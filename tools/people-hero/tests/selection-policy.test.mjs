@@ -68,11 +68,42 @@ test("credit policy excludes self, archive, uncredited, own-name, one-episode, a
   assert.deepEqual(new Set(result.eligible.map((credit) => credit.mediaId)), new Set([1, 9]));
   assert.deepEqual(new Set(result.rejected.map((record) => record.reason)), new Set([
     "self-appearance",
+    "archive-or-photo-appearance",
     "uncredited",
     "character-matches-person",
     "one-episode-tv-role",
     "adult",
     "unrelated-crew-job"
+  ]));
+});
+
+test("principal-billed Music movies retain performer credits without admitting ordinary Self appearances", () => {
+  const person = {
+    id: 14386,
+    name: "Beyoncé",
+    combined_credits: {
+      cast: [
+        movie(20, { title: "Concert Film", character: "Self", genre_ids: [10402, 99], order: 0 }),
+        movie(21, { title: "Name Credit", character: "Beyoncé Knowles-Carter", genre_ids: [10402], order: 0 }),
+        movie(22, { character: "Self", genre_ids: [10402], order: 1 }),
+        movie(23, { character: "Self", genre_ids: [99], order: 0 }),
+        tv(24, { character: "Self", genre_ids: [10402], order: 0 }),
+        movie(25, { character: "Self (archive footage)", genre_ids: [10402], order: 0 }),
+        movie(26, { character: "Self (uncredited)", genre_ids: [10402], order: 0 })
+      ],
+      crew: []
+    }
+  };
+
+  const result = selectEligibleCredits(person);
+  assert.deepEqual(result.eligible.map((credit) => credit.mediaId), [20, 21]);
+  assert.ok(result.eligible.every((credit) => credit.principalMusicPerformance === true));
+  assert.deepEqual(new Map(result.rejected.map((record) => [record.mediaId, record.reason])), new Map([
+    [22, "self-appearance"],
+    [23, "self-appearance"],
+    [24, "self-appearance"],
+    [25, "archive-or-photo-appearance"],
+    [26, "uncredited"]
   ]));
 });
 

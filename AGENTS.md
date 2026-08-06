@@ -52,7 +52,7 @@ Do not generate alternate T1, flat, or 36/60-title variants unless the user expl
 
 ## Source selection and determinism
 
-People heroes may use genuine cast credits and exact `Director` credits across movies and TV. Exclude adult/blocked records, self/archive/uncredited appearances, characters matching the person, unrelated credits, records without usable official artwork, and duplicate media identities. Exclude one-episode TV roles by default unless a tracked exception marks the role as culturally significant. Ranking must represent the person's career using role significance, popularity, vote support, and artwork suitability; it must not simply take the first or most-popular API records up to the layout cap.
+People heroes may use genuine cast credits and exact `Director` credits across movies and TV. A principal-performer concert or performance film may retain a `Self` or own-name cast credit only when TMDB classifies it as a movie in Music genre `10402` and bills the person at order `0`. Exclude all other self appearances, adult/blocked records, archive/uncredited appearances, characters matching the person, unrelated credits, records without usable official artwork, and duplicate media identities. Exclude one-episode TV roles by default unless a tracked exception marks the role as culturally significant. Ranking must represent the person's career using role significance, popularity, vote support, and artwork suitability; it must not simply take the first or most-popular API records up to the layout cap.
 
 Every selection and render decision must be deterministic. Define stable tie-breaks and route all pseudo-random choices through one explicitly seeded generator. The reproducibility record must bind at least:
 

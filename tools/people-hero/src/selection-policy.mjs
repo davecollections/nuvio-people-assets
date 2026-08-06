@@ -2,6 +2,7 @@ const SELF_PATTERN = /(?:^|\b)(?:self|himself|herself|themself|themselves)(?:\b|
 const ARCHIVE_PATTERN = /archive\s+(?:footage|audio|material)|photograph|photo\s+only/iu;
 const UNCREDITED_PATTERN = /uncredited/iu;
 const SAFE_ART_PATH = /^\/[A-Za-z0-9._-]+$/u;
+const MUSIC_GENRE_ID = 10402;
 
 function text(value) {
   return typeof value === "string" ? value.trim() : "";
@@ -44,17 +45,30 @@ function oneEpisodeExceptionSet(overrides, personId) {
     .map((record) => `${personId}:tv:${record.mediaId}`));
 }
 
-function rejectCast(record, personId, personName, exceptions) {
+function characterMatchesPerson(character, personName) {
+  const normalizedCharacter = normalizedIdentity(character);
+  const normalizedPerson = normalizedIdentity(personName);
+  return Boolean(normalizedCharacter && normalizedPerson
+    && (normalizedCharacter === normalizedPerson || normalizedCharacter.includes(normalizedPerson)));
+}
+
+function isPrincipalMusicPerformance(record, personName) {
+  const character = text(record?.character);
+  const identifiesPerformer = SELF_PATTERN.test(character) || characterMatchesPerson(character, personName);
+  return identifiesPerformer
+    && record?.media_type === "movie"
+    && integer(record?.order, 999) === 0
+    && Array.isArray(record?.genre_ids)
+    && record.genre_ids.includes(MUSIC_GENRE_ID);
+}
+
+function rejectCast(record, personId, personName, exceptions, principalMusicPerformance) {
   const character = text(record.character);
   if (character) {
-    if (SELF_PATTERN.test(character)) return "self-appearance";
     if (ARCHIVE_PATTERN.test(character)) return "archive-or-photo-appearance";
     if (UNCREDITED_PATTERN.test(character)) return "uncredited";
-    const normalizedCharacter = normalizedIdentity(character);
-    const normalizedPerson = normalizedIdentity(personName);
-    if (normalizedCharacter && normalizedPerson && (normalizedCharacter === normalizedPerson || normalizedCharacter.includes(normalizedPerson))) {
-      return "character-matches-person";
-    }
+    if (SELF_PATTERN.test(character) && !principalMusicPerformance) return "self-appearance";
+    if (characterMatchesPerson(character, personName) && !principalMusicPerformance) return "character-matches-person";
   }
   if (record.media_type === "tv" && integer(record.episode_count) <= 1 && !exceptions.has(`${personId}:tv:${record.id}`)) {
     return "one-episode-tv-role";
@@ -88,7 +102,7 @@ function compareCredits(left, right) {
     || (left.backdropPath || "").localeCompare(right.backdropPath || "", "en");
 }
 
-function normalizeCredit(record, role) {
+function normalizeCredit(record, role, { principalMusicPerformance = false } = {}) {
   const mediaType = record?.media_type;
   if ((mediaType !== "movie" && mediaType !== "tv") || !Number.isSafeInteger(record.id) || record.id <= 0) return null;
   const posterPath = artworkPath(record.poster_path);
@@ -106,7 +120,8 @@ function normalizeCredit(record, role) {
     voteCount: Math.max(0, integer(record.vote_count)),
     posterPath,
     backdropPath,
-    artworkKinds: Number(Boolean(posterPath)) + Number(Boolean(backdropPath))
+    artworkKinds: Number(Boolean(posterPath)) + Number(Boolean(backdropPath)),
+    principalMusicPerformance: role === "cast" && principalMusicPerformance
   };
 }
 
@@ -122,7 +137,8 @@ function mergeCredit(existing, incoming) {
     voteCount: Math.max(existing.voteCount, incoming.voteCount),
     posterPath: existing.posterPath || incoming.posterPath,
     backdropPath: existing.backdropPath || incoming.backdropPath,
-    artworkKinds: Math.max(existing.artworkKinds, incoming.artworkKinds)
+    artworkKinds: Math.max(existing.artworkKinds, incoming.artworkKinds),
+    principalMusicPerformance: existing.principalMusicPerformance || incoming.principalMusicPerformance
   };
 }
 
@@ -141,9 +157,10 @@ export function selectEligibleCredits(person, overrides = {}) {
 
   for (const record of Array.isArray(credits?.cast) ? credits.cast : []) {
     let reason = null;
+    const principalMusicPerformance = isPrincipalMusicPerformance(record, personName);
     if (record?.adult === true) reason = "adult";
-    else reason = rejectCast(record, person?.id, personName, exceptions);
-    const normalized = normalizeCredit(record, "cast");
+    else reason = rejectCast(record, person?.id, personName, exceptions, principalMusicPerformance);
+    const normalized = normalizeCredit(record, "cast", { principalMusicPerformance });
     if (!reason && !normalized) reason = "invalid-media-identity";
     if (!reason && !normalized.title) reason = "missing-title";
     if (!reason && normalized.artworkKinds === 0) reason = "missing-artwork";
