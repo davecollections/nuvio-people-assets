@@ -29,6 +29,10 @@ Consumers may use the stable `main` URLs and compare manifest hashes when decidi
 
 People imagery and film/TV artwork originate from TMDB. This repository does not claim ownership of third-party artwork. The repository is not endorsed or certified by TMDB. Hero generation must use official TMDB artwork only; general web images, fan art, and AI-generated imagery are not permitted.
 
+<img src="docs/tmdb-logo.svg" alt="The Movie Database (TMDB)" width="180">
+
+**This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.**
+
 The T2 compositor is adapted from [Prism Wallpapers](https://github.com/bramst0ne/prism-wallpapers), created by `bramst0ne`. Nuvio People gratefully acknowledges the original project and its author, who granted direct permission on 2026-08-06 to use, copy, modify, and publicly include the relevant code for this artwork workflow. Adapted source files retain their attribution notices.
 
 No TMDB credential is stored in this repository. Metadata requests are made through a configured Cloudflare Worker; its TMDB bearer token remains a Cloudflare secret. Official TMDB image files are downloaded only from their public image host.
