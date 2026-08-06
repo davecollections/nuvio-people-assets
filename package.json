@@ -6,8 +6,10 @@
   "type": "module",
   "scripts": {
     "manifest": "node scripts/build-manifest.mjs",
+    "people-hero:preflight": "node tools/people-hero/src/preflight.mjs",
+    "people-hero:stage": "node tools/people-hero/src/stage.mjs",
     "validate": "node scripts/validate-assets.mjs",
-    "test": "npm run validate"
+    "test": "node --test tools/people-hero/tests/*.test.mjs && npm run validate"
   },
   "devDependencies": {
     "sharp": "^0.35.3"
