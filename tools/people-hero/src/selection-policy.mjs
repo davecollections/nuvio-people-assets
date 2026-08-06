@@ -92,7 +92,8 @@ function significanceBand(record) {
 }
 
 function compareCredits(left, right) {
-  return right.significanceBand - left.significanceBand
+  return Number(left.principalMusicPerformance) - Number(right.principalMusicPerformance)
+    || right.significanceBand - left.significanceBand
     || right.popularityScaled - left.popularityScaled
     || right.voteCount - left.voteCount
     || right.artworkKinds - left.artworkKinds
