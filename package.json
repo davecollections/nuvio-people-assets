@@ -1,0 +1,18 @@
+{
+  "name": "nuvio-people-assets",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Public People artwork assets for Nuvio",
+  "type": "module",
+  "scripts": {
+    "manifest": "node scripts/build-manifest.mjs",
+    "validate": "node scripts/validate-assets.mjs",
+    "test": "npm run validate"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

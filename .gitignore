@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.work/
+.cache/
+downloads/
+source-artwork/
+*.log
+*.tmp
