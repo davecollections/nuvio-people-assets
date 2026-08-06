@@ -185,7 +185,9 @@ def build_slots(width: int, height: int, mode: str, seed: int) -> tuple[list[dic
                 "opacity": opacity,
             })
             y += tile_height + gap
-    slots.sort(key=lambda slot: (not slot["onScreen"], not slot["focal"], slot["x"], slot["y"]))
+    # Preserve the original T2 focal priority, then fill from the bright right
+    # edge toward the dark title-safe zone when unique sources are limited.
+    slots.sort(key=lambda slot: (not slot["onScreen"], not slot["focal"], -slot["x"], slot["y"]))
     return slots, oversized_width, oversized_height, bleed_x, bleed_y
 
 
@@ -227,7 +229,9 @@ def perspective_warp(image: Image.Image, offset_x: int, offset_y: int, width: in
     inset_y = height * WARP_STRENGTH / 2
     inset_x = width * WARP_STRENGTH / 2
     source = [(offset_x, offset_y), (offset_x + width, offset_y), (offset_x + width, offset_y + height), (offset_x, offset_y + height)]
-    destination = [(0, inset_y), (width, 0), (width - inset_x, height - inset_y), (inset_x, height - inset_y)]
+    # Match Prism T2: the right edge stays full-height while the left edge
+    # tapers vertically and the bottom edge tapers toward the left viewpoint.
+    destination = [(0, inset_y), (width, 0), (width - inset_x, height), (inset_x, height - inset_y)]
     matrix = []
     values = []
     for (source_x, source_y), (dest_x, dest_y) in zip(source, destination):
