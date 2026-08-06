@@ -84,6 +84,13 @@ async function runProcess(executable, args, cwd) {
   });
 }
 
+export function executableForSpawn(value) {
+  assert(typeof value === "string" && value.trim(), "Python executable is required");
+  const executable = value.trim();
+  const containsPathSeparator = executable.includes("/") || executable.includes("\\");
+  return path.isAbsolute(executable) || containsPathSeparator ? path.resolve(executable) : executable;
+}
+
 async function downloadOfficialImage(artworkPath, destination, fetchImpl) {
   assert(/^\/[A-Za-z0-9._-]+$/u.test(artworkPath), `Unsafe official artwork path: ${artworkPath}`);
   const url = new URL(`/t/p/original${artworkPath}`, IMAGE_ORIGIN);
@@ -181,7 +188,7 @@ export async function stageCandidate({ personId, pythonExecutable, fetchImpl = g
   const intermediatePath = path.join(stagingDirectory, "hero.png");
   const compositorReportPath = path.join(reportsDirectory, "compositor-report.json");
   await writeFile(planPath, `${JSON.stringify(plan, null, 2)}\n`, "utf8");
-  const processResult = await runProcess(path.resolve(pythonExecutable), [compositorPath, "--plan", planPath, "--output", intermediatePath, "--report", compositorReportPath], toolRoot);
+  const processResult = await runProcess(executableForSpawn(pythonExecutable), [compositorPath, "--plan", planPath, "--output", intermediatePath, "--report", compositorReportPath], toolRoot);
   await writeFile(path.join(reportsDirectory, "compositor.log"), `${processResult.stdout}${processResult.stderr}`, "utf8");
   assert(processResult.code === 0, `T2 compositor exited with code ${processResult.code}`);
 

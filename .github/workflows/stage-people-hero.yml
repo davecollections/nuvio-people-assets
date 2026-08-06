@@ -63,4 +63,5 @@ jobs:
           name: people-hero-candidate-${{ github.run_id }}
           path: tools/people-hero/.work/attempt-*
           if-no-files-found: error
+          include-hidden-files: true
           retention-days: 7
