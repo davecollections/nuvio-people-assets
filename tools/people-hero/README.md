@@ -13,6 +13,14 @@ PEOPLE_HERO_PROXY_TOKEN=<runtime secret, when service access is enabled>
 
 Never put either value in a committed `.env` file. The proxy URL is not sensitive, but keeping it runtime-configurable avoids coupling this public asset repository to one deployment. The token must be a Cloudflare/GitHub secret and is never printed.
 
+Check one registered identity before downloading artwork:
+
+```text
+npm run people-hero:eligibility -- --person-id 2230991
+```
+
+This makes one proxy metadata request, requires no Python, downloads no images, and writes one compact result beneath `.work`. The result reports only counts, the chosen filmography/profile-only/skip outcome, and grouped rejection reasons; it does not retain a source snapshot or artwork paths.
+
 Current boundaries:
 
 - explicit registered Person IDs only;
@@ -23,3 +31,5 @@ Current boundaries:
 - no asset promotion, manifest update, commit, or push.
 
 The manual `Stage one People hero` GitHub Actions workflow accepts one registered TMDB Person ID and uploads the ignored attempt directory as a seven-day artifact. It has read-only repository permission and cannot publish artwork.
+
+The manual `Check one People hero eligibility` workflow performs the compact metadata-only check with Node.js and uploads only its seven-day result. It does not install Python or download artwork.
