@@ -6,7 +6,7 @@ The generator is a staging-first, deterministic People-only workflow. It produce
 
 For each registered TMDB Person ID it chooses exactly one outcome:
 
-1. **Filmography:** select 15–24 eligible, distinct credits. Use posters and backdrops first; add at most three profiles only when portrait positions would otherwise remain empty.
+1. **Filmography:** select 15–32 eligible, distinct credits. Use more than 24 only when the career supports a denser unique-title composition. Use posters and backdrops first; add at most three profiles only when portrait positions would otherwise remain empty. The adaptive masonry creates exactly one card per selected source, with no empty card slots or repeated title identities.
 2. **Profile-only:** when fewer than 15 credits qualify but 15–24 suitable official profiles exist, use the portrait-focused T2 layout with no credit artwork.
 3. **Skip:** when neither threshold is met.
 

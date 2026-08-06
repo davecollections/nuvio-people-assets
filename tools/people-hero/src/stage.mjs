@@ -200,6 +200,9 @@ export async function stageCandidate({ personId, pythonExecutable, fetchImpl = g
     sharp(candidatePath, { failOn: "error" }).metadata(),
     readFile(compositorReportPath, "utf8").then(JSON.parse)
   ]);
+  assert(compositorReport.layout?.slotCount === planSources.length, "Compositor slot count does not match the unique source count");
+  assert(compositorReport.usedSourceCount === planSources.length, "Compositor did not place every unique source");
+  assert(compositorReport.visibleEmptySlots === 0, "Compositor left visible card slots empty");
   assert(metadata.format === "webp" && metadata.width === 2560 && metadata.height === 1440, "Candidate output contract mismatch");
   assert(candidateStat.size <= 1024 * 1024, "Candidate exceeds the repository 1 MiB asset ceiling");
 

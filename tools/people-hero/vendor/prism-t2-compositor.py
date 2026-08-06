@@ -133,62 +133,96 @@ def make_tile(image: Image.Image, width: int, height: int, opacity: float) -> Im
     return tile
 
 
-def build_slots(width: int, height: int, mode: str, seed: int) -> tuple[list[dict], int, int, int, int]:
+def build_slots(width: int, height: int, mode: str, seed: int, source_count: int) -> tuple[list[dict], int, int, int, int, dict]:
+    if source_count < 1:
+        fail("At least one source is required to build T2 slots")
+
     scale = height / 1080
-    landscape_width = int(300 * scale)
-    portrait_width = int((320 if mode == "profile-only" else 200) * scale)
-    portrait_height = round(portrait_width * 3 / 2)
-    gap = int(GAP * scale)
-    pattern = ["P"] if mode == "profile-only" else ["L", "P", "L", "P", "L", "P", "L", "P", "L"]
+    gap = max(1, int(GAP * scale))
+    if source_count <= 18:
+        column_count = 5
+    elif source_count <= 24:
+        column_count = 6
+    elif source_count <= 30:
+        column_count = 7
+    else:
+        column_count = 8
+    column_count = min(column_count, source_count)
+
+    base_rows, extra_rows = divmod(source_count, column_count)
+    row_counts = [base_rows + (1 if index < extra_rows else 0) for index in range(column_count)]
     rng = random.Random(seed)
-
-    bleed_x = (landscape_width + gap) * 3
-    bleed_y = portrait_height * 2 + gap * 4
+    vertical_span = height * 1.16
     columns = []
-    x = -bleed_x
-    pattern_index = 0
-    while x < width + bleed_x:
-        column_type = pattern[pattern_index % len(pattern)]
-        base_width = landscape_width if column_type == "L" else portrait_width
-        center = x + base_width / 2
-        distance = (center - width / 2) / (width / 2)
-        column_width = int(base_width * max(0.5, min(1.5, 1 - POV_X * distance * 0.15)))
-        columns.append({"x": x, "width": column_width, "type": column_type})
-        x += column_width + gap
-        pattern_index += 1
 
+    for column_index, row_count in enumerate(row_counts):
+        if mode == "profile-only":
+            tile_types = ["P"] * row_count
+        else:
+            base_type = "P" if column_index % 2 == 0 else "L"
+            tile_types = []
+            for _ in range(row_count):
+                flip = rng.random() < RANDOM_ASPECT_CHANCE
+                tile_types.append(("L" if base_type == "P" else "P") if flip else base_type)
+            if row_count > 1 and len(set(tile_types)) == 1:
+                tile_types[-1] = "L" if tile_types[-1] == "P" else "P"
+
+        height_factor = sum(1.5 if tile_type == "P" else 9 / 16 for tile_type in tile_types)
+        column_width = int((vertical_span - gap * (row_count - 1)) / height_factor)
+        minimum_width = int(height / 6)
+        maximum_width = int(height * 0.48)
+        column_width = max(minimum_width, min(maximum_width, column_width))
+        column_height = sum(int(column_width * (1.5 if tile_type == "P" else 9 / 16)) for tile_type in tile_types) + gap * (row_count - 1)
+        columns.append({
+            "width": column_width,
+            "height": column_height,
+            "tileTypes": tile_types,
+        })
+
+    total_grid_width = sum(column["width"] for column in columns) + gap * (column_count - 1)
+    grid_right = int(width * 1.08)
+    grid_left = grid_right - total_grid_width
+    bleed_x = max(int(width * 0.20), -grid_left + gap, grid_right - width + gap)
+    bleed_y = int(height * 0.24)
     oversized_width = width + bleed_x * 2
     oversized_height = height + bleed_y * 2
+
     slots = []
+    source_x = grid_left
     for column_index, column in enumerate(columns):
-        screen_x = column["x"] + column["width"] / 2
+        overflow = max(0, column["height"] - height)
+        source_y = -overflow * (0.30 if column_index % 2 == 0 else 0.70)
+        screen_x = source_x + column["width"] / 2
         norm_x = screen_x / width
         opacity = FADE_LEFT + (FADE_RIGHT - FADE_LEFT) * max(0, min(1, norm_x))
-        stagger = int(portrait_height * COL_STAGGER) if column_index % 2 else 0
-        y = stagger
-        while y < oversized_height:
-            tile_type = column["type"]
-            if mode != "profile-only" and rng.random() < RANDOM_ASPECT_CHANCE:
-                tile_type = "P" if tile_type == "L" else "L"
-            tile_width = column["width"]
-            tile_height = max(4, int(tile_width * (3 / 2 if tile_type == "P" else 9 / 16)))
-            screen_y = y - bleed_y + tile_height / 2
-            norm_y = screen_y / height
+
+        for tile_type in column["tileTypes"]:
+            tile_height = max(4, int(column["width"] * (1.5 if tile_type == "P" else 9 / 16)))
+            norm_y = (source_y + tile_height / 2) / height
             slots.append({
-                "x": column["x"] + bleed_x,
-                "y": y,
-                "width": tile_width,
+                "x": int(source_x + bleed_x),
+                "y": int(source_y + bleed_y),
+                "width": column["width"],
                 "height": tile_height,
                 "type": tile_type,
-                "onScreen": 0 <= norm_x <= 1 and 0 <= norm_y <= 1,
+                "onScreen": source_x < width and source_x + column["width"] > 0 and source_y < height and source_y + tile_height > 0,
                 "focal": math.hypot(norm_x - FOCUS_X, norm_y - FOCUS_Y) <= FOCUS_RADIUS,
                 "opacity": opacity,
             })
-            y += tile_height + gap
-    # Preserve the original T2 focal priority, then fill from the bright right
-    # edge toward the dark title-safe zone when unique sources are limited.
-    slots.sort(key=lambda slot: (not slot["onScreen"], not slot["focal"], -slot["x"], slot["y"]))
-    return slots, oversized_width, oversized_height, bleed_x, bleed_y
+            source_y += tile_height + gap
+        source_x += column["width"] + gap
+
+    slots.sort(key=lambda slot: (not slot["focal"], -slot["x"], slot["y"]))
+    layout = {
+        "strategy": "adaptive-unique-source-masonry-v1",
+        "sourceCount": source_count,
+        "columnCount": column_count,
+        "rowCounts": row_counts,
+        "slotCount": len(slots),
+        "gridLeft": grid_left,
+        "gridRight": grid_right,
+    }
+    return slots, oversized_width, oversized_height, bleed_x, bleed_y, layout
 
 
 def assign_sources(plan: dict, slots: list[dict]) -> tuple[list[dict], list[str]]:
@@ -297,7 +331,7 @@ def render(plan: dict, output_path: Path) -> dict:
     height = int(plan.get("height", 1440))
     if (width, height) != (2560, 1440):
         fail("The v2 compositor output must be exactly 2560x1440")
-    slots, oversized_width, oversized_height, offset_x, offset_y = build_slots(width, height, plan["mode"], plan["seed"])
+    slots, oversized_width, oversized_height, offset_x, offset_y, layout = build_slots(width, height, plan["mode"], plan["seed"], len(plan["sources"]))
     placements, used_ids = assign_sources(plan, slots)
     canvas = Image.new("RGBA", (oversized_width, oversized_height), BACKGROUND)
     for placement in placements:
@@ -319,6 +353,7 @@ def render(plan: dict, output_path: Path) -> dict:
         },
         "sourceCount": len(plan["sources"]),
         "usedSourceCount": len(used_ids),
+        "layout": layout,
         "visibleSlots": visible_slots,
         "visiblePlacements": visible_placements,
         "visibleEmptySlots": max(0, visible_slots - visible_placements),

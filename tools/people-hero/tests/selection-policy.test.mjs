@@ -189,3 +189,15 @@ test("filmography uses up to three profiles only when portrait credit artwork is
   assert.equal(result.outcome, "filmography");
   assert.equal(result.fallbackProfiles.length, 3);
 });
+
+test("filmography uses up to 32 distinct credits when a career supports the denser T2 layout", () => {
+  const result = planPersonHero({
+    id: 31,
+    name: "Tom Hanks",
+    combined_credits: { cast: Array.from({ length: 40 }, (_, index) => movie(index + 1)), crew: [] },
+    images: { profiles: [] }
+  });
+  assert.equal(result.outcome, "filmography");
+  assert.equal(result.selectedCredits.length, 32);
+  assert.equal(new Set(result.selectedCredits.map((credit) => credit.mediaId)).size, 32);
+});

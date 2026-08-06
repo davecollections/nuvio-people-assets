@@ -218,7 +218,7 @@ export function selectProfiles(person) {
     || left.filePath.localeCompare(right.filePath, "en"));
 }
 
-export function planPersonHero(person, overrides = {}, { minimumCredits = 15, maximumCredits = 24, minimumProfiles = 15, maximumProfiles = 24 } = {}) {
+export function planPersonHero(person, overrides = {}, { minimumCredits = 15, maximumCredits = 32, minimumProfiles = 15, maximumProfiles = 24 } = {}) {
   const { eligible, rejected } = selectEligibleCredits(person, overrides);
   const profiles = selectProfiles(person);
   if (eligible.length >= minimumCredits) {

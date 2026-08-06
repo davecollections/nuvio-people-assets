@@ -9,6 +9,7 @@ test("vendored compositor is network-free and credential-free", async () => {
   assert.doesNotMatch(source, /(?:api[_-]?key|bearer[_-]?token|dotenv|\.env)/iu);
   assert.match(source, /Adapted from Prism Wallpapers by bramst0ne/u);
   assert.match(source, /fraction = max\(0\.0, min\(1\.0, fraction\)\)/u);
-  assert.match(source, /not slot\["focal"\], -slot\["x"\], slot\["y"\]/u);
+  assert.match(source, /adaptive-unique-source-masonry-v1/u);
+  assert.match(source, /"slotCount": len\(slots\)/u);
   assert.match(source, /\(width - inset_x, height\), \(inset_x, height - inset_y\)/u);
 });
