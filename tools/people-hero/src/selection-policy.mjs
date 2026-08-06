@@ -46,14 +46,15 @@ function oneEpisodeExceptionSet(overrides, personId) {
 
 function rejectCast(record, personId, personName, exceptions) {
   const character = text(record.character);
-  if (!character) return null;
-  if (SELF_PATTERN.test(character)) return "self-appearance";
-  if (ARCHIVE_PATTERN.test(character)) return "archive-or-photo-appearance";
-  if (UNCREDITED_PATTERN.test(character)) return "uncredited";
-  const normalizedCharacter = normalizedIdentity(character);
-  const normalizedPerson = normalizedIdentity(personName);
-  if (normalizedCharacter && normalizedPerson && (normalizedCharacter === normalizedPerson || normalizedCharacter.includes(normalizedPerson))) {
-    return "character-matches-person";
+  if (character) {
+    if (SELF_PATTERN.test(character)) return "self-appearance";
+    if (ARCHIVE_PATTERN.test(character)) return "archive-or-photo-appearance";
+    if (UNCREDITED_PATTERN.test(character)) return "uncredited";
+    const normalizedCharacter = normalizedIdentity(character);
+    const normalizedPerson = normalizedIdentity(personName);
+    if (normalizedCharacter && normalizedPerson && (normalizedCharacter === normalizedPerson || normalizedCharacter.includes(normalizedPerson))) {
+      return "character-matches-person";
+    }
   }
   if (record.media_type === "tv" && integer(record.episode_count) <= 1 && !exceptions.has(`${personId}:tv:${record.id}`)) {
     return "one-episode-tv-role";
