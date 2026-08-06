@@ -16,6 +16,8 @@ const assetDefinitions = {
   hero: { filename: "hero.webp", required: false, format: "webp" }
 };
 
+const approvedHeroDimensions = new Set(["1920x1080", "2560x1440"]);
+
 function slash(value) {
   return value.split(path.sep).join("/");
 }
@@ -47,6 +49,13 @@ async function inspectAsset(relativePath, expectedFormat) {
     height: metadata.height,
     format: metadata.format
   };
+}
+
+export function validateHeroContract(asset) {
+  const dimensions = `${asset.width}x${asset.height}`;
+  if (!approvedHeroDimensions.has(dimensions)) {
+    throw new Error(`${asset.path}: hero must be exactly 1920x1080 or 2560x1440`);
+  }
 }
 
 export async function buildInventory() {
@@ -103,12 +112,7 @@ export async function buildInventory() {
       const relativePath = path.join("assets", "people", String(person.tmdbPersonId), definition.filename);
       const inspected = await inspectAsset(relativePath, definition.format);
       if (key === "hero") {
-        if (inspected.width !== 1920 || inspected.height !== 1080) {
-          throw new Error(`${inspected.path}: hero must be exactly 1920x1080`);
-        }
-        if (inspected.bytes > 250 * 1024) {
-          throw new Error(`${inspected.path}: hero exceeds the 250 KiB rollout budget`);
-        }
+        validateHeroContract(inspected);
       }
       assets[key] = inspected;
       assetCounts[key] += 1;
@@ -124,20 +128,25 @@ export async function buildInventory() {
   }
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     repository: "davecollections/nuvio-people-assets",
     ordering: "tmdb-person-id-ascending",
     recordCount: people.length,
     assetCounts,
     totalAssetBytes: totalBytes,
     heroPreset: {
-      id: "people-filmography-t2-perspective-24-v1",
-      width: 1920,
-      height: 1080,
-      creditCount: 24,
+      id: "people-t2-perspective-v2",
+      width: 2560,
+      height: 1440,
+      minimumCredits: 15,
+      maximumCredits: 32,
+      minimumProfiles: 15,
+      maximumProfiles: 24,
       layout: "t2-perspective",
       format: "webp",
       quality: 82,
+      targetBytes: 256000,
+      targetIsHardLimit: false,
       sourcePolicy: "official-tmdb-artwork-only"
     },
     people
