@@ -273,6 +273,7 @@ def apply_gradient(image: Image.Image, accent: tuple[int, int, int]) -> Image.Im
     bottom_pixels = bottom.load()
     for y in range(int(height * 0.55), height):
         fraction = (y - height * 0.55) / (height * 0.45)
+        fraction = max(0.0, min(1.0, fraction))
         alpha = int(215 * fraction ** 1.3)
         for x in range(width):
             bottom_pixels[x, y] = (6, 8, 12, alpha)

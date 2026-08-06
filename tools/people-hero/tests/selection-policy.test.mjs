@@ -96,6 +96,45 @@ test("one-episode exception is person-specific and cast/director duplicates merg
   assert.ok(!selectEligibleCredits(otherPerson, overrides).eligible.some((credit) => credit.mediaId === 10));
 });
 
+test("equivalent titles from the same year retain the strongest deterministic credit", () => {
+  const person = {
+    id: 76594,
+    name: "Miley Cyrus",
+    combined_credits: {
+      cast: [
+        movie(53504, {
+          title: "Wish Gone Amiss",
+          release_date: "2007-07-13",
+          character: "Miley Stewart / Hannah Montana",
+          popularity: 1.2744,
+          vote_count: 11
+        }),
+        movie(1507919, {
+          title: "Wish Gone Amiss",
+          release_date: "2007-11-27",
+          character: "",
+          order: 2,
+          popularity: 0.8276,
+          vote_count: 1,
+          backdrop_path: null
+        }),
+        movie(99, { title: "Wish Gone Amiss", release_date: "2027-01-01" })
+      ],
+      crew: []
+    }
+  };
+
+  const result = selectEligibleCredits(person);
+  assert.deepEqual(result.eligible.map((credit) => credit.mediaId), [99, 53504]);
+  assert.deepEqual(result.rejected.find((record) => record.mediaId === 1507919), {
+    role: "cast",
+    mediaType: "movie",
+    mediaId: 1507919,
+    reason: "equivalent-title-duplicate",
+    retainedMediaId: 53504
+  });
+});
+
 test("profile selection rejects weak shapes and sorts deterministically", () => {
   const selected = selectProfiles({
     images: {

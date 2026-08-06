@@ -32,6 +32,12 @@ function titleFor(record) {
   return text(record.title) || text(record.name) || text(record.original_title) || text(record.original_name);
 }
 
+function releaseYearFor(record, mediaType) {
+  const value = text(mediaType === "movie" ? record.release_date : record.first_air_date);
+  const match = /^(\d{4})-/u.exec(value);
+  return match ? Number.parseInt(match[1], 10) : null;
+}
+
 function oneEpisodeExceptionSet(overrides, personId) {
   const records = Array.isArray(overrides?.oneEpisodeTvRoles) ? overrides.oneEpisodeTvRoles : [];
   return new Set(records.filter((record) => record && record.personId === personId && record.mediaType === "tv" && Number.isSafeInteger(record.mediaId))
@@ -90,6 +96,7 @@ function normalizeCredit(record, role) {
     mediaType,
     mediaId: record.id,
     title: titleFor(record),
+    releaseYear: releaseYearFor(record, mediaType),
     roles: [role],
     characters: role === "cast" ? [text(record.character)] : [],
     billingOrder: role === "cast" ? integer(record.order, 999) : 999,
@@ -116,6 +123,12 @@ function mergeCredit(existing, incoming) {
     backdropPath: existing.backdropPath || incoming.backdropPath,
     artworkKinds: Math.max(existing.artworkKinds, incoming.artworkKinds)
   };
+}
+
+function equivalentTitleIdentity(record) {
+  const normalizedTitle = normalizedIdentity(record.title);
+  if (!normalizedTitle || !record.releaseYear) return mediaIdentity(record);
+  return `${record.mediaType}:${record.releaseYear}:${normalizedTitle}`;
 }
 
 export function selectEligibleCredits(person, overrides = {}) {
@@ -157,7 +170,25 @@ export function selectEligibleCredits(person, overrides = {}) {
     accepted.set(key, accepted.has(key) ? mergeCredit(accepted.get(key), normalized) : normalized);
   }
 
-  const eligible = [...accepted.values()].map((record) => ({ ...record, significanceBand: significanceBand(record) })).sort(compareCredits);
+  const ranked = [...accepted.values()].map((record) => ({ ...record, significanceBand: significanceBand(record) })).sort(compareCredits);
+  const retainedByEquivalentTitle = new Map();
+  const eligible = [];
+  for (const record of ranked) {
+    const key = equivalentTitleIdentity(record);
+    const retained = retainedByEquivalentTitle.get(key);
+    if (retained) {
+      rejected.push({
+        role: record.roles.join("+"),
+        mediaType: record.mediaType,
+        mediaId: record.mediaId,
+        reason: "equivalent-title-duplicate",
+        retainedMediaId: retained.mediaId
+      });
+      continue;
+    }
+    retainedByEquivalentTitle.set(key, record);
+    eligible.push(record);
+  }
   return { eligible, rejected };
 }
 
