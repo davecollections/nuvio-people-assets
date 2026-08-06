@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "manifest": "node scripts/build-manifest.mjs",
+    "people-hero:eligibility": "node tools/people-hero/src/eligibility.mjs",
     "people-hero:preflight": "node tools/people-hero/src/preflight.mjs",
     "people-hero:stage": "node tools/people-hero/src/stage.mjs",
     "validate": "node scripts/validate-assets.mjs",

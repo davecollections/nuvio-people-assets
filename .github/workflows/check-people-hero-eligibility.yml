@@ -1,0 +1,51 @@
+name: Check one People hero eligibility
+
+on:
+  workflow_dispatch:
+    inputs:
+      person_id:
+        description: TMDB Person ID registered in data/people.json
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  eligibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PEOPLE_HERO_PROXY_URL: ${{ vars.PEOPLE_HERO_PROXY_URL }}
+      PEOPLE_HERO_PROXY_TOKEN: ${{ secrets.PEOPLE_HERO_PROXY_TOKEN }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository and generator
+        run: npm test
+
+      - name: Check eligibility
+        env:
+          REQUESTED_PERSON_ID: ${{ inputs.person_id }}
+        run: npm run people-hero:eligibility -- --person-id "$REQUESTED_PERSON_ID"
+
+      - name: Upload compact eligibility result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: people-hero-eligibility-${{ github.run_id }}
+          path: tools/people-hero/.work/eligibility-attempt-*
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 7

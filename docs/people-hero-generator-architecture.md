@@ -34,7 +34,7 @@ Ranking is deterministic and career-oriented. Role significance is considered be
 
 ## Staging and publication
 
-Every run accepts a narrow explicit Person ID list and writes only beneath `tools/people-hero/.work`. A source snapshot records accepted and rejected credits, ranking components, selected paths, profiles, layout seed, renderer version, and hashes without credentials.
+Every operation accepts exactly one registered Person ID and writes only beneath `tools/people-hero/.work`. The lightweight eligibility check makes one metadata request and retains only a compact deterministic summary of counts, outcome, and grouped rejection reasons; it downloads no artwork and stores no source paths. A full candidate-generation run separately records the source snapshot, accepted and rejected credits, ranking components, selected paths, profiles, layout seed, renderer version, and hashes without credentials.
 
 Generation has no code path to `assets/people`. Promotion remains a separate future command requiring explicit owner approval of the exact Person ID and candidate SHA-256. No branch, commit, push, or publication occurs automatically.
 
