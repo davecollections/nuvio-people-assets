@@ -45,7 +45,7 @@ The approved new-generation preset is `people-t2-perspective-v2`:
 - dark, clean left title-safe zone;
 - no title logo baked into the hero;
 - premium mixed poster/backdrop presentation without stretching or a flat poster-grid appearance;
-- adaptive masonry with exactly one card per selected source: no empty card slots and no repeated title identities;
+- approved full-bleed Prism T2 lattice, placing every distinct selected source before any deterministic coverage fallback; repeated placements are permitted only when needed to prevent exposed perspective/bleed slots and should remain in lower-salience positions where possible;
 - official TMDB poster, backdrop, and permitted profile artwork only.
 
 Do not generate alternate T1, flat, or 36/60-title variants unless the user explicitly reopens design testing. Profile-only heroes retain the T2 perspective but use portrait tiles rather than severely cropping headshots into landscape tiles. Do not use general web images, fan art, AI imagery, or Fanart.tv artwork for People heroes.
