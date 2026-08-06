@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 2,
+  "id": "people-t2-perspective-v2",
+  "width": 2560,
+  "height": 1440,
+  "layout": "t2-perspective",
+  "format": "webp",
+  "quality": 82,
+  "targetBytes": 256000,
+  "targetIsHardLimit": false,
+  "sourcePolicy": "official-tmdb-artwork-only",
+  "titleLogoBakedIn": false,
+  "filmography": {
+    "minimumCredits": 15,
+    "maximumCredits": 24,
+    "mediaTypes": ["movie", "tv"],
+    "roles": ["cast", "director"],
+    "minimumTvEpisodes": 2,
+    "oneEpisodeExceptionFile": "data/hero-credit-overrides.json",
+    "excludeAdult": true,
+    "excludeSelf": true,
+    "excludeUncredited": true,
+    "excludeArchiveFootage": true,
+    "requirePosterOrBackdrop": true,
+    "maximumFallbackProfiles": 3
+  },
+  "profileOnly": {
+    "minimumProfiles": 15,
+    "maximumProfiles": 24,
+    "portraitTilesOnly": true
+  },
+  "refresh": {
+    "intervalMonths": 2,
+    "minimumChangedSelections": 2,
+    "singleNewCreditTopRank": 8,
+    "minimumChangedProfileSelections": 3,
+    "stageOnly": true
+  }
+}

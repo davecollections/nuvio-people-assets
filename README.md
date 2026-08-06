@@ -9,7 +9,7 @@ assets/people/{tmdb_person_id}/
   poster.webp
   title-logo.png
   landscape.webp   # retained for current/V1 compatibility
-  hero.webp        # filmography hero, added as it is approved
+  hero.webp        # approved filmography or profile-only hero
 ```
 
 For example, Tom Hanks is stored under `assets/people/31/`.
@@ -18,7 +18,8 @@ For example, Tom Hanks is stored under `assets/people/31/`.
 
 - `poster.webp` and `title-logo.png` are required for every registry entry.
 - `landscape.webp` is currently retained, but is considered a legacy/compatibility asset while the V2 presentation options are finalised.
-- `hero.webp` is optional during rollout. Approved heroes use the `people-filmography-t2-perspective-24-v1` design: 1920 x 1080, 24 credited titles, T2 perspective layout, WebP quality 82.
+- `hero.webp` is optional during rollout. New heroes use the `people-t2-perspective-v2` design: 2560 x 1440, T2 perspective layout, and WebP quality 82.
+- Filmography heroes use 15–24 eligible, distinct movie/TV credits. Profile-only heroes are permitted when fewer than 15 credits qualify but at least 15 suitable official profile images exist.
 - Paths are identity-based and must not be renamed when a person's display name changes.
 - `manifests/people.json` is the canonical machine-readable inventory, including SHA-256 hashes, dimensions, byte counts, and direct raw GitHub URLs.
 
@@ -28,11 +29,15 @@ Consumers may use the stable `main` URLs and compare manifest hashes when decidi
 
 People imagery and film/TV artwork originate from TMDB. This repository does not claim ownership of third-party artwork. The repository is not endorsed or certified by TMDB. Hero generation must use official TMDB artwork only; general web images, fan art, and AI-generated imagery are not permitted.
 
+The T2 compositor is adapted from [Prism Wallpapers](https://github.com/bramst0ne/prism-wallpapers), created by `bramst0ne`. Nuvio People gratefully acknowledges the original project and its author, who granted direct permission on 2026-08-06 to use, copy, modify, and publicly include the relevant code for this artwork workflow. Adapted source files retain their attribution notices.
+
+No TMDB credential is stored in this repository. Metadata requests are made through a configured Cloudflare Worker; its TMDB bearer token remains a Cloudflare secret. Official TMDB image files are downloaded only from their public image host.
+
 ## Updating
 
 The intended update model is selective and infrequent:
 
-1. Audit people whose credited catalogue or presentation asset has materially changed.
+1. Every two months, audit people whose selected catalogue or presentation assets may have materially changed.
 2. Regenerate only affected identities using deterministic selection and layout.
 3. Run `npm run manifest` and `npm test`.
 4. Review the exact output hashes before publishing.
@@ -53,4 +58,4 @@ npm run manifest
 npm test
 ```
 
-Validation enforces the registry-to-directory mapping, required assets, supported formats, hero dimensions and size budget, absence of unexpected files, and an up-to-date manifest.
+Validation enforces the registry-to-directory mapping, required assets, supported formats, approved hero dimensions, absence of unexpected files, and an up-to-date manifest. The 250 KiB hero size is a target rather than a rejection threshold.
