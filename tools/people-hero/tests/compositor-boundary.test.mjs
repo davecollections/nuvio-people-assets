@@ -8,4 +8,10 @@ test("vendored compositor is network-free and credential-free", async () => {
   assert.doesNotMatch(source, /(?:requests|urllib|httpx|aiohttp)\s*(?:\.|import)/u);
   assert.doesNotMatch(source, /(?:api[_-]?key|bearer[_-]?token|dotenv|\.env)/iu);
   assert.match(source, /Adapted from Prism Wallpapers by bramst0ne/u);
+  assert.match(source, /fraction = max\(0\.0, min\(1\.0, fraction\)\)/u);
+  assert.match(source, /approved-prism-t2-full-bleed-v1/u);
+  assert.match(source, /"slotCount": len\(slots\)/u);
+  assert.match(source, /"cropEmptySlots": max\(0, crop_slots - crop_placements\)/u);
+  assert.match(source, /"repeatedPlacementCount": sum/u);
+  assert.match(source, /\(width - inset_x, height\), \(inset_x, height - inset_y\)/u);
 });

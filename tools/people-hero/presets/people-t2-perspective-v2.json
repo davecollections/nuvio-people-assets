@@ -12,7 +12,7 @@
   "titleLogoBakedIn": false,
   "filmography": {
     "minimumCredits": 15,
-    "maximumCredits": 24,
+    "maximumCredits": 32,
     "mediaTypes": ["movie", "tv"],
     "roles": ["cast", "director"],
     "minimumTvEpisodes": 2,

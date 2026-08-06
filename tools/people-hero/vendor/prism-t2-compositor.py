@@ -133,28 +133,33 @@ def make_tile(image: Image.Image, width: int, height: int, opacity: float) -> Im
     return tile
 
 
-def build_slots(width: int, height: int, mode: str, seed: int) -> tuple[list[dict], int, int, int, int]:
+def build_slots(width: int, height: int, mode: str, seed: int, source_count: int) -> tuple[list[dict], int, int, int, int, dict]:
+    """Build Prism's approved oversized, mixed-aspect T2 bleed lattice."""
+    if source_count < 1:
+        fail("At least one source is required to build T2 slots")
+
     scale = height / 1080
     landscape_width = int(300 * scale)
     portrait_width = int((320 if mode == "profile-only" else 200) * scale)
     portrait_height = round(portrait_width * 3 / 2)
-    gap = int(GAP * scale)
+    landscape_height = round(landscape_width * 9 / 16)
+    gap = max(1, int(GAP * scale))
     pattern = ["P"] if mode == "profile-only" else ["L", "P", "L", "P", "L", "P", "L", "P", "L"]
     rng = random.Random(seed)
 
     bleed_x = (landscape_width + gap) * 3
-    bleed_y = portrait_height * 2 + gap * 4
+    bleed_y = max(portrait_height, landscape_height) * 2 + gap * 4
     columns = []
-    x = -bleed_x
+    source_x = -bleed_x
     pattern_index = 0
-    while x < width + bleed_x:
+    while source_x < width + bleed_x:
         column_type = pattern[pattern_index % len(pattern)]
         base_width = landscape_width if column_type == "L" else portrait_width
-        center = x + base_width / 2
-        distance = (center - width / 2) / (width / 2)
-        column_width = int(base_width * max(0.5, min(1.5, 1 - POV_X * distance * 0.15)))
-        columns.append({"x": x, "width": column_width, "type": column_type})
-        x += column_width + gap
+        column_center = source_x + base_width / 2
+        normalized_distance = (column_center - width / 2) / (width / 2)
+        column_width = int(base_width * max(0.5, min(1.5, 1 - POV_X * normalized_distance * 0.15)))
+        columns.append({"x": source_x, "width": column_width, "type": column_type})
+        source_x += column_width + gap
         pattern_index += 1
 
     oversized_width = width + bleed_x * 2
@@ -164,61 +169,91 @@ def build_slots(width: int, height: int, mode: str, seed: int) -> tuple[list[dic
         screen_x = column["x"] + column["width"] / 2
         norm_x = screen_x / width
         opacity = FADE_LEFT + (FADE_RIGHT - FADE_LEFT) * max(0, min(1, norm_x))
-        stagger = int(portrait_height * COL_STAGGER) if column_index % 2 else 0
-        y = stagger
-        while y < oversized_height:
+        stagger_y = int(portrait_height * COL_STAGGER) if column_index % 2 else 0
+        canvas_y = stagger_y
+
+        while canvas_y < oversized_height:
             tile_type = column["type"]
             if mode != "profile-only" and rng.random() < RANDOM_ASPECT_CHANCE:
                 tile_type = "P" if tile_type == "L" else "L"
             tile_width = column["width"]
             tile_height = max(4, int(tile_width * (3 / 2 if tile_type == "P" else 9 / 16)))
-            screen_y = y - bleed_y + tile_height / 2
+            source_y = canvas_y - bleed_y
+            screen_y = source_y + tile_height / 2
             norm_y = screen_y / height
             slots.append({
                 "x": column["x"] + bleed_x,
-                "y": y,
+                "y": canvas_y,
                 "width": tile_width,
                 "height": tile_height,
                 "type": tile_type,
                 "onScreen": 0 <= norm_x <= 1 and 0 <= norm_y <= 1,
+                "overlapsCrop": column["x"] < width and column["x"] + tile_width > 0 and source_y < height and source_y + tile_height > 0,
                 "focal": math.hypot(norm_x - FOCUS_X, norm_y - FOCUS_Y) <= FOCUS_RADIUS,
                 "opacity": opacity,
             })
-            y += tile_height + gap
-    slots.sort(key=lambda slot: (not slot["onScreen"], not slot["focal"], slot["x"], slot["y"]))
-    return slots, oversized_width, oversized_height, bleed_x, bleed_y
+            canvas_y += tile_height + gap
+
+    # This is the reference Prism ordering: protect visible/focal cards first,
+    # then populate the complete bleed lattice needed by the perspective crop.
+    slots.sort(key=lambda slot: (not slot["onScreen"], not slot["focal"]))
+    layout = {
+        "strategy": "approved-prism-t2-full-bleed-v1",
+        "sourceCount": source_count,
+        "columnCount": len(columns),
+        "slotCount": len(slots),
+        "onScreenSlotCount": sum(1 for slot in slots if slot["onScreen"]),
+        "cropSlotCount": sum(1 for slot in slots if slot["overlapsCrop"]),
+        "bleedX": bleed_x,
+        "bleedY": bleed_y,
+    }
+    return slots, oversized_width, oversized_height, bleed_x, bleed_y, layout
 
 
 def assign_sources(plan: dict, slots: list[dict]) -> tuple[list[dict], list[str]]:
     rng = random.Random(plan["seed"])
     sources = list(plan["sources"])
-    priority_count = max(1, int(len(sources) * 0.35))
-    priority = sources[:priority_count]
-    remainder = sources[priority_count:]
-    rng.shuffle(remainder)
-    ordered = priority + remainder
+    pools = {}
+    for kind in ("portrait", "landscape"):
+        available = [source for source in sources if kind in source]
+        priority_count = max(1, int(len(available) * 0.35)) if available else 0
+        priority = available[:priority_count]
+        remainder = available[priority_count:]
+        rng.shuffle(remainder)
+        pools[kind] = {"priority": priority, "remainder": remainder}
+
     used = set()
     placements = []
+    repeat_cursors = {(kind, group): 0 for kind in pools for group in ("priority", "remainder")}
+
+    def choose(kind: str, focal: bool) -> tuple[dict | None, bool]:
+        preferred_group = "priority" if focal else "remainder"
+        alternate_group = "remainder" if focal else "priority"
+        for group in (preferred_group, alternate_group):
+            for source in pools[kind][group]:
+                if source["id"] not in used:
+                    return source, False
+        for group in (preferred_group, alternate_group):
+            fallback = pools[kind][group]
+            if fallback:
+                cursor_key = (kind, group)
+                source = fallback[repeat_cursors[cursor_key] % len(fallback)]
+                repeat_cursors[cursor_key] += 1
+                return source, True
+        return None, False
 
     for slot in slots:
-        selected = None
         required_kind = "portrait" if slot["type"] == "P" else "landscape"
-        for source in ordered:
-            if source["id"] not in used and required_kind in source:
-                selected = source
-                break
+        selected, repeated = choose(required_kind, slot["focal"])
         if selected is None and plan["mode"] == "filmography":
             fallback_kind = "landscape" if required_kind == "portrait" else "portrait"
-            for source in ordered:
-                if source["id"] not in used and fallback_kind in source:
-                    selected = source
-                    break
+            selected, repeated = choose(fallback_kind, slot["focal"])
             if selected is not None:
                 required_kind = fallback_kind
         if selected is None:
             continue
         used.add(selected["id"])
-        placements.append({**slot, "sourceId": selected["id"], "sourcePath": selected[required_kind]})
+        placements.append({**slot, "sourceId": selected["id"], "sourcePath": selected[required_kind], "repeated": repeated})
 
     return placements, sorted(used)
 
@@ -227,7 +262,9 @@ def perspective_warp(image: Image.Image, offset_x: int, offset_y: int, width: in
     inset_y = height * WARP_STRENGTH / 2
     inset_x = width * WARP_STRENGTH / 2
     source = [(offset_x, offset_y), (offset_x + width, offset_y), (offset_x + width, offset_y + height), (offset_x, offset_y + height)]
-    destination = [(0, inset_y), (width, 0), (width - inset_x, height - inset_y), (inset_x, height - inset_y)]
+    # Match Prism T2: the right edge stays full-height while the left edge
+    # tapers vertically and the bottom edge tapers toward the left viewpoint.
+    destination = [(0, inset_y), (width, 0), (width - inset_x, height), (inset_x, height - inset_y)]
     matrix = []
     values = []
     for (source_x, source_y), (dest_x, dest_y) in zip(source, destination):
@@ -262,20 +299,29 @@ def apply_depth_of_field(image: Image.Image, scale: float) -> Image.Image:
 
 def apply_gradient(image: Image.Image, accent: tuple[int, int, int]) -> Image.Image:
     width, height = image.size
-    overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    pixels = overlay.load()
-    for x in range(int(width * 0.65)):
-        alpha = int(240 * ((1 - x / (width * 0.65)) ** 1.4))
-        for y in range(height):
-            pixels[x, y] = (6, 8, 12, alpha)
-    result = Image.alpha_composite(image, overlay)
-    bottom = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    bottom_pixels = bottom.load()
-    for y in range(int(height * 0.55), height):
-        fraction = (y - height * 0.55) / (height * 0.45)
-        alpha = int(215 * fraction ** 1.3)
-        for x in range(width):
-            bottom_pixels[x, y] = (6, 8, 12, alpha)
+    def left_gradient(gradient_width: int, gradient_height: int) -> Image.Image:
+        overlay = Image.new("RGBA", (gradient_width, gradient_height), (0, 0, 0, 0))
+        pixels = overlay.load()
+        for x in range(int(gradient_width * 0.65)):
+            alpha = int(240 * ((1 - x / (gradient_width * 0.65)) ** 1.4))
+            for y in range(gradient_height):
+                pixels[x, y] = (6, 8, 12, alpha)
+        return overlay
+
+    def bottom_gradient(gradient_width: int, gradient_height: int) -> Image.Image:
+        overlay = Image.new("RGBA", (gradient_width, gradient_height), (0, 0, 0, 0))
+        pixels = overlay.load()
+        for y in range(gradient_height):
+            fraction = (y - gradient_height * 0.55) / (gradient_height * 0.45)
+            fraction = max(0.0, min(1.0, fraction))
+            alpha = int(215 * fraction ** 1.3)
+            for x in range(gradient_width):
+                pixels[x, y] = (6, 8, 12, alpha)
+        return overlay
+
+    left = left_gradient(width // 4, height // 4).resize((width, height), Image.Resampling.BILINEAR)
+    bottom = bottom_gradient(width // 4, height // 4).resize((width, height), Image.Resampling.BILINEAR)
+    result = Image.alpha_composite(image, left)
     result = Image.alpha_composite(result, bottom)
     glow = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(glow)
@@ -292,7 +338,7 @@ def render(plan: dict, output_path: Path) -> dict:
     height = int(plan.get("height", 1440))
     if (width, height) != (2560, 1440):
         fail("The v2 compositor output must be exactly 2560x1440")
-    slots, oversized_width, oversized_height, offset_x, offset_y = build_slots(width, height, plan["mode"], plan["seed"])
+    slots, oversized_width, oversized_height, offset_x, offset_y, layout = build_slots(width, height, plan["mode"], plan["seed"], len(plan["sources"]))
     placements, used_ids = assign_sources(plan, slots)
     canvas = Image.new("RGBA", (oversized_width, oversized_height), BACKGROUND)
     for placement in placements:
@@ -305,6 +351,8 @@ def render(plan: dict, output_path: Path) -> dict:
     final.save(output_path, "PNG", optimize=True)
     visible_placements = sum(1 for placement in placements if placement["onScreen"])
     visible_slots = sum(1 for slot in slots if slot["onScreen"])
+    crop_placements = sum(1 for placement in placements if placement["overlapsCrop"])
+    crop_slots = sum(1 for slot in slots if slot["overlapsCrop"])
     return {
         "mode": plan["mode"],
         "runtime": {
@@ -314,9 +362,14 @@ def render(plan: dict, output_path: Path) -> dict:
         },
         "sourceCount": len(plan["sources"]),
         "usedSourceCount": len(used_ids),
+        "layout": layout,
         "visibleSlots": visible_slots,
         "visiblePlacements": visible_placements,
         "visibleEmptySlots": max(0, visible_slots - visible_placements),
+        "cropSlots": crop_slots,
+        "cropPlacements": crop_placements,
+        "cropEmptySlots": max(0, crop_slots - crop_placements),
+        "repeatedPlacementCount": sum(1 for placement in placements if placement["repeated"]),
         "placements": [
             {key: value for key, value in placement.items() if key != "sourcePath"}
             for placement in placements

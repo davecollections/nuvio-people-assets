@@ -62,7 +62,7 @@ export async function buildPreflight({ personId }) {
   assert(person, `TMDB Person ID ${personId} is not present in data/people.json`);
   assert(preset.id === "people-t2-perspective-v2", "Unexpected People hero preset ID");
   assert(preset.width === 2560 && preset.height === 1440 && preset.quality === 82, "People hero output lock mismatch");
-  assert(preset.filmography.minimumCredits === 15 && preset.filmography.maximumCredits === 24, "Filmography thresholds changed unexpectedly");
+  assert(preset.filmography.minimumCredits === 15 && preset.filmography.maximumCredits === 32, "Filmography thresholds changed unexpectedly");
   assert(preset.profileOnly.minimumProfiles === 15 && preset.profileOnly.maximumProfiles === 24, "Profile-only thresholds changed unexpectedly");
   assert(overrides.schemaVersion === 1 && Array.isArray(overrides.oneEpisodeTvRoles), "Invalid credit override file");
 

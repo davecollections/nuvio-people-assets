@@ -38,20 +38,21 @@ The approved new-generation preset is `people-t2-perspective-v2`:
 
 - 2560 x 1440 WebP, quality 82;
 - 250 KiB is a target, not a hard rejection threshold;
-- 15–24 eligible distinct movie/TV credits for a filmography hero;
+- 15–32 eligible distinct movie/TV credits for a filmography hero, using more only when the career supports a denser unique-title layout;
 - a profile-only hero with 15–24 distinct official TMDB profiles when fewer than 15 credits qualify;
 - at most three official profiles may fill otherwise-empty portrait positions in a filmography hero;
 - perspective T2 composition, concentrated centre-right and right;
 - dark, clean left title-safe zone;
 - no title logo baked into the hero;
 - premium mixed poster/backdrop presentation without stretching or a flat poster-grid appearance;
+- approved full-bleed Prism T2 lattice, placing every distinct selected source before any deterministic coverage fallback; repeated placements are permitted only when needed to prevent exposed perspective/bleed slots and should remain in lower-salience positions where possible;
 - official TMDB poster, backdrop, and permitted profile artwork only.
 
 Do not generate alternate T1, flat, or 36/60-title variants unless the user explicitly reopens design testing. Profile-only heroes retain the T2 perspective but use portrait tiles rather than severely cropping headshots into landscape tiles. Do not use general web images, fan art, AI imagery, or Fanart.tv artwork for People heroes.
 
 ## Source selection and determinism
 
-People heroes may use genuine cast credits and exact `Director` credits across movies and TV. Exclude adult/blocked records, self/archive/uncredited appearances, characters matching the person, unrelated credits, records without usable official artwork, and duplicate media identities. Exclude one-episode TV roles by default unless a tracked exception marks the role as culturally significant. Ranking must represent the person's career using role significance, popularity, vote support, and artwork suitability; it must not simply take the first or most-popular 24 API records.
+People heroes may use genuine cast credits and exact `Director` credits across movies and TV. Exclude adult/blocked records, self/archive/uncredited appearances, characters matching the person, unrelated credits, records without usable official artwork, and duplicate media identities. Exclude one-episode TV roles by default unless a tracked exception marks the role as culturally significant. Ranking must represent the person's career using role significance, popularity, vote support, and artwork suitability; it must not simply take the first or most-popular API records up to the layout cap.
 
 Every selection and render decision must be deterministic. Define stable tie-breaks and route all pseudo-random choices through one explicitly seeded generator. The reproducibility record must bind at least:
 

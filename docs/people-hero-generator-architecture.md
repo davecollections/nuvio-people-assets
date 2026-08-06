@@ -6,7 +6,7 @@ The generator is a staging-first, deterministic People-only workflow. It produce
 
 For each registered TMDB Person ID it chooses exactly one outcome:
 
-1. **Filmography:** select 15–24 eligible, distinct credits. Use posters and backdrops first; add at most three profiles only when portrait positions would otherwise remain empty.
+1. **Filmography:** select 15–32 eligible, distinct credits. Use more than 24 only when the career supports a denser unique-title composition. Use posters and backdrops first; add at most three profiles only when portrait positions would otherwise remain empty. The approved full-bleed Prism T2 lattice places every selected source first, then uses deterministic lower-salience fallback placements only where required to prevent exposed perspective/bleed slots.
 2. **Profile-only:** when fewer than 15 credits qualify but 15–24 suitable official profiles exist, use the portrait-focused T2 layout with no credit artwork.
 3. **Skip:** when neither threshold is met.
 
