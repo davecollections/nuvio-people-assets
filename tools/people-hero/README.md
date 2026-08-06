@@ -32,4 +32,6 @@ Current boundaries:
 
 The manual `Stage one People hero` GitHub Actions workflow accepts one registered TMDB Person ID and uploads the ignored attempt directory as a seven-day artifact. It has read-only repository permission and cannot publish artwork.
 
+The manual `Stage People hero batch` workflow accepts an explicit comma- or whitespace-separated list of 1–30 registered Person IDs. One validated dispatch fans out isolated staging jobs with at most five running in parallel, keeps failures independent, and uploads one seven-day artifact per identity. It cannot infer the full registry, publish artwork, or update the manifest.
+
 The manual `Check one People hero eligibility` workflow performs the compact metadata-only check with Node.js and uploads only its seven-day result. It does not install Python or download artwork.
