@@ -96,6 +96,25 @@ test("one-episode exception is person-specific and cast/director duplicates merg
   assert.ok(!selectEligibleCredits(otherPerson, overrides).eligible.some((credit) => credit.mediaId === 10));
 });
 
+test("one-episode TV roles remain excluded when TMDB omits the character", () => {
+  const result = selectEligibleCredits({
+    id: 2230991,
+    name: "Daisy Edgar-Jones",
+    combined_credits: {
+      cast: [tv(1900, { name: "LIVE with Kelly and Mark", character: "", episode_count: 1 })],
+      crew: []
+    }
+  });
+
+  assert.equal(result.eligible.length, 0);
+  assert.deepEqual(result.rejected, [{
+    role: "cast",
+    mediaType: "tv",
+    mediaId: 1900,
+    reason: "one-episode-tv-role"
+  }]);
+});
+
 test("equivalent titles from the same year retain the strongest deterministic credit", () => {
   const person = {
     id: 76594,
