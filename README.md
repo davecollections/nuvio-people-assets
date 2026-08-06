@@ -29,9 +29,7 @@ Consumers may use the stable `main` URLs and compare manifest hashes when decidi
 
 People imagery and film/TV artwork originate from TMDB. This repository does not claim ownership of third-party artwork. The repository is not endorsed or certified by TMDB. Hero generation must use official TMDB artwork only; general web images, fan art, and AI-generated imagery are not permitted.
 
-<a href="https://www.themoviedb.org/about/logos-attribution">
-  <img src="docs/tmdb-logo.svg" alt="The Movie Database (TMDB)" width="180">
-</a>
+<img src="docs/tmdb-logo.svg" alt="The Movie Database (TMDB)" width="180">
 
 **This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.**
 
