@@ -13,6 +13,21 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+export function validateCreditOverrides(overrides) {
+  assert(overrides?.schemaVersion === 1, "Invalid credit override schema version");
+  assert(Array.isArray(overrides.oneEpisodeTvRoles), "Invalid one-episode TV role overrides");
+  assert(Array.isArray(overrides.blockedMedia), "Invalid blocked-media overrides");
+  assert(overrides.blockedMedia.every((record) => record
+    && (record.mediaType === "movie" || record.mediaType === "tv")
+    && Number.isSafeInteger(record.mediaId)
+    && record.mediaId > 0
+    && typeof record.reason === "string"
+    && record.reason.trim().length > 0), "Invalid blocked-media override record");
+  const blockedMediaKeys = overrides.blockedMedia.map((record) => `${record.mediaType}:${record.mediaId}`);
+  assert(new Set(blockedMediaKeys).size === blockedMediaKeys.length, "Duplicate blocked-media override");
+  return overrides;
+}
+
 export function isPathInside(parent, candidate) {
   const relative = path.relative(path.resolve(parent), path.resolve(candidate));
   return relative === "" || (!relative.startsWith("..") && !path.isAbsolute(relative));
@@ -64,7 +79,7 @@ export async function buildPreflight({ personId }) {
   assert(preset.width === 2560 && preset.height === 1440 && preset.quality === 82, "People hero output lock mismatch");
   assert(preset.filmography.minimumCredits === 15 && preset.filmography.maximumCredits === 32, "Filmography thresholds changed unexpectedly");
   assert(preset.profileOnly.minimumProfiles === 15 && preset.profileOnly.maximumProfiles === 24, "Profile-only thresholds changed unexpectedly");
-  assert(overrides.schemaVersion === 1 && Array.isArray(overrides.oneEpisodeTvRoles), "Invalid credit override file");
+  validateCreditOverrides(overrides);
 
   return {
     status: "preflight-passed-no-generation",

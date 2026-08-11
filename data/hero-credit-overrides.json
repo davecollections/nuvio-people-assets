@@ -1,4 +1,11 @@
 {
   "schemaVersion": 1,
-  "oneEpisodeTvRoles": []
+  "oneEpisodeTvRoles": [],
+  "blockedMedia": [
+    {
+      "mediaType": "movie",
+      "mediaId": 1687093,
+      "reason": "owner-blocked-unsuitable-title-artwork"
+    }
+  ]
 }

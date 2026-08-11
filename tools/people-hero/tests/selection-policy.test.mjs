@@ -148,6 +148,64 @@ test("one-episode TV roles remain excluded when TMDB omits the character", () =>
   }]);
 });
 
+test("blank documentary cast remains eligible while standalone archive labels are rejected", () => {
+  const documentary = movie(1901, { title: "Career Retrospective", character: "", genre_ids: [99] });
+  const result = selectEligibleCredits({
+    id: 31,
+    name: "Tom Hanks",
+    combined_credits: {
+      cast: [
+        documentary,
+        movie(1902, { title: "Ordinary Feature", character: "", genre_ids: [18] }),
+        movie(1903, { character: "(archive)" }),
+        movie(1904, { character: "Archival" })
+      ],
+      crew: [{ ...documentary, job: "Director" }]
+    }
+  });
+
+  assert.deepEqual(result.eligible.map((credit) => credit.mediaId), [1901, 1902]);
+  assert.deepEqual(result.eligible.find((credit) => credit.mediaId === 1901).roles, ["cast", "director"]);
+  assert.deepEqual(new Map(result.rejected.map((record) => [record.mediaId, record.reason])), new Map([
+    [1903, "archive-or-photo-appearance"],
+    [1904, "archive-or-photo-appearance"]
+  ]));
+});
+
+test("a blank documentary performance can retain the fifteenth genuine Chris Tucker credit", () => {
+  const result = planPersonHero({
+    id: 66,
+    name: "Chris Tucker",
+    combined_credits: {
+      cast: [
+        ...Array.from({ length: 14 }, (_, index) => movie(index + 1)),
+        movie(608675, { title: "Def Comedy Jam, Vol. 7", character: "", genre_ids: [99], order: 5 })
+      ],
+      crew: []
+    },
+    images: { profiles: profiles(9) }
+  });
+
+  assert.equal(result.outcome, "filmography");
+  assert.equal(result.selectedCredits.length, 15);
+  assert.ok(result.selectedCredits.some((credit) => credit.mediaId === 608675));
+});
+
+test("media-level blocks reject both cast and exact Director credits", () => {
+  const blocked = movie(1687093, { title: "Blocked Title", character: "Lead" });
+  const result = selectEligibleCredits({
+    id: 224,
+    name: "David Cronenberg",
+    combined_credits: { cast: [blocked], crew: [{ ...blocked, job: "Director" }] }
+  }, {
+    oneEpisodeTvRoles: [],
+    blockedMedia: [{ mediaType: "movie", mediaId: 1687093, reason: "owner-blocked" }]
+  });
+
+  assert.equal(result.eligible.length, 0);
+  assert.deepEqual(result.rejected.map((record) => record.reason), ["blocked-media", "blocked-media"]);
+});
+
 test("equivalent titles from the same year retain the strongest deterministic credit", () => {
   const person = {
     id: 76594,
