@@ -1,0 +1,69 @@
+{
+  "version": "people-base-artwork-migration-record-v1",
+  "migrationDate": "2026-08-08",
+  "trackingIssue": 23,
+  "sourceRepository": "davecollections/nuvio-assets",
+  "sourceCatalogueCommit": "5a63129",
+  "destinationRepository": "davecollections/nuvio-people-assets",
+  "registry": {
+    "recordCount": 1480,
+    "sourceMembershipCount": 1735,
+    "sourceMembershipFingerprint": "8819f5026fbc5bf92ab69f09c4c9ac9ac15157f75b26b0688f14937927ade2c9"
+  },
+  "legacyManifests": {
+    "artworkRecordCount": 1480,
+    "artworkFingerprint": "5541507599696b671e29a9b1ba9dadb460c2417591258abc98d3f892a45162be",
+    "presentationRecordCount": 1480,
+    "presentationFingerprint": "f4b669a6f01169bec4e7b01f4a690a9950dfd1ea187542b31a62860ff66ae742"
+  },
+  "assetParityBeforeMigration": {
+    "posterMatches": 1480,
+    "landscapeMatches": 1480,
+    "titleLogoMatches": 1479,
+    "intentionalTitleLogoDifferences": [31]
+  },
+  "localSourceArchive": {
+    "status": "complete-ignored-hardlink-cache",
+    "inputCacheCount": 7,
+    "inputEntryCount": 1495,
+    "approvedSourceCount": 1478,
+    "fallbackCount": 2,
+    "missingCount": 0,
+    "hardLinkCount": 1478,
+    "hardLinkRequirement": "same-volume-hard-link-support",
+    "copiedFileCount": 0,
+    "networkRequests": 0
+  },
+  "proofs": [
+    {
+      "tmdbPersonId": 1,
+      "canonicalName": "George Lucas",
+      "case": "portrait-source",
+      "posterSha256": "29b6ebf0a7de1c27b8c4637317794ecbc0f4658fd22cbf3c8874f5e393addd38",
+      "landscapeSha256": "2b37e32cc6478f10f34c998a7750b336432cf18938557b7fc7876bc5b3cde084",
+      "titleLogoSha256": "c3078a812dd0af80fb8786930229ad873d0c1ec22cd9087d3f91bbb7b0d39aaa",
+      "matchesCurrent": true,
+      "networkRequests": 0
+    },
+    {
+      "tmdbPersonId": 31,
+      "canonicalName": "Tom Hanks",
+      "case": "approved-title-logo-output-override",
+      "posterSha256": "38f6b5d3b64caa6615b6d645855ec37ca9d01ca9e54d1af8104dd67f0ebf098d",
+      "landscapeSha256": "70e60c563659fe3bea677b80dab6ecc452e86e66342ee72d3344651b288caeba",
+      "titleLogoSha256": "e87ff34b3d6aa17dfa663a8a73574d95e533ea33410ab8534f890e6f57cde8e4",
+      "matchesCurrent": true,
+      "networkRequests": 0
+    },
+    {
+      "tmdbPersonId": 8559,
+      "canonicalName": "Kátia Lund",
+      "case": "text-fallback",
+      "posterSha256": "cbe24ec5cccf54db2e002b1c7f4a1cb1830edf9df65c1491797445eb80d0bf90",
+      "landscapeSha256": "f50bade6cb96950c27021161979d7b443d8ec02e12844a333e73b5190810dcf0",
+      "titleLogoSha256": "2591231590eb015c3bdf59d12b3fab5e02cf25bf1d2c936e5373bbdeca269ca5",
+      "matchesCurrent": true,
+      "networkRequests": 0
+    }
+  ]
+}

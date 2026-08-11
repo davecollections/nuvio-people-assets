@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davecollections.github.io/nuvio-people-assets/schemas/people-title-logo-output-overrides.schema.json",
+  "title": "People title-logo output overrides",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "ordering", "recordCount", "records"],
+  "properties": {
+    "version": { "const": "people-title-logo-output-overrides-v1" },
+    "status": { "const": "active" },
+    "ordering": { "const": "tmdb-person-id-ascending" },
+    "recordCount": { "type": "integer", "minimum": 0 },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["stableKey", "tmdbPersonId", "canonicalName", "operation", "trimThreshold", "transparentPadding", "inputSha256", "outputSha256", "outputWidth", "outputHeight", "reason"],
+        "properties": {
+          "stableKey": { "type": "string", "pattern": "^person:[1-9][0-9]*$" },
+          "tmdbPersonId": { "type": "integer", "minimum": 1 },
+          "canonicalName": { "type": "string", "minLength": 1 },
+          "operation": { "const": "alpha-trim-transparent-padding-v1" },
+          "trimThreshold": { "type": "integer", "minimum": 0, "maximum": 255 },
+          "transparentPadding": { "type": "integer", "minimum": 0 },
+          "inputSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "outputSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "outputWidth": { "type": "integer", "minimum": 1 },
+          "outputHeight": { "type": "integer", "minimum": 1 },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

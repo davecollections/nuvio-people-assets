@@ -1,0 +1,21 @@
+{
+  "version": "people-title-logo-output-overrides-v1",
+  "status": "active",
+  "ordering": "tmdb-person-id-ascending",
+  "recordCount": 1,
+  "records": [
+    {
+      "stableKey": "person:31",
+      "tmdbPersonId": 31,
+      "canonicalName": "Tom Hanks",
+      "operation": "alpha-trim-transparent-padding-v1",
+      "trimThreshold": 10,
+      "transparentPadding": 48,
+      "inputSha256": "81118625e5dace95556b1c46d091f20b02432c22d6fc4cc6a84cc0c07ddbfb7a",
+      "outputSha256": "e87ff34b3d6aa17dfa663a8a73574d95e533ea33410ab8534f890e6f57cde8e4",
+      "outputWidth": 1078,
+      "outputHeight": 307,
+      "reason": "Owner-approved tighter transparent canvas for improved runtime logo scale."
+    }
+  ]
+}
