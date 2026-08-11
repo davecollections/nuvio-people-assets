@@ -1,5 +1,5 @@
 const SELF_PATTERN = /(?:^|\b)(?:self|himself|herself|themself|themselves)(?:\b|$)/iu;
-const ARCHIVE_PATTERN = /archive\s+(?:footage|audio|material)|photograph|photo\s+only/iu;
+const ARCHIVE_PATTERN = /\b(?:archive|archival)\b|photograph|photo\s+only/iu;
 const UNCREDITED_PATTERN = /uncredited/iu;
 const SAFE_ART_PATH = /^\/[A-Za-z0-9._-]+$/u;
 const MUSIC_GENRE_ID = 10402;
@@ -43,6 +43,14 @@ function oneEpisodeExceptionSet(overrides, personId) {
   const records = Array.isArray(overrides?.oneEpisodeTvRoles) ? overrides.oneEpisodeTvRoles : [];
   return new Set(records.filter((record) => record && record.personId === personId && record.mediaType === "tv" && Number.isSafeInteger(record.mediaId))
     .map((record) => `${personId}:tv:${record.mediaId}`));
+}
+
+function blockedMediaSet(overrides) {
+  const records = Array.isArray(overrides?.blockedMedia) ? overrides.blockedMedia : [];
+  return new Set(records.filter((record) => record
+    && (record.mediaType === "movie" || record.mediaType === "tv")
+    && Number.isSafeInteger(record.mediaId))
+    .map((record) => `${record.mediaType}:${record.mediaId}`));
 }
 
 function characterMatchesPerson(character, personName) {
@@ -153,13 +161,15 @@ export function selectEligibleCredits(person, overrides = {}) {
   const personName = text(person?.name);
   const credits = person?.combined_credits;
   const exceptions = oneEpisodeExceptionSet(overrides, person?.id);
+  const blockedMedia = blockedMediaSet(overrides);
   const accepted = new Map();
   const rejected = [];
 
   for (const record of Array.isArray(credits?.cast) ? credits.cast : []) {
     let reason = null;
     const principalMusicPerformance = isPrincipalMusicPerformance(record, personName);
-    if (record?.adult === true) reason = "adult";
+    if (blockedMedia.has(`${record?.media_type}:${record?.id}`)) reason = "blocked-media";
+    else if (record?.adult === true) reason = "adult";
     else reason = rejectCast(record, person?.id, personName, exceptions, principalMusicPerformance);
     const normalized = normalizeCredit(record, "cast", { principalMusicPerformance });
     if (!reason && !normalized) reason = "invalid-media-identity";
@@ -175,7 +185,8 @@ export function selectEligibleCredits(person, overrides = {}) {
 
   for (const record of Array.isArray(credits?.crew) ? credits.crew : []) {
     let reason = null;
-    if (record?.job !== "Director") reason = "unrelated-crew-job";
+    if (blockedMedia.has(`${record?.media_type}:${record?.id}`)) reason = "blocked-media";
+    else if (record?.job !== "Director") reason = "unrelated-crew-job";
     else if (record?.adult === true) reason = "adult";
     const normalized = normalizeCredit(record, "director");
     if (!reason && !normalized) reason = "invalid-media-identity";

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import path from "node:path";
 import test from "node:test";
 
-import { deriveLayoutSeed, isPathInside } from "../src/preflight.mjs";
+import { deriveLayoutSeed, isPathInside, validateCreditOverrides } from "../src/preflight.mjs";
 
 test("layout seeds are stable and identity-specific", () => {
   const presetId = "people-t2-perspective-v2";
@@ -21,4 +21,17 @@ test("path containment rejects siblings and accepts descendants", () => {
   assert.equal(isPathInside(root, root), true);
   assert.equal(isPathInside(root, path.join(root, "staging", "hero.webp")), true);
   assert.equal(isPathInside(root, path.resolve(root, "..", "nuvio-people-assets")), false);
+});
+
+test("credit override validation requires unique, explained media blocks", () => {
+  const valid = {
+    schemaVersion: 1,
+    oneEpisodeTvRoles: [],
+    blockedMedia: [{ mediaType: "movie", mediaId: 1687093, reason: "owner-blocked" }]
+  };
+  assert.equal(validateCreditOverrides(valid), valid);
+  assert.throws(() => validateCreditOverrides({ ...valid, blockedMedia: []
+    .concat(valid.blockedMedia, valid.blockedMedia) }), /Duplicate blocked-media override/u);
+  assert.throws(() => validateCreditOverrides({ ...valid, blockedMedia: [{ mediaType: "movie", mediaId: 1, reason: "" }] }),
+    /Invalid blocked-media override record/u);
 });
