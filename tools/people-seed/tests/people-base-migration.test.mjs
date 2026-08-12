@@ -28,36 +28,47 @@ async function walk(directory) {
   return files;
 }
 
-test("migrated rich registry and base-artwork hashes cover the canonical 1480 identities", async () => {
-  const [canonical, registry, artwork, presentation, current, migration] = await Promise.all([
+test("migrated registry, legacy base artwork, and approved v2 title logos cover the canonical 1480 identities", async () => {
+  const [canonical, registry, artwork, presentation, current, migration, publication] = await Promise.all([
     readJson("data/people.json"),
     readJson("data/people-base/people-registry.json"),
     readJson("data/people-base/legacy-artwork-manifest.json"),
     readJson("data/people-base/legacy-presentation-manifest.json"),
     readJson("manifests/people.json"),
     readJson("data/people-base/migration-record.json"),
+    readJson("data/people-base/title-logo-v2-publication.json"),
   ]);
   assert.equal(registry.recordCount, 1480);
   assert.equal(artwork.recordCount, 1480);
   assert.equal(presentation.recordCount, 1480);
+  assert.equal(publication.recordCount, 1480);
   const canonicalById = new Map(canonical.people.map((person) => [person.tmdbPersonId, person]));
   const currentById = new Map(current.people.map((person) => [person.tmdbPersonId, person]));
   const presentationById = new Map(presentation.records.map((record) => [record.tmdbPersonId, record]));
+  const publicationById = new Map(publication.records.map((record) => [record.tmdbPersonId, record]));
   const titleDrift = [];
   for (const person of registry.records) {
     const canonicalPerson = canonicalById.get(person.tmdbPersonId);
     const currentPerson = currentById.get(person.tmdbPersonId);
     const legacyTitle = presentationById.get(person.tmdbPersonId);
+    const publishedTitle = publicationById.get(person.tmdbPersonId);
     assert.equal(person.canonicalName, canonicalPerson.canonicalName);
     assert.deepEqual(person.categoryMembership, canonicalPerson.categoryMembership);
     const legacyArtwork = artwork.records.find((record) => record.tmdbPersonId === person.tmdbPersonId);
     assert.equal(legacyArtwork.posterHash, currentPerson.assets.poster.sha256);
     assert.equal(legacyArtwork.landscapeHash, currentPerson.assets.landscape.sha256);
+    assert.equal(publishedTitle.stableKey, person.stableKey);
+    assert.equal(publishedTitle.canonicalName, person.canonicalName);
+    assert.equal(publishedTitle.sha256, currentPerson.assets.titleLogo.sha256);
+    assert.equal(publishedTitle.byteCount, currentPerson.assets.titleLogo.bytes);
+    assert.equal(currentPerson.assets.titleLogo.width, publication.output.width);
+    assert.equal(currentPerson.assets.titleLogo.height, publication.output.height);
+    assert.equal(currentPerson.assets.titleLogo.format, publication.output.format);
     if (legacyTitle.titleLogoSha256 !== currentPerson.assets.titleLogo.sha256) titleDrift.push(person.tmdbPersonId);
   }
-  assert.deepEqual(titleDrift, [31], "only the reviewed Tom Hanks tight-crop correction may differ from the legacy title-logo snapshot");
+  assert.deepEqual(titleDrift, registry.records.map((record) => record.tmdbPersonId), "every owner-approved v2 title logo must supersede its legacy snapshot");
   const outputOverrides = await readJson("data/people-base/title-logo-output-overrides.json");
-  assert.deepEqual(outputOverrides.records.map((record) => record.tmdbPersonId), titleDrift);
+  assert.deepEqual(outputOverrides.records.map((record) => record.tmdbPersonId), [31], "the historical Tom Hanks tight-crop override remains preserved as legacy reproduction evidence");
   assert.equal(migration.localSourceArchive.approvedSourceCount + migration.localSourceArchive.fallbackCount, 1480);
   assert.equal(migration.localSourceArchive.missingCount, 0);
   assert.equal(migration.proofs.every((proof) => proof.matchesCurrent && proof.networkRequests === 0), true);
@@ -89,6 +100,7 @@ test("every migrated People source document still satisfies its preserved schema
     ["data/people-base/sources.json", "schemas/people-sources.schema.json"],
     ["data/people-base/title-logo-line-break-overrides.json", "schemas/people-title-logo-line-break-overrides.schema.json"],
     ["data/people-base/title-logo-output-overrides.json", "schemas/people-title-logo-output-overrides.schema.json"],
+    ["data/people-base/title-logo-v2-publication.json", "schemas/people-title-logo-v2-publication.schema.json"],
   ];
   for (const [documentPath, schemaPath] of pairs) {
     const [document, schema] = await Promise.all([readJson(documentPath), readJson(schemaPath)]);
@@ -130,10 +142,11 @@ test("cache selection prefers the exact expected hash and attempt paths remain c
   assert.notEqual(first, baseArtworkAttemptName([...ids].reverse(), now));
 });
 
-test("migrated title-logo renderer reproduces a current approved byte hash twice", async () => {
-  const [registry, current] = await Promise.all([
+test("migrated legacy title-logo renderer remains deterministic without defining the v2 publication", async () => {
+  const [registry, current, legacyPresentation] = await Promise.all([
     readJson("data/people-base/people-registry.json"),
     readJson("manifests/people.json"),
+    readJson("data/people-base/legacy-presentation-manifest.json"),
   ]);
   const record = registry.records.find((person) => person.tmdbPersonId === 1);
   const person = {
@@ -146,16 +159,19 @@ test("migrated title-logo renderer reproduces a current approved byte hash twice
   const prepared = await prepareTitleLogoRenderer({ people: [person], configuration });
   const first = await renderTitleLogo({ person, ...prepared });
   const second = await renderTitleLogo({ person, ...prepared });
-  const expected = current.people.find((item) => item.tmdbPersonId === 1).assets.titleLogo.sha256;
-  assert.equal(first.record.outputHash, expected);
-  assert.equal(second.record.outputHash, expected);
+  const legacyHash = legacyPresentation.records.find((item) => item.tmdbPersonId === 1).titleLogoSha256;
+  const currentHash = current.people.find((item) => item.tmdbPersonId === 1).assets.titleLogo.sha256;
+  assert.equal(first.record.outputHash, legacyHash);
+  assert.equal(second.record.outputHash, legacyHash);
+  assert.notEqual(first.record.outputHash, currentHash);
   assert.deepEqual(first.output, second.output);
 });
 
-test("Tom Hanks exact output override reproduces the approved tight transparent canvas", async () => {
-  const [registry, current] = await Promise.all([
+test("historical Tom Hanks output override remains deterministic after the v2 publication", async () => {
+  const [registry, current, outputOverrideDocument] = await Promise.all([
     readJson("data/people-base/people-registry.json"),
     readJson("manifests/people.json"),
+    readJson("data/people-base/title-logo-output-overrides.json"),
   ]);
   const record = registry.records.find((person) => person.tmdbPersonId === 31);
   const person = { stableKey: record.stableKey, tmdbPersonId: record.tmdbPersonId, canonicalName: record.canonicalName, categoryMembership: record.categoryMembership };
@@ -165,9 +181,11 @@ test("Tom Hanks exact output override reproduces the approved tight transparent 
   const base = await renderTitleLogo({ person, ...prepared });
   const first = await applyTitleLogoOutputOverride({ person, rendered: base, runtime: prepared.runtime, overrides });
   const second = await applyTitleLogoOutputOverride({ person, rendered: base, runtime: prepared.runtime, overrides });
-  const expected = current.people.find((item) => item.tmdbPersonId === 31).assets.titleLogo;
-  assert.equal(first.record.outputHash, expected.sha256);
-  assert.equal(first.record.canvasWidth, expected.width);
-  assert.equal(first.record.canvasHeight, expected.height);
+  const historicalOverride = outputOverrideDocument.records[0];
+  const currentTitleLogo = current.people.find((item) => item.tmdbPersonId === 31).assets.titleLogo;
+  assert.equal(first.record.outputHash, historicalOverride.outputSha256);
+  assert.equal(first.record.canvasWidth, historicalOverride.outputWidth);
+  assert.equal(first.record.canvasHeight, historicalOverride.outputHeight);
+  assert.notEqual(first.record.outputHash, currentTitleLogo.sha256);
   assert.deepEqual(first.output, second.output);
 });

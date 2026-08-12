@@ -1,0 +1,62 @@
+{
+  "id": "people-title-logo-standard-canvas-v2",
+  "version": 3,
+  "status": "design-locked",
+  "publicationAuthorised": false,
+  "rendererVersion": "people-title-logo-standard-canvas-renderer-v5",
+  "basePresetId": "people-title-logo-cormorant-production-v1",
+  "baseRendererVersion": "people-title-logo-renderer-v5",
+  "canvas": {
+    "width": 1600,
+    "height": 480,
+    "transparentPadding": 24
+  },
+  "typography": {
+    "fontSize": 150,
+    "sizingRule": "uniform-fixed",
+    "minimumVisibleLineGap": 2,
+    "presentationCase": "uppercase-en-US",
+    "alignment": "center",
+    "region": {
+      "x": 0,
+      "y": 32,
+      "width": 1600,
+      "height": 259
+    }
+  },
+  "separator": {
+    "style": "split-rule-open-clapboard",
+    "width": 700,
+    "height": 50,
+    "baseWidth": 460,
+    "baseHeight": 33,
+    "lineThickness": 1.75,
+    "iconWidth": 32,
+    "bodyTop": 15,
+    "bodyHeight": 17,
+    "ruleClearance": 18,
+    "colour": "#FFFFFF",
+    "opacity": 0.86,
+    "top": 317,
+    "nameGap": 26,
+    "collectionGap": 19
+  },
+  "collection": {
+    "text": "COLLECTION",
+    "family": "Cormorant Garamond",
+    "weight": 500,
+    "fontSize": 97.65,
+    "tracking": 10.6575,
+    "colour": "#FFFFFF"
+  },
+  "output": {
+    "format": "png",
+    "alpha": true,
+    "background": "transparent",
+    "canvas": "standard-1600x480",
+    "visibleAlphaThreshold": 0,
+    "compressionLevel": 9,
+    "adaptiveFiltering": false,
+    "palette": false
+  }
+}
