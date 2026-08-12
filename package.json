@@ -11,6 +11,7 @@
     "people-hero:stage": "node tools/people-hero/src/stage.mjs",
     "people-base:consolidate-sources": "node tools/people-seed/src/consolidate-source-caches.mjs",
     "people-base:stage": "node tools/people-seed/src/stage-base-artwork.mjs",
+    "people-title-logo:v2-proof": "node tools/people-seed/src/title-logo-v2-proof.mjs",
     "validate": "node scripts/validate-assets.mjs",
     "test": "node --test tools/people-hero/tests/*.test.mjs tools/people-seed/tests/*.test.mjs && npm run validate"
   },
