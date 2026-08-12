@@ -7,9 +7,9 @@
     "poster": 1480,
     "titleLogo": 1480,
     "landscape": 1480,
-    "hero": 280
+    "hero": 282
   },
-  "totalAssetBytes": 332592975,
+  "totalAssetBytes": 332982935,
   "heroPreset": {
     "id": "people-t2-perspective-v2",
     "width": 2560,
@@ -24724,6 +24724,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9339/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9339/hero.webp",
+          "sha256": "49b7b69be6edcf2351e1ed750a364b1f34cdb44702b22077267a2c1133438e5d",
+          "bytes": 215934,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24759,6 +24768,15 @@
           "bytes": 42034,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9340/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9340/hero.webp",
+          "sha256": "cb237590584e8f957ade0771f08043eb7f50f59ba9c8e406cb826def6c232abd",
+          "bytes": 174026,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }

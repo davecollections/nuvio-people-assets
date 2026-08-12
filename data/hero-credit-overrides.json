@@ -6,6 +6,83 @@
       "mediaType": "movie",
       "mediaId": 1687093,
       "reason": "owner-blocked-unsuitable-title-artwork"
+    },
+    {
+      "mediaType": "movie",
+      "mediaId": 1660279,
+      "reason": "behind-the-scenes-self-documentary"
+    }
+  ],
+  "creativeCrewCredits": [
+    {
+      "personId": 9339,
+      "mediaType": "movie",
+      "mediaId": 752,
+      "jobs": ["Producer", "Screenplay"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
+    },
+    {
+      "personId": 9339,
+      "mediaType": "movie",
+      "mediaId": 22832,
+      "jobs": ["Producer"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
+    },
+    {
+      "personId": 9339,
+      "mediaType": "movie",
+      "mediaId": 55931,
+      "jobs": ["Original Film Writer", "Producer", "Story", "Writer"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
+    },
+    {
+      "personId": 9339,
+      "mediaType": "movie",
+      "mediaId": 9691,
+      "jobs": ["Screenplay", "Story"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
+    },
+    {
+      "personId": 9339,
+      "mediaType": "tv",
+      "mediaId": 91814,
+      "jobs": ["Writer"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
+    },
+    {
+      "personId": 9340,
+      "mediaType": "movie",
+      "mediaId": 752,
+      "jobs": ["Producer", "Screenplay"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
+    },
+    {
+      "personId": 9340,
+      "mediaType": "movie",
+      "mediaId": 22832,
+      "jobs": ["Producer"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
+    },
+    {
+      "personId": 9340,
+      "mediaType": "movie",
+      "mediaId": 55931,
+      "jobs": ["Original Film Writer", "Producer", "Story", "Writer"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
+    },
+    {
+      "personId": 9340,
+      "mediaType": "movie",
+      "mediaId": 9691,
+      "jobs": ["Screenplay", "Story"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
+    },
+    {
+      "personId": 9340,
+      "mediaType": "movie",
+      "mediaId": 24914,
+      "jobs": ["Original Film Writer", "Story"],
+      "reason": "owner-approved-career-representative-wachowski-credit"
     }
   ]
 }

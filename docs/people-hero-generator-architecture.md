@@ -26,7 +26,7 @@ The vendored compositor has no network or credential code. It receives a local s
 
 ## Selection policy
 
-Eligible records are genuine movie/TV acting credits and exact `Director` crew credits. Reject adult or blocked media, self/himself/herself roles, archive footage, uncredited work, characters matching the person's name, unrelated crew work, duplicates, individual TV episodes, and records without a usable official poster or backdrop.
+Eligible records are genuine movie/TV acting credits and exact `Director` crew credits. A tracked owner-approved override can additionally admit an exact person/media/job creative crew credit when a directing career would otherwise fall below the filmography minimum; this does not admit that job globally. Reject adult or blocked media, self/himself/herself roles, archive footage, uncredited work, characters matching the person's name, unrelated crew work, duplicates, individual TV episodes, and records without a usable official poster or backdrop.
 
 One-episode TV cast roles are rejected by default. A small tracked exception map can admit a culturally significant role. Parent shows are deduplicated by `(mediaType, mediaId)`.
 

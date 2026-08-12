@@ -53,6 +53,16 @@ function blockedMediaSet(overrides) {
     .map((record) => `${record.mediaType}:${record.mediaId}`));
 }
 
+function creativeCrewOverrideMap(overrides, personId) {
+  const records = Array.isArray(overrides?.creativeCrewCredits) ? overrides.creativeCrewCredits : [];
+  return new Map(records.filter((record) => record
+    && record.personId === personId
+    && (record.mediaType === "movie" || record.mediaType === "tv")
+    && Number.isSafeInteger(record.mediaId)
+    && Array.isArray(record.jobs))
+    .map((record) => [`${record.mediaType}:${record.mediaId}`, new Set(record.jobs)]));
+}
+
 function characterMatchesPerson(character, personName) {
   const normalizedCharacter = normalizedIdentity(character);
   const normalizedPerson = normalizedIdentity(personName);
@@ -87,6 +97,7 @@ function rejectCast(record, personId, personName, exceptions, principalMusicPerf
 function significanceBand(record) {
   if (record.roles.includes("director") && record.roles.includes("cast")) return 6;
   if (record.roles.includes("director")) return 5;
+  if (record.roles.includes("creative")) return 4;
   if (record.mediaType === "movie") {
     const billing = Math.max(0, integer(record.billingOrder, 999));
     if (billing <= 2) return 5;
@@ -122,6 +133,7 @@ function normalizeCredit(record, role, { principalMusicPerformance = false } = {
     title: titleFor(record),
     releaseYear: releaseYearFor(record, mediaType),
     roles: [role],
+    creativeJobs: role === "creative" ? [text(record.job)] : [],
     characters: role === "cast" ? [text(record.character)] : [],
     billingOrder: role === "cast" ? integer(record.order, 999) : 999,
     episodeCount: mediaType === "tv" ? integer(record.episode_count) : 0,
@@ -139,6 +151,7 @@ function mergeCredit(existing, incoming) {
   return {
     ...existing,
     roles,
+    creativeJobs: [...new Set([...existing.creativeJobs, ...incoming.creativeJobs].filter(Boolean))].sort(),
     characters: [...new Set([...existing.characters, ...incoming.characters].filter(Boolean))].sort(),
     billingOrder: Math.min(existing.billingOrder, incoming.billingOrder),
     episodeCount: Math.max(existing.episodeCount, incoming.episodeCount),
@@ -162,6 +175,7 @@ export function selectEligibleCredits(person, overrides = {}) {
   const credits = person?.combined_credits;
   const exceptions = oneEpisodeExceptionSet(overrides, person?.id);
   const blockedMedia = blockedMediaSet(overrides);
+  const creativeCrew = creativeCrewOverrideMap(overrides, person?.id);
   const accepted = new Map();
   const rejected = [];
 
@@ -185,10 +199,14 @@ export function selectEligibleCredits(person, overrides = {}) {
 
   for (const record of Array.isArray(credits?.crew) ? credits.crew : []) {
     let reason = null;
+    let role = "director";
+    const permittedCreativeJobs = creativeCrew.get(`${record?.media_type}:${record?.id}`);
     if (blockedMedia.has(`${record?.media_type}:${record?.id}`)) reason = "blocked-media";
-    else if (record?.job !== "Director") reason = "unrelated-crew-job";
     else if (record?.adult === true) reason = "adult";
-    const normalized = normalizeCredit(record, "director");
+    else if (record?.job === "Director") role = "director";
+    else if (permittedCreativeJobs?.has(record?.job)) role = "creative";
+    else reason = "unrelated-crew-job";
+    const normalized = normalizeCredit(record, role);
     if (!reason && !normalized) reason = "invalid-media-identity";
     if (!reason && !normalized.title) reason = "missing-title";
     if (!reason && normalized.artworkKinds === 0) reason = "missing-artwork";

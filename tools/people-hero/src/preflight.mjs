@@ -17,6 +17,7 @@ export function validateCreditOverrides(overrides) {
   assert(overrides?.schemaVersion === 1, "Invalid credit override schema version");
   assert(Array.isArray(overrides.oneEpisodeTvRoles), "Invalid one-episode TV role overrides");
   assert(Array.isArray(overrides.blockedMedia), "Invalid blocked-media overrides");
+  assert(Array.isArray(overrides.creativeCrewCredits), "Invalid creative-crew credit overrides");
   assert(overrides.blockedMedia.every((record) => record
     && (record.mediaType === "movie" || record.mediaType === "tv")
     && Number.isSafeInteger(record.mediaId)
@@ -25,6 +26,22 @@ export function validateCreditOverrides(overrides) {
     && record.reason.trim().length > 0), "Invalid blocked-media override record");
   const blockedMediaKeys = overrides.blockedMedia.map((record) => `${record.mediaType}:${record.mediaId}`);
   assert(new Set(blockedMediaKeys).size === blockedMediaKeys.length, "Duplicate blocked-media override");
+  const permittedCreativeJobs = new Set(["Creator", "Original Film Writer", "Producer", "Screenplay", "Story", "Writer"]);
+  assert(overrides.creativeCrewCredits.every((record) => record
+    && Number.isSafeInteger(record.personId)
+    && record.personId > 0
+    && (record.mediaType === "movie" || record.mediaType === "tv")
+    && Number.isSafeInteger(record.mediaId)
+    && record.mediaId > 0
+    && Array.isArray(record.jobs)
+    && record.jobs.length > 0
+    && record.jobs.every((job) => typeof job === "string" && permittedCreativeJobs.has(job))
+    && new Set(record.jobs).size === record.jobs.length
+    && typeof record.reason === "string"
+    && record.reason.trim().length > 0), "Invalid creative-crew credit override record");
+  const creativeCrewKeys = overrides.creativeCrewCredits
+    .map((record) => `${record.personId}:${record.mediaType}:${record.mediaId}`);
+  assert(new Set(creativeCrewKeys).size === creativeCrewKeys.length, "Duplicate creative-crew credit override");
   return overrides;
 }
 
