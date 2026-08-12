@@ -147,7 +147,18 @@ export async function buildInventory() {
       quality: 82,
       targetBytes: 256000,
       targetIsHardLimit: false,
-      sourcePolicy: "official-tmdb-artwork-only"
+      sourcePolicy: "official-tmdb-artwork-only",
+      sparseFallback: {
+        id: "people-t2-cinematic-defocus-fallback-v1",
+        minimumCredits: 1,
+        sourceOrder: "eligible-credit-rank",
+        artworkPreference: ["poster", "backdrop"],
+        blurSigma: 34,
+        saturation: 0.82,
+        brightness: 0.7,
+        titleLogoBakedIn: false,
+        upgradeWhenNormalHeroEligible: true
+      }
     },
     people
   };

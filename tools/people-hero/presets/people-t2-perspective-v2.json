@@ -29,6 +29,17 @@
     "maximumProfiles": 24,
     "portraitTilesOnly": true
   },
+  "sparseFallback": {
+    "id": "people-t2-cinematic-defocus-fallback-v1",
+    "minimumCredits": 1,
+    "sourceOrder": "eligible-credit-rank",
+    "artworkPreference": ["poster", "backdrop"],
+    "blurSigma": 34,
+    "saturation": 0.82,
+    "brightness": 0.7,
+    "titleLogoBakedIn": false,
+    "upgradeWhenNormalHeroEligible": true
+  },
   "refresh": {
     "intervalMonths": 2,
     "minimumChangedSelections": 2,

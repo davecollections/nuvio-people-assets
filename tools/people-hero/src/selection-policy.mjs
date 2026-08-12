@@ -266,7 +266,13 @@ export function selectProfiles(person) {
     || left.filePath.localeCompare(right.filePath, "en"));
 }
 
-export function planPersonHero(person, overrides = {}, { minimumCredits = 15, maximumCredits = 32, minimumProfiles = 15, maximumProfiles = 24 } = {}) {
+export function planPersonHero(person, overrides = {}, {
+  minimumCredits = 15,
+  maximumCredits = 32,
+  minimumProfiles = 15,
+  maximumProfiles = 24,
+  minimumSparseCredits = 1
+} = {}) {
   const { eligible, rejected } = selectEligibleCredits(person, overrides);
   const profiles = selectProfiles(person);
   if (eligible.length >= minimumCredits) {
@@ -291,9 +297,19 @@ export function planPersonHero(person, overrides = {}, { minimumCredits = 15, ma
       rejected
     };
   }
+  if (eligible.length >= minimumSparseCredits) {
+    return {
+      outcome: "sparse-fallback",
+      selectedCredits: eligible,
+      fallbackProfiles: [],
+      eligibleCreditCount: eligible.length,
+      usableProfileCount: profiles.length,
+      rejected
+    };
+  }
   return {
     outcome: "skip",
-    reason: "insufficient-eligible-credits-and-profiles",
+    reason: "no-eligible-credit-artwork-and-insufficient-profiles",
     eligibleCreditCount: eligible.length,
     usableProfileCount: profiles.length,
     rejected

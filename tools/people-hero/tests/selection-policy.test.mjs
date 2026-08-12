@@ -299,7 +299,7 @@ test("profile selection rejects weak shapes and sorts deterministically", () => 
   assert.deepEqual(selected.map((profile) => profile.filePath), ["/profile-0.jpg", "/profile-1.jpg"]);
 });
 
-test("planner chooses filmography, profile-only, and skip without forcing sparse mixtures", () => {
+test("planner chooses filmography, profile-only, sparse fallback, and true skip deterministically", () => {
   const filmography = planPersonHero({
     id: 1,
     name: "Person One",
@@ -319,13 +319,24 @@ test("planner chooses filmography, profile-only, and skip without forcing sparse
   assert.equal(profileOnly.outcome, "profile-only");
   assert.equal(profileOnly.selectedProfiles.length, 17);
 
-  const skipped = planPersonHero({
+  const sparse = planPersonHero({
     id: 3,
     name: "Person Three",
     combined_credits: { cast: Array.from({ length: 3 }, (_, index) => movie(index + 1)), crew: [] },
     images: { profiles: profiles(4) }
   });
+  assert.equal(sparse.outcome, "sparse-fallback");
+  assert.equal(sparse.selectedCredits.length, 3);
+  assert.deepEqual(sparse.fallbackProfiles, []);
+
+  const skipped = planPersonHero({
+    id: 5,
+    name: "Person Five",
+    combined_credits: { cast: [], crew: [] },
+    images: { profiles: profiles(4) }
+  });
   assert.equal(skipped.outcome, "skip");
+  assert.equal(skipped.reason, "no-eligible-credit-artwork-and-insufficient-profiles");
 });
 
 test("filmography uses up to three profiles only when portrait credit artwork is short", () => {

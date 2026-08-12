@@ -20,6 +20,7 @@ For example, Tom Hanks is stored under `assets/people/31/`.
 - `landscape.webp` is currently retained, but is considered a legacy/compatibility asset while the V2 presentation options are finalised.
 - `hero.webp` is optional during rollout. New heroes use the `people-t2-perspective-v2` design: 2560 x 1440, T2 perspective layout, and WebP quality 82.
 - Filmography heroes use 15–32 eligible, distinct movie/TV credits. Principal-performer concert and performance films may qualify when TMDB records them as Music-genre movies with the person billed first; ordinary `Self` appearances remain excluded. The approved full-bleed T2 lattice places every selected source before using deterministic low-salience fallback placements to keep the perspective crop complete. Profile-only heroes are permitted when fewer than 15 credits qualify but at least 15 suitable official profile images exist.
+- When neither normal threshold is met but at least one eligible credit has official artwork, a sparse fallback uses every eligible credit in the T2 lattice and applies the locked cinematic defocus and dark grading. This hides unavoidable repetition without admitting excluded credits; the separate title logo is never baked into the hero. Refreshes automatically replace the fallback when a normal hero becomes eligible.
 - Paths are identity-based and must not be renamed when a person's display name changes.
 - `manifests/people.json` is the canonical machine-readable inventory, including SHA-256 hashes, dimensions, byte counts, and direct raw GitHub URLs.
 

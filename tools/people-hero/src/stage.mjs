@@ -106,10 +106,49 @@ async function downloadOfficialImage(artworkPath, destination, fetchImpl) {
 
 function selectedSourceKeys(selection) {
   if (selection.outcome === "profile-only") return selection.selectedProfiles.map((profile) => `profile:${profile.filePath}`);
+  if (selection.outcome === "sparse-fallback") {
+    return selection.selectedCredits.map((credit) => `${credit.mediaType}:${credit.mediaId}:${credit.posterPath || credit.backdropPath}`);
+  }
   return [
     ...selection.selectedCredits.map((credit) => `${credit.mediaType}:${credit.mediaId}:${credit.posterPath || ""}:${credit.backdropPath || ""}`),
     ...selection.fallbackProfiles.map((profile) => `profile:${profile.filePath}`)
   ];
+}
+
+export function sourceArtworkForCredit(credit, outcome) {
+  const sparse = outcome === "sparse-fallback";
+  return {
+    portraitPath: credit.posterPath,
+    landscapePath: sparse && credit.posterPath ? null : credit.backdropPath
+  };
+}
+
+function sparseFallbackOverlay(width, height) {
+  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><defs><linearGradient id="left" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#020407" stop-opacity="0.98"/><stop offset="0.34" stop-color="#020407" stop-opacity="0.95"/><stop offset="0.62" stop-color="#020407" stop-opacity="0.56"/><stop offset="0.86" stop-color="#020407" stop-opacity="0.10"/><stop offset="1" stop-color="#020407" stop-opacity="0"/></linearGradient><linearGradient id="bottom" x1="0" y1="0" x2="0" y2="1"><stop offset="0.52" stop-color="#020407" stop-opacity="0"/><stop offset="1" stop-color="#020407" stop-opacity="0.62"/></linearGradient><radialGradient id="vignette" cx="70%" cy="42%" r="76%"><stop offset="0.48" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.55"/></radialGradient></defs><rect width="100%" height="100%" fill="#07101a" fill-opacity="0.10"/><rect width="100%" height="100%" fill="url(#left)"/><rect width="100%" height="100%" fill="url(#bottom)"/><rect width="100%" height="100%" fill="url(#vignette)"/></svg>`);
+}
+
+export async function encodeCandidateBuffer({ input, preset, outcome }) {
+  if (outcome === "sparse-fallback") {
+    assert(sharp.versions.sharp === "0.35.3" && sharp.versions.vips === "8.18.3",
+      "Sparse fallback exact-byte runtime lock mismatch");
+  }
+  let pipeline = sharp(input, { failOn: "error" });
+  if (outcome === "sparse-fallback") {
+    pipeline = pipeline
+      .blur(preset.sparseFallback.blurSigma)
+      .modulate({
+        saturation: preset.sparseFallback.saturation,
+        brightness: preset.sparseFallback.brightness
+      })
+      .composite([{ input: sparseFallbackOverlay(preset.width, preset.height), left: 0, top: 0 }]);
+  }
+  return pipeline.webp({ quality: preset.quality, effort: 6, smartSubsample: true }).toBuffer();
+}
+
+export async function encodeCandidate({ intermediatePath, candidatePath, preset, outcome }) {
+  const input = await readFile(intermediatePath);
+  const output = await encodeCandidateBuffer({ input, preset, outcome });
+  await writeFile(candidatePath, output);
 }
 
 async function prepareSources(selection, sourceDirectory, fetchImpl) {
@@ -137,7 +176,10 @@ async function prepareSources(selection, sourceDirectory, fetchImpl) {
   } else {
     for (let index = 0; index < selection.selectedCredits.length; index += 1) {
       const credit = selection.selectedCredits[index];
-      await add({ id: `${credit.mediaType}:${credit.mediaId}`, portraitPath: credit.posterPath, landscapePath: credit.backdropPath }, index);
+      await add({
+        id: `${credit.mediaType}:${credit.mediaId}`,
+        ...sourceArtworkForCredit(credit, selection.outcome)
+      }, index);
     }
     for (let index = 0; index < selection.fallbackProfiles.length; index += 1) {
       const profile = selection.fallbackProfiles[index];
@@ -147,7 +189,12 @@ async function prepareSources(selection, sourceDirectory, fetchImpl) {
   return { planSources, downloads };
 }
 
-export async function stageCandidate({ personId, pythonExecutable, fetchImpl = globalThis.fetch }) {
+export async function stageCandidate({
+  personId,
+  pythonExecutable,
+  fetchImpl = globalThis.fetch,
+  sourceSnapshot = null
+}) {
   assert(pythonExecutable, "--python or PEOPLE_HERO_PYTHON is required");
   const preflight = await buildPreflight({ personId });
   const attemptRoot = await allocateAttempt(personId);
@@ -155,13 +202,16 @@ export async function stageCandidate({ personId, pythonExecutable, fetchImpl = g
   const stagingDirectory = path.join(attemptRoot, "staging");
   await Promise.all([mkdir(reportsDirectory, { recursive: true }), mkdir(stagingDirectory, { recursive: true })]);
 
-  const proxyClient = createTmdbProxyClient({ fetchImpl });
-  const snapshot = await proxyClient.getPersonSnapshot(personId);
+  assert(sourceSnapshot === null || (sourceSnapshot && sourceSnapshot.id === personId),
+    "Provided source snapshot does not match the requested Person ID");
+  const snapshot = sourceSnapshot || await createTmdbProxyClient({ fetchImpl }).getPersonSnapshot(personId);
+  const sourceSnapshotOrigin = sourceSnapshot ? "provided-cache" : "cloudflare-proxy";
   const selection = planPersonHero(snapshot, preflight.overrides, {
     minimumCredits: preflight.preset.filmography.minimumCredits,
     maximumCredits: preflight.preset.filmography.maximumCredits,
     minimumProfiles: preflight.preset.profileOnly.minimumProfiles,
-    maximumProfiles: preflight.preset.profileOnly.maximumProfiles
+    maximumProfiles: preflight.preset.profileOnly.maximumProfiles,
+    minimumSparseCredits: preflight.preset.sparseFallback.minimumCredits
   });
   await writeFile(path.join(reportsDirectory, "source-snapshot.json"), `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
   await writeFile(path.join(reportsDirectory, "selection.json"), `${JSON.stringify(selection, null, 2)}\n`, "utf8");
@@ -174,10 +224,11 @@ export async function stageCandidate({ personId, pythonExecutable, fetchImpl = g
 
   const { planSources, downloads } = await prepareSources(selection, path.join(attemptRoot, "sources"), fetchImpl);
   const sourceKeys = selectedSourceKeys(selection);
-  const seed = deriveLayoutSeed({ presetId: preflight.preset.id, tmdbPersonId: personId, sourceKeys });
+  const layoutPresetId = selection.outcome === "sparse-fallback" ? preflight.preset.sparseFallback.id : preflight.preset.id;
+  const seed = deriveLayoutSeed({ presetId: layoutPresetId, tmdbPersonId: personId, sourceKeys });
   const plan = {
     schemaVersion: 1,
-    mode: selection.outcome,
+    mode: selection.outcome === "sparse-fallback" ? "filmography" : selection.outcome,
     width: preflight.preset.width,
     height: preflight.preset.height,
     seed,
@@ -193,7 +244,7 @@ export async function stageCandidate({ personId, pythonExecutable, fetchImpl = g
   assert(processResult.code === 0, `T2 compositor exited with code ${processResult.code}`);
 
   const candidatePath = path.join(stagingDirectory, "hero.webp");
-  await sharp(intermediatePath, { failOn: "error" }).webp({ quality: preflight.preset.quality, effort: 6, smartSubsample: true }).toFile(candidatePath);
+  await encodeCandidate({ intermediatePath, candidatePath, preset: preflight.preset, outcome: selection.outcome });
   const [candidateBytes, candidateStat, metadata, compositorReport] = await Promise.all([
     readFile(candidatePath),
     stat(candidatePath),
@@ -215,8 +266,20 @@ export async function stageCandidate({ personId, pythonExecutable, fetchImpl = g
     seed,
     renderer: preflight.renderer,
     runtime: { node: process.version, platform: process.platform, architecture: process.arch, sharp: sharp.versions },
-    selection: { outcome: selection.outcome, eligibleCreditCount: selection.eligibleCreditCount, usableProfileCount: selection.usableProfileCount, selectedSourceKeys: sourceKeys },
-    requests: { metadata: 1, imageDownloads: downloads.length, downloads },
+    selection: {
+      outcome: selection.outcome,
+      eligibleCreditCount: selection.eligibleCreditCount,
+      usableProfileCount: selection.usableProfileCount,
+      selectedSourceKeys: sourceKeys,
+      layoutPresetId,
+      sparseFallbackPreset: selection.outcome === "sparse-fallback" ? preflight.preset.sparseFallback : null
+    },
+    requests: {
+      metadata: sourceSnapshot ? 0 : 1,
+      sourceSnapshotOrigin,
+      imageDownloads: downloads.length,
+      downloads
+    },
     compositor: compositorReport,
     output: { path: "staging/hero.webp", sha256: sha256(candidateBytes), bytes: candidateBytes.length, targetBytes: preflight.preset.targetBytes, overTarget: candidateBytes.length > preflight.preset.targetBytes, width: metadata.width, height: metadata.height, format: metadata.format },
     boundaries: { permanentAssetWrites: 0, manifestWrites: 0, publishActions: 0 }

@@ -7,7 +7,8 @@ const person = { tmdbPersonId: 2230991, canonicalName: "Daisy Edgar-Jones" };
 const preset = {
   id: "people-t2-perspective-v2",
   filmography: { minimumCredits: 15, maximumCredits: 32 },
-  profileOnly: { minimumProfiles: 15, maximumProfiles: 24 }
+  profileOnly: { minimumProfiles: 15, maximumProfiles: 24 },
+  sparseFallback: { minimumCredits: 1 }
 };
 
 test("eligibility report is compact, deterministic, and records no generation work", () => {
@@ -46,7 +47,7 @@ test("eligibility report is compact, deterministic, and records no generation wo
   assert.equal(serialized, JSON.stringify(buildEligibilityReport({ person, preset, selection })));
 });
 
-test("eligibility report summarizes filmography and skip outcomes", () => {
+test("eligibility report summarizes filmography, sparse fallback, and skip outcomes", () => {
   const filmography = buildEligibilityReport({
     person,
     preset,
@@ -62,18 +63,33 @@ test("eligibility report summarizes filmography and skip outcomes", () => {
   assert.equal(filmography.selection.selectedCreditCount, 17);
   assert.equal(filmography.selection.fallbackProfileCount, 2);
 
-  const skipped = buildEligibilityReport({
+  const sparse = buildEligibilityReport({
     person,
     preset,
     selection: {
-      outcome: "skip",
-      reason: "insufficient-eligible-credits-and-profiles",
+      outcome: "sparse-fallback",
+      selectedCredits: Array.from({ length: 8 }, () => ({})),
+      fallbackProfiles: [],
       eligibleCreditCount: 8,
       usableProfileCount: 3,
       rejected: []
     }
   });
-  assert.equal(skipped.selection.reason, "insufficient-eligible-credits-and-profiles");
+  assert.equal(sparse.selection.selectedCreditCount, 8);
+  assert.equal(sparse.selection.fallbackProfileCount, 0);
+
+  const skipped = buildEligibilityReport({
+    person,
+    preset,
+    selection: {
+      outcome: "skip",
+      reason: "no-eligible-credit-artwork-and-insufficient-profiles",
+      eligibleCreditCount: 0,
+      usableProfileCount: 3,
+      rejected: []
+    }
+  });
+  assert.equal(skipped.selection.reason, "no-eligible-credit-artwork-and-insufficient-profiles");
   assert.equal(skipped.selection.selectedCreditCount, 0);
   assert.equal(skipped.selection.selectedProfileCount, 0);
 });
