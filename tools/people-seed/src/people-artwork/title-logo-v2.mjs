@@ -5,7 +5,7 @@ import path from "node:path";
 import { renderTitleLogo, prepareTitleLogoRenderer } from "./title-logo.mjs";
 import { PEOPLE_ARTWORK_REPO_ROOT } from "./runtime-dependencies.mjs";
 
-export const PEOPLE_TITLE_LOGO_V2_RENDERER_VERSION = "people-title-logo-standard-canvas-renderer-v3";
+export const PEOPLE_TITLE_LOGO_V2_RENDERER_VERSION = "people-title-logo-standard-canvas-renderer-v5";
 export const PEOPLE_TITLE_LOGO_V2_PRESET_ID = "people-title-logo-standard-canvas-v2";
 export const PEOPLE_TITLE_LOGO_V2_PRESET_PATH = "tools/people-seed/presets/people-title-logo-standard-canvas-v2.json";
 
@@ -20,20 +20,22 @@ function validateDesignLockedPreset(preset, basePreset) {
   assert(preset?.rendererVersion === PEOPLE_TITLE_LOGO_V2_RENDERER_VERSION, "People title-logo v2 renderer version changed.");
   assert(preset?.status === "design-locked" && preset?.publicationAuthorised === false, "People title-logo v2 must remain design-locked and staging-only until asset publication is separately approved.");
   assert(preset?.basePresetId === basePreset.id && preset?.baseRendererVersion === basePreset.rendererVersion, "People title-logo v2 base renderer binding changed.");
-  assert(preset?.canvas?.width === 1600 && preset.canvas.height === 480 && preset.canvas.transparentPadding === 32, "People title-logo v2 must use the approved standard 1600x480 canvas.");
-  assert(preset?.typography?.maximumFontSize === 250 && preset.typography.minimumFontSize === 88 && preset.typography.fontSizeStep === 1, "People title-logo v2 adaptive name sizing changed.");
+  assert(preset?.version === 3, "People title-logo v2 preset version changed.");
+  assert(preset?.canvas?.width === 1600 && preset.canvas.height === 480 && preset.canvas.transparentPadding === 24, "People title-logo v2 must use the approved standard 1600x480 canvas and padding.");
+  assert(preset?.typography?.fontSize === 150 && preset.typography.sizingRule === "uniform-fixed", "People title-logo v2 uniform name sizing changed.");
+  assert(preset?.typography?.minimumVisibleLineGap === 2, "People title-logo v2 minimum visible line gap changed.");
   assert(preset?.typography?.presentationCase === "uppercase-en-US" && preset.typography.alignment === "center", "People title-logo v2 name presentation changed.");
-  assert(JSON.stringify(preset.typography.region) === JSON.stringify({ x: 32, y: 32, width: 1536, height: 259 }), "People title-logo v2 name region changed.");
+  assert(JSON.stringify(preset.typography.region) === JSON.stringify({ x: 0, y: 32, width: 1600, height: 259 }), "People title-logo v2 name region changed.");
   assert(preset?.separator?.style === "split-rule-open-clapboard", "People title-logo v2 separator must use the approved open-clapboard lock.");
-  assert(preset?.separator?.width === 667 && preset.separator.height === 48 && preset.separator.baseWidth === 460 && preset.separator.baseHeight === 33, "People title-logo v2 separator size changed.");
+  assert(preset?.separator?.width === 700 && preset.separator.height === 50 && preset.separator.baseWidth === 460 && preset.separator.baseHeight === 33, "People title-logo v2 separator size changed.");
   assert(typeof preset?.separator?.lineThickness === "number" && preset.separator.lineThickness > 0, "People title-logo v2 separator line thickness must be positive.");
   assert(preset?.separator?.iconWidth === 32 && preset.separator.bodyTop === 15 && preset.separator.bodyHeight === 17, "People title-logo v2 clapboard geometry changed.");
   assert(preset?.separator?.ruleClearance === 18, "People title-logo v2 clapboard rule clearance changed.");
   assert(preset?.separator?.top === 317 && preset.separator.nameGap === 26 && preset.separator.collectionGap === 19, "People title-logo v2 fixed secondary positioning changed.");
   assert(typeof preset?.separator?.opacity === "number" && preset.separator.opacity > 0 && preset.separator.opacity <= 1, "People title-logo v2 separator opacity is invalid.");
   assert(preset?.collection?.text === "COLLECTION" && preset.collection.family === basePreset.typography.family, "People title-logo v2 COLLECTION typography changed family or content.");
-  assert(preset?.collection?.weight === 500 && preset.collection.fontSize === 93, "People title-logo v2 COLLECTION must use the approved uniform size.");
-  assert(preset?.collection?.tracking === 10.15, "People title-logo v2 COLLECTION tracking changed.");
+  assert(preset?.collection?.weight === 500 && preset.collection.fontSize === 97.65, "People title-logo v2 COLLECTION must use the approved uniform size.");
+  assert(preset?.collection?.tracking === 10.6575, "People title-logo v2 COLLECTION tracking changed.");
   assert(preset?.output?.format === "png" && preset.output.alpha === true && preset.output.canvas === "standard-1600x480", "People title-logo v2 output contract changed.");
   assert(preset?.output?.visibleAlphaThreshold === 0, "People title-logo v2 visible-alpha threshold changed.");
 }
@@ -113,7 +115,7 @@ function escapePangoMarkup(value) {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
-async function renderNameAtFontSize(runtime, baseRecord, fontSize, fontRecord) {
+async function renderNameAtFontSize(runtime, baseRecord, fontSize, fontRecord, maximumHeight) {
   const size = Math.round(fontSize * 1024);
   const sourceBounds = baseRecord.lineBounds;
   const sourceTop = Math.min(...sourceBounds.map((bound) => bound.y));
@@ -139,25 +141,27 @@ async function renderNameAtFontSize(runtime, baseRecord, fontSize, fontRecord) {
     });
   }
   const width = Math.max(...layers.map((layer) => layer.width));
+  const originalHeight = Math.max(...layers.map((layer) => layer.top + layer.height));
+  const lineGapAdjustment = Math.max(0, originalHeight - maximumHeight);
+  if (lineGapAdjustment > 0) {
+    assert(layers.length === 2, `${baseRecord.stableKey}: People title-logo v2 line-gap compaction requires exactly two lines.`);
+    layers[1].top -= lineGapAdjustment;
+  }
+  const visibleLineGap = layers.length === 2
+    ? layers[1].top - (layers[0].top + layers[0].height)
+    : null;
   const height = Math.max(...layers.map((layer) => layer.top + layer.height));
   const output = await runtime.sharp({ create: { width, height, channels: 4, background: { r: 255, g: 255, b: 255, alpha: 0 } } })
     .composite(layers.map((layer) => ({ input: layer.output, left: Math.round((width - layer.width) / 2), top: layer.top })))
     .png({ compressionLevel: 9, adaptiveFiltering: false, palette: false })
     .toBuffer();
-  return { output, width, height, fontSize, scaleFromBase };
+  return { output, width, height, fontSize, scaleFromBase, lineGapAdjustment, visibleLineGap };
 }
 
-async function renderAdaptiveName(runtime, baseRecord, preset, fontRecord) {
+async function renderFixedName(runtime, baseRecord, preset, fontRecord) {
   const typography = preset.typography;
-  let fontSize = typography.maximumFontSize;
-  let rendered = await renderNameAtFontSize(runtime, baseRecord, fontSize, fontRecord);
-  const initialScale = Math.min(1, typography.region.width / rendered.width, typography.region.height / rendered.height);
-  fontSize = Math.max(typography.minimumFontSize, Math.floor(fontSize * initialScale));
-  rendered = await renderNameAtFontSize(runtime, baseRecord, fontSize, fontRecord);
-  while ((rendered.width > typography.region.width || rendered.height > typography.region.height) && fontSize > typography.minimumFontSize) {
-    fontSize -= typography.fontSizeStep;
-    rendered = await renderNameAtFontSize(runtime, baseRecord, fontSize, fontRecord);
-  }
+  const rendered = await renderNameAtFontSize(runtime, baseRecord, typography.fontSize, fontRecord, typography.region.height);
+  assert(rendered.lineGapAdjustment === 0 || rendered.visibleLineGap >= typography.minimumVisibleLineGap, `${baseRecord.stableKey}: People title-logo v2 line-gap compaction exceeds the approved minimum visible gap.`);
   assert(rendered.width <= typography.region.width && rendered.height <= typography.region.height, `${baseRecord.stableKey}: People title-logo v2 name cannot fit the approved standard canvas.`);
   return rendered;
 }
@@ -178,7 +182,7 @@ export async function renderTitleLogoV2({ person, runtime, configuration, fontRe
   assert(preset?.id === PEOPLE_TITLE_LOGO_V2_PRESET_ID, "People title-logo v2 configuration is missing.");
   const base = await renderTitleLogo({ person, runtime, configuration, fontRecord });
   const baseNameBounds = unionBounds(base.record.lineBounds);
-  const name = await renderAdaptiveName(runtime, base.record, preset, fontRecord);
+  const name = await renderFixedName(runtime, base.record, preset, fontRecord);
   const collection = await renderCollection(runtime, preset, fontRecord);
   const separatorBuffer = renderSeparatorSvg(preset.separator);
   const separatorMetadata = await runtime.sharp(separatorBuffer).metadata();
@@ -239,9 +243,11 @@ export async function renderTitleLogoV2({ person, runtime, configuration, fontRe
       baseNameFontSize: base.record.finalFontSize,
       nameFontSize: name.fontSize,
       nameScaleFromBase: Number(name.scaleFromBase.toFixed(6)),
-      nameSizingRule: "adaptive-within-fixed-region",
-      maximumNameFontSize: preset.typography.maximumFontSize,
-      minimumNameFontSize: preset.typography.minimumFontSize,
+      nameSizingRule: preset.typography.sizingRule,
+      lockedNameFontSize: preset.typography.fontSize,
+      lineGapAdjustment: name.lineGapAdjustment,
+      visibleLineGap: name.visibleLineGap,
+      minimumVisibleLineGap: preset.typography.minimumVisibleLineGap,
       nameRegion: { ...nameRegion },
       baseNameBounds,
       nameBounds: { x: nameLeft, y: nameTop, width: name.width, height: name.height },

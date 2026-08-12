@@ -32,7 +32,7 @@ The original studio/network batch is not part of this tool and remains owned by 
 
 ## Title-logo standard-canvas v2
 
-Issue #37 contains the owner-approved design lock for the staging-only successor to the current title-logo renderer. It uses a standard 1600 x 480 transparent canvas, adaptively fits only the uppercase Cormorant person name, and keeps one uniform open-clapboard, split-rule, and `COLLECTION` block across every identity. The preset is design-locked but remains publication-disabled, so it cannot by itself change any catalogue asset.
+Issue #37 contains the owner-approved design lock for the staging-only successor to the current title-logo renderer. It uses a standard 1600 x 480 transparent canvas, one fixed 150 px uppercase Cormorant person-name size, and one uniform open-clapboard, split-rule, and `COLLECTION` block across every identity. The approved secondary treatment is 5% larger than the earlier six-person proof: a 700 x 50 separator and 97.65 px `COLLECTION` text. When a two-line name is at most a few pixels too tall because of its exact glyph bounds, only the visible inter-line gap is compacted, never the 150 px font size, and at least 2 px of visible separation must remain. The preset is design-locked but remains publication-disabled, so it cannot by itself change any catalogue asset.
 
 Generate a narrow local proof set with explicit registered identities:
 

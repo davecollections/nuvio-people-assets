@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davecollections.github.io/nuvio-people-assets/schemas/people-title-logo-v2-publication.schema.json",
+  "title": "People title-logo v2 publication record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "publishedAt",
+    "status",
+    "ordering",
+    "ownerApprovalReference",
+    "presetId",
+    "presetHash",
+    "rendererVersion",
+    "planHash",
+    "registryHash",
+    "catalogueReportHash",
+    "design",
+    "output",
+    "recordCount",
+    "records"
+  ],
+  "properties": {
+    "version": { "const": "people-title-logo-v2-publication-v1" },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "status": { "const": "owner-approved-published" },
+    "ordering": { "const": "tmdb-person-id-ascending" },
+    "ownerApprovalReference": { "const": "owner-approved-exact-1480-title-logo-promotion-2026-08-13" },
+    "presetId": { "const": "people-title-logo-standard-canvas-v2" },
+    "presetHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "rendererVersion": { "const": "people-title-logo-standard-canvas-renderer-v5" },
+    "planHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "registryHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "catalogueReportHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "design": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nameFontSize", "nameSizingRule", "minimumVisibleLineGap", "separatorWidth", "separatorHeight", "collectionFontSize"],
+      "properties": {
+        "nameFontSize": { "const": 150 },
+        "nameSizingRule": { "const": "uniform-fixed" },
+        "minimumVisibleLineGap": { "const": 2 },
+        "separatorWidth": { "const": 700 },
+        "separatorHeight": { "const": 50 },
+        "collectionFontSize": { "const": 97.65 }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "width", "height", "alpha", "maximumBytes"],
+      "properties": {
+        "format": { "const": "png" },
+        "width": { "const": 1600 },
+        "height": { "const": 480 },
+        "alpha": { "const": true },
+        "maximumBytes": { "const": 1048576 }
+      }
+    },
+    "recordCount": { "const": 1480 },
+    "records": {
+      "type": "array",
+      "minItems": 1480,
+      "maxItems": 1480,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["stableKey", "tmdbPersonId", "canonicalName", "presentationLines", "sha256", "byteCount", "lineGapAdjustment"],
+        "properties": {
+          "stableKey": { "type": "string", "pattern": "^person:[1-9][0-9]*$" },
+          "tmdbPersonId": { "type": "integer", "minimum": 1 },
+          "canonicalName": { "type": "string", "minLength": 1 },
+          "presentationLines": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "byteCount": { "type": "integer", "minimum": 1, "maximum": 1048575 },
+          "lineGapAdjustment": { "type": "integer", "minimum": 0, "maximum": 13 }
+        }
+      }
+    }
+  }
+}
