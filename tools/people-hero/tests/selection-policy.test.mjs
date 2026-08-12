@@ -206,6 +206,46 @@ test("media-level blocks reject both cast and exact Director credits", () => {
   assert.deepEqual(result.rejected.map((record) => record.reason), ["blocked-media", "blocked-media"]);
 });
 
+test("person-bound creative crew exceptions fill a short directing career without admitting unrelated crew", () => {
+  const directingCredits = Array.from({ length: 10 }, (_, index) => movie(index + 1, { job: "Director" }));
+  const creativeCredits = [
+    movie(101, { job: "Screenplay" }),
+    movie(102, { job: "Producer" }),
+    movie(103, { job: "Writer" }),
+    movie(104, { job: "Story" }),
+    tv(105, { job: "Creator" })
+  ];
+  const overrides = {
+    creativeCrewCredits: creativeCredits.map((credit) => ({
+      personId: 9339,
+      mediaType: credit.media_type,
+      mediaId: credit.id,
+      jobs: [credit.job],
+      reason: "owner-approved"
+    }))
+  };
+  const person = {
+    id: 9339,
+    name: "Lilly Wachowski",
+    combined_credits: {
+      cast: [],
+      crew: [...directingCredits, ...creativeCredits, movie(106, { job: "Producer" })]
+    },
+    images: { profiles: [] }
+  };
+
+  const result = planPersonHero(person, overrides);
+  assert.equal(result.outcome, "filmography");
+  assert.equal(result.selectedCredits.length, 15);
+  assert.deepEqual(result.selectedCredits.slice(0, 10).map((credit) => credit.roles),
+    Array.from({ length: 10 }, () => ["director"]));
+  assert.ok(result.selectedCredits.slice(10).every((credit) => credit.roles.includes("creative")));
+  assert.ok(result.rejected.some((record) => record.mediaId === 106 && record.reason === "unrelated-crew-job"));
+
+  const otherPerson = { ...person, id: 9340 };
+  assert.equal(selectEligibleCredits(otherPerson, overrides).eligible.length, 10);
+});
+
 test("equivalent titles from the same year retain the strongest deterministic credit", () => {
   const person = {
     id: 76594,

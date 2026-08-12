@@ -27,11 +27,23 @@ test("credit override validation requires unique, explained media blocks", () =>
   const valid = {
     schemaVersion: 1,
     oneEpisodeTvRoles: [],
-    blockedMedia: [{ mediaType: "movie", mediaId: 1687093, reason: "owner-blocked" }]
+    blockedMedia: [{ mediaType: "movie", mediaId: 1687093, reason: "owner-blocked" }],
+    creativeCrewCredits: [{
+      personId: 9339,
+      mediaType: "movie",
+      mediaId: 752,
+      jobs: ["Producer", "Screenplay"],
+      reason: "owner-approved"
+    }]
   };
   assert.equal(validateCreditOverrides(valid), valid);
   assert.throws(() => validateCreditOverrides({ ...valid, blockedMedia: []
     .concat(valid.blockedMedia, valid.blockedMedia) }), /Duplicate blocked-media override/u);
   assert.throws(() => validateCreditOverrides({ ...valid, blockedMedia: [{ mediaType: "movie", mediaId: 1, reason: "" }] }),
     /Invalid blocked-media override record/u);
+  assert.throws(() => validateCreditOverrides({ ...valid, creativeCrewCredits: []
+    .concat(valid.creativeCrewCredits, valid.creativeCrewCredits) }), /Duplicate creative-crew credit override/u);
+  assert.throws(() => validateCreditOverrides({ ...valid, creativeCrewCredits: [{
+    ...valid.creativeCrewCredits[0], jobs: ["Executive Producer"]
+  }] }), /Invalid creative-crew credit override record/u);
 });
