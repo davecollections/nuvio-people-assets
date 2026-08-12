@@ -7,9 +7,9 @@
     "poster": 1480,
     "titleLogo": 1480,
     "landscape": 1480,
-    "hero": 282
+    "hero": 587
   },
-  "totalAssetBytes": 332982935,
+  "totalAssetBytes": 396689891,
   "heroPreset": {
     "id": "people-t2-perspective-v2",
     "width": 2560,
@@ -21113,6 +21113,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/6968/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6968/hero.webp",
+          "sha256": "879f97b13a0ed3633e1c0fe9c1278bcf62936d03524cda2ef6581dfa14b0ca85",
+          "bytes": 230026,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21148,6 +21157,15 @@
           "bytes": 32688,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7026/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7026/hero.webp",
+          "sha256": "b98c6ad85094803630cf1598aa582a31eb40218e0000c48c97ba58b2eb9aeec9",
+          "bytes": 211148,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21185,6 +21203,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7056/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7056/hero.webp",
+          "sha256": "24f69111167c93b6f38b0bc913ed2f004461b024655ddfa1f073f8021d48b6b7",
+          "bytes": 201838,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21220,6 +21247,15 @@
           "bytes": 45974,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7071/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7071/hero.webp",
+          "sha256": "0d069994706785fa1e1c0e773e58e51924fb9a8c8f44c126753e678ce4e9a798",
+          "bytes": 174714,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21257,6 +21293,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7087/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7087/hero.webp",
+          "sha256": "6774a2f88c51c5fec609306e7f44c695be17eeda710f6e4729ec72157730aea0",
+          "bytes": 198770,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21292,6 +21337,15 @@
           "bytes": 61320,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7124/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7124/hero.webp",
+          "sha256": "f84f7bb4731ccde4d6e08220f9b3419bfe5003b940d31d8f685c458e388105eb",
+          "bytes": 194996,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21329,6 +21383,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7152/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7152/hero.webp",
+          "sha256": "53b6ff4de535429d271c5212c1a06ead2d9bd5f73b8d662fa0eb8cc80a8a5563",
+          "bytes": 170044,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21364,6 +21427,15 @@
           "bytes": 32982,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7180/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7180/hero.webp",
+          "sha256": "cce3aed0b90860648d4eedad6b39a8d292bb7e9559e2800bbaf9136ab3933546",
+          "bytes": 284132,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21401,6 +21473,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7301/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7301/hero.webp",
+          "sha256": "a7713a5cad506714dde0ba2624e018b201d3d3150803ad497a175cbc4c9fc609",
+          "bytes": 210072,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21436,6 +21517,15 @@
           "bytes": 23936,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7302/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7302/hero.webp",
+          "sha256": "8e2bbf66c4c436b3230afc7fe110729795f344d9abc210078039794c2e9dc9ba",
+          "bytes": 205654,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21473,6 +21563,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7399/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7399/hero.webp",
+          "sha256": "830ed0a0ee1a64727b9053b11eeab4dd542fac73f8c97e9e55dcd069ec87128d",
+          "bytes": 217996,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21508,6 +21607,15 @@
           "bytes": 43212,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7401/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7401/hero.webp",
+          "sha256": "f11f82471d0131a43b81d0ed16b0cf974d45227c6a51b144f72997a6367df3ca",
+          "bytes": 174256,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21545,6 +21653,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7427/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7427/hero.webp",
+          "sha256": "2f8a97a5c2818e3609c8ed9be6adaf9e10866d4244ac81f89bf5006badba5858",
+          "bytes": 213488,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21580,6 +21697,15 @@
           "bytes": 43884,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7447/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7447/hero.webp",
+          "sha256": "cbc3309c8f8ab47cc32250db67e8a08447b1b13d21e34b9b186410a2b5ecff47",
+          "bytes": 190624,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21617,6 +21743,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7450/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7450/hero.webp",
+          "sha256": "d0dc5e9de627bf9e4fbfe3e55ab5784ff98d174930fc80a66c5fa2aab4d39e1d",
+          "bytes": 230844,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21652,6 +21787,15 @@
           "bytes": 27698,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7453/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7453/hero.webp",
+          "sha256": "4b1931c0953c3eb91e67015cf5977f5e86462ca14f9e8c9fc84fa97cd2d8cfe2",
+          "bytes": 234058,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21689,6 +21833,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7467/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7467/hero.webp",
+          "sha256": "db403f316af44010384bcb9e5d637febf1ac3899c8294ac1f1ff70f55a2c8992",
+          "bytes": 158482,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21724,6 +21877,15 @@
           "bytes": 20234,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7489/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7489/hero.webp",
+          "sha256": "1c347f5931bdb18656e50464af660b275a26d7fe98fc08684a901f68bf5bff19",
+          "bytes": 194606,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21761,6 +21923,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7499/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7499/hero.webp",
+          "sha256": "595c520ef9b92ba0986735036d0649c291c4ae50b40c1caf1d423e5e514e6ebc",
+          "bytes": 185486,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21796,6 +21967,15 @@
           "bytes": 30964,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7501/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7501/hero.webp",
+          "sha256": "6ecae5b26e20eb0730946503eb73e317c3fd65048e6168e103dbb6ce358a5d9d",
+          "bytes": 237152,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21833,6 +22013,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7502/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7502/hero.webp",
+          "sha256": "23a36f18eed5d44b72fd6708ef148b389f05a4cb296513ceb6dbe35ae7b53798",
+          "bytes": 230922,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21868,6 +22057,15 @@
           "bytes": 36152,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7503/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7503/hero.webp",
+          "sha256": "5979f33a2166e5fc22899897b36ffaca702c7b6958f0a2718634877420346854",
+          "bytes": 267838,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21905,6 +22103,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7505/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7505/hero.webp",
+          "sha256": "d19fd3c67ca0285f224ebfbb0c1a47ee489fa26e6ad1013c68d79488ec647171",
+          "bytes": 275398,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -21940,6 +22147,15 @@
           "bytes": 41864,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7517/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7517/hero.webp",
+          "sha256": "8b727a43502b9a38ee659e3d6f33c7f0ec40d73ce855a754ba0dbef3313a5a84",
+          "bytes": 219046,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -21977,6 +22193,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7570/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7570/hero.webp",
+          "sha256": "c79c429720c7dbf144985b016c3d22ca572380d7b023f8d66da3c6ad36b7967e",
+          "bytes": 199106,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22012,6 +22237,15 @@
           "bytes": 28628,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7623/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7623/hero.webp",
+          "sha256": "2ebc45827a621fe5efa5a8c38ac4ac476aa4394ccd6051deda0b82685e1b99df",
+          "bytes": 184382,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22049,6 +22283,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7632/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7632/hero.webp",
+          "sha256": "6ca5141b185a543ed45391059dda8309fa61a03d3a72acdbf59ec652e76d3a32",
+          "bytes": 224416,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22084,6 +22327,15 @@
           "bytes": 24850,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7633/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7633/hero.webp",
+          "sha256": "16de6eb7c9332a79dc22543da8f05a10a977c562c89ce07bca37c348a771eb99",
+          "bytes": 197652,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22121,6 +22373,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7663/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7663/hero.webp",
+          "sha256": "b995250586fb86b26bb748ab4e6aef1a4e89181e9af14cdb99f434db5a4681b3",
+          "bytes": 184236,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22156,6 +22417,15 @@
           "bytes": 43166,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7664/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7664/hero.webp",
+          "sha256": "0c6267ad1ea1d745f99dcf6e8b886043c2551c00be4bc8e613f3484754f907f2",
+          "bytes": 191740,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22193,6 +22463,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7767/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7767/hero.webp",
+          "sha256": "8d4b96e05275f49f281dc0083c2e787024c49968cf847d9bfa94528a454a2279",
+          "bytes": 184706,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22228,6 +22507,15 @@
           "bytes": 49944,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7904/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7904/hero.webp",
+          "sha256": "dbb5ee2e85a3f97920af756c5ab0a72c78da34ee561d04ad5ba06abd707fbf1c",
+          "bytes": 251634,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22265,6 +22553,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/7907/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/7907/hero.webp",
+          "sha256": "3063dddde744e78fc06f0514b5a960e5c784df2de042d8e91fa9a650ba9b293d",
+          "bytes": 194762,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22300,6 +22597,15 @@
           "bytes": 23878,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8167/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8167/hero.webp",
+          "sha256": "42887dd01e8c198a28b6b99096239ffbd3395be88ffcdca34dc22b56cc878674",
+          "bytes": 219322,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22337,6 +22643,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8169/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8169/hero.webp",
+          "sha256": "fc94c2371fc1a029f0caac4626041134cee2d7856e86ef44028d141299477b7c",
+          "bytes": 200468,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22372,6 +22687,15 @@
           "bytes": 48626,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8170/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8170/hero.webp",
+          "sha256": "dbade9bc743ba321b5cef8485ff304035c795b571497413769126fb8fbbf8c3f",
+          "bytes": 193262,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22409,6 +22733,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8171/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8171/hero.webp",
+          "sha256": "9c9a5bd067948d83520f0d9521f37d1ab27f22a7ed0517fe86fe5393a3230a85",
+          "bytes": 191700,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22444,6 +22777,15 @@
           "bytes": 41270,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8177/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8177/hero.webp",
+          "sha256": "e0c1547a7105a4f3deedc1f04bd841149d8fc5560e90f5bdad3339b9ab2f3f74",
+          "bytes": 188848,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22517,6 +22859,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8237/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8237/hero.webp",
+          "sha256": "8a81a4785211eee5814e1f91f7f9001e9fa781b8e0a809d7f2a305207b2366bb",
+          "bytes": 228598,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22552,6 +22903,15 @@
           "bytes": 30338,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8252/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8252/hero.webp",
+          "sha256": "34084013bbeb0ed4d266cd5b00619fdba0283876c04bc2b6b7e438c81fbdddbc",
+          "bytes": 206014,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22589,6 +22949,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8254/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8254/hero.webp",
+          "sha256": "7a387720e8c13cd6f13bbf7dbd3ca64aa2f23dcf75f700b58999de7040916ee5",
+          "bytes": 194456,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22624,6 +22993,15 @@
           "bytes": 28200,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8258/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8258/hero.webp",
+          "sha256": "3c8c567c6c79cff54d4221dd48c48576a4d22312458b7702a6834bdec9a05d3a",
+          "bytes": 221522,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22661,6 +23039,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8293/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8293/hero.webp",
+          "sha256": "a85d840a66e0d90374055806f223cfac41ce8a57c95b8bb5f0db798df149f1d1",
+          "bytes": 178076,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22696,6 +23083,15 @@
           "bytes": 35672,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8349/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8349/hero.webp",
+          "sha256": "6946dd624e22543e9d327f40776701eb3669faefd941c772765b9285f1d48f1d",
+          "bytes": 192214,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22733,6 +23129,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8436/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8436/hero.webp",
+          "sha256": "79dacf87e43c8b28627ba64d18d7fdd24c32b3e073f3ae2a4d74795d71923f36",
+          "bytes": 196750,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22769,6 +23174,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8437/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8437/hero.webp",
+          "sha256": "a9bbaeb05a03f8e2f2a35460b5b7dd273e5bc532e422ded23aaf719d4f05cb78",
+          "bytes": 213392,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22804,6 +23218,15 @@
           "bytes": 28766,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8447/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8447/hero.webp",
+          "sha256": "fea582ea5039ffdd9b26e9efba86596fbf66fe4ed0a6b4f084b350f93a9b46d1",
+          "bytes": 195044,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22877,6 +23300,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8487/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8487/hero.webp",
+          "sha256": "94f16c06714825235169c67eb2d06ccff2de87bce01233b218c779c64358589a",
+          "bytes": 203052,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22912,6 +23344,15 @@
           "bytes": 43954,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8500/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8500/hero.webp",
+          "sha256": "928c73999c0f83b6da14d221d637b04b26e06e5fc289caa718b1aa27f124534f",
+          "bytes": 201754,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -22949,6 +23390,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8515/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8515/hero.webp",
+          "sha256": "dd36470b884dbdf2291da8da48dcb2300a5793ec18a912ea4124846f13790a63",
+          "bytes": 227806,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -22984,6 +23434,15 @@
           "bytes": 36394,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8516/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8516/hero.webp",
+          "sha256": "f6a15c89f69a679b7207848edfcd6bf7d5f1ffc0837d2139c0aaefbf39457fab",
+          "bytes": 216046,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23021,6 +23480,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8534/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8534/hero.webp",
+          "sha256": "a2291c5ecb8ee24ddf061dde9ddf7ec45a1be3cd20ca6860f379027bb3def60f",
+          "bytes": 213362,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23057,6 +23525,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8535/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8535/hero.webp",
+          "sha256": "8bbe676ae7cbcf6c0eaed3c58a574627b1c394c1a72cea8b217d02fe3b86679d",
+          "bytes": 230216,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23092,6 +23569,15 @@
           "bytes": 44018,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8557/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8557/hero.webp",
+          "sha256": "e8c23a52c85d15ef87e0f82078ed4280b6672afb87688814ed135862cf31589a",
+          "bytes": 197896,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23165,6 +23651,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8606/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8606/hero.webp",
+          "sha256": "c211ed413487c35b6df66297238626ab7f22c9dc34eaee28f56cc98cfe4b9950",
+          "bytes": 244226,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23200,6 +23695,15 @@
           "bytes": 38402,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8629/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8629/hero.webp",
+          "sha256": "651757b2b12189d0bf39b6fab7dd7d9a99373986fa8e7c2c64f9da07eb1e4280",
+          "bytes": 188868,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23238,6 +23742,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8630/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8630/hero.webp",
+          "sha256": "4942d91d28fe1dc0a73e691009dd3575bcbab39d48c756ce84ce7013908fd722",
+          "bytes": 213568,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23275,6 +23788,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8635/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8635/hero.webp",
+          "sha256": "38dd06725a595fcc24cff33d15a9d4b75b023bbc474f2091d74884459fe9f4f5",
+          "bytes": 200174,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23310,6 +23832,15 @@
           "bytes": 44294,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8636/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8636/hero.webp",
+          "sha256": "35cb44faf9479093adb4694dbb22929a24ca576ffb46f6a891bbc722ff3800bd",
+          "bytes": 240870,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23347,6 +23878,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8691/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8691/hero.webp",
+          "sha256": "f74137084251ad4c82d9d6b8e290afee7ab199a3213610aa05dd7a86f43c1628",
+          "bytes": 218050,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23382,6 +23922,15 @@
           "bytes": 53094,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8724/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8724/hero.webp",
+          "sha256": "241762756649615bed5259336f6a8373a080e30095df10fe68a3c425e9e3bf4f",
+          "bytes": 232372,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23419,6 +23968,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8725/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8725/hero.webp",
+          "sha256": "6f2d1da6cebc26b409d9d269ebaebb210acd737469741bca3692623a88691213",
+          "bytes": 237292,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23454,6 +24012,15 @@
           "bytes": 29878,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8741/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8741/hero.webp",
+          "sha256": "078dcffe94f6fb95cfc29bf8ea9e1c0efd6235eb8c644065b37c19710ded2bc2",
+          "bytes": 203408,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23491,6 +24058,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8783/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8783/hero.webp",
+          "sha256": "6b6607db763ebe3073eb15c79d0dd049758cc57653fac8594280ceb9d0501e87",
+          "bytes": 174452,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23526,6 +24102,15 @@
           "bytes": 43156,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8784/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8784/hero.webp",
+          "sha256": "d4f7dd2129aeb6f5153edc619e54b62f1f557114324f71e5efbdf6d36792d97c",
+          "bytes": 215098,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23563,6 +24148,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8823/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8823/hero.webp",
+          "sha256": "e5da7d16c665ec6fd445ee60492fcc3b8bf8411a06b63a302aa6b987d291a806",
+          "bytes": 236014,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23599,6 +24193,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8828/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8828/hero.webp",
+          "sha256": "c5f1eacc86692ebfa3c380f25a2728bf5eb98bbd93b30e82e8f54071b4c32a32",
+          "bytes": 216552,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23634,6 +24237,15 @@
           "bytes": 36482,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8841/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8841/hero.webp",
+          "sha256": "43fee554c6f382be2227c75221d91b58310d91d8f6c3f565109dfbcd020ff1f2",
+          "bytes": 228190,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23716,6 +24328,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8857/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8857/hero.webp",
+          "sha256": "12eabb1a6baacbf29d5d8c9d443ea07f59141efcb2fadd65f930ccef0bf16093",
+          "bytes": 234278,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23751,6 +24372,15 @@
           "bytes": 49450,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8891/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8891/hero.webp",
+          "sha256": "2f2d9b8298084ac858bcdf19153e8277ea2ab7be95d700913648450e86790f6f",
+          "bytes": 203742,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23788,6 +24418,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8892/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8892/hero.webp",
+          "sha256": "5b54ada66ec463e997aeebadfd49dfade64d66e681c54544fd592a07a5b30840",
+          "bytes": 260786,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23823,6 +24462,15 @@
           "bytes": 46808,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8893/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8893/hero.webp",
+          "sha256": "af4d43015a92f11122e1b7745ddaaa971f73fbfc5432cafd893ec6a554a50915",
+          "bytes": 194160,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23860,6 +24508,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8924/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8924/hero.webp",
+          "sha256": "87de9f95a8a0ee1ec320e27a3e729fb402793c6b3a7b58b3917ada16adee20a6",
+          "bytes": 190318,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23895,6 +24552,15 @@
           "bytes": 38470,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8930/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8930/hero.webp",
+          "sha256": "ccfa99c4bdb18fd8e5268a6b9f5903104d28bc302497d777999d1802fea702ce",
+          "bytes": 231878,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -23932,6 +24598,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8944/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8944/hero.webp",
+          "sha256": "ea6f4993c1c392a545e89ba4b8e53ce42454214e2925d5bfc35a9be1253b9b1f",
+          "bytes": 184582,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -23967,6 +24642,15 @@
           "bytes": 39894,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8945/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8945/hero.webp",
+          "sha256": "d844931946597ef5d675e71ac7a3bbc257207a43c5d314b9be354be6b045ce11",
+          "bytes": 201032,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24004,6 +24688,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8949/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8949/hero.webp",
+          "sha256": "e7e00876a368e02acabc4c2407d39faa74ba079d9a34b42fe3c05f0f5fc5c812",
+          "bytes": 207918,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24039,6 +24732,15 @@
           "bytes": 26190,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8963/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8963/hero.webp",
+          "sha256": "9204e84d1ad1e79a33e1ad92caaec1eded710fb123a306d35b83ed7bde23b5ca",
+          "bytes": 207682,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24076,6 +24778,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8975/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8975/hero.webp",
+          "sha256": "bfe516ec22b7e7e08c06f6ba262b1863784c635bf27ee0efb513e4a81485f32e",
+          "bytes": 207742,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24111,6 +24822,15 @@
           "bytes": 33764,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8977/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8977/hero.webp",
+          "sha256": "97c57790e27105126cd7f63cbf06d1823c678ea5844f05bb199641db6d07148a",
+          "bytes": 222292,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24148,6 +24868,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/8984/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/8984/hero.webp",
+          "sha256": "2367206a52e7e615a5c66e332b15d079574fe53c1b4194006ea7ef3ea40c84da",
+          "bytes": 186968,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24183,6 +24912,15 @@
           "bytes": 61596,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9029/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9029/hero.webp",
+          "sha256": "4d95bd8c2e62f12e46ac720d4a91eb1feb411704caf7a26625d21b46ba233915",
+          "bytes": 150714,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24220,6 +24958,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9032/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9032/hero.webp",
+          "sha256": "759132a31f1a9f12911f125605d7d87d5b8454ac8172f7f4c9e25c8e49d70df9",
+          "bytes": 201390,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24255,6 +25002,15 @@
           "bytes": 60800,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9049/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9049/hero.webp",
+          "sha256": "195995424a211314e13136d7f3eb9daa4e0bba9861e58747d92f2a51c9640353",
+          "bytes": 217398,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24292,6 +25048,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9054/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9054/hero.webp",
+          "sha256": "e26dce5939c6337fcb76471efe1b82320e3a77f94930271db519b141d18e8933",
+          "bytes": 218894,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24327,6 +25092,15 @@
           "bytes": 33776,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9066/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9066/hero.webp",
+          "sha256": "b06524f69f7f3683319a159f941f3ae0e7d7f1718f09c91a30cb5493080c30f7",
+          "bytes": 219962,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24364,6 +25138,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9076/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9076/hero.webp",
+          "sha256": "575c14bac3cf193c65c34f6312e57e2941923bd2955c1b7431dbe7149e2ca383",
+          "bytes": 190440,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24399,6 +25182,15 @@
           "bytes": 44180,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9088/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9088/hero.webp",
+          "sha256": "2feb25dcf2a50585fbad69767b7d8238bf1825a8fb465ccb567a61794750e6a0",
+          "bytes": 214026,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24436,6 +25228,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9137/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9137/hero.webp",
+          "sha256": "cd0967a609614320dcc8eaaeb55fd6adb2caa4b0f795ae21cb932dcb3fd8d80d",
+          "bytes": 211752,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24471,6 +25272,15 @@
           "bytes": 47444,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9168/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9168/hero.webp",
+          "sha256": "6a66c9cdb9dec5c4c0852b481aac90684c4c1fb93c1b23b602db59eb3cd8c847",
+          "bytes": 189830,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24508,6 +25318,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9181/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9181/hero.webp",
+          "sha256": "a653b160319bac927a04f87fd51d1c6af1ae6f2220276611fdc98146a81b9172",
+          "bytes": 198512,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24543,6 +25362,15 @@
           "bytes": 42214,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9206/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9206/hero.webp",
+          "sha256": "7f806f52e014ac2906cf8ae140f0f4e87fde7352fbb142f4e9db960faacff9e1",
+          "bytes": 159500,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24580,6 +25408,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9273/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9273/hero.webp",
+          "sha256": "01f35e96ffeea600ee8ef36ec245b79657935735a108414299f5a2e992329d34",
+          "bytes": 206236,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24615,6 +25452,15 @@
           "bytes": 44724,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9278/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9278/hero.webp",
+          "sha256": "c84b09af7cf92514dcb83038ece8a82c1989acadae24a52aeedf97fa382ec007",
+          "bytes": 205478,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24652,6 +25498,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9281/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9281/hero.webp",
+          "sha256": "9cf37f11f15af81e23e3ce593f1d3e633c0ed085e600c5faf1048906c4f4bb1e",
+          "bytes": 232352,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24687,6 +25542,15 @@
           "bytes": 27132,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9309/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9309/hero.webp",
+          "sha256": "70f6baafaa7521c369748b7f22a0c732bdb69a72f981e5b129e06d4fed90e2bc",
+          "bytes": 213654,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24814,6 +25678,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9560/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9560/hero.webp",
+          "sha256": "22ab42fb1c1a18a8a8d99d49cf75a4813e81be250696c658b320183bb831fde3",
+          "bytes": 224120,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24849,6 +25722,15 @@
           "bytes": 52656,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9575/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9575/hero.webp",
+          "sha256": "5e48f4e86268fd91f85b9e5b4e545677143935ed2411f3c7c16c5b009f29125e",
+          "bytes": 201242,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24886,6 +25768,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9577/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9577/hero.webp",
+          "sha256": "52f5d06e448d28ad5b80fa97c652fe9f86ff6ddb0715ad03947a6edd2c013980",
+          "bytes": 213020,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24921,6 +25812,15 @@
           "bytes": 62294,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9599/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9599/hero.webp",
+          "sha256": "8634797dfa5a25f4a858759dbb447bb15c5dda399ceb7423cf023e24112ac7c6",
+          "bytes": 245534,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -24958,6 +25858,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9603/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9603/hero.webp",
+          "sha256": "a2b9d36a0dd30900f1a704fc9eb34ae2a2084e6babdfe204a6814372abd908e1",
+          "bytes": 230126,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -24993,6 +25902,15 @@
           "bytes": 37372,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9640/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9640/hero.webp",
+          "sha256": "ab582c5b6fba85f9597e8c3acd230f18fe84da3e40788c8e263ddace1a964572",
+          "bytes": 210224,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25030,6 +25948,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9642/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9642/hero.webp",
+          "sha256": "3e7fa0c3cd0c74d472f8a9a6fd25a3d4b17288dad19d4629e3f6cb53b1f72845",
+          "bytes": 198264,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25065,6 +25992,15 @@
           "bytes": 55654,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9730/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9730/hero.webp",
+          "sha256": "f0fa83309db32069f49459318d1dc2e4ebd32dd0353645badeb4dc929708d92c",
+          "bytes": 166610,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25102,6 +26038,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9777/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9777/hero.webp",
+          "sha256": "86775268f82f7abb26817a002cf4d075489e24f141c3b80b412240bfc677ce4b",
+          "bytes": 198288,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25137,6 +26082,15 @@
           "bytes": 41274,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9778/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9778/hero.webp",
+          "sha256": "173887bc632d03d3fd9ef85f282b60936ce5a05a276a19ade35cfd9b4d97bc33",
+          "bytes": 226958,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25174,6 +26128,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9780/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9780/hero.webp",
+          "sha256": "83b5664f5f55a1a971478fdc727fa3e976c53ad0818a66199ca266daa15f2d8f",
+          "bytes": 216066,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25209,6 +26172,15 @@
           "bytes": 26120,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9788/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9788/hero.webp",
+          "sha256": "5b483d7b6e1f8008e2b68b21a9c995503f602ea4fc524ef228ebdc236c24d54f",
+          "bytes": 189202,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25246,6 +26218,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9789/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9789/hero.webp",
+          "sha256": "093fb94276331462204b5deca4e18753633103212a393e088801e3ddd7598eb8",
+          "bytes": 232636,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25281,6 +26262,15 @@
           "bytes": 31592,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9827/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9827/hero.webp",
+          "sha256": "8f84c04d98b178eaa5ae78ff7bd4904b0de4594c5b4a8c3a35885417ad73cb0d",
+          "bytes": 206190,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25318,6 +26308,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9888/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9888/hero.webp",
+          "sha256": "c808cb00928fe0fcf1e46c7105eefae3d3d830f96a6a2f5e02527a15f7f8e679",
+          "bytes": 153166,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25353,6 +26352,15 @@
           "bytes": 36424,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9956/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9956/hero.webp",
+          "sha256": "774b599ec90fd5bce60f75d84b448e60791a24a17a26606a5620e1c545279e61",
+          "bytes": 161364,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25390,6 +26398,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/9994/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/9994/hero.webp",
+          "sha256": "cf24afcdc8936ce737e9027d886ffe34d3f5e9c4f17f9ec8958d5699192d9f26",
+          "bytes": 223608,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25425,6 +26442,15 @@
           "bytes": 29902,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10001/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10001/hero.webp",
+          "sha256": "c690ebe6ab1e12120d77359422002d8c1c7157473eabcd29031b9cb6f802f382",
+          "bytes": 208200,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25462,6 +26488,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10017/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10017/hero.webp",
+          "sha256": "b0ce37e5dc083a5660192568dc07f88cc75622156b1f01fae3826ea3bc05b155",
+          "bytes": 256004,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25497,6 +26532,15 @@
           "bytes": 26212,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10021/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10021/hero.webp",
+          "sha256": "f07be3231663b635ff1cadcf53795a9b80d2a7cc9e1e2250b5ca31e3333371ec",
+          "bytes": 177914,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25534,6 +26578,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10051/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10051/hero.webp",
+          "sha256": "31ebedc9ecd2d3471e892b4e8e8fb59e5cafa85e57625bb557b5225d17aa6acb",
+          "bytes": 178884,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25570,6 +26623,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10055/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10055/hero.webp",
+          "sha256": "0d3e08bc01fd0ffbdce0dd482338f72aa970a3a39132807cdadfbe46c82c1b0d",
+          "bytes": 210620,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25605,6 +26667,15 @@
           "bytes": 24724,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10083/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10083/hero.webp",
+          "sha256": "6d16fbb27495b36e8d38c5bc505437ff32a1f8bdc84972434328633e01997b2b",
+          "bytes": 183284,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25678,6 +26749,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10099/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10099/hero.webp",
+          "sha256": "0141161f1a9613bb13a22ecf0aced5dd15baeb63af818e57033b18487f56d62c",
+          "bytes": 152846,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25713,6 +26793,15 @@
           "bytes": 25406,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10127/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10127/hero.webp",
+          "sha256": "d306b4816a357ca337d8e9bd5cc252888401fb481dbf47c050a5d3d66ef3181d",
+          "bytes": 190270,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25750,6 +26839,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10146/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10146/hero.webp",
+          "sha256": "ec48d1b4823355ba0495bc21c2003b907f3bb3bdef167eb140fbfd1daac6070d",
+          "bytes": 204526,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25785,6 +26883,15 @@
           "bytes": 41780,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10158/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10158/hero.webp",
+          "sha256": "ac92fe00c0c0aec61f674f48a4fd05c375e7940e7dcf60e0330651dac33dd7a1",
+          "bytes": 223778,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25822,6 +26929,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10205/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10205/hero.webp",
+          "sha256": "98bf28c633ad3ca2e7523fea01e7e77054b098ff05a369cd52c8c366a2ca8562",
+          "bytes": 166370,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25857,6 +26973,15 @@
           "bytes": 49564,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10223/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10223/hero.webp",
+          "sha256": "530de598c9720d5889d13bc7018a1c1ee6522cf6c9cc6d039646d0c6fd2af867",
+          "bytes": 245728,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25894,6 +27019,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10297/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10297/hero.webp",
+          "sha256": "f0c4f35a27238b6857b5afd9e19093bc949937926bab9fe171d319324267ceea",
+          "bytes": 212086,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -25929,6 +27063,15 @@
           "bytes": 30988,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10316/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10316/hero.webp",
+          "sha256": "1ea4b35246a4834c42c2873779b62d7ff2e2c6c8668009d4c3c471108b791c91",
+          "bytes": 159250,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -25966,6 +27109,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10346/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10346/hero.webp",
+          "sha256": "dedddda92d9ae4248a821d2c78b31492e2c4966a4e0db016d1370f208b23278f",
+          "bytes": 159072,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26001,6 +27153,15 @@
           "bytes": 36826,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10367/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10367/hero.webp",
+          "sha256": "80a1417b0f5ee5dfa630a859051da4efd404bb72e0fc6dc838d8110cfaa52d90",
+          "bytes": 206630,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26038,6 +27199,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10400/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10400/hero.webp",
+          "sha256": "6416a1d8b8a0fc279d618e59366f0643ebde42a580ed0ba2297fc9e47dd2ceee",
+          "bytes": 206210,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26073,6 +27243,15 @@
           "bytes": 51860,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10437/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10437/hero.webp",
+          "sha256": "df6c7819e0d94c46681347942eabae51b241d08a6fdc128f4c74fe55349ef330",
+          "bytes": 243878,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26110,6 +27289,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10487/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10487/hero.webp",
+          "sha256": "0f314bb04fe689a88d2e1d06353c59f9858dce1d1061410a56fb4c91e0a03436",
+          "bytes": 259404,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26145,6 +27333,15 @@
           "bytes": 44596,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10491/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10491/hero.webp",
+          "sha256": "e93733dd97ff18115fbe52acbc0aef9c359e0d10d704c74976e87eb4ad6c5e8c",
+          "bytes": 193714,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26182,6 +27379,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10538/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10538/hero.webp",
+          "sha256": "03bbfd9190b2a7dc8bbdccc0d777b4380f7f257c8fa62ff81770725eb0386b21",
+          "bytes": 242148,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26217,6 +27423,15 @@
           "bytes": 25652,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10539/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10539/hero.webp",
+          "sha256": "b1ff57e19e7765bca10c837c9e6bfd84044f8715a2a2498c9f9cc049082fb152",
+          "bytes": 221330,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26254,6 +27469,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10601/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10601/hero.webp",
+          "sha256": "ebdae891dbdc1bdcf8d3c51bfaa757ff7b4e01ee3da14cd60cf395f0a213fa61",
+          "bytes": 214142,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26289,6 +27513,15 @@
           "bytes": 41236,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10606/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10606/hero.webp",
+          "sha256": "5ff311d8a53ca98a544775d0ed2bd4a8db66561c4cb9fb9a720d661c74bf6fd6",
+          "bytes": 205440,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26326,6 +27559,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10607/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10607/hero.webp",
+          "sha256": "7ab53972e7a581f5ce6f79cad51bd40af0ce2933b9d3d98af6cb0f7ea1edc734",
+          "bytes": 209664,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26361,6 +27603,15 @@
           "bytes": 49232,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10690/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10690/hero.webp",
+          "sha256": "befd04a97f89d82611ff59176964e0ddc8c9f010b175fada4488994c3cd86f60",
+          "bytes": 189078,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26398,6 +27649,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10696/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10696/hero.webp",
+          "sha256": "f0062080f7c9b65ce62402ff7816bfac9cc5c5dec925a7bc12c275681206d5fc",
+          "bytes": 196858,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26433,6 +27693,15 @@
           "bytes": 48262,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10707/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10707/hero.webp",
+          "sha256": "1b898a0313fa666dae5f22114f942dc851ac26704f5d5c373e738ac8fe89b5ea",
+          "bytes": 238472,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26470,6 +27739,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10757/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10757/hero.webp",
+          "sha256": "cb796f16de875d9c716c4ef8673347fee08df0aba9a4b02ac4f2942edb368b34",
+          "bytes": 170188,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26505,6 +27783,15 @@
           "bytes": 38562,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10774/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10774/hero.webp",
+          "sha256": "4103c4978e3b57b1858a849eee8fb41c66435eccfc4b96e1a79c30515e4f28fc",
+          "bytes": 210804,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26542,6 +27829,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10790/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10790/hero.webp",
+          "sha256": "53521c18715cbc5946525d6699a7e5f5db0d0d14faaf82997e88aebb54bb13c6",
+          "bytes": 230444,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26577,6 +27873,15 @@
           "bytes": 32480,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10798/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10798/hero.webp",
+          "sha256": "6619678c94746b4e5ab575dd2e44836e74363bf52e2f2c9d30e5373cbabaab9a",
+          "bytes": 235556,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26614,6 +27919,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10814/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10814/hero.webp",
+          "sha256": "28a4c8e7406bd1d90b1c5cd0d5241d0faf694024c9613aa24fd43eba86fc1005",
+          "bytes": 189806,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26649,6 +27963,15 @@
           "bytes": 51106,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10828/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10828/hero.webp",
+          "sha256": "1daacaeeb9222ab6cef0d6bfcdac34f324bff48c7b1f753affd4af4db494e711",
+          "bytes": 213294,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26686,6 +28009,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10859/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10859/hero.webp",
+          "sha256": "c3f62562e55ff70b0dd776f41e4488d63deb95198a0dda37d1aa1f17f1bf97e9",
+          "bytes": 267590,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26721,6 +28053,15 @@
           "bytes": 50948,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10860/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10860/hero.webp",
+          "sha256": "bbfffbead5d354cb34fdc943f6056dbe765701ee49108829e320793b78b31b24",
+          "bytes": 208670,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26758,6 +28099,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10882/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10882/hero.webp",
+          "sha256": "62a93d65edfa5ffbd2a408cb6e9a72d16c6aa368fb900ce401d435413ccb369f",
+          "bytes": 212682,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26793,6 +28143,15 @@
           "bytes": 34026,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10912/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10912/hero.webp",
+          "sha256": "e36181a1cc60b9cc9e61f794df89741c240042f3ea1b0b899a90061775117752",
+          "bytes": 186056,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26830,6 +28189,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10921/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10921/hero.webp",
+          "sha256": "33ce26ca7a58077e1e24fb4695e79bdbafb9c124d9208e1138bd88dd610f7df8",
+          "bytes": 210660,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26865,6 +28233,15 @@
           "bytes": 43460,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10930/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10930/hero.webp",
+          "sha256": "59c7e993c2fc10a387797970b3086ead9db0cd429564bf17464d97dd0e0c432c",
+          "bytes": 231870,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26902,6 +28279,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10959/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10959/hero.webp",
+          "sha256": "e6d058b84783041853eb16fe095783de46d6c41cd113a9241601b569743fffd8",
+          "bytes": 196238,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -26937,6 +28323,15 @@
           "bytes": 40580,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10978/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10978/hero.webp",
+          "sha256": "e8efb49f27ce41d2306e3b7736379f9b37ca84040018ffdb2c68a8746f6cac68",
+          "bytes": 207952,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -26974,6 +28369,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10980/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10980/hero.webp",
+          "sha256": "a853808f083d5685d4aa761f3fcef91be3cd71c4eec675ec5baee343313d0dac",
+          "bytes": 231520,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27009,6 +28413,15 @@
           "bytes": 53186,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10990/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10990/hero.webp",
+          "sha256": "b7c89818077101047d767b76ef52f8f109f9a99761fbd1e816d02e1988a266b3",
+          "bytes": 234220,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27046,6 +28459,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/10993/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/10993/hero.webp",
+          "sha256": "bb4ca9066f199eca2615a44b562f60196de7c69836a14a0f3fdf164749c92741",
+          "bytes": 195364,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27081,6 +28503,15 @@
           "bytes": 27444,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11006/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11006/hero.webp",
+          "sha256": "7e182aee9d102bebed35ca4055f4bfedabd0f74748ee48452bed25b9dd907cb7",
+          "bytes": 205190,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27118,6 +28549,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11064/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11064/hero.webp",
+          "sha256": "4b6cf1e87ccaca466035b2c8f594edc4102e4e83d8c6cd152bb530bb339a5f9c",
+          "bytes": 193696,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27153,6 +28593,15 @@
           "bytes": 65522,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11066/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11066/hero.webp",
+          "sha256": "d30aebd3dfbfdb87dd7fdc55ddd6765d40fa933b0a4fc5cfb219b41af6ace369",
+          "bytes": 233226,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27190,6 +28639,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11090/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11090/hero.webp",
+          "sha256": "d0d01577719512df743ea5211f10c06b221d7b4fd30be8c5ed53c8e41139fac3",
+          "bytes": 229198,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27225,6 +28683,15 @@
           "bytes": 45886,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11108/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11108/hero.webp",
+          "sha256": "ef2956385dae59fb96200479f97bc8df076587161e3fc9459251ccca3fc7a38f",
+          "bytes": 213856,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27262,6 +28729,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11109/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11109/hero.webp",
+          "sha256": "7d14a13b13ea8eb807804849f89fe40fa8e5234234ef902654ae9d1ab52a1896",
+          "bytes": 228650,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27297,6 +28773,15 @@
           "bytes": 46476,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11147/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11147/hero.webp",
+          "sha256": "25ab7d00787780c57eaca40c407811cbd69d99772f80b9308e3efc6f906f5dc3",
+          "bytes": 160794,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27334,6 +28819,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11148/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11148/hero.webp",
+          "sha256": "2b913b185cc8944ffc47ae6f3b53c36e05f1dc510e22e77f0a9c36442b0af1d5",
+          "bytes": 201474,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27369,6 +28863,15 @@
           "bytes": 32444,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11150/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11150/hero.webp",
+          "sha256": "1cab9b461bad036fc42b3f607dafa47e1c572ecea8abcded426d75a0f2335568",
+          "bytes": 218058,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27406,6 +28909,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11160/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11160/hero.webp",
+          "sha256": "325eec9482b386e1fa57e1b37ae0900963639098ecc87d5901d4ff89c6368194",
+          "bytes": 251524,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27441,6 +28953,15 @@
           "bytes": 52178,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11169/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11169/hero.webp",
+          "sha256": "4b5ddc03b86f85e249cb622aff4acd735fb63c1c4f20e38d2b66dd1d7979292b",
+          "bytes": 228714,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27478,6 +28999,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11181/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11181/hero.webp",
+          "sha256": "93a16f72f24955d3bff90532b944cc44680a4618212f5f6b8862957b3ae9afc2",
+          "bytes": 201786,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27513,6 +29043,15 @@
           "bytes": 35318,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11184/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11184/hero.webp",
+          "sha256": "5ea1b2e67e40c1fde624cf8ba19e32adfde8863ee4e9e6eb26d9284a696892b5",
+          "bytes": 270912,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27550,6 +29089,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11207/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11207/hero.webp",
+          "sha256": "10cca6a6ceee9349bc42d8d66a32e7689a7b17d09df45f6d6b986b58250368d1",
+          "bytes": 182266,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27585,6 +29133,15 @@
           "bytes": 45084,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11218/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11218/hero.webp",
+          "sha256": "be04961ab32faefa6feaebba44d6a3f8329abbf071a5f839a932f94c9953310d",
+          "bytes": 165320,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27622,6 +29179,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11288/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11288/hero.webp",
+          "sha256": "617241963d4852cf4955900a97c68b10dac3e607637124c6debdc95a48464ee8",
+          "bytes": 166026,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27657,6 +29223,15 @@
           "bytes": 36198,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11356/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11356/hero.webp",
+          "sha256": "b64f7b4f9a03696592a6433457150b4354989c885472d7ca708b75708cf512a9",
+          "bytes": 242172,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27694,6 +29269,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11390/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11390/hero.webp",
+          "sha256": "1f470d4ad66bbb60c6bbca0182154c979b34867f2959f9eb96c32867e99027e8",
+          "bytes": 213706,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27729,6 +29313,15 @@
           "bytes": 59876,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11401/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11401/hero.webp",
+          "sha256": "3d709ddc4f797aef8560e608f1361ccbdcc32de80c39044e10a2b12ad707e2e6",
+          "bytes": 241402,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27766,6 +29359,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11435/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11435/hero.webp",
+          "sha256": "51e3f8ac5757d87760d5023cf91bcbb03d9cc42172051ede31943a4522998576",
+          "bytes": 218098,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27801,6 +29403,15 @@
           "bytes": 58272,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11477/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11477/hero.webp",
+          "sha256": "0a1f979a0926ba6d8056763119371347bf5beb86c30db3135c9cb91149ef7c76",
+          "bytes": 217020,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27838,6 +29449,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11492/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11492/hero.webp",
+          "sha256": "fa30152b5268b10034f940f854e00e47980cb979f588bf2509c0beaae4267a59",
+          "bytes": 223790,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27873,6 +29493,15 @@
           "bytes": 21160,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11498/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11498/hero.webp",
+          "sha256": "3688e9e636a0d5f59b2d4f98abcd32c284510d78b41b9565671b40bec931620d",
+          "bytes": 239698,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27910,6 +29539,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11510/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11510/hero.webp",
+          "sha256": "df65fb199bba4dde4140f927ff12ff9d2bf170ca199de012dfe0c7414ef2d91a",
+          "bytes": 245468,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -27945,6 +29583,15 @@
           "bytes": 58784,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11514/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11514/hero.webp",
+          "sha256": "654acbe4fda13d30c0f2de24bc81d394187b2af9fbc5f080edea0bd7e3913400",
+          "bytes": 237856,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -27982,6 +29629,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11528/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11528/hero.webp",
+          "sha256": "206d579507da0ff23651ce659e86338a788d723592fb58d29f9dfc31168ab41d",
+          "bytes": 217174,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28017,6 +29673,15 @@
           "bytes": 29902,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11572/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11572/hero.webp",
+          "sha256": "d7722b15aa862aaa6e1fb5a2990ea5cd976dc073c8b880797033f27e5ff22efb",
+          "bytes": 164198,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28090,6 +29755,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11661/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11661/hero.webp",
+          "sha256": "91924ff83f6a93aef4010ca5321a202b30a2771865ce0fccde2b6a78a6449fa4",
+          "bytes": 205068,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28125,6 +29799,15 @@
           "bytes": 28826,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11664/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11664/hero.webp",
+          "sha256": "ceaa18151ac1bb97605ef3e7b43bed69be22e0ca99b6da9cd71524592212437a",
+          "bytes": 225356,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28162,6 +29845,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11701/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11701/hero.webp",
+          "sha256": "520f2e33c3dfedcc56241fe5caf784f6a5e27ed3da25a03fcc8836ce53c0746f",
+          "bytes": 186752,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28197,6 +29889,15 @@
           "bytes": 57044,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11703/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11703/hero.webp",
+          "sha256": "e99a9e4c58641bfa6ba82f3f41077db716da22344a90ddbe336689ded4d5fe1b",
+          "bytes": 196588,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28234,6 +29935,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11705/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11705/hero.webp",
+          "sha256": "d184fe5e8073773f4a1c747104cafdc10d0d27a07e10985018733e7ce28be478",
+          "bytes": 193474,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28269,6 +29979,15 @@
           "bytes": 25606,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11720/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11720/hero.webp",
+          "sha256": "55a44de790cb9768807df3e749c1d3bd34c30aa539b8817c67324cd9fa0928b0",
+          "bytes": 226764,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28306,6 +30025,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11770/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11770/hero.webp",
+          "sha256": "51df0756551e036ace5945d3384244bc44ce319d608c10af5c7213d98b8d7e4b",
+          "bytes": 198666,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28341,6 +30069,15 @@
           "bytes": 42342,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11782/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11782/hero.webp",
+          "sha256": "f9d0d32377323146ec7e6897f2fc72926e63dcf102fcfe9aeff42f732cbbbb69",
+          "bytes": 225710,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28378,6 +30115,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11856/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11856/hero.webp",
+          "sha256": "21aff45879ce39cb780e575ae29e6dafb23e383a07e09b527b91a2cab8586cb1",
+          "bytes": 167824,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28413,6 +30159,15 @@
           "bytes": 32650,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11857/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11857/hero.webp",
+          "sha256": "074ba5c6c528e27f81895c25d33ab7efb5279e24603700356202c4083573a0b8",
+          "bytes": 212386,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28450,6 +30205,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11859/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11859/hero.webp",
+          "sha256": "f8f2e7b69d49e511820f01df38d6d29b58ae0ac597be3ff3b03d95eb07cd3c57",
+          "bytes": 221494,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28485,6 +30249,15 @@
           "bytes": 55192,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11863/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11863/hero.webp",
+          "sha256": "a7d5436bfc7e9ce8271b71b4a8f1ff32418821dec1e21cdbe4c17e9379a44f8a",
+          "bytes": 215394,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28522,6 +30295,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11916/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11916/hero.webp",
+          "sha256": "985c6f82a1370794c04fb399da96f85f6a2e47eb04aa0b5edb3e9c55c6268f3c",
+          "bytes": 166302,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28557,6 +30339,15 @@
           "bytes": 53512,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/11983/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/11983/hero.webp",
+          "sha256": "16c4e96d4fa3b64b0e410d1b0fb9d4a7a7911e4b15b36a1aa4c23c26215889fe",
+          "bytes": 191238,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28594,6 +30385,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12021/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12021/hero.webp",
+          "sha256": "f4ec70a8d3b9ad74f3e038a64961937e56c5e778a267d23cff6bc676318dc56e",
+          "bytes": 200420,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28629,6 +30429,15 @@
           "bytes": 39586,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12041/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12041/hero.webp",
+          "sha256": "de4cbb08afb8c2882fa028d3b757f78674cabb861fdda3da52e5c053f8e3b988",
+          "bytes": 187258,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28666,6 +30475,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12052/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12052/hero.webp",
+          "sha256": "7dbfa2076c642931fa31a8f8b4a898e5f927a44703d0fecbe10966c1ab2e0c85",
+          "bytes": 218766,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28702,6 +30520,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12073/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12073/hero.webp",
+          "sha256": "5ca49a175b846b6c5335fed3ac4cc063e29ecce01c8d0d2b8f08f55524bb64ec",
+          "bytes": 255834,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28737,6 +30564,15 @@
           "bytes": 37156,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12074/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12074/hero.webp",
+          "sha256": "ce1e3c4cf0f006a91c285979a2bf4ddfd06fd3c316a67b96e42d689f296294b7",
+          "bytes": 188526,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28810,6 +30646,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12134/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12134/hero.webp",
+          "sha256": "84b60f9440ff2a7753e2b7feefb5f10f360d22e52cd149fc4195bcd3f84f7e86",
+          "bytes": 184730,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28845,6 +30690,15 @@
           "bytes": 73948,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12147/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12147/hero.webp",
+          "sha256": "f5d589f726d2913f0ebba11b88adda54148ac340b3dd3a74bf96b7be0a412d8f",
+          "bytes": 233464,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28882,6 +30736,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12150/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12150/hero.webp",
+          "sha256": "2119dd0fca2b02ab2d336181d49da110bdba27b6a6cf29b5dff092b2c3a2f24c",
+          "bytes": 216846,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28917,6 +30780,15 @@
           "bytes": 45706,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12151/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12151/hero.webp",
+          "sha256": "bccdaecd1ff3ca2467913009048bb5d377149e55179daf698a123deb5a19069c",
+          "bytes": 179248,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -28954,6 +30826,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12160/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12160/hero.webp",
+          "sha256": "bc14097823f6ba64faa901a29082662e87107ce1aba7716414d6c0c7d8293696",
+          "bytes": 163840,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -28989,6 +30870,15 @@
           "bytes": 28870,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12180/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12180/hero.webp",
+          "sha256": "9542b070b4d6cd7622a5f1f1428f8d674db2deea3d13c7e7b838710ed53b181b",
+          "bytes": 215406,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29026,6 +30916,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12214/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12214/hero.webp",
+          "sha256": "efe3bbdd1e0bff81dabfd2f0d8897e47a31f05c879dcc86c6ed5fbfc3049e69a",
+          "bytes": 170032,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29061,6 +30960,15 @@
           "bytes": 38960,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12238/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12238/hero.webp",
+          "sha256": "10007630f3321ff5bb7d131d121ebdbfa4cb2886fdde82790c8fc091f0ef35a2",
+          "bytes": 214494,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29098,6 +31006,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12248/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12248/hero.webp",
+          "sha256": "6dab417e10147f59218004768cd3a304110bfaba2bfb29f00670138a57732a17",
+          "bytes": 242204,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29133,6 +31050,15 @@
           "bytes": 33908,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12266/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12266/hero.webp",
+          "sha256": "80358603b45b68fcc0acc9a0c37da25717ad2ac3e9b287c54873afa7dcdb74bf",
+          "bytes": 172106,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29170,6 +31096,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12329/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12329/hero.webp",
+          "sha256": "2c58d97cf9ed7f7567d95082571223843d98eba84f26987bcb7ed42a9e928a20",
+          "bytes": 198626,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29205,6 +31140,15 @@
           "bytes": 47584,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12445/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12445/hero.webp",
+          "sha256": "7a369e151a45d9f0512772ac86f58af60c0501fbb4652d686d363c9ec81e6d0d",
+          "bytes": 206854,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29242,6 +31186,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12446/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12446/hero.webp",
+          "sha256": "4a5694e38d1485b74267ed120eac293c0de4439f992311a522f5300870ee1f1c",
+          "bytes": 216618,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29277,6 +31230,15 @@
           "bytes": 25730,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12453/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12453/hero.webp",
+          "sha256": "c80d300c2db92d89a0d91bd3054dae10f4611360ce051a44ce3909d3fbc86b31",
+          "bytes": 176480,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29314,6 +31276,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12515/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12515/hero.webp",
+          "sha256": "232d5b2c4d43d87ecaa57d798e867f21cf12b4b8339c7e736fce4a30970703d2",
+          "bytes": 209644,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29349,6 +31320,15 @@
           "bytes": 32712,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12516/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12516/hero.webp",
+          "sha256": "1982cd07db01d14dbfd025fff232eb41404ae9b5220a05c45131f81d82ec2423",
+          "bytes": 223610,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29386,6 +31366,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12519/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12519/hero.webp",
+          "sha256": "2c12b4c93044019f2989e4ffdb3e247bbc2f6c7c1bb5d5fdfaca61227d23819c",
+          "bytes": 213784,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29421,6 +31410,15 @@
           "bytes": 51060,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12647/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12647/hero.webp",
+          "sha256": "f5545047fe525c9a0ed4ba2fa16abf49b69450957d1654c2e01bd31bafb02ebc",
+          "bytes": 214306,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29458,6 +31456,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12835/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12835/hero.webp",
+          "sha256": "e022bfd8e28d3027dd24a93e791a74ef08b5ffe23cb1ca6c4e7a1d398da6a2ef",
+          "bytes": 183130,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29493,6 +31500,15 @@
           "bytes": 42204,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12898/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12898/hero.webp",
+          "sha256": "edb345a997b0c5e643b95a48219b667d855ea4145c00d7ea883fc26538fe411c",
+          "bytes": 246328,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29530,6 +31546,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/12950/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/12950/hero.webp",
+          "sha256": "b174285fa5122a0387b96a52d23bc92b28422a1fa7061154a03bec93e4eb8272",
+          "bytes": 236128,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29565,6 +31590,15 @@
           "bytes": 21880,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13023/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13023/hero.webp",
+          "sha256": "78b0f6eec4a4729fc13f0d4d42a85d9a6483e8238425344d1a582a2cf0465b1f",
+          "bytes": 185976,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29602,6 +31636,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13235/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13235/hero.webp",
+          "sha256": "ab0348f278328c64cf1f4389ebe6a09d1567590b4382b41b30a19f41821e2aae",
+          "bytes": 180202,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29637,6 +31680,15 @@
           "bytes": 39782,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13240/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13240/hero.webp",
+          "sha256": "bd38de5f4d7c99eb72bda702f20cafddac0cbf077863811c00308751b7a83ede",
+          "bytes": 212230,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29674,6 +31726,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13242/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13242/hero.webp",
+          "sha256": "38a42e58e4ed5bdd6c2f1c166de51b098e430cf4994bc783bf43a8bb2c697602",
+          "bytes": 248734,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29710,6 +31771,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13265/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13265/hero.webp",
+          "sha256": "f063a3c108fdcb4c2ca87d893c0335684416d17642ece721243fdd4f74c6d086",
+          "bytes": 194114,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29745,6 +31815,15 @@
           "bytes": 39930,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13284/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13284/hero.webp",
+          "sha256": "c9a1216d2b9a34f80038cfd445842af959f10dc2726c0ed6625b38ab3afdebf8",
+          "bytes": 217380,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29783,6 +31862,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13294/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13294/hero.webp",
+          "sha256": "af294e373a01ff438c24386779c6c35d5b1d50cbedca6bc543f63d1f11ece85a",
+          "bytes": 194666,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29818,6 +31906,15 @@
           "bytes": 53454,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13299/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13299/hero.webp",
+          "sha256": "4767f19a3c75ee842485e58a570b48e1b7f83ffe6b37318dcb0bc67761b8854d",
+          "bytes": 240550,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29855,6 +31952,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13333/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13333/hero.webp",
+          "sha256": "613eb95380018279badd8c8d131acbcd9608cd4d53d7f3477d0dacc426cee080",
+          "bytes": 194716,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29890,6 +31996,15 @@
           "bytes": 23798,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13352/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13352/hero.webp",
+          "sha256": "1e8427b6898144c75ab1728d97943652b5441a099b8716023b901966e037f039",
+          "bytes": 215180,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29927,6 +32042,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13446/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13446/hero.webp",
+          "sha256": "c1a06b767db5f29aac7145fbcd1278b91f6ffc1345a36de9f1939e3eacfcbfe5",
+          "bytes": 201280,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -29962,6 +32086,15 @@
           "bytes": 29044,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13472/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13472/hero.webp",
+          "sha256": "4520909c51e2e576cb9ffe892a69a904bf7d4fdb26cd35a46053ebcf79de8e89",
+          "bytes": 282060,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -29999,6 +32132,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13524/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13524/hero.webp",
+          "sha256": "1feafe6d137ada4aa7f6643e8ad5c179317d36ffc7afcb0f9e61c0805324a5f7",
+          "bytes": 210674,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30034,6 +32176,15 @@
           "bytes": 41184,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13526/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13526/hero.webp",
+          "sha256": "034c3523993daf6cc05d4dab3fd37a4f42fd24e01209bfb59efb4ed478251920",
+          "bytes": 195940,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30071,6 +32222,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13548/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13548/hero.webp",
+          "sha256": "8b7e2da06fc6ee886a5551d6563e11341d1709f4ca7c0514fc7ced62f05a05dc",
+          "bytes": 176690,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30106,6 +32266,15 @@
           "bytes": 55476,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13565/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13565/hero.webp",
+          "sha256": "ab03b9bd619eb59c2491eac6fe857317ff4ae468f8c9f5a29e342079a0340de9",
+          "bytes": 216452,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30143,6 +32312,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13566/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13566/hero.webp",
+          "sha256": "3bcc629e7a9657985e177cd642abc9dbf35b3cc8b927b71609de2d777de862c9",
+          "bytes": 196068,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30179,6 +32357,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13576/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13576/hero.webp",
+          "sha256": "6faa05865eb36121a2ec1bafd60c785d3804bcb28414150b4c7297bae01fb41d",
+          "bytes": 210844,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30214,6 +32401,15 @@
           "bytes": 35878,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13577/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13577/hero.webp",
+          "sha256": "fc89ae5b4f0bc011734ea66f7ba23a64e59a4d14a118ed4f8fe4581f2497964f",
+          "bytes": 211874,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30287,6 +32483,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13726/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13726/hero.webp",
+          "sha256": "e2e6dcf1182fcb6c3b591597513670c087d349408f59c52c663df1e4577bad38",
+          "bytes": 198270,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30323,6 +32528,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13776/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13776/hero.webp",
+          "sha256": "1def891f17a70679f68653e5548ba9756e1de4460c731f4d87d4219d0b277909",
+          "bytes": 187628,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30358,6 +32572,15 @@
           "bytes": 43418,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13784/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13784/hero.webp",
+          "sha256": "5b03720bf5f9cbc9e56488303103c70ce9db3f1c675587b4e177c0bac0820ca7",
+          "bytes": 252192,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30396,6 +32619,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13848/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13848/hero.webp",
+          "sha256": "82c2a1bca620000dd41c65cc5a98f1a1d0b754a00d1c16543a8e346fea816413",
+          "bytes": 209324,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30431,6 +32663,15 @@
           "bytes": 19182,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13899/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13899/hero.webp",
+          "sha256": "82101eab2f6b390be4f60ea0c82c481d1073ed8aaa568a945a1af536ec2a249e",
+          "bytes": 202276,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30468,6 +32709,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13980/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13980/hero.webp",
+          "sha256": "de71632b99bcf7b2459cd4f2f7898c19c32574dad4405b39f992f5730aaf4804",
+          "bytes": 205766,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30503,6 +32753,15 @@
           "bytes": 37212,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13992/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13992/hero.webp",
+          "sha256": "b64c1abf5b69b6c11889563d824213dec078efbea7c127337b7eabc6efe62f74",
+          "bytes": 215996,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30540,6 +32799,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14011/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14011/hero.webp",
+          "sha256": "d2c64837fdba2297214e954ab950fc6bcfa152920224715a0bf6d942df373321",
+          "bytes": 183518,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30575,6 +32843,15 @@
           "bytes": 54934,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14132/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14132/hero.webp",
+          "sha256": "d7251c15114015f6c4e5d545b483dc035548596be4b48acf10471a31d1c06d0c",
+          "bytes": 176948,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30612,6 +32889,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14227/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14227/hero.webp",
+          "sha256": "646102a8a5a023df497edc358810c972f0714e76ec9d33ad45b28115dd3d7de3",
+          "bytes": 201980,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30647,6 +32933,15 @@
           "bytes": 31184,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14261/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14261/hero.webp",
+          "sha256": "1f2f5d3aa4068d3d923a1ec583488efe3513e2f4cb57b3ad6c43fb3989867b28",
+          "bytes": 224410,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30684,6 +32979,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14277/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14277/hero.webp",
+          "sha256": "3bf4234855c8faa0e0425290982e7d37213dac6cb9c44b053b820ad478444594",
+          "bytes": 193548,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30720,6 +33024,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14343/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14343/hero.webp",
+          "sha256": "68b9f9255476a2c38238f5d25441d5e677c1a591924a2fdedec582ae45510d10",
+          "bytes": 182434,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30755,6 +33068,15 @@
           "bytes": 34636,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14353/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14353/hero.webp",
+          "sha256": "f624be0b93b45502b8400de88f43d975d41f147b0c8e2a8e4f483400b1cc5747",
+          "bytes": 205528,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30837,6 +33159,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14392/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14392/hero.webp",
+          "sha256": "d23256c686faf5a75b37a5d25915db902b1c4f1903acaf677897e74451291810",
+          "bytes": 188000,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30872,6 +33203,15 @@
           "bytes": 25368,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14405/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14405/hero.webp",
+          "sha256": "080919d85b9f7756182a68f46edbc2fa5460a0878535528b9fc57ca71c622da6",
+          "bytes": 217712,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30909,6 +33249,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14406/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14406/hero.webp",
+          "sha256": "6c8fb6a362b39c3357b1860260e44b19a76173b195089bf7236d93c78a649dc1",
+          "bytes": 215684,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -30944,6 +33293,15 @@
           "bytes": 29454,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14500/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14500/hero.webp",
+          "sha256": "36c619e254532768291d1c3ea06c5044a9a1b916ec4405d016cb04e5e41c65bf",
+          "bytes": 194126,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -30981,6 +33339,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14501/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14501/hero.webp",
+          "sha256": "9c103e954fea9759322d7d06f2d7b4bd6508744d1f76280e38d44cd39260377e",
+          "bytes": 202838,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31017,6 +33384,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14520/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14520/hero.webp",
+          "sha256": "4a23753fcf7f5ae8a40d660723f16bb927512de618c9a78332a80773304235cc",
+          "bytes": 215762,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31052,6 +33428,15 @@
           "bytes": 34790,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14528/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14528/hero.webp",
+          "sha256": "d6b94d191f835139ad7ff02577c09cf8d715588e45faca8a91eeccd12032681c",
+          "bytes": 226094,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31125,6 +33510,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14597/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14597/hero.webp",
+          "sha256": "03aecd0446ad4e6270e2a6144ec01e39e70647226c8b6bdc4c6db786e229c115",
+          "bytes": 166144,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31162,6 +33556,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14639/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14639/hero.webp",
+          "sha256": "d48f2ed82d24aa40fac5d0eed6065b145aa7fcfaa146dd04354d4fdbb998c60f",
+          "bytes": 231472,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31197,6 +33600,15 @@
           "bytes": 44908,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14643/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14643/hero.webp",
+          "sha256": "160fa0547008c7da8b0b0392caac5dc43641193c5bcc772228b4343838afa5c9",
+          "bytes": 221234,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31234,6 +33646,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14674/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14674/hero.webp",
+          "sha256": "e031bf4d2d01bb0eab19ab03398477085ca74eec2a396d3faa735ca3881ef626",
+          "bytes": 241276,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31269,6 +33690,15 @@
           "bytes": 47010,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14730/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14730/hero.webp",
+          "sha256": "bfcd340b4eb982e6fdf4400a7775d2e2173391d1946ded038a9aece12e87a986",
+          "bytes": 242434,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31306,6 +33736,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14773/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14773/hero.webp",
+          "sha256": "625fa883c216a8d3bb30bc44c0ddf86a7ed1b47a9081edd770f753439f074486",
+          "bytes": 240926,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31341,6 +33780,15 @@
           "bytes": 45248,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14812/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14812/hero.webp",
+          "sha256": "71cd9b42ec458aa364d19f007aba1615184ba7f335ef0b77e7ad2d9c4ab89910",
+          "bytes": 220764,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31378,6 +33826,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14837/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14837/hero.webp",
+          "sha256": "3c7ba204092ebffe7ae71c4c02e498664c761e86cdfb3bdb5bea24a7db686860",
+          "bytes": 209058,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31413,6 +33870,15 @@
           "bytes": 21416,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14855/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14855/hero.webp",
+          "sha256": "5bebf1dd7323613bcec6e4f25d20451c641cae0cb7082983e581f75829e6a463",
+          "bytes": 214542,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31450,6 +33916,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14887/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14887/hero.webp",
+          "sha256": "2bdac559114433f37752c93e4052781c899e5bbee474ce3185f3ab6fbc7da70d",
+          "bytes": 204352,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31485,6 +33960,15 @@
           "bytes": 30716,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14965/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14965/hero.webp",
+          "sha256": "02b09170caca130ad667f06a6daa682286c5c79092ab9b95616e06ffe4bd51de",
+          "bytes": 256292,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31522,6 +34006,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14974/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14974/hero.webp",
+          "sha256": "009581d2878ca0c3ac753e494298d79189f92341ebce4317b8da3cc093713c6f",
+          "bytes": 205638,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31557,6 +34050,15 @@
           "bytes": 40650,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/14999/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14999/hero.webp",
+          "sha256": "8edda8fd4eca30cb6e278de89beb477170c94684bc167baa6862dd430e2ea768",
+          "bytes": 247146,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31594,6 +34096,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15111/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15111/hero.webp",
+          "sha256": "67e0cd09738e79ef6b375c3457ee0abc8cf63674dc25844372e4f1e27eda2d15",
+          "bytes": 208926,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31629,6 +34140,15 @@
           "bytes": 38604,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15112/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15112/hero.webp",
+          "sha256": "0fb3c01280860c8ee29a637efb1a9e069c78b8915b8c70758213c216c5e1e615",
+          "bytes": 187982,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31666,6 +34186,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15127/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15127/hero.webp",
+          "sha256": "2ae4be1ec64b2ca7b5f1a686d52949ca3487529b84041dc462ea49a365b50b6b",
+          "bytes": 220674,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31701,6 +34230,15 @@
           "bytes": 77480,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15152/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15152/hero.webp",
+          "sha256": "c8a5089581ff20155dd02dab9d4fcc40774ab256566cbf7b41220d76717474b6",
+          "bytes": 196150,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31738,6 +34276,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15175/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15175/hero.webp",
+          "sha256": "3b658ff6b48fcfaea2cde9fda34c5c8ce6438cf68d11500dae8663ba8c27548e",
+          "bytes": 210338,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31773,6 +34320,15 @@
           "bytes": 75478,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15189/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15189/hero.webp",
+          "sha256": "23dd43eaa3ae1c8da652042b89314bee4f8a6ef3b266fedd8473f8afe4a6e325",
+          "bytes": 157194,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31810,6 +34366,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15217/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15217/hero.webp",
+          "sha256": "347270d3e1467de62d065dc90b362c136a6702f0f1e98c5d56339076e63048d3",
+          "bytes": 227632,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31845,6 +34410,15 @@
           "bytes": 37214,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15254/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15254/hero.webp",
+          "sha256": "1375aa36a1d1f69ef7c57ea1d7e2e278f7ab9c223ead28617424a3e40649b8d7",
+          "bytes": 200152,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31882,6 +34456,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15277/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15277/hero.webp",
+          "sha256": "1d10c72a3574d6a79d851a44738c0cc13500b9036b01cd9c09543089669ddf80",
+          "bytes": 218800,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31917,6 +34500,15 @@
           "bytes": 31776,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15293/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15293/hero.webp",
+          "sha256": "3822c3f6fe6015fcc721a04491d107518d9d0b9ce8c1150c41cf5a06943307ce",
+          "bytes": 176956,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -31954,6 +34546,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15378/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15378/hero.webp",
+          "sha256": "2f8522cea45c035096f5c9d7412867fbac5ab1d0fe4041cdda1ff0094587e5c2",
+          "bytes": 212568,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -31989,6 +34590,15 @@
           "bytes": 31532,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15389/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15389/hero.webp",
+          "sha256": "ee8429144adf18700af8905170d5e07a0b18991b20fd77effed6bb45e6a76957",
+          "bytes": 171980,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -32026,6 +34636,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15488/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15488/hero.webp",
+          "sha256": "9705c512c70d1111aaec2fe12efc6c29f597a0cf69753ad611755dd1eafbfad2",
+          "bytes": 201776,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -32061,6 +34680,15 @@
           "bytes": 39920,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15565/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15565/hero.webp",
+          "sha256": "1859c4a278a13f99d9f4f4786e7d0b2f66738ce5f1a01e58ce062f15d397f29c",
+          "bytes": 226416,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -32098,6 +34726,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15576/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15576/hero.webp",
+          "sha256": "ae1b3ee237cd3495d2eae983d35a6a39eb865d969e9c50eacec1c57c642804fe",
+          "bytes": 189714,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -32133,6 +34770,15 @@
           "bytes": 26422,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15735/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15735/hero.webp",
+          "sha256": "58bc9002049b978aef6a0241d13b705be747710939bffbdc01c31d8e0d94df14",
+          "bytes": 185456,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -32170,6 +34816,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15758/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15758/hero.webp",
+          "sha256": "bd73edb9530da9c1013b36581d7b0b793ba1be9cf7d9459e558097493af27dfe",
+          "bytes": 234226,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -32205,6 +34860,15 @@
           "bytes": 21518,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15761/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15761/hero.webp",
+          "sha256": "ba6e50f5217b1116c3b13f7b131a0e4025057a03376124edd00c16791003a4c1",
+          "bytes": 234760,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -32242,6 +34906,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15762/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15762/hero.webp",
+          "sha256": "f66f1d902d420e2190d87182b472351c2782c5e8487d7a3f82c56684e0bb87ad",
+          "bytes": 271238,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -32277,6 +34950,15 @@
           "bytes": 60806,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15788/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15788/hero.webp",
+          "sha256": "ac2e80087651fc5781a060cda0fb3a90e9840e4b0af83a60f9aaacf5aa316d33",
+          "bytes": 194254,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -32314,6 +34996,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15831/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15831/hero.webp",
+          "sha256": "7ba66afe71e76e616c3107568ca13829f8e153759029924dfb3d86c75d9d94af",
+          "bytes": 257086,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -32349,6 +35040,15 @@
           "bytes": 54232,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/15886/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/15886/hero.webp",
+          "sha256": "cfc464588225da9779b8ddd8553053ba3391668b6e77ccebf7a9f29e1b026104",
+          "bytes": 219434,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -32386,6 +35086,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/16294/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/16294/hero.webp",
+          "sha256": "e197b047a9f7eb2c91c4b07a47221d3b102a30d3fca0d7c5173cd71067f8d040",
+          "bytes": 167340,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -32421,6 +35130,15 @@
           "bytes": 55708,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/16327/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/16327/hero.webp",
+          "sha256": "86800ffa4b1d11e7d97157378258a0845bedfc38690afe8779d4909cb9ee8baf",
+          "bytes": 193748,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
@@ -32458,6 +35176,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/16431/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/16431/hero.webp",
+          "sha256": "1437e93c55573bd76a1653de88eaea772395691dd14206dbb848cd0e215da7cd",
+          "bytes": 194164,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -32494,6 +35221,15 @@
           "width": 1200,
           "height": 675,
           "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/16475/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/16475/hero.webp",
+          "sha256": "3bafd4c3127d33dc25dd29546814e887fc2c91fbc713188e39a56224d69aa876",
+          "bytes": 230512,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
         }
       }
     },
@@ -32529,6 +35265,15 @@
           "bytes": 27876,
           "width": 1200,
           "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/16483/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/16483/hero.webp",
+          "sha256": "de593cb7f7266f1f66e61495259f556011e0b7c047964988903207e6cf4dc74c",
+          "bytes": 185564,
+          "width": 2560,
+          "height": 1440,
           "format": "webp"
         }
       }
