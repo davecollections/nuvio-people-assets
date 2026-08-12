@@ -84,11 +84,12 @@ Validates one registered identity and the v2 local generator. It makes no reques
 
 export async function buildPreflight({ personId }) {
   assert(Number.isInteger(personId) && personId > 0, "--person-id must be exactly one positive TMDB Person ID");
-  const [registry, preset, overrides, compositorSource] = await Promise.all([
+  const [registry, preset, overrides, compositorSource, postprocessorSource] = await Promise.all([
     readFile(path.join(repositoryRoot, "data", "people.json"), "utf8").then(JSON.parse),
     readFile(presetPath, "utf8").then(JSON.parse),
     readFile(path.join(repositoryRoot, "data", "hero-credit-overrides.json"), "utf8").then(JSON.parse),
-    readFile(path.join(toolRoot, "vendor", "prism-t2-compositor.py"))
+    readFile(path.join(toolRoot, "vendor", "prism-t2-compositor.py")),
+    readFile(path.join(toolRoot, "src", "stage.mjs"))
   ]);
   const person = registry.people.find((record) => record.tmdbPersonId === personId);
   assert(person, `TMDB Person ID ${personId} is not present in data/people.json`);
@@ -96,6 +97,13 @@ export async function buildPreflight({ personId }) {
   assert(preset.width === 2560 && preset.height === 1440 && preset.quality === 82, "People hero output lock mismatch");
   assert(preset.filmography.minimumCredits === 15 && preset.filmography.maximumCredits === 32, "Filmography thresholds changed unexpectedly");
   assert(preset.profileOnly.minimumProfiles === 15 && preset.profileOnly.maximumProfiles === 24, "Profile-only thresholds changed unexpectedly");
+  assert(preset.sparseFallback?.id === "people-t2-cinematic-defocus-fallback-v1"
+    && preset.sparseFallback.minimumCredits === 1
+    && preset.sparseFallback.blurSigma === 34
+    && preset.sparseFallback.saturation === 0.82
+    && preset.sparseFallback.brightness === 0.7
+    && preset.sparseFallback.titleLogoBakedIn === false,
+  "Sparse fallback output lock mismatch");
   validateCreditOverrides(overrides);
 
   return {
@@ -105,7 +113,11 @@ export async function buildPreflight({ personId }) {
     overrides,
     renderer: {
       path: "tools/people-hero/vendor/prism-t2-compositor.py",
-      sha256: createHash("sha256").update(compositorSource).digest("hex")
+      sha256: createHash("sha256").update(compositorSource).digest("hex"),
+      postprocessor: {
+        path: "tools/people-hero/src/stage.mjs",
+        sha256: createHash("sha256").update(postprocessorSource).digest("hex")
+      }
     },
     runtime: {
       proxyUrlConfigured: Boolean(process.env.PEOPLE_HERO_PROXY_URL?.trim()),

@@ -1,6 +1,6 @@
 # People hero generator
 
-This staging-only tool creates deterministic People hero candidates using the `people-t2-perspective-v2` preset.
+This staging-only tool creates deterministic People hero candidates using the `people-t2-perspective-v2` preset. When fewer than 15 eligible credits and fewer than 15 profiles exist, it uses every eligible credit poster in the same T2 lattice and applies the locked `people-t2-cinematic-defocus-fallback-v1` treatment. This avoids missing heroes without weakening credit eligibility.
 
 The T2 compositor is adapted with permission from [Prism Wallpapers](https://github.com/bramst0ne/prism-wallpapers). It consumes downloaded local image files and contains no credential or metadata-networking code.
 
@@ -26,7 +26,8 @@ Current boundaries:
 - explicit registered Person IDs only;
 - all downloads, snapshots, and candidates remain in `.work`;
 - official TMDB poster, backdrop, and profile paths only;
-- filmography, profile-only, or skip outcomes under the locked thresholds;
+- filmography, profile-only, sparse-fallback, or skip outcomes under the locked thresholds;
+- sparse fallback is permitted only when at least one eligible official credit artwork source exists, never contains a baked-in title logo, and is automatically superseded once a normal hero becomes eligible;
 - no direct TMDB metadata credential;
 - no asset promotion, manifest update, commit, or push.
 

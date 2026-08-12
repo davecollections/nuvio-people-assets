@@ -52,7 +52,7 @@ function rejectionReasonCounts(records) {
 export function buildEligibilityReport({ person, preset, selection }) {
   assert(person && Number.isSafeInteger(person.tmdbPersonId) && person.tmdbPersonId > 0, "Registered person is required");
   assert(preset?.id === "people-t2-perspective-v2", "Locked People hero preset is required");
-  assert(["filmography", "profile-only", "skip"].includes(selection?.outcome), "Selection outcome is invalid");
+  assert(["filmography", "profile-only", "sparse-fallback", "skip"].includes(selection?.outcome), "Selection outcome is invalid");
 
   return {
     version: "nuvio-people-hero-eligibility-v1",
@@ -66,7 +66,8 @@ export function buildEligibilityReport({ person, preset, selection }) {
       minimumCredits: preset.filmography.minimumCredits,
       maximumCredits: preset.filmography.maximumCredits,
       minimumProfiles: preset.profileOnly.minimumProfiles,
-      maximumProfiles: preset.profileOnly.maximumProfiles
+      maximumProfiles: preset.profileOnly.maximumProfiles,
+      minimumSparseCredits: preset.sparseFallback.minimumCredits
     },
     selection: {
       outcome: selection.outcome,
@@ -118,7 +119,8 @@ export async function checkEligibility({
     minimumCredits: preflight.preset.filmography.minimumCredits,
     maximumCredits: preflight.preset.filmography.maximumCredits,
     minimumProfiles: preflight.preset.profileOnly.minimumProfiles,
-    maximumProfiles: preflight.preset.profileOnly.maximumProfiles
+    maximumProfiles: preflight.preset.profileOnly.maximumProfiles,
+    minimumSparseCredits: preflight.preset.sparseFallback.minimumCredits
   });
   const report = buildEligibilityReport({ person: preflight.person, preset: preflight.preset, selection });
   const attemptRoot = await resultWriter({ personId, report });
