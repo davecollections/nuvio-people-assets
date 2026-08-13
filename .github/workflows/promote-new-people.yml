@@ -46,13 +46,6 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Require pull request automation permission
-        run: |
-          $permissions = gh api "repos/${{ github.repository }}/actions/permissions/workflow" | ConvertFrom-Json
-          if (-not $permissions.can_approve_pull_request_reviews) {
-            throw "Enable Settings > Actions > General > Allow GitHub Actions to create and approve pull requests before promotion."
-          }
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -166,7 +159,15 @@ jobs:
         run: |
           $summaryFile = Join-Path "$env:REQUEST_ROOT" "promotion-pr-body.md"
           Add-Content -Path "$summaryFile" -Value "`nCloses #$env:TRACKING_ISSUE`n"
-          $url = gh pr create --draft --base main --head "$env:PROMOTION_BRANCH" --title "Publish $env:PERSON_COUNT reviewed People from run $env:STAGING_RUN_ID" --body-file "$summaryFile"
+          $createOutput = @(gh pr create --draft --base main --head "$env:PROMOTION_BRANCH" --title "Publish $env:PERSON_COUNT reviewed People from run $env:STAGING_RUN_ID" --body-file "$summaryFile" 2>&1)
+          if ($LASTEXITCODE -ne 0) {
+            $details = ($createOutput | Out-String).Trim()
+            throw "GitHub Actions could not create the draft pull request. Confirm Settings > Actions > General > Allow GitHub Actions to create and approve pull requests is enabled. Details: $details"
+          }
+          $url = ([string]($createOutput | Select-Object -Last 1)).Trim()
+          if ($url -notmatch '^https://github\.com/.+/.+/pull/\d+$') {
+            throw "GitHub Actions did not return a valid draft pull request URL."
+          }
           "url=$url" >> $env:GITHUB_OUTPUT
           Get-Content "$summaryFile" >> $env:GITHUB_STEP_SUMMARY
           "Draft pull request: $url" >> $env:GITHUB_STEP_SUMMARY

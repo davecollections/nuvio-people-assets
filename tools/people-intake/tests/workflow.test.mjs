@@ -42,10 +42,13 @@ test("new People promotion trusts only successful main staging and opens a draft
   assert.match(workflow, /workflowName -ne "Stage new People artwork set"/u);
   assert.match(workflow, /headBranch -ne "main"/u);
   assert.match(workflow, /git merge-base --is-ancestor/u);
-  assert.match(workflow, /can_approve_pull_request_reviews/u);
+  assert.match(workflow, /^\s+pull-requests:\s+write\s*$/mu);
+  assert.doesNotMatch(workflow, /actions\/permissions\/workflow|can_approve_pull_request_reviews/u);
   assert.match(workflow, /gh run download/u);
   assert.match(workflow, /npm run people-intake:promote/u);
   assert.match(workflow, /gh pr create --draft/u);
+  assert.match(workflow, /GitHub Actions could not create the draft pull request/u);
+  assert.ok(workflow.indexOf("git push") < workflow.indexOf("gh pr create --draft"));
   assert.doesNotMatch(workflow, /gh pr merge/u);
   assert.doesNotMatch(workflow, /PEOPLE_HERO_PROXY|TMDB_BEARER_TOKEN|api_key/iu);
 });
