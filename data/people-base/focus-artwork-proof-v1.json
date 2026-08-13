@@ -1,0 +1,108 @@
+{
+  "version": "people-static-colour-focus-proof-v1",
+  "status": "owner-approved-hosted-proof",
+  "trackingIssue": 41,
+  "preset": {
+    "id": "people-static-colour-focus-v1",
+    "format": "webp",
+    "quality": 82,
+    "effort": 6,
+    "chromaSubsampling": "4:4:4",
+    "poster": "1000x1500",
+    "landscape": "1200x675",
+    "derivation": "approved base artwork with grayscale and warm tint removed"
+  },
+  "recordCount": 10,
+  "records": [
+    {
+      "tmdbPersonId": 31,
+      "canonicalName": "Tom Hanks",
+      "sourceSha256": "273962814949713ccd34e74f6c44173aa07c8419ea81ec3b55ff1a3db68cd7a5",
+      "monochromePosterSha256": "38f6b5d3b64caa6615b6d645855ec37ca9d01ca9e54d1af8104dd67f0ebf098d",
+      "focusPosterSha256": "e7b6f7c8ba2eb8c400b5d44047a7f7e600ea305d2a80812ed18ba0fb6ccaeb18",
+      "monochromeLandscapeSha256": "70e60c563659fe3bea677b80dab6ecc452e86e66342ee72d3344651b288caeba",
+      "focusLandscapeSha256": "3b0a1d06109b0c27842cb6874d66bc76cb5d4683a60a145a088f7b8f0b47db8e"
+    },
+    {
+      "tmdbPersonId": 64,
+      "canonicalName": "Gary Oldman",
+      "sourceSha256": "7e39583c1e741b9f7bc6529dd76ade96520ac643550ee61d8db4c048ae039377",
+      "monochromePosterSha256": "032093b14c01cb5b3368dda154bcb2f67726a73e38ce1893cd2de68d3be6ef4d",
+      "focusPosterSha256": "a7a53607032a1573a950c34306d6ccd56b31e853cce8e206420cf0641e6708e0",
+      "monochromeLandscapeSha256": "e2ce268078c91cc4c9a465a8d9df6c06a504779cfe5624c1151d2a88a8350f4f",
+      "focusLandscapeSha256": "c674a10f3243f9d32110ce74aeb07022b84ef47946497a998f40cd3ef055547c"
+    },
+    {
+      "tmdbPersonId": 1100,
+      "canonicalName": "Arnold Schwarzenegger",
+      "sourceSha256": "099b699e71a2911efab2cf55f111804abd5775000ac02a52b82aa611ce7d5846",
+      "monochromePosterSha256": "33de2167ddc944cdb8e00d8cbb06f3ae03dde2071b4daac49918fedee2184252",
+      "focusPosterSha256": "646339817fe7e5fb6f8f76a1b4218fee0f894494efa6c280912ea430db7243ba",
+      "monochromeLandscapeSha256": "5e4188d29573a0afac723f187ec8ec3a9d2d04c2d4bde5d558c9b1f8989edaa0",
+      "focusLandscapeSha256": "c7ce65758368731ec10e590c59fbb9f1f98aa5f97be94c9d774ce9dd079513a7"
+    },
+    {
+      "tmdbPersonId": 1650,
+      "canonicalName": "François Truffaut",
+      "sourceSha256": "051347530ab95216a7da15196632ff01734d7fbe45d43f7629a7784126858caa",
+      "monochromePosterSha256": "8c3a29fac6f0be2d6caa71c2cb9129381cded5e7d9777d4f6e0639ca6735d113",
+      "focusPosterSha256": "cd9f84e47f339035f3436611f160e49573c81db7410a7dac28b1cee4c72a4202",
+      "monochromeLandscapeSha256": "96ee548eab8da6d93e11dec050abcd39bb85a0d112e16fe8e9cd0716a67233c8",
+      "focusLandscapeSha256": "dd3f24b67f477c7cc4fe5e4b3c92a6134ec6eeeb0844b058ce05c814aec0b2bb"
+    },
+    {
+      "tmdbPersonId": 1922,
+      "canonicalName": "Catherine Zeta-Jones",
+      "sourceSha256": "e627d25d9ef42e8b558c8a47a12aeb79969258a63a83b42544bd3763d0ba9542",
+      "monochromePosterSha256": "713d7c7021790892956c721e8cb90c2508cbd711f344f13b0ec6139a359c5f5c",
+      "focusPosterSha256": "950c2a2ad91f3310120697af4e081f9d674d9c21b602004cbf0968e06e8ef218",
+      "monochromeLandscapeSha256": "1f77e2483a34dcd6147dc0c5b2acc8b071545c484e7934f1a0a1bebc495e8176",
+      "focusLandscapeSha256": "6689d890eade39a7ffbf016da29757b6da851ac35fc051ba4beed3d1e91ded70"
+    },
+    {
+      "tmdbPersonId": 6730,
+      "canonicalName": "Sacha Baron Cohen",
+      "sourceSha256": "6e9fbb0d05ace01917b70b7885481f998a3b6f364ba8217821f535b4adef29a1",
+      "monochromePosterSha256": "d2930b30d9bb0b2b060f6c08e5d6091c622d47ca6a9255e8dcd034314b4f8a7c",
+      "focusPosterSha256": "3bc9fcaf97015432b9e8858655ac1c9557a610aefc167b40865563ce67611e7d",
+      "monochromeLandscapeSha256": "7d89b0c093531c1d5dc83139b6694f18dd2854740fa262fac107e15d09ec89ef",
+      "focusLandscapeSha256": "4c9148ab01b91c0d20778a1f45277409fb0b744f43da4735e75ce651dcf2ebdd"
+    },
+    {
+      "tmdbPersonId": 14386,
+      "canonicalName": "Beyoncé",
+      "sourceSha256": "cdd43d5c993c7b278694c5f84312ce200ae1257359a2bbb78f37fafe476c5fe0",
+      "monochromePosterSha256": "91b741895a83b781beb70d4c78c17bdefa353621feabbb7d3f7d9c9618ab653d",
+      "focusPosterSha256": "d03b59188ac1cfab8bfcff61a9fdcdf819f5f2f84b452b4fac6c1e7a062f4113",
+      "monochromeLandscapeSha256": "20e8c9c365fb1f94658d1a612b786a80828504be85c38cdea99651a4640a6081",
+      "focusLandscapeSha256": "8a6a41d28561fcd87746caba24dd0ec91792f9e9426197d1827a600f5a550241"
+    },
+    {
+      "tmdbPersonId": 76594,
+      "canonicalName": "Miley Cyrus",
+      "sourceSha256": "6ec0e34f3fc8dc23a91de39ab9642b22ed4bfaff2639ee4572f528afe2abbae9",
+      "monochromePosterSha256": "1f7f02dae1fdff39cc93d1c57c5f5d7081d0edad64327b76a3f4d51ce21dbb9a",
+      "focusPosterSha256": "4f50a334e5ba3ff29391033ad08e52c0f64e3bc536b0b49b7d811557c8c753f3",
+      "monochromeLandscapeSha256": "bc3f4b9ba243d167baea428aa74efd3c2f4a2e25356fd1dee7ef3c564789e153",
+      "focusLandscapeSha256": "52f329d0379e23e0b7243daa5694ec4b2cec2d7fa9ed76f924aab0317e6cf4bc"
+    },
+    {
+      "tmdbPersonId": 234352,
+      "canonicalName": "Margot Robbie",
+      "sourceSha256": "1d0aee20b2e00417485828188470725da78b615ee1527fccc26df0d7b00c200d",
+      "monochromePosterSha256": "c6bcde36e862070bda01493f3be997d2552dad92eeff4c615e54c1b0fae3a044",
+      "focusPosterSha256": "c130997b5b145aea372e8d5bef5fae42d799ca434390ea50f905e370ddd9483c",
+      "monochromeLandscapeSha256": "4223714311700141f43d076485d7455d47f1251e3e74f9c29ec7c411a3b1acaf",
+      "focusLandscapeSha256": "488b043a2517d7e5a0c376da86ab9402774b53721a8f63862636e76984953b6d"
+    },
+    {
+      "tmdbPersonId": 1136406,
+      "canonicalName": "Tom Holland",
+      "sourceSha256": "b5c1ed19349d2f5b3edb0ab0983c9aef97474f6dd633e2300ea4a118d769c923",
+      "monochromePosterSha256": "e04c35841dd34bf6c86417f233fd17d47f614026ea283f9c48247a21b9c44b93",
+      "focusPosterSha256": "b3e5ea15c132dacb1ce559d01dbda131ee6ca33e53aafa2243887a14836beee8",
+      "monochromeLandscapeSha256": "5cb279e947acb5600dadcba4ae3bfb2eab82563726ea622dbd9c0a78bbefa0d9",
+      "focusLandscapeSha256": "f72106f5101c2804455be9cdf896dc53cc33bcbbb460a8964da5f42c2fdb7f74"
+    }
+  ]
+}

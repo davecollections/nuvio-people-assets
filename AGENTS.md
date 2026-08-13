@@ -24,6 +24,8 @@ assets/people/{tmdb_person_id}/
   title-logo.png    # required
   landscape.webp    # retained compatibility asset
   hero.webp         # optional during controlled rollout
+  focus-poster.webp      # optional static colour focus counterpart
+  focus-landscape.webp   # optional static colour focus counterpart
 ```
 
 - A display-name change must never rename the directory or public URL.
@@ -31,6 +33,7 @@ assets/people/{tmdb_person_id}/
 - Do not delete existing landscapes. They remain legacy/current compatibility assets pending a separate V2 decision.
 - Do not regenerate the catalogue-wide title-logo set as part of hero-generator work.
 - Do not modify published assets unless the user explicitly approves that asset change.
+- Focus artwork must be published as a poster/landscape pair. It uses the same approved source, crop, gradients, grain, and person-name typography as the monochrome base artwork, with only the grayscale and warm-tint treatment removed. The controlled preset is static WebP quality 82 at 1000 x 1500 and 1200 x 675; catalogue-wide promotion requires separate explicit approval after the Nuvio focus proof.
 
 ## Locked People hero preset
 
@@ -95,6 +98,7 @@ The current validator is authoritative. In particular:
 
 - every asset must decode to its filename's expected format;
 - every individual asset must remain below 1 MiB;
+- focus posters must be exactly 1000 x 1500 and focus landscapes exactly 1200 x 675, with neither file permitted on its own;
 - legacy published heroes may remain 1920 x 1080 until individually replaced; all newly promoted heroes must be exactly 2560 x 1440;
 - the repository-wide 1 MiB ceiling remains mandatory, while 250 KiB is only the hero optimisation target;
 - no unexpected files may appear in identity directories;

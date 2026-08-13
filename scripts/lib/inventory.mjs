@@ -13,10 +13,16 @@ const assetDefinitions = {
   poster: { filename: "poster.webp", required: true, format: "webp" },
   titleLogo: { filename: "title-logo.png", required: true, format: "png" },
   landscape: { filename: "landscape.webp", required: false, format: "webp" },
-  hero: { filename: "hero.webp", required: false, format: "webp" }
+  hero: { filename: "hero.webp", required: false, format: "webp" },
+  focusPoster: { filename: "focus-poster.webp", required: false, format: "webp" },
+  focusLandscape: { filename: "focus-landscape.webp", required: false, format: "webp" }
 };
 
 const approvedHeroDimensions = new Set(["1920x1080", "2560x1440"]);
+const approvedFocusDimensions = Object.freeze({
+  focusPoster: "1000x1500",
+  focusLandscape: "1200x675"
+});
 
 function slash(value) {
   return value.split(path.sep).join("/");
@@ -58,6 +64,25 @@ export function validateHeroContract(asset) {
   }
 }
 
+export function validateFocusArtworkContract(asset, key) {
+  const expectedDimensions = approvedFocusDimensions[key];
+  if (!expectedDimensions) {
+    throw new Error(`Unknown focus artwork kind: ${key}`);
+  }
+  const dimensions = `${asset.width}x${asset.height}`;
+  if (dimensions !== expectedDimensions) {
+    throw new Error(`${asset.path}: ${key} must be exactly ${expectedDimensions}`);
+  }
+}
+
+export function validateFocusArtworkPair(assets, personId = "person") {
+  const hasPoster = Boolean(assets.focusPoster);
+  const hasLandscape = Boolean(assets.focusLandscape);
+  if (hasPoster !== hasLandscape) {
+    throw new Error(`${personId}: focus-poster.webp and focus-landscape.webp must be published together`);
+  }
+}
+
 export async function buildInventory() {
   const registry = JSON.parse(await readFile(registryPath, "utf8"));
   if (!Array.isArray(registry.people) || registry.people.length === 0) {
@@ -85,7 +110,7 @@ export async function buildInventory() {
     throw new Error("assets/people directories do not exactly match data/people.json");
   }
 
-  const assetCounts = { poster: 0, titleLogo: 0, landscape: 0, hero: 0 };
+  const assetCounts = { poster: 0, titleLogo: 0, landscape: 0, hero: 0, focusPoster: 0, focusLandscape: 0 };
   let totalBytes = 0;
   const people = [];
 
@@ -114,10 +139,14 @@ export async function buildInventory() {
       if (key === "hero") {
         validateHeroContract(inspected);
       }
+      if (key === "focusPoster" || key === "focusLandscape") {
+        validateFocusArtworkContract(inspected, key);
+      }
       assets[key] = inspected;
       assetCounts[key] += 1;
       totalBytes += inspected.bytes;
     }
+    validateFocusArtworkPair(assets, person.tmdbPersonId);
 
     people.push({
       tmdbPersonId: person.tmdbPersonId,
@@ -158,6 +187,29 @@ export async function buildInventory() {
         brightness: 0.7,
         titleLogoBakedIn: false,
         upgradeWhenNormalHeroEligible: true
+      }
+    },
+    focusArtworkPreset: {
+      id: "people-static-colour-focus-v1",
+      status: "controlled-proof",
+      source: "preserved-approved-people-portrait",
+      derivation: "approved base artwork with grayscale and warm tint removed",
+      format: "webp",
+      quality: 82,
+      effort: 6,
+      chromaSubsampling: "4:4:4",
+      staticImage: true,
+      nativelyAnimated: false,
+      publishedAsPair: true,
+      poster: {
+        filename: "focus-poster.webp",
+        width: 1000,
+        height: 1500
+      },
+      landscape: {
+        filename: "focus-landscape.webp",
+        width: 1200,
+        height: 675
       }
     },
     people
