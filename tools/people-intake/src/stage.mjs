@@ -15,6 +15,10 @@ import {
   renderPeopleArtwork
 } from "../../people-seed/src/people-artwork/renderer.mjs";
 import { prepareTitleLogoV2Renderer, renderTitleLogoV2 } from "../../people-seed/src/people-artwork/title-logo-v2.mjs";
+import {
+  buildNewPersonLandscapePolicyEvidence,
+  PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
+} from "./landscape-policy.mjs";
 
 const toolRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const repositoryRoot = path.resolve(toolRoot, "../..");
@@ -316,9 +320,10 @@ export async function stageNewPerson({
     sourceCache: sourceCacheRoot,
     outputDir: monochromeRoot,
     format: "both",
-    portraitTreatment: "monochrome-warm"
+    portraitTreatment: "monochrome-warm",
+    landscapeDefaultCropPolicy: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
   });
-  await writeRenderMetadata({
+  const monochromeMetadataFiles = await writeRenderMetadata({
     metadata: monochrome.metadata,
     outputDir: reportsRoot,
     jsonName: "monochrome-render-metadata.json",
@@ -328,6 +333,7 @@ export async function stageNewPerson({
   await copyCandidate(path.join(monochromeRoot, "landscape", `${personId}.webp`), path.join(candidateIdentityRoot, "landscape.webp"));
 
   let focus = null;
+  let focusMetadataFiles = null;
   if (selectedProfile) {
     const focusRoot = path.join(attemptRoot, "renders", "focus");
     focus = await renderPeopleArtwork({
@@ -337,11 +343,12 @@ export async function stageNewPerson({
       outputDir: focusRoot,
       format: "both",
       portraitTreatment: "colour-focus",
-      outputQuality: 82
+      outputQuality: 82,
+      landscapeDefaultCropPolicy: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
     });
     assert(focus.resolutions[0]?.sourceStatus === "validated-cache-hit",
       "Focus artwork requires a validated portrait source");
-    await writeRenderMetadata({
+    focusMetadataFiles = await writeRenderMetadata({
       metadata: focus.metadata,
       outputDir: reportsRoot,
       jsonName: "focus-render-metadata.json",
@@ -350,6 +357,17 @@ export async function stageNewPerson({
     await copyCandidate(path.join(focusRoot, "poster", `${personId}.webp`), path.join(candidateIdentityRoot, "focus-poster.webp"));
     await copyCandidate(path.join(focusRoot, "landscape", `${personId}.webp`), path.join(candidateIdentityRoot, "focus-landscape.webp"));
   }
+
+  const landscapeCropPolicy = buildNewPersonLandscapePolicyEvidence({
+    personId,
+    hasProfile: Boolean(selectedProfile),
+    monochromeMetadata: monochrome.metadata,
+    focusMetadata: focus?.metadata || null
+  });
+  landscapeCropPolicy.renderMetadata = {
+    monochrome: await inspectEvidence(monochromeMetadataFiles.jsonPath),
+    focus: focus ? await inspectEvidence(focusMetadataFiles.jsonPath) : null
+  };
 
   const preparedTitle = await prepareTitleLogoV2Renderer({ people: [person] });
   const titleLogo = await renderTitleLogoV2({ person, ...preparedTitle });
@@ -416,6 +434,7 @@ export async function stageNewPerson({
       outcome: hero.report.selection?.outcome || null,
       output: hero.report.output || null
     },
+    landscapeCropPolicy,
     requests: {
       metadata: 1,
       profileImageDownloads: selectedProfile ? 1 : 0,

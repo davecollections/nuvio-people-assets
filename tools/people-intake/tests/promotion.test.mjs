@@ -14,6 +14,11 @@ import {
   validatePublicationLedger
 } from "../src/promote.mjs";
 import { validatePromotionRequest } from "../src/promotion-request.mjs";
+import {
+  buildNewPersonLandscapePolicyEvidence,
+  PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_HASH,
+  PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
+} from "../src/landscape-policy.mjs";
 
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const json = (value) => Buffer.from(`${JSON.stringify(value, null, 2)}\n`, "utf8");
@@ -84,7 +89,47 @@ async function fixture() {
     output: null,
     boundaries: { permanentAssetWrites: 0, manifestWrites: 0, publishActions: 0 }
   });
-  const candidateReport = await writeJson(path.join(attemptRoot, "reports", "candidate-report.json"), {
+  const monochromeMetadataValue = {
+    version: "people-artwork-render-metadata-v1",
+    records: [{
+      tmdbPersonId: 9000001,
+      formatId: "landscape",
+      portraitTreatment: "monochrome-warm",
+      fallbackUsed: true,
+      outputHash: outputs.landscape.sha256,
+      sourceHash: null,
+      cropMethod: null,
+      cropRectangle: null,
+      resizeScale: null,
+      portraitBounds: null,
+      landscapeDefaultCropPolicyId: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID,
+      landscapeDefaultCropPolicyHash: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_HASH,
+      landscapeDefaultCropStatus: "source-unavailable-fallback",
+      landscapeDefaultCropTier: null,
+      landscapeDefaultCropSourceHash: null,
+      landscapeDefaultCropSourceBoundLimited: false
+    }]
+  };
+  const monochromeMetadata = await writeJson(
+    path.join(attemptRoot, "reports", "monochrome-render-metadata.json"),
+    monochromeMetadataValue
+  );
+  const landscapeCropPolicy = buildNewPersonLandscapePolicyEvidence({
+    personId: 9000001,
+    hasProfile: false,
+    monochromeMetadata: monochromeMetadataValue,
+    focusMetadata: null
+  });
+  landscapeCropPolicy.renderMetadata = {
+    monochrome: {
+      path: "tools/people-intake/.work/attempt-fixture/reports/monochrome-render-metadata.json",
+      sha256: monochromeMetadata.sha256,
+      bytes: monochromeMetadata.bytes
+    },
+    focus: null
+  };
+  const candidateReportPath = path.join(attemptRoot, "reports", "candidate-report.json");
+  const candidateReport = await writeJson(candidateReportPath, {
     version: "nuvio-new-person-artwork-candidate-v1",
     status: "staging-only-needs-owner-review",
     generatedAt: "2026-08-13T00:00:00.000Z",
@@ -101,7 +146,9 @@ async function fixture() {
       sha256: sourceSnapshot.sha256,
       bytes: sourceSnapshot.bytes
     },
+    profileSource: { filePath: null },
     hero: { status: "skipped", outcome: "skip", output: null },
+    landscapeCropPolicy,
     outputs,
     boundaries: {
       permanentAssetWrites: 0,
@@ -124,7 +171,7 @@ async function fixture() {
       destination: "assets/people/9000001"
     }]
   };
-  return { root, repositoryRoot, workRoot, artifactRoot, outputs, approvalDocument };
+  return { root, repositoryRoot, workRoot, artifactRoot, outputs, approvalDocument, candidateReportPath };
 }
 
 test("promotion arguments and owner approvals fail closed", () => {
@@ -211,6 +258,22 @@ test("reviewed candidates validate by exact report, selection, identity, file se
   assert.equal(dryRun.result.assetWrites, 0);
   assert.equal(dryRun.result.networkRequests, 0);
   assert.match(dryRun.markdown, /copied byte-for-byte/u);
+
+  const missingPolicyReport = JSON.parse(await readFile(item.candidateReportPath, "utf8"));
+  delete missingPolicyReport.landscapeCropPolicy;
+  const missingPolicyRecord = await writeJson(item.candidateReportPath, missingPolicyReport);
+  const missingPolicyApproval = structuredClone(item.approvalDocument);
+  missingPolicyApproval.approvals[0].candidateReportSha256 = missingPolicyRecord.sha256;
+  await assert.rejects(() => promoteReviewedCandidates({
+    artifactRoot: item.artifactRoot,
+    approvals: parsePromotionApprovals(JSON.stringify(missingPolicyApproval)),
+    stagingRunId: 123,
+    trackingIssue: 49,
+    promotionRunId: 456,
+    dryRun: true,
+    repositoryRoot: item.repositoryRoot,
+    workRoot: item.workRoot
+  }), /chin-safe|Landscape policy/u);
 
   const changed = structuredClone(item.approvalDocument);
   changed.approvals[0].candidateReportSha256 = "0".repeat(64);
