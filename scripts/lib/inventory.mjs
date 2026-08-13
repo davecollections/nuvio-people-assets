@@ -191,7 +191,7 @@ export async function buildInventory() {
     },
     focusArtworkPreset: {
       id: "people-static-colour-focus-v1",
-      status: "controlled-proof",
+      status: "production-approved",
       source: "preserved-approved-people-portrait",
       derivation: "approved base artwork with grayscale and warm tint removed",
       format: "webp",
@@ -201,6 +201,8 @@ export async function buildInventory() {
       staticImage: true,
       nativelyAnimated: false,
       publishedAsPair: true,
+      eligibility: "preserved-approved-portrait-source-required",
+      excludedPersonIds: [8559, 76447],
       poster: {
         filename: "focus-poster.webp",
         width: 1000,

@@ -1,0 +1,59 @@
+{
+  "version": "people-static-colour-focus-publication-v1",
+  "status": "owner-approved-production",
+  "trackingIssue": 43,
+  "approvedProof": {
+    "issue": 41,
+    "pullRequest": 42,
+    "proofRecord": "data/people-base/focus-artwork-proof-v1.json"
+  },
+  "preset": {
+    "id": "people-static-colour-focus-v1",
+    "format": "webp",
+    "quality": 82,
+    "effort": 6,
+    "chromaSubsampling": "4:4:4",
+    "poster": {
+      "width": 1000,
+      "height": 1500,
+      "filename": "focus-poster.webp"
+    },
+    "landscape": {
+      "width": 1200,
+      "height": 675,
+      "filename": "focus-landscape.webp"
+    },
+    "derivation": "approved base artwork with grayscale and warm tint removed"
+  },
+  "sourceEvidence": {
+    "rendererSourceSha256": "e9002f3769a48429928c6a5783fba62d7b1c9bc08bd2ba6d17dcef61c6267930",
+    "derivedRendererSha256": "4f8bafed47e8b83d271c472a3583ed0e9589da34de36a02752f418fccfc0cc7c",
+    "generationReportSha256": "b5b24c14766337380faa35b1ea65f90ac4919586dce8f86ae56345830727a2cd",
+    "outputInventorySha256": "6c992b813a16323739ef023637d8e763e0af72d88b9b3f850a48eb50cbc573e2",
+    "deterministicPriorSamplePersonCount": 120,
+    "deterministicPriorSampleByteMatches": 240,
+    "networkRequests": 0,
+    "downloads": 0
+  },
+  "catalogue": {
+    "registeredPeople": 1480,
+    "publishedPairs": 1478,
+    "posterBytes": 135197340,
+    "landscapeBytes": 43683358,
+    "totalBytes": 178880698,
+    "createdUnderIssue43": 1468,
+    "unchangedApprovedProofPairs": 10,
+    "excluded": [
+      {
+        "tmdbPersonId": 8559,
+        "canonicalName": "Kátia Lund",
+        "reason": "no-approved-profile-source"
+      },
+      {
+        "tmdbPersonId": 76447,
+        "canonicalName": "Shimit Amin",
+        "reason": "no-approved-profile-source"
+      }
+    ]
+  }
+}
