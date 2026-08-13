@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   prepare:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     timeout-minutes: 10
     outputs:
       person_ids: ${{ steps.batch.outputs.person_ids }}
@@ -32,7 +32,7 @@ jobs:
         id: batch
         env:
           NEW_PEOPLE_IDS: ${{ inputs.person_ids }}
-        run: node tools/people-intake/src/batch-input.mjs >> "$GITHUB_OUTPUT"
+        run: node tools/people-intake/src/batch-input.mjs >> $env:GITHUB_OUTPUT
 
       - name: Install dependencies
         run: npm ci
@@ -42,7 +42,7 @@ jobs:
 
   stage:
     needs: prepare
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -80,7 +80,7 @@ jobs:
       - name: Stage complete candidate
         env:
           REQUESTED_PERSON_ID: ${{ matrix.person_id }}
-        run: npm run people-intake:stage -- --person-id "$REQUESTED_PERSON_ID"
+        run: npm run people-intake:stage -- --person-id "$env:REQUESTED_PERSON_ID"
 
       - name: Upload staging evidence
         if: always()
