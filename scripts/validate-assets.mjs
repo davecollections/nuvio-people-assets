@@ -15,3 +15,4 @@ const totalAssets = Object.values(inventory.assetCounts).reduce((sum, count) => 
 console.log(`Validated ${inventory.recordCount} people and ${totalAssets} assets.`);
 console.log(`Asset bytes: ${inventory.totalAssetBytes}`);
 console.log(`Hero count: ${inventory.assetCounts.hero}`);
+console.log(`Focus artwork pairs: ${inventory.assetCounts.focusPoster}`);

@@ -7,9 +7,11 @@
     "poster": 1480,
     "titleLogo": 1480,
     "landscape": 1480,
-    "hero": 1480
+    "hero": 1480,
+    "focusPoster": 10,
+    "focusLandscape": 10
   },
-  "totalAssetBytes": 568737574,
+  "totalAssetBytes": 570126364,
   "heroPreset": {
     "id": "people-t2-perspective-v2",
     "width": 2560,
@@ -37,6 +39,29 @@
       "brightness": 0.7,
       "titleLogoBakedIn": false,
       "upgradeWhenNormalHeroEligible": true
+    }
+  },
+  "focusArtworkPreset": {
+    "id": "people-static-colour-focus-v1",
+    "status": "controlled-proof",
+    "source": "preserved-approved-people-portrait",
+    "derivation": "approved base artwork with grayscale and warm tint removed",
+    "format": "webp",
+    "quality": 82,
+    "effort": 6,
+    "chromaSubsampling": "4:4:4",
+    "staticImage": true,
+    "nativelyAnimated": false,
+    "publishedAsPair": true,
+    "poster": {
+      "filename": "focus-poster.webp",
+      "width": 1000,
+      "height": 1500
+    },
+    "landscape": {
+      "filename": "focus-landscape.webp",
+      "width": 1200,
+      "height": 675
     }
   },
   "people": [
@@ -441,6 +466,24 @@
           "bytes": 193052,
           "width": 2560,
           "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/31/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/31/focus-poster.webp",
+          "sha256": "e7b6f7c8ba2eb8c400b5d44047a7f7e600ea305d2a80812ed18ba0fb6ccaeb18",
+          "bytes": 83014,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/31/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/31/focus-landscape.webp",
+          "sha256": "3b0a1d06109b0c27842cb6874d66bc76cb5d4683a60a145a088f7b8f0b47db8e",
+          "bytes": 23598,
+          "width": 1200,
+          "height": 675,
           "format": "webp"
         }
       }
@@ -1027,6 +1070,24 @@
           "bytes": 137362,
           "width": 2560,
           "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/64/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/64/focus-poster.webp",
+          "sha256": "a7a53607032a1573a950c34306d6ccd56b31e853cce8e206420cf0641e6708e0",
+          "bytes": 158894,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/64/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/64/focus-landscape.webp",
+          "sha256": "c674a10f3243f9d32110ce74aeb07022b84ef47946497a998f40cd3ef055547c",
+          "bytes": 55014,
+          "width": 1200,
+          "height": 675,
           "format": "webp"
         }
       }
@@ -6204,6 +6265,24 @@
           "width": 2560,
           "height": 1440,
           "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/1100/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1100/focus-poster.webp",
+          "sha256": "646339817fe7e5fb6f8f76a1b4218fee0f894494efa6c280912ea430db7243ba",
+          "bytes": 68950,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/1100/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1100/focus-landscape.webp",
+          "sha256": "c7ce65758368731ec10e590c59fbb9f1f98aa5f97be94c9d774ce9dd079513a7",
+          "bytes": 28814,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
         }
       }
     },
@@ -8454,6 +8533,24 @@
           "width": 2560,
           "height": 1440,
           "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/1650/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1650/focus-poster.webp",
+          "sha256": "cd9f84e47f339035f3436611f160e49573c81db7410a7dac28b1cee4c72a4202",
+          "bytes": 236110,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/1650/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1650/focus-landscape.webp",
+          "sha256": "dd3f24b67f477c7cc4fe5e4b3c92a6134ec6eeeb0844b058ce05c814aec0b2bb",
+          "bytes": 54598,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
         }
       }
     },
@@ -9353,6 +9450,24 @@
           "bytes": 225732,
           "width": 2560,
           "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/1922/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1922/focus-poster.webp",
+          "sha256": "950c2a2ad91f3310120697af4e081f9d674d9c21b602004cbf0968e06e8ef218",
+          "bytes": 75896,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/1922/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1922/focus-landscape.webp",
+          "sha256": "6689d890eade39a7ffbf016da29757b6da851ac35fc051ba4beed3d1e91ded70",
+          "bytes": 29774,
+          "width": 1200,
+          "height": 675,
           "format": "webp"
         }
       }
@@ -22765,6 +22880,24 @@
           "width": 2560,
           "height": 1440,
           "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/6730/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6730/focus-poster.webp",
+          "sha256": "3bc9fcaf97015432b9e8858655ac1c9557a610aefc167b40865563ce67611e7d",
+          "bytes": 95396,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/6730/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6730/focus-landscape.webp",
+          "sha256": "4c9148ab01b91c0d20778a1f45277409fb0b744f43da4735e75ce651dcf2ebdd",
+          "bytes": 30878,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
         }
       }
     },
@@ -35503,6 +35636,24 @@
           "bytes": 232200,
           "width": 2560,
           "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/14386/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14386/focus-poster.webp",
+          "sha256": "d03b59188ac1cfab8bfcff61a9fdcdf819f5f2f84b452b4fac6c1e7a062f4113",
+          "bytes": 76278,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/14386/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/14386/focus-landscape.webp",
+          "sha256": "8a6a41d28561fcd87746caba24dd0ec91792f9e9426197d1827a600f5a550241",
+          "bytes": 23344,
+          "width": 1200,
+          "height": 675,
           "format": "webp"
         }
       }
@@ -54856,6 +55007,24 @@
           "width": 2560,
           "height": 1440,
           "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/76594/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/76594/focus-poster.webp",
+          "sha256": "4f50a334e5ba3ff29391033ad08e52c0f64e3bc536b0b49b7d811557c8c753f3",
+          "bytes": 63676,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/76594/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/76594/focus-landscape.webp",
+          "sha256": "52f329d0379e23e0b7243daa5694ec4b2cec2d7fa9ed76f924aab0317e6cf4bc",
+          "bytes": 23998,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
         }
       }
     },
@@ -62461,6 +62630,24 @@
           "width": 2560,
           "height": 1440,
           "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/234352/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/234352/focus-poster.webp",
+          "sha256": "c130997b5b145aea372e8d5bef5fae42d799ca434390ea50f905e370ddd9483c",
+          "bytes": 73292,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/234352/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/234352/focus-landscape.webp",
+          "sha256": "488b043a2517d7e5a0c376da86ab9402774b53721a8f63862636e76984953b6d",
+          "bytes": 28254,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
         }
       }
     },
@@ -64755,6 +64942,24 @@
           "bytes": 197964,
           "width": 2560,
           "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/1136406/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1136406/focus-poster.webp",
+          "sha256": "b3e5ea15c132dacb1ce559d01dbda131ee6ca33e53aafa2243887a14836beee8",
+          "bytes": 127240,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/1136406/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1136406/focus-landscape.webp",
+          "sha256": "f72106f5101c2804455be9cdf896dc53cc33bcbbb460a8964da5f42c2fdb7f74",
+          "bytes": 31772,
+          "width": 1200,
+          "height": 675,
           "format": "webp"
         }
       }
