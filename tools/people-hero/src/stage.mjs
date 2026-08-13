@@ -12,7 +12,9 @@ import { planPersonHero } from "./selection-policy.mjs";
 import { createTmdbProxyClient } from "./tmdb-proxy-client.mjs";
 
 const toolRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const repositoryRoot = path.resolve(toolRoot, "../..");
 const workRoot = path.join(toolRoot, ".work");
+const peopleIntakeWorkRoot = path.join(repositoryRoot, "tools", "people-intake", ".work");
 const compositorPath = path.join(toolRoot, "vendor", "prism-t2-compositor.py");
 const IMAGE_ORIGIN = "https://image.tmdb.org";
 
@@ -48,7 +50,14 @@ function sha256(bytes) {
   return createHash("sha256").update(bytes).digest("hex");
 }
 
-async function allocateAttempt(personId) {
+async function allocateAttempt(personId, requestedAttemptRoot = null) {
+  if (requestedAttemptRoot) {
+    const attempt = path.resolve(requestedAttemptRoot);
+    assert(isPathInside(peopleIntakeWorkRoot, attempt),
+      "A supplied People hero attempt must stay inside tools/people-intake/.work");
+    await mkdir(attempt, { recursive: false });
+    return attempt;
+  }
   await mkdir(workRoot, { recursive: true });
   const timestamp = new Date().toISOString().replaceAll(/[-:.]/gu, "");
   for (let suffix = 0; suffix < 100; suffix += 1) {
@@ -91,7 +100,7 @@ export function executableForSpawn(value) {
   return path.isAbsolute(executable) || containsPathSeparator ? path.resolve(executable) : executable;
 }
 
-async function downloadOfficialImage(artworkPath, destination, fetchImpl) {
+export async function downloadOfficialImage(artworkPath, destination, fetchImpl) {
   assert(/^\/[A-Za-z0-9._-]+$/u.test(artworkPath), `Unsafe official artwork path: ${artworkPath}`);
   const url = new URL(`/t/p/original${artworkPath}`, IMAGE_ORIGIN);
   const response = await fetchImpl(url, { headers: { Accept: "image/avif,image/webp,image/jpeg,image/png" } });
@@ -193,11 +202,13 @@ export async function stageCandidate({
   personId,
   pythonExecutable,
   fetchImpl = globalThis.fetch,
-  sourceSnapshot = null
+  sourceSnapshot = null,
+  personCandidate = null,
+  attemptRoot: requestedAttemptRoot = null
 }) {
   assert(pythonExecutable, "--python or PEOPLE_HERO_PYTHON is required");
-  const preflight = await buildPreflight({ personId });
-  const attemptRoot = await allocateAttempt(personId);
+  const preflight = await buildPreflight({ personId, personCandidate });
+  const attemptRoot = await allocateAttempt(personId, requestedAttemptRoot);
   const reportsDirectory = path.join(attemptRoot, "reports");
   const stagingDirectory = path.join(attemptRoot, "staging");
   await Promise.all([mkdir(reportsDirectory, { recursive: true }), mkdir(stagingDirectory, { recursive: true })]);

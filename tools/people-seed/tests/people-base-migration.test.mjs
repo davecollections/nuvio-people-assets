@@ -124,6 +124,7 @@ test("base-artwork code is credential-free, network-free, bounded, and staging-o
   await assert.rejects(() => stageBaseArtwork({ personIds: Array.from({ length: 31 }, (_, index) => index + 1), sourceCaches: [".work/cache"] }), /between 1 and 30/u);
   assert.throws(() => assertSafeOutputDirectory(path.join(repoRoot, "assets", "people", "1")), /staging-only/u);
   assert.doesNotThrow(() => assertSafeOutputDirectory(path.join(repoRoot, "tools", "people-seed", ".work", "proof")));
+  assert.doesNotThrow(() => assertSafeOutputDirectory(path.join(repoRoot, "tools", "people-intake", ".work", "proof")));
 });
 
 test("cache selection prefers the exact expected hash and attempt paths remain compact", () => {

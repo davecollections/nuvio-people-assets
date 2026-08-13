@@ -71,7 +71,7 @@
     "record": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["stableKey", "tmdbPersonId", "canonicalName", "categoryMembership", "categoryNeutralReuse", "formatId", "fallbackUsed", "fallbackReason", "profilePathAttempted", "sourceStatus", "sourceDecision", "sourcePath", "sourceHash", "sourceWidth", "sourceHeight", "independentlyGeneratedFromOriginalSource", "derivedFromOtherFormat", "presetId", "presetHash", "fontFamily", "fontWeight", "fontHash", "requestedFontSize", "finalFontSize", "nameLines", "lineCount", "lineHeight", "textBounds", "safeMargins", "cropMethod", "cropRectangle", "cropRetainedAreaFraction", "resizeScale", "upscaleFactor", "portraitBounds", "gradientBounds", "grainSeed", "grainAmount", "canvasWidth", "canvasHeight", "outputPath", "outputHash", "byteCount"],
+      "required": ["stableKey", "tmdbPersonId", "canonicalName", "categoryMembership", "categoryNeutralReuse", "formatId", "portraitTreatment", "outputQuality", "fallbackUsed", "fallbackReason", "profilePathAttempted", "sourceStatus", "sourceDecision", "sourcePath", "sourceHash", "sourceWidth", "sourceHeight", "independentlyGeneratedFromOriginalSource", "derivedFromOtherFormat", "presetId", "presetHash", "fontFamily", "fontWeight", "fontHash", "requestedFontSize", "finalFontSize", "nameLines", "lineCount", "lineHeight", "textBounds", "safeMargins", "cropMethod", "cropRectangle", "cropRetainedAreaFraction", "resizeScale", "upscaleFactor", "portraitBounds", "gradientBounds", "grainSeed", "grainAmount", "canvasWidth", "canvasHeight", "outputPath", "outputHash", "byteCount"],
       "properties": {
         "stableKey": { "type": "string", "pattern": "^person:[1-9][0-9]*$" },
         "tmdbPersonId": { "type": "integer", "minimum": 1 },
@@ -79,6 +79,8 @@
         "categoryMembership": { "type": "array", "items": { "enum": ["actor", "director"] }, "uniqueItems": true },
         "categoryNeutralReuse": { "const": true },
         "formatId": { "enum": ["landscape", "poster"] },
+        "portraitTreatment": { "enum": ["monochrome-warm", "colour-focus"] },
+        "outputQuality": { "type": "integer", "minimum": 1, "maximum": 100 },
         "fallbackUsed": { "type": "boolean" },
         "fallbackReason": { "type": ["string", "null"], "enum": [null, "no-profile-path", "source-not-cached", "source-fetch-failed", "source-http-invalid", "source-content-type-invalid", "source-empty", "source-decode-failed", "source-dimensions-invalid", "source-validation-failed"] },
         "profilePathAttempted": { "type": ["string", "null"] },
