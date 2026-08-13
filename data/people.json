@@ -1223,6 +1223,13 @@
       ]
     },
     {
+      "tmdbPersonId": 1341,
+      "canonicalName": "Donnie Yen",
+      "categoryMembership": [
+        "actor"
+      ]
+    },
+    {
       "tmdbPersonId": 1352,
       "canonicalName": "Jean-Louis Trintignant",
       "categoryMembership": [
@@ -7982,6 +7989,13 @@
       "canonicalName": "Malcolm McDowell",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 57130,
+      "canonicalName": "Todd Phillips",
+      "categoryMembership": [
+        "director"
       ]
     },
     {

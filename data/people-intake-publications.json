@@ -1,5 +1,142 @@
 {
   "schemaVersion": 1,
   "ordering": "tmdb-person-id-ascending",
-  "records": []
+  "records": [
+    {
+      "tmdbPersonId": 1341,
+      "canonicalName": "Donnie Yen",
+      "categoryMembership": [
+        "actor"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 31668218871,
+      "promotionRunId": 31671667813,
+      "trackingIssue": 51,
+      "destination": "assets/people/1341",
+      "candidateGeneratedAt": "2026-08-13T04:50:54.135Z",
+      "candidateReportSha256": "8150f4dac82547d22c158a2a4fc1b30483ccd6581e5ab5f93ee5152ac11269da",
+      "sourceSnapshotSha256": "e2188ba4d75750a177cdf7e933b42995f83089fa453046155d1fbe3de9a83f31",
+      "heroSelectionSha256": "4e30a491117aca53f8dcd0e06cdf830aa68d11c7df4cccf845355d30a4f8afa1",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "filmography",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "452adcd012af0839b505ac501dcc72183ddbc68c2adf6b97ef7bb6693e583c5b",
+          "bytes": 27874,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "aee697487dcbc1b8e0e2d2895ea7b806ce2300c04558a00088ef68d980942f7d",
+          "bytes": 86010,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "4acd0d18fef42f9060f9d6a0d98ba24faca7c5328741ad0d0a109cab668b0f68",
+          "bytes": 179078,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "bb586291ae0a402d7a211fc36905c2580d9a74e9d282cadd76ce598e0296a12d",
+          "bytes": 36602,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "76b7fd625a8a6bbbde9439d8677292251faec9fd1ab71fe5c8a726259ae2f9b2",
+          "bytes": 112296,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "5ae9aaf2590e1b245c0aa0bef7551cebe06a27651dc083a9bc1405c38b81d669",
+          "bytes": 23643,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 57130,
+      "canonicalName": "Todd Phillips",
+      "categoryMembership": [
+        "director"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 31668218871,
+      "promotionRunId": 31671667813,
+      "trackingIssue": 51,
+      "destination": "assets/people/57130",
+      "candidateGeneratedAt": "2026-08-13T04:51:01.453Z",
+      "candidateReportSha256": "2f21561b818645c6554c8e7867a78689dc0b4b26845529095ae642d092a84fe9",
+      "sourceSnapshotSha256": "8589d0814c0a740bb3add352cd0e070918e0102e0289257bb23a66829e2d429e",
+      "heroSelectionSha256": "e3d1931f5218bc616cb3705076a7a8a61d33b643cb8740b81e31a8fced9757e8",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "sparse-fallback",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "9c6e0ca7253894c745fd7e610082a9e3d9cc921fa22c70d217436dac2d684448",
+          "bytes": 38296,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "5391f0b1fa202ae9dad2a2ec4401588cbaee66939b75efa6caf24af20bc867f7",
+          "bytes": 103076,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "367863292feaf24d83483eb8dd39bdb68e6c0e71464f515c1a508f2f2eb5735d",
+          "bytes": 18292,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "09425fd60b59151a71a5f650154aae0b3ba694e65ee3c9233844254c9a8c4bf0",
+          "bytes": 50902,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "763ed53ecee7d1eee0ab853ce559d0bd31dc4ff6880bdd222076b4b6f8878762",
+          "bytes": 135462,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "d123acd120ce443ff93f88aba8a6a26f02be2dd5c8e6d24d03ed74f489409ce6",
+          "bytes": 25121,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    }
+  ]
 }
