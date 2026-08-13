@@ -33,7 +33,7 @@ assets/people/{tmdb_person_id}/
 - Do not delete existing landscapes. They remain legacy/current compatibility assets pending a separate V2 decision.
 - Do not regenerate the catalogue-wide title-logo set as part of hero-generator work.
 - Do not modify published assets unless the user explicitly approves that asset change.
-- Focus artwork must be published as a poster/landscape pair. It uses the same approved source, crop, gradients, grain, and person-name typography as the monochrome base artwork, with only the grayscale and warm-tint treatment removed. The controlled preset is static WebP quality 82 at 1000 x 1500 and 1200 x 675; catalogue-wide promotion requires separate explicit approval after the Nuvio focus proof.
+- Focus artwork must be published as a poster/landscape pair. It uses the same approved source, crop, gradients, grain, and person-name typography as the monochrome base artwork, with only the grayscale and warm-tint treatment removed. The production preset is static WebP quality 82 at 1000 x 1500 and 1200 x 675. Catalogue-wide publication for the 1,478 source-backed identities was owner-approved under issue #43; IDs 8559 and 76447 remain excluded until an approved profile source exists. Future new or changed focus assets still require explicit owner approval.
 
 ## Locked People hero preset
 
