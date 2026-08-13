@@ -11,10 +11,12 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { isDeepStrictEqual } from "node:util";
 import sharp from "sharp";
 
 import { buildInventory, repositoryRoot as canonicalRepositoryRoot } from "../../../scripts/lib/inventory.mjs";
 import { isPathInside } from "../../people-hero/src/preflight.mjs";
+import { buildNewPersonLandscapePolicyEvidence } from "./landscape-policy.mjs";
 
 export const MAXIMUM_PROMOTION_BATCH_SIZE = 30;
 export const APPROVAL_DOCUMENT_VERSION = "nuvio-new-person-review-approval-batch-v1";
@@ -241,6 +243,14 @@ function assertReportedAsset(personId, key, reported, inspected) {
   }
 }
 
+function assertReportedEvidence(personId, key, reported, inspected, expectedSuffix) {
+  assert(reported && typeof reported === "object", `${personId}: candidate report is missing ${key} evidence`);
+  assert(String(reported.path || "").replaceAll("\\", "/").endsWith(expectedSuffix),
+    `${personId}: ${key} evidence path is not bound to the staged report`);
+  assert(reported.sha256 === inspected.sha256 && reported.bytes === inspected.bytes,
+    `${personId}: ${key} evidence differs from the hash-bound candidate report`);
+}
+
 async function verifyCandidate({ candidate, approval }) {
   const { reportPath, reportRecord } = candidate;
   const report = reportRecord.value;
@@ -262,10 +272,15 @@ async function verifyCandidate({ candidate, approval }) {
   const sourceSnapshotPath = path.join(attemptRoot, "reports", "source-snapshot.json");
   const selectionPath = path.join(attemptRoot, "hero", "reports", "selection.json");
   const heroReportPath = path.join(attemptRoot, "hero", "reports", "candidate-report.json");
-  const [sourceSnapshot, selection, heroReport] = await Promise.all([
+  const monochromeMetadataPath = path.join(attemptRoot, "reports", "monochrome-render-metadata.json");
+  const hasProfile = Boolean(report.profileSource?.filePath);
+  const focusMetadataPath = hasProfile ? path.join(attemptRoot, "reports", "focus-render-metadata.json") : null;
+  const [sourceSnapshot, selection, heroReport, monochromeMetadata, focusMetadata] = await Promise.all([
     readJsonRecord(sourceSnapshotPath),
     readJsonRecord(selectionPath),
-    readJsonRecord(heroReportPath)
+    readJsonRecord(heroReportPath),
+    readJsonRecord(monochromeMetadataPath),
+    focusMetadataPath ? readJsonRecord(focusMetadataPath) : Promise.resolve(null)
   ]);
   assert(sourceSnapshot.sha256 === report.sourceSnapshot?.sha256,
     `${personId}: source snapshot differs from the candidate report`);
@@ -281,6 +296,24 @@ async function verifyCandidate({ candidate, approval }) {
     && Object.keys(heroReport.value?.boundaries || {}).length === 3,
   `${personId}: hero report recorded a permanent or publication action`);
 
+  const { renderMetadata: reportedRenderMetadata, ...reportedLandscapePolicy } = report.landscapeCropPolicy || {};
+  const expectedLandscapePolicy = buildNewPersonLandscapePolicyEvidence({
+    personId,
+    hasProfile,
+    monochromeMetadata: monochromeMetadata.value,
+    focusMetadata: focusMetadata?.value || null
+  });
+  assert(isDeepStrictEqual(reportedLandscapePolicy, expectedLandscapePolicy),
+    `${personId}: candidate report chin-safe evidence differs from the render metadata`);
+  assertReportedEvidence(personId, "monochrome Landscape policy", reportedRenderMetadata?.monochrome,
+    monochromeMetadata, `/reports/monochrome-render-metadata.json`);
+  if (hasProfile) {
+    assertReportedEvidence(personId, "focus Landscape policy", reportedRenderMetadata?.focus,
+      focusMetadata, `/reports/focus-render-metadata.json`);
+  } else {
+    assert(reportedRenderMetadata?.focus === null, `${personId}: profile-free candidate reports focus Landscape policy evidence`);
+  }
+
   const directoryFiles = (await readdir(candidateRoot, { withFileTypes: true }))
     .filter((entry) => entry.isFile())
     .map((entry) => entry.name)
@@ -292,6 +325,8 @@ async function verifyCandidate({ candidate, approval }) {
   }
   assert(reportedKeys.includes("focusPoster") === reportedKeys.includes("focusLandscape"),
     `${personId}: focus artwork must be a complete pair`);
+  assert(hasProfile === reportedKeys.includes("focusPoster"),
+    `${personId}: profile source and focus artwork contract differ`);
   const expectedFiles = reportedKeys.map((key) => ASSETS[key].filename).sort();
   assert(JSON.stringify(directoryFiles) === JSON.stringify(expectedFiles),
     `${personId}: candidate directory does not exactly match the reported file set`);
@@ -305,6 +340,12 @@ async function verifyCandidate({ candidate, approval }) {
     assets[key] = { ...inspected, sourcePath };
   }
   const heroAsset = assets.hero;
+  assert(expectedLandscapePolicy.monochrome.outputHash === assets.landscape.sha256,
+    `${personId}: monochrome Landscape chin-safe evidence differs from the reviewed bytes`);
+  if (hasProfile) {
+    assert(expectedLandscapePolicy.focus.outputHash === assets.focusLandscape?.sha256,
+      `${personId}: focus Landscape chin-safe evidence differs from the reviewed bytes`);
+  }
   if (heroAsset) {
     assert(heroReport.value?.output?.sha256 === heroAsset.sha256,
       `${personId}: hero report output differs from candidate bytes`);

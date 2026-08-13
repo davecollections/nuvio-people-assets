@@ -7,6 +7,11 @@ import { fileURLToPath } from "node:url";
 import { buildPreflight } from "../../people-hero/src/preflight.mjs";
 import { renderPeopleArtwork } from "../../people-seed/src/people-artwork/renderer.mjs";
 import {
+  buildNewPersonLandscapePolicyEvidence,
+  PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_HASH,
+  PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
+} from "../src/landscape-policy.mjs";
+import {
   assertNewPersonWorkPath,
   buildReviewApprovalTemplate,
   candidateOutputDefinitions,
@@ -16,6 +21,31 @@ import {
 } from "../src/stage.mjs";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+
+function landscapeRecord({ personId = 9001, portraitTreatment = "monochrome-warm", hasProfile = true } = {}) {
+  return {
+    tmdbPersonId: personId,
+    formatId: "landscape",
+    portraitTreatment,
+    fallbackUsed: !hasProfile,
+    outputHash: portraitTreatment === "monochrome-warm" ? "a".repeat(64) : "b".repeat(64),
+    sourceHash: hasProfile ? "c".repeat(64) : null,
+    cropMethod: hasProfile ? "net-new-tier-1-slight-landscape-v1" : null,
+    cropRectangle: hasProfile ? { left: 0, top: 0, width: 1250, height: 1420 } : null,
+    resizeScale: hasProfile ? { x: 0.4752, y: 0.475352 } : null,
+    portraitBounds: hasProfile ? { x: 504, y: 0, width: 594, height: 675 } : null,
+    landscapeDefaultCropPolicyId: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID,
+    landscapeDefaultCropPolicyHash: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_HASH,
+    landscapeDefaultCropStatus: hasProfile ? "active-tier-1-slight" : "source-unavailable-fallback",
+    landscapeDefaultCropTier: hasProfile ? "tier-1-slight" : null,
+    landscapeDefaultCropSourceHash: hasProfile ? "c".repeat(64) : null,
+    landscapeDefaultCropSourceBoundLimited: false
+  };
+}
+
+function renderMetadata(record) {
+  return { version: "people-artwork-render-metadata-v1", records: [record] };
+}
 
 test("new People stage input requires exactly one positive ID", () => {
   assert.equal(parseNewPersonStageArguments(["--person-id", "9001"]).personId, 9001);
@@ -95,9 +125,48 @@ test("renderer exposes locked monochrome and colour treatments without weakening
   await assert.rejects(() => renderPeopleArtwork({ people: [], outputQuality: 0 }), /integer from 1 to 100/u);
 });
 
+test("new People Landscape evidence requires the locked chin-safe policy for monochrome and focus", () => {
+  const monochrome = landscapeRecord();
+  const focus = landscapeRecord({ portraitTreatment: "colour-focus" });
+  const evidence = buildNewPersonLandscapePolicyEvidence({
+    personId: 9001,
+    hasProfile: true,
+    monochromeMetadata: renderMetadata(monochrome),
+    focusMetadata: renderMetadata(focus)
+  });
+  assert.equal(evidence.policyId, PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID);
+  assert.equal(evidence.monochrome.status, "active-tier-1-slight");
+  assert.deepEqual(evidence.monochrome.portraitBounds, { x: 504, y: 0, width: 594, height: 675 });
+
+  assert.throws(() => buildNewPersonLandscapePolicyEvidence({
+    personId: 9001,
+    hasProfile: true,
+    monochromeMetadata: renderMetadata({ ...monochrome, landscapeDefaultCropPolicyId: null }),
+    focusMetadata: renderMetadata(focus)
+  }), /locked chin-safe policy/u);
+  assert.throws(() => buildNewPersonLandscapePolicyEvidence({
+    personId: 9001,
+    hasProfile: true,
+    monochromeMetadata: renderMetadata(monochrome),
+    focusMetadata: renderMetadata({ ...focus, portraitBounds: { x: 438, y: 0, width: 660, height: 675 } })
+  }), /locked chin-safe placement|differ in chin-safe/u);
+});
+
+test("profile-free new People Landscapes bind the chin-safe fallback boundary", () => {
+  const evidence = buildNewPersonLandscapePolicyEvidence({
+    personId: 9001,
+    hasProfile: false,
+    monochromeMetadata: renderMetadata(landscapeRecord({ hasProfile: false })),
+    focusMetadata: null
+  });
+  assert.equal(evidence.monochrome.status, "source-unavailable-fallback");
+  assert.equal(evidence.focus, null);
+});
+
 test("new People intake source contains no credential or permanent publication path", async () => {
   const source = await readFile(path.join(repositoryRoot, "tools", "people-intake", "src", "stage.mjs"), "utf8");
   assert.doesNotMatch(source, /TMDB_BEARER_TOKEN|api_key|api\.themoviedb\.org/iu);
   assert.doesNotMatch(source, /git\s+(add|commit|push)|npm\s+run\s+manifest/iu);
   assert.match(source, /const workRoot = path\.join\(toolRoot, ["']\.work["']\)/u);
+  assert.equal((source.match(/landscapeDefaultCropPolicy:\s*PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID/gu) || []).length, 2);
 });
