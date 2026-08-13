@@ -82,7 +82,25 @@ Validates one registered identity and the v2 local generator. It makes no reques
 `;
 }
 
-export async function buildPreflight({ personId }) {
+function validatePersonCandidate(person, personId) {
+  assert(person && person.tmdbPersonId === personId, "People candidate identity does not match the requested Person ID");
+  assert(person.stableKey === `person:${personId}`, "People candidate stable key does not match the requested Person ID");
+  assert(typeof person.canonicalName === "string" && person.canonicalName.trim(), "People candidate canonical name is required");
+  assert(Array.isArray(person.categoryMembership) && person.categoryMembership.length > 0,
+    "People candidate category membership is required");
+  assert(person.categoryMembership.every((category) => category === "actor" || category === "director"),
+    "People candidate category membership is invalid");
+  assert(new Set(person.categoryMembership).size === person.categoryMembership.length,
+    "People candidate category membership contains duplicates");
+  return {
+    stableKey: person.stableKey,
+    tmdbPersonId: person.tmdbPersonId,
+    canonicalName: person.canonicalName.trim(),
+    categoryMembership: [...person.categoryMembership]
+  };
+}
+
+export async function buildPreflight({ personId, personCandidate = null }) {
   assert(Number.isInteger(personId) && personId > 0, "--person-id must be exactly one positive TMDB Person ID");
   const [registry, preset, overrides, compositorSource, postprocessorSource] = await Promise.all([
     readFile(path.join(repositoryRoot, "data", "people.json"), "utf8").then(JSON.parse),
@@ -91,8 +109,15 @@ export async function buildPreflight({ personId }) {
     readFile(path.join(toolRoot, "vendor", "prism-t2-compositor.py")),
     readFile(path.join(toolRoot, "src", "stage.mjs"))
   ]);
-  const person = registry.people.find((record) => record.tmdbPersonId === personId);
+  const registeredPerson = registry.people.find((record) => record.tmdbPersonId === personId) || null;
+  const person = registeredPerson || (personCandidate ? validatePersonCandidate(personCandidate, personId) : null);
   assert(person, `TMDB Person ID ${personId} is not present in data/people.json`);
+  if (registeredPerson && personCandidate) {
+    const candidate = validatePersonCandidate(personCandidate, personId);
+    assert(candidate.canonicalName === registeredPerson.canonicalName
+      && JSON.stringify(candidate.categoryMembership) === JSON.stringify(registeredPerson.categoryMembership),
+    `People candidate for ${personId} differs from the registered identity`);
+  }
   assert(preset.id === "people-t2-perspective-v2", "Unexpected People hero preset ID");
   assert(preset.width === 2560 && preset.height === 1440 && preset.quality === 82, "People hero output lock mismatch");
   assert(preset.filmography.minimumCredits === 15 && preset.filmography.maximumCredits === 32, "Filmography thresholds changed unexpectedly");
@@ -109,6 +134,7 @@ export async function buildPreflight({ personId }) {
   return {
     status: "preflight-passed-no-generation",
     person,
+    identityOrigin: registeredPerson ? "canonical-registry" : "staged-unregistered-candidate",
     preset,
     overrides,
     renderer: {

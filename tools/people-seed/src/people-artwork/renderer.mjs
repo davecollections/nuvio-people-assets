@@ -10,10 +10,13 @@ import {
 import { loadPeopleArtworkRuntime, PEOPLE_ARTWORK_PACKAGE_ROOT, PEOPLE_ARTWORK_REPO_ROOT } from "./runtime-dependencies.mjs";
 import { resolvePortraitSource } from "./source-resolution.mjs";
 
+export const PEOPLE_ARTWORK_RENDERER_VERSION = "people-artwork-renderer-v2";
+
 const sha256 = (value) => crypto.createHash("sha256").update(value).digest("hex");
 const round = (value, places = 4) => Number(value.toFixed(places));
 const codePointLength = (value) => [...value].length;
 const FORMAT_ORDER = ["landscape", "poster"];
+const PORTRAIT_TREATMENTS = new Set(["monochrome-warm", "colour-focus"]);
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -115,7 +118,7 @@ function posterOverlay(preset) {
   return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${preset.canvas.width}" height="${preset.canvas.height}"><defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="${gradient.transparentUntilCanvasPercent}%" stop-color="${gradient.bottomColour}" stop-opacity="0"/><stop offset="${gradient.transitionAtCanvasPercent}%" stop-color="${gradient.bottomColour}" stop-opacity="0.35"/><stop offset="100%" stop-color="${gradient.bottomColour}" stop-opacity="${gradient.maximumOpacity}"/></linearGradient><radialGradient id="v"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="${preset.tonal.vignetteOpacity}"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#b)"/><rect width="100%" height="100%" fill="url(#v)"/></svg>`);
 }
 
-async function buildPortraitBase(source, preset, formatId, sharp, cropOverride = null) {
+async function buildPortraitBase(source, preset, formatId, sharp, cropOverride = null, portraitTreatment = "monochrome-warm") {
   const oriented = orientedDimensions(source);
   const crop = cropOverride?.used
     ? {
@@ -145,13 +148,17 @@ async function buildPortraitBase(source, preset, formatId, sharp, cropOverride =
   const seedPrefix = formatId === "landscape" ? "B" : "poster";
   const grainSeed = parseInt(sha256(`${seedPrefix}:${source.sourceHash}:people-grain-v1`).slice(0, 8), 16) >>> 0;
   const intercept = 128 - 128 * preset.tonal.contrast;
-  const portrait = await sharp(source.sourcePath)
+  let portraitPipeline = sharp(source.sourcePath)
     .rotate()
     .extract(cropCore(crop))
     .resize(target.width, target.height, { fit: "fill", kernel: sharp.kernel.cubic })
-    .toColorspace("srgb")
-    .grayscale()
-    .tint(preset.tonal.tint)
+    .toColorspace("srgb");
+  if (portraitTreatment === "monochrome-warm") {
+    portraitPipeline = portraitPipeline
+      .grayscale()
+      .tint(preset.tonal.tint);
+  }
+  const portrait = await portraitPipeline
     .modulate({ brightness: preset.tonal.brightness })
     .linear(preset.tonal.contrast, intercept)
     .png()
@@ -298,23 +305,24 @@ export async function fitTypography(name, preset, runtime, fontRecord, { fallbac
   };
 }
 
-async function renderPortrait({ person, source, formatId, presetRecord, runtime, fontRecord, cropOverride = null }) {
+async function renderPortrait({ person, source, formatId, presetRecord, runtime, fontRecord, cropOverride = null, portraitTreatment, outputQuality }) {
   const { preset, presetHash } = presetRecord;
   if (cropOverride?.used) {
     assert(cropOverride.record.basePresetId === preset.id, `${person.stableKey}: crop override preset ID mismatch.`);
     assert(cropOverride.record.basePresetHash === presetHash, `${person.stableKey}: crop override preset hash mismatch.`);
   }
-  const base = await buildPortraitBase(source, preset, formatId, runtime.sharp, cropOverride);
+  const base = await buildPortraitBase(source, preset, formatId, runtime.sharp, cropOverride, portraitTreatment);
   const typography = await fitTypography(person.canonicalName, preset, runtime, fontRecord);
   assert(!typography.clipping && typography.lineCount <= 2 && typography.lines.join(" ") === person.canonicalName, `${person.stableKey}/${formatId}: typography validation failed.`);
-  const output = await runtime.sharp(base.buffer).composite([{ input: typography.buffer, left: 0, top: 0 }]).webp(preset.output).toBuffer();
+  const outputOptions = outputQuality === null ? preset.output : { ...preset.output, quality: outputQuality };
+  const output = await runtime.sharp(base.buffer).composite([{ input: typography.buffer, left: 0, top: 0 }]).webp(outputOptions).toBuffer();
   const gradientBounds = formatId === "landscape"
     ? { x: 0, y: Math.round(preset.canvas.height * preset.background.bottomGradient.startsAtCanvasPercent / 100), width: preset.canvas.width, height: preset.canvas.height - Math.round(preset.canvas.height * preset.background.bottomGradient.startsAtCanvasPercent / 100) }
     : { x: 0, y: Math.round(preset.canvas.height * preset.background.bottomGradient.transparentUntilCanvasPercent / 100), width: preset.canvas.width, height: preset.canvas.height - Math.round(preset.canvas.height * preset.background.bottomGradient.transparentUntilCanvasPercent / 100) };
   return { output, preset, presetHash, typography, base, gradientBounds };
 }
 
-async function renderFallback({ person, source, formatId, presetRecord, runtime, fontRecord }) {
+async function renderFallback({ person, source, formatId, presetRecord, runtime, fontRecord, outputQuality }) {
   const { preset, presetHash } = presetRecord;
   const typography = await fitTypography(person.canonicalName, preset, runtime, fontRecord, { fallback: true });
   assert(!typography.clipping && typography.lineCount <= 2 && typography.lines.join(" ") === person.canonicalName, `${person.stableKey}/${formatId}: fallback typography validation failed.`);
@@ -323,7 +331,8 @@ async function renderFallback({ person, source, formatId, presetRecord, runtime,
     .composite([{ input: grainBuffer(preset.canvas.width, preset.canvas.height, grainSeed, preset.grain.amount), raw: { width: preset.canvas.width, height: preset.canvas.height, channels: 4 }, left: 0, top: 0, blend: preset.grain.blend }])
     .png()
     .toBuffer();
-  const output = await runtime.sharp(base).composite([{ input: typography.buffer, left: 0, top: 0 }]).webp(preset.output).toBuffer();
+  const outputOptions = outputQuality === null ? preset.output : { ...preset.output, quality: outputQuality };
+  const output = await runtime.sharp(base).composite([{ input: typography.buffer, left: 0, top: 0 }]).webp(outputOptions).toBuffer();
   return { output, preset, presetHash, typography, grainSeed, grainAmount: preset.grain.amount, source };
 }
 
@@ -337,13 +346,14 @@ async function atomicWrite(filePath, buffer) {
 export function assertSafeOutputDirectory(outputDir) {
   const resolved = path.resolve(outputDir);
   const relative = path.relative(PEOPLE_ARTWORK_REPO_ROOT, resolved).replaceAll("\\", "/");
-  if (!relative.startsWith("tools/people-seed/.work/")) {
-    throw new Error(`People base-artwork renderer is staging-only and requires tools/people-seed/.work: ${resolved}`);
+  const allowed = ["tools/people-seed/.work/", "tools/people-intake/.work/"];
+  if (!allowed.some((prefix) => relative.startsWith(prefix))) {
+    throw new Error(`People base-artwork renderer is staging-only and requires an approved People tool .work directory: ${resolved}`);
   }
   return resolved;
 }
 
-function metadataRow({ person, source, formatId, rendered, presetRecord, fontRecord, outputRelativePath, outputHash, byteCount, fallbackUsed, cropOverride = null }) {
+function metadataRow({ person, source, formatId, rendered, presetRecord, fontRecord, outputRelativePath, outputHash, byteCount, fallbackUsed, cropOverride = null, portraitTreatment, outputQuality }) {
   const { preset, presetHash } = presetRecord;
   const typography = rendered.typography;
   const base = fallbackUsed ? null : rendered.base;
@@ -354,6 +364,8 @@ function metadataRow({ person, source, formatId, rendered, presetRecord, fontRec
     categoryMembership: person.categoryMembership,
     categoryNeutralReuse: true,
     formatId,
+    portraitTreatment,
+    outputQuality: outputQuality ?? preset.output.quality,
     fallbackUsed,
     fallbackReason: fallbackUsed ? source.fallbackReason : null,
     profilePathAttempted: source.profilePathAttempted,
@@ -435,7 +447,12 @@ export async function renderPeopleArtwork({
   landscapeCropOverrides = null,
   landscapeDefaultCropPolicy = null,
   expectedSources = null,
+  portraitTreatment = "monochrome-warm",
+  outputQuality = null,
 } = {}) {
+  assert(PORTRAIT_TREATMENTS.has(portraitTreatment), `Unsupported People portrait treatment: ${portraitTreatment}`);
+  assert(outputQuality === null || (Number.isInteger(outputQuality) && outputQuality >= 1 && outputQuality <= 100),
+    "People artwork output quality must be an integer from 1 to 100");
   const runtime = providedRuntime || loadPeopleArtworkRuntime();
   const presets = await loadPeopleArtworkPresets();
   for (const group of Object.values(presets)) for (const item of Object.values(group)) validateRuntimeAgainstPreset(runtime, item.preset);
@@ -469,14 +486,14 @@ export async function renderPeopleArtwork({
       const fallbackUsed = !source.available;
       const presetRecord = fallbackUsed ? presets.fallback[formatId] : presets.portrait[formatId];
       const rendered = fallbackUsed
-        ? await renderFallback({ person, source, formatId, presetRecord, runtime, fontRecord })
-        : await renderPortrait({ person, source, formatId, presetRecord, runtime, fontRecord, cropOverride });
+        ? await renderFallback({ person, source, formatId, presetRecord, runtime, fontRecord, outputQuality })
+        : await renderPortrait({ person, source, formatId, presetRecord, runtime, fontRecord, cropOverride, portraitTreatment, outputQuality });
       const outputRelativePath = `${formatId}/${person.tmdbPersonId}.webp`;
       const outputPath = path.join(resolvedOutput, outputRelativePath);
       await atomicWrite(outputPath, rendered.output);
       const decoded = await runtime.sharp(rendered.output, { failOn: "error" }).metadata();
       assert(decoded.format === "webp" && decoded.width === rendered.preset.canvas.width && decoded.height === rendered.preset.canvas.height, `${person.stableKey}/${formatId}: output decode failed.`);
-      records.push(metadataRow({ person, source, formatId, rendered, presetRecord, fontRecord, outputRelativePath, outputHash: sha256(rendered.output), byteCount: rendered.output.length, fallbackUsed, cropOverride }));
+      records.push(metadataRow({ person, source, formatId, rendered, presetRecord, fontRecord, outputRelativePath, outputHash: sha256(rendered.output), byteCount: rendered.output.length, fallbackUsed, cropOverride, portraitTreatment, outputQuality }));
     }
   }
   return {

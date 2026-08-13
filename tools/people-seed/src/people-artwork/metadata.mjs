@@ -58,7 +58,7 @@ export async function writeRenderMetadata({ metadata, outputDir, jsonName = "ren
   const errors = await validateRenderMetadata(metadata);
   if (errors.length) throw new Error(`Render metadata failed validation:\n${errors.map((item) => `- ${item}`).join("\n")}`);
   const fields = [
-    "stableKey", "tmdbPersonId", "canonicalName", "categoryMembership", "formatId", "fallbackUsed", "fallbackReason",
+    "stableKey", "tmdbPersonId", "canonicalName", "categoryMembership", "formatId", "portraitTreatment", "outputQuality", "fallbackUsed", "fallbackReason",
     "profilePathAttempted", "sourceStatus", "sourceDecision", "sourcePath", "sourceHash", "sourceWidth", "sourceHeight",
     "presetId", "presetHash", "fontFamily", "fontWeight", "fontHash", "requestedFontSize", "finalFontSize", "nameLines",
     "lineCount", "lineHeight", "textBounds", "safeMargins", "cropMethod", "cropRectangle", "cropRetainedAreaFraction",

@@ -1,0 +1,93 @@
+name: Stage new People artwork set
+
+on:
+  workflow_dispatch:
+    inputs:
+      person_ids:
+        description: Comma- or whitespace-separated unregistered TMDB Person IDs (maximum 30)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      person_ids: ${{ steps.batch.outputs.person_ids }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Validate explicit unregistered batch
+        id: batch
+        env:
+          NEW_PEOPLE_IDS: ${{ inputs.person_ids }}
+        run: node tools/people-intake/src/batch-input.mjs >> "$GITHUB_OUTPUT"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository and staging tools
+        run: npm test
+
+  stage:
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        person_id: ${{ fromJSON(needs.prepare.outputs.person_ids) }}
+    env:
+      PEOPLE_HERO_PROXY_URL: ${{ vars.PEOPLE_HERO_PROXY_URL }}
+      PEOPLE_HERO_PROXY_TOKEN: ${{ secrets.PEOPLE_HERO_PROXY_TOKEN }}
+      PEOPLE_HERO_PYTHON: python
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: tools/people-hero/requirements.txt
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Install compositor dependencies
+        run: python -m pip install --requirement tools/people-hero/requirements.txt
+
+      - name: Stage complete candidate
+        env:
+          REQUESTED_PERSON_ID: ${{ matrix.person_id }}
+        run: npm run people-intake:stage -- --person-id "$REQUESTED_PERSON_ID"
+
+      - name: Upload staging evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: new-person-candidate-${{ github.run_id }}-${{ matrix.person_id }}
+          path: tools/people-intake/.work/attempt-*
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 7
