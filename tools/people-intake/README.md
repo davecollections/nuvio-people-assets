@@ -70,7 +70,7 @@ Create an open issue for the reviewed batch, then manually run `Promote reviewed
 - the open tracking issue number;
 - the complete owner-approved JSON document.
 
-The repository setting **Settings → Actions → General → Allow GitHub Actions to create and approve pull requests** must be enabled. The workflow checks this before downloading artifacts or creating a branch. Although GitHub combines creation and approval in one setting, this workflow only creates a draft pull request and contains no approval or merge command.
+The repository setting **Settings → Actions → General → Allow GitHub Actions to create and approve pull requests** must be enabled. GitHub does not give the workflow token reliable administration-read access to preflight that setting, so the actual draft pull-request creation is authoritative. If GitHub rejects it, the workflow fails with a settings-specific diagnostic after preserving the validated promotion commit on its isolated branch. Although GitHub combines creation and approval in one setting, this workflow only creates a draft pull request and contains no approval or merge command.
 
 The promotion workflow accepts 1–30 approved identities and permits partial approval of a larger staged batch. It verifies that the staging run succeeded from `main`, came from the trusted staging workflow, and used a commit that remains in current `main`. It then verifies every approved identity, candidate-report hash, hero-selection hash, locked preset, destination, file set, output hash, byte count, format, and dimensions.
 
