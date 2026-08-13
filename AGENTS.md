@@ -91,6 +91,9 @@ tools/people-hero/.work/
 - Promotion requires explicit user approval bound to the reviewed candidate SHA-256, Person ID, preset version, source-selection record, and exact destination.
 - Before promotion, compare the candidate SHA-256 with the published hero and skip unchanged bytes.
 - After an approved promotion, rebuild `manifests/people.json`, run `npm test`, and report every changed, unchanged, skipped, and failed identity.
+- New-identity promotion must use the separate reviewed-candidate workflow. It may consume only a successful trusted `main` run of `Stage new People artwork set`, and every approved identity must bind the candidate-report SHA-256, hero-selection SHA-256, locked hero preset, reviewed category membership, and exact `assets/people/{tmdb_person_id}` destination.
+- Promotion must copy reviewed artifact bytes without metadata access, image downloads, or rerendering. It must update `data/people.json`, `data/people-intake-publications.json`, and `manifests/people.json` on an isolated branch, then open a draft pull request. It must never merge automatically.
+- The 1,480-record files below `data/people-base/` are frozen migration and reproduction evidence. Do not append later new People identities to those legacy records; use the compact intake publication ledger instead.
 
 ## Validation and storage rules
 

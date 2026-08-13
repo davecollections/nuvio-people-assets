@@ -160,6 +160,31 @@ export function candidateOutputDefinitions({ hasProfile, heroStatus }) {
   return definitions;
 }
 
+export function buildReviewApprovalTemplate({
+  personId,
+  canonicalName,
+  categoryMembership,
+  candidateReportSha256,
+  heroSelectionSha256,
+  heroPresetId = "people-t2-perspective-v2"
+}) {
+  assert(Number.isSafeInteger(personId) && personId > 0, "Approval template requires a positive Person ID");
+  return {
+    version: "nuvio-new-person-review-approval-batch-v1",
+    status: "owner-confirmation-required",
+    instructions: "Review the candidate, confirm or edit categoryMembership, then change status to owner-approved before promotion.",
+    approvals: [{
+      tmdbPersonId: personId,
+      canonicalName,
+      categoryMembership: [...categoryMembership],
+      candidateReportSha256,
+      heroSelectionSha256,
+      heroPresetId,
+      destination: `assets/people/${personId}`
+    }]
+  };
+}
+
 async function allocateAttempt(personId, now) {
   await mkdir(workRoot, { recursive: true });
   const timestamp = now.toISOString().replaceAll(/[-:.]/gu, "");
@@ -197,6 +222,15 @@ async function inspectOutput(filePath, expected) {
     width: metadata.width,
     height: metadata.height,
     format: metadata.format
+  };
+}
+
+async function inspectEvidence(filePath) {
+  const bytes = await readFile(filePath);
+  return {
+    path: path.relative(repositoryRoot, filePath).replaceAll("\\", "/"),
+    sha256: sha256(bytes),
+    bytes: bytes.length
   };
 }
 
@@ -398,7 +432,16 @@ export async function stageNewPerson({
     }
   };
   const reportPath = path.join(reportsRoot, "candidate-report.json");
-  await writeJson(reportPath, report);
+  const candidateReport = await writeJson(reportPath, report);
+  const heroSelection = await inspectEvidence(path.join(hero.attemptRoot, "reports", "selection.json"));
+  await writeJson(path.join(reportsRoot, "review-approval-template.json"), buildReviewApprovalTemplate({
+    personId,
+    canonicalName: person.canonicalName,
+    categoryMembership: categorySuggestion.categoryMembership,
+    candidateReportSha256: candidateReport.sha256,
+    heroSelectionSha256: heroSelection.sha256,
+    heroPresetId: hero.report.preset?.id || "people-t2-perspective-v2"
+  }));
   return { attemptRoot, candidateIdentityRoot, reportPath, report, monochrome, focus, hero };
 }
 

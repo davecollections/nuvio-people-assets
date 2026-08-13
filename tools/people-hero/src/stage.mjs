@@ -228,7 +228,16 @@ export async function stageCandidate({
   await writeFile(path.join(reportsDirectory, "selection.json"), `${JSON.stringify(selection, null, 2)}\n`, "utf8");
 
   if (selection.outcome === "skip") {
-    const report = { version: "nuvio-people-hero-candidate-v2", status: "skipped", person: preflight.person, selection, boundaries: { permanentAssetWrites: 0, manifestWrites: 0, publishActions: 0 } };
+    const report = {
+      version: "nuvio-people-hero-candidate-v2",
+      status: "skipped",
+      person: preflight.person,
+      preset: preflight.preset,
+      renderer: preflight.renderer,
+      runtime: { node: process.version, platform: process.platform, architecture: process.arch, sharp: sharp.versions },
+      selection,
+      boundaries: { permanentAssetWrites: 0, manifestWrites: 0, publishActions: 0 }
+    };
     await writeFile(path.join(reportsDirectory, "candidate-report.json"), `${JSON.stringify(report, null, 2)}\n`, "utf8");
     return { attemptRoot, report };
   }

@@ -8,6 +8,7 @@ import { buildPreflight } from "../../people-hero/src/preflight.mjs";
 import { renderPeopleArtwork } from "../../people-seed/src/people-artwork/renderer.mjs";
 import {
   assertNewPersonWorkPath,
+  buildReviewApprovalTemplate,
   candidateOutputDefinitions,
   parseNewPersonStageArguments,
   selectBaseProfile,
@@ -56,6 +57,19 @@ test("complete and fallback candidates have explicit paired output contracts", (
     candidateOutputDefinitions({ hasProfile: false, heroStatus: "skipped" }).map(([key]) => key),
     ["poster", "landscape", "titleLogo"]
   );
+});
+
+test("staging emits a non-approved hash-bound review template", () => {
+  const template = buildReviewApprovalTemplate({
+    personId: 9001,
+    canonicalName: "Fixture Person",
+    categoryMembership: ["actor"],
+    candidateReportSha256: "a".repeat(64),
+    heroSelectionSha256: "b".repeat(64)
+  });
+  assert.equal(template.status, "owner-confirmation-required");
+  assert.equal(template.approvals[0].destination, "assets/people/9001");
+  assert.equal(template.approvals[0].heroPresetId, "people-t2-perspective-v2");
 });
 
 test("new People output paths fail closed outside the ignored intake workspace", () => {

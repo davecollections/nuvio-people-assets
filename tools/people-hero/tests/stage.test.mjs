@@ -55,3 +55,12 @@ test("sparse fallback cinematic defocus is deterministic, locked, and contains n
   assert.equal(metadata.width, 2560);
   assert.equal(metadata.height, 1440);
 });
+
+test("skipped hero evidence remains bound to the locked preset", async () => {
+  const source = await import("node:fs/promises").then(({ readFile }) => readFile(
+    new URL("../src/stage.mjs", import.meta.url),
+    "utf8"
+  ));
+  assert.match(source, /status: "skipped"[\s\S]*preset: preflight\.preset/u);
+  assert.match(source, /status: "skipped"[\s\S]*selection/u);
+});
