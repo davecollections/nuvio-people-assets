@@ -12,9 +12,12 @@ test("new People staging uses the locked Windows runtime and PowerShell environm
   const windowsRunners = workflow.match(
     /^\s+runs-on:\s+windows-latest\s*$/gmu,
   );
+  const nodeRuntimes = workflow.match(/^\s+node-version:\s+22\s*$/gmu);
 
   assert.equal(windowsRunners?.length, 2);
+  assert.equal(nodeRuntimes?.length, 2);
   assert.doesNotMatch(workflow, /^\s+runs-on:\s+ubuntu-latest\s*$/gmu);
+  assert.doesNotMatch(workflow, /^\s+node-version:\s+20\s*$/gmu);
   assert.match(
     workflow,
     /batch-input\.mjs >> \$env:GITHUB_OUTPUT/u,
