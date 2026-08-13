@@ -56,6 +56,8 @@ Generated downloads, caches, contact sheets, and working files must remain outsi
 
 New identities begin with the staging-only intake workflow documented in [`tools/people-intake/README.md`](tools/people-intake/README.md). It accepts explicit unregistered TMDB Person IDs and prepares the base poster/landscape, matching colour focus pair when a profile exists, V2 title logo, and T2 hero as one hash-bound review artifact. It cannot register or publish the identity; promotion remains a separate owner-approved step.
 
+After review, the separate `Promote reviewed new People candidates` workflow can copy the exact approved artifact bytes into an isolated branch, extend `data/people.json` and the compact `data/people-intake-publications.json` evidence ledger, rebuild the manifest, validate the repository, and open a draft pull request. It cannot rerender artwork or merge its pull request. See the intake documentation for the approval record and safety checks.
+
 ## Legacy poster, landscape, and title-logo reproduction
 
 The People-only base-artwork source record and offline renderer migrated from `nuvio-assets` are retained under `data/people-base/` and `tools/people-seed/`. The tool is staging-only, accepts at most 30 explicit Person IDs, and cannot access the network or publish assets. See [the decommission checklist](docs/people-workflow-decommission.md) before removing any legacy People paths from the old repository.

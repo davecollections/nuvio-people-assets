@@ -8,7 +8,7 @@ const readJson = async (relativePath) => JSON.parse(
   await readFile(path.join(repositoryRoot, relativePath), "utf8")
 );
 
-test("production focus artwork covers every and only source-backed People identity", async () => {
+test("the legacy production focus publication remains exact while later People use the live pair contract", async () => {
   const [publication, legacyArtwork, manifest] = await Promise.all([
     readJson("data/people-base/focus-artwork-publication-v1.json"),
     readJson("data/people-base/legacy-artwork-manifest.json"),
@@ -18,7 +18,6 @@ test("production focus artwork covers every and only source-backed People identi
   assert.equal(publication.status, "owner-approved-production");
   assert.equal(publication.trackingIssue, 43);
   assert.equal(manifest.focusArtworkPreset.status, "production-approved");
-  assert.deepEqual(manifest.focusArtworkPreset.excludedPersonIds, [8559, 76447]);
 
   const eligibleIds = legacyArtwork.records
     .filter((record) => !record.fallbackUsed)
@@ -33,15 +32,21 @@ test("production focus artwork covers every and only source-backed People identi
     publication.catalogue.excluded.map((record) => record.tmdbPersonId),
     excludedIds
   );
-  assert.equal(manifest.assetCounts.focusPoster, eligibleIds.length);
-  assert.equal(manifest.assetCounts.focusLandscape, eligibleIds.length);
+  assert.equal(manifest.assetCounts.focusPoster, manifest.assetCounts.focusLandscape);
 
   const eligibleSet = new Set(eligibleIds);
+  const legacyIds = new Set(legacyArtwork.records.map((record) => record.tmdbPersonId));
+  assert.deepEqual(
+    manifest.focusArtworkPreset.excludedPersonIds.filter((personId) => legacyIds.has(personId)),
+    [8559, 76447]
+  );
   let posterBytes = 0;
   let landscapeBytes = 0;
   for (const person of manifest.people) {
     const hasPoster = Boolean(person.assets.focusPoster);
     const hasLandscape = Boolean(person.assets.focusLandscape);
+    assert.equal(hasPoster, hasLandscape, `${person.tmdbPersonId}: live focus pair mismatch`);
+    if (!legacyIds.has(person.tmdbPersonId)) continue;
     assert.equal(hasPoster, eligibleSet.has(person.tmdbPersonId), `${person.tmdbPersonId}: focus poster eligibility mismatch`);
     assert.equal(hasLandscape, eligibleSet.has(person.tmdbPersonId), `${person.tmdbPersonId}: focus landscape eligibility mismatch`);
     if (!hasPoster) continue;

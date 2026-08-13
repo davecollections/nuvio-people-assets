@@ -28,7 +28,7 @@ async function walk(directory) {
   return files;
 }
 
-test("migrated registry, legacy base artwork, and approved v2 title logos cover the canonical 1480 identities", async () => {
+test("frozen migrated registry, legacy base artwork, and approved v2 title logos preserve the original 1480 identities", async () => {
   const [canonical, registry, artwork, presentation, current, migration, publication] = await Promise.all([
     readJson("data/people.json"),
     readJson("data/people-base/people-registry.json"),

@@ -202,7 +202,9 @@ export async function buildInventory() {
       nativelyAnimated: false,
       publishedAsPair: true,
       eligibility: "preserved-approved-portrait-source-required",
-      excludedPersonIds: [8559, 76447],
+      excludedPersonIds: people
+        .filter((person) => !person.assets.focusPoster)
+        .map((person) => person.tmdbPersonId),
       poster: {
         filename: "focus-poster.webp",
         width: 1000,

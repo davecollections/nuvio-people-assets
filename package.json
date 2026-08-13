@@ -13,6 +13,7 @@
     "people-base:stage": "node tools/people-seed/src/stage-base-artwork.mjs",
     "people-title-logo:v2-proof": "node tools/people-seed/src/title-logo-v2-proof.mjs",
     "people-intake:stage": "node tools/people-intake/src/stage.mjs",
+    "people-intake:promote": "node tools/people-intake/src/promote.mjs",
     "validate": "node scripts/validate-assets.mjs",
     "test": "node --test tools/people-hero/tests/*.test.mjs tools/people-intake/tests/*.test.mjs tools/people-seed/tests/*.test.mjs && npm run validate"
   },

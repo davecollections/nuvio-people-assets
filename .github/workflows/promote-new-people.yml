@@ -1,0 +1,185 @@
+name: Promote reviewed new People candidates
+
+on:
+  workflow_dispatch:
+    inputs:
+      staging_run_id:
+        description: Successful main-branch Stage new People artwork set run ID
+        required: true
+        type: string
+      tracking_issue:
+        description: Open GitHub issue for this promotion batch
+        required: true
+        type: string
+      approvals_json:
+        description: Owner-approved hash-bound review JSON (maximum 30 identities)
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: write
+  issues: read
+  pull-requests: write
+
+concurrency:
+  group: promote-reviewed-new-people
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Require the trusted default branch
+        run: |
+          if ("${{ github.ref }}" -ne "refs/heads/main") {
+            throw "Promotion must be dispatched from main."
+          }
+
+      - name: Check out current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Require pull request automation permission
+        run: |
+          $permissions = gh api "repos/${{ github.repository }}/actions/permissions/workflow" | ConvertFrom-Json
+          if (-not $permissions.can_approve_pull_request_reviews) {
+            throw "Enable Settings > Actions > General > Allow GitHub Actions to create and approve pull requests before promotion."
+          }
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository before promotion
+        run: npm test
+
+      - name: Validate owner approval request
+        id: request
+        env:
+          STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+          TRACKING_ISSUE: ${{ inputs.tracking_issue }}
+          PEOPLE_PROMOTION_APPROVALS: ${{ inputs.approvals_json }}
+        run: node tools/people-intake/src/promotion-request.mjs
+
+      - name: Verify trusted staging run and open tracking issue
+        env:
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+          TRACKING_ISSUE: ${{ steps.request.outputs.tracking_issue }}
+        run: |
+          $run = gh run view "$env:STAGING_RUN_ID" --json conclusion,event,headBranch,headSha,status,workflowName,url | ConvertFrom-Json
+          if ($run.status -ne "completed" -or $run.conclusion -ne "success") {
+            throw "The staging run is not complete and successful."
+          }
+          if ($run.event -ne "workflow_dispatch" -or $run.headBranch -ne "main") {
+            throw "The staging run was not manually dispatched from main."
+          }
+          if ($run.workflowName -ne "Stage new People artwork set") {
+            throw "The source run is not the trusted new People staging workflow."
+          }
+          git merge-base --is-ancestor $run.headSha HEAD
+          if ($LASTEXITCODE -ne 0) {
+            throw "The staging commit is not an ancestor of current main."
+          }
+          $issue = gh issue view "$env:TRACKING_ISSUE" --json state,url | ConvertFrom-Json
+          if ($issue.state -ne "OPEN") {
+            throw "The promotion tracking issue must be open."
+          }
+          "Verified staging run: $($run.url)" >> $env:GITHUB_STEP_SUMMARY
+          "Tracking issue: $($issue.url)" >> $env:GITHUB_STEP_SUMMARY
+
+      - name: Download immutable staging artifacts
+        env:
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+          REQUEST_ROOT: ${{ steps.request.outputs.request_root }}
+        run: |
+          $artifactRoot = Join-Path "$env:REQUEST_ROOT" "artifacts"
+          gh run download "$env:STAGING_RUN_ID" --dir "$artifactRoot"
+
+      - name: Create isolated promotion branch
+        id: branch
+        run: |
+          $branch = "work/promote-new-people-${{ github.run_id }}"
+          git switch -c "$branch"
+          "branch=$branch" >> $env:GITHUB_OUTPUT
+
+      - name: Promote exact reviewed bytes
+        id: promotion
+        env:
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+          TRACKING_ISSUE: ${{ steps.request.outputs.tracking_issue }}
+          REQUEST_ROOT: ${{ steps.request.outputs.request_root }}
+          APPROVALS_FILE: ${{ steps.request.outputs.approvals_file }}
+        run: |
+          $artifactRoot = Join-Path "$env:REQUEST_ROOT" "artifacts"
+          $reportFile = Join-Path "$env:REQUEST_ROOT" "promotion-result.json"
+          $summaryFile = Join-Path "$env:REQUEST_ROOT" "promotion-pr-body.md"
+          npm run people-intake:promote -- --artifact-root "$artifactRoot" --approvals-file "$env:APPROVALS_FILE" --staging-run-id "$env:STAGING_RUN_ID" --tracking-issue "$env:TRACKING_ISSUE" --promotion-run-id "${{ github.run_id }}" --report-file "$reportFile" --summary-file "$summaryFile" --github-output "$env:GITHUB_OUTPUT"
+
+      - name: Validate promoted repository
+        run: npm test
+
+      - name: Commit exact promotion change
+        env:
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- assets/people data/people.json data/people-intake-publications.json manifests/people.json
+          git diff --cached --check
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
+            throw "Promotion produced no reviewed repository change."
+          }
+          $unexpected = git status --porcelain | Where-Object {
+            $_ -notmatch '^[AM]  (assets/people/|data/people\.json$|data/people-intake-publications\.json$|manifests/people\.json$)'
+          }
+          if ($unexpected) {
+            throw "Promotion produced an unexpected worktree path: $($unexpected -join ', ')"
+          }
+          git commit -m "Publish reviewed new People from staging run $env:STAGING_RUN_ID"
+
+      - name: Push promotion branch
+        env:
+          PROMOTION_BRANCH: ${{ steps.branch.outputs.branch }}
+        run: git push --set-upstream origin "$env:PROMOTION_BRANCH"
+
+      - name: Open draft promotion pull request
+        id: pull-request
+        env:
+          PROMOTION_BRANCH: ${{ steps.branch.outputs.branch }}
+          REQUEST_ROOT: ${{ steps.request.outputs.request_root }}
+          TRACKING_ISSUE: ${{ steps.request.outputs.tracking_issue }}
+          PERSON_COUNT: ${{ steps.promotion.outputs.person_count }}
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+        run: |
+          $summaryFile = Join-Path "$env:REQUEST_ROOT" "promotion-pr-body.md"
+          Add-Content -Path "$summaryFile" -Value "`nCloses #$env:TRACKING_ISSUE`n"
+          $url = gh pr create --draft --base main --head "$env:PROMOTION_BRANCH" --title "Publish $env:PERSON_COUNT reviewed People from run $env:STAGING_RUN_ID" --body-file "$summaryFile"
+          "url=$url" >> $env:GITHUB_OUTPUT
+          Get-Content "$summaryFile" >> $env:GITHUB_STEP_SUMMARY
+          "Draft pull request: $url" >> $env:GITHUB_STEP_SUMMARY
+
+      - name: Upload compact promotion evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: new-people-promotion-${{ github.run_id }}
+          path: |
+            ${{ steps.request.outputs.approvals_file }}
+            ${{ steps.request.outputs.request_root }}/promotion-result.json
+            ${{ steps.request.outputs.request_root }}/promotion-pr-body.md
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 14
