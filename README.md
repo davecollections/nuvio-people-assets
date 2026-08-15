@@ -6,10 +6,10 @@ Each person has a stable, TMDB-ID-based directory:
 
 ```text
 assets/people/{tmdb_person_id}/
-  poster.webp
-  title-logo.png
-  landscape.webp   # retained for current/V1 compatibility
-  hero.webp        # approved filmography or profile-only hero
+  poster.webp      # required
+  title-logo.png   # required
+  landscape.webp   # required; retained for current/V1 compatibility
+  hero.webp        # required approved filmography, profile-only, or sparse hero
   focus-poster.webp     # optional static colour focus counterpart
   focus-landscape.webp  # optional static colour focus counterpart
 ```
@@ -18,16 +18,15 @@ For example, Tom Hanks is stored under `assets/people/31/`.
 
 ## Asset contract
 
-- `poster.webp` and `title-logo.png` are required for every registry entry.
-- `landscape.webp` is currently retained, but is considered a legacy/compatibility asset while the V2 presentation options are finalised.
-- `hero.webp` is optional during rollout. New heroes use the `people-t2-perspective-v2` design: 2560 x 1440, T2 perspective layout, and WebP quality 82.
+- `poster.webp`, `landscape.webp`, `title-logo.png`, and `hero.webp` are required for every registry entry. Landscape remains a current/V1 compatibility asset, but it is part of the canonical consumer contract until a separately approved V2 decision changes that contract.
+- New heroes use the `people-t2-perspective-v2` design: 2560 x 1440, T2 perspective layout, and WebP quality 82.
 - Focus artwork is published as a pair wherever a preserved approved portrait source exists. `focus-poster.webp` is 1000 x 1500 and `focus-landscape.webp` is 1200 x 675; both are static WebP quality 82 files generated from the same approved portrait, crop, gradients, grain, and typography as their monochrome counterparts, with only the grayscale and warm-tint treatment removed. Kátia Lund (`8559`) and Shimit Amin (`76447`) intentionally have no focus pair because no approved profile source exists.
 - Filmography heroes use 15–32 eligible, distinct movie/TV credits. Principal-performer concert and performance films may qualify when TMDB records them as Music-genre movies with the person billed first; ordinary `Self` appearances remain excluded. The approved full-bleed T2 lattice places every selected source before using deterministic low-salience fallback placements to keep the perspective crop complete. Profile-only heroes are permitted when fewer than 15 credits qualify but at least 15 suitable official profile images exist.
 - When neither normal threshold is met but at least one eligible credit has official artwork, a sparse fallback uses every eligible credit in the T2 lattice and applies the locked cinematic defocus and dark grading. This hides unavoidable repetition without admitting excluded credits; the separate title logo is never baked into the hero. Refreshes automatically replace the fallback when a normal hero becomes eligible.
 - Paths are identity-based and must not be renamed when a person's display name changes.
-- `manifests/people.json` is the canonical machine-readable inventory, including SHA-256 hashes, dimensions, byte counts, and direct raw GitHub URLs.
+- `manifests/people.json` is the canonical machine-readable authority for People identities, actor/director category memberships, and artwork inventory. It includes per-asset SHA-256 hashes, dimensions, byte counts, and direct raw GitHub URLs.
 
-Consumers may use the stable `main` URLs and compare manifest hashes when deciding whether to refresh cached artwork.
+Consumers may use the stable `main` URLs and compare the per-asset hashes in the manifest when deciding whether to refresh cached artwork. See the practical [consumer handoff](docs/consumer-handoff.md) before migrating from the legacy `nuvio-assets` People paths.
 
 ## Source and rights
 
