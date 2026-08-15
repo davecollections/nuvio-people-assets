@@ -22,13 +22,14 @@ Each published identity uses its numeric TMDB Person ID:
 assets/people/{tmdb_person_id}/
   poster.webp       # required
   title-logo.png    # required
-  landscape.webp    # retained compatibility asset
-  hero.webp         # optional during controlled rollout
+  landscape.webp    # required retained compatibility asset
+  hero.webp         # required People hero
   focus-poster.webp      # optional static colour focus counterpart
   focus-landscape.webp   # optional static colour focus counterpart
 ```
 
 - A display-name change must never rename the directory or public URL.
+- Every registered identity must retain all four core files: poster, landscape, title logo, and hero.
 - Each identity must retain its own physical files; do not replace identity-specific assets with aliases or shared files.
 - Do not delete existing landscapes. They remain legacy/current compatibility assets pending a separate V2 decision.
 - Do not regenerate the catalogue-wide title-logo set as part of hero-generator work.
@@ -86,7 +87,7 @@ tools/people-hero/.work/
 
 - Never delete or recreate ignored audit or staging workspaces without explicit approval.
 - Generation is staging-only by default and must process the narrowest explicitly selected identity set.
-- Never run a blind or automatic 1,480-person batch.
+- Never run a blind or automatic catalogue-wide batch.
 - Do not write directly to `assets/people`, rebuild the canonical manifest, commit, or push during generation/review.
 - Promotion requires explicit user approval bound to the reviewed candidate SHA-256, Person ID, preset version, source-selection record, and exact destination.
 - Before promotion, compare the candidate SHA-256 with the published hero and skip unchanged bytes.
@@ -100,6 +101,7 @@ tools/people-hero/.work/
 The current validator is authoritative. In particular:
 
 - every asset must decode to its filename's expected format;
+- every registered identity must have poster, landscape, title-logo, and hero assets;
 - every individual asset must remain below 1 MiB;
 - focus posters must be exactly 1000 x 1500 and focus landscapes exactly 1200 x 675, with neither file permitted on its own;
 - legacy published heroes may remain 1920 x 1080 until individually replaced; all newly promoted heroes must be exactly 2560 x 1440;

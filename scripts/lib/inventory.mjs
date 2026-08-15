@@ -12,8 +12,8 @@ const baseUrl = "https://raw.githubusercontent.com/davecollections/nuvio-people-
 const assetDefinitions = {
   poster: { filename: "poster.webp", required: true, format: "webp" },
   titleLogo: { filename: "title-logo.png", required: true, format: "png" },
-  landscape: { filename: "landscape.webp", required: false, format: "webp" },
-  hero: { filename: "hero.webp", required: false, format: "webp" },
+  landscape: { filename: "landscape.webp", required: true, format: "webp" },
+  hero: { filename: "hero.webp", required: true, format: "webp" },
   focusPoster: { filename: "focus-poster.webp", required: false, format: "webp" },
   focusLandscape: { filename: "focus-landscape.webp", required: false, format: "webp" }
 };
