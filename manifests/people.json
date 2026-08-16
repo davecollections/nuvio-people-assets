@@ -2,16 +2,16 @@
   "schemaVersion": 2,
   "repository": "davecollections/nuvio-people-assets",
   "ordering": "tmdb-person-id-ascending",
-  "recordCount": 1502,
+  "recordCount": 1505,
   "assetCounts": {
-    "poster": 1502,
-    "titleLogo": 1502,
-    "landscape": 1502,
-    "hero": 1502,
-    "focusPoster": 1500,
-    "focusLandscape": 1500
+    "poster": 1505,
+    "titleLogo": 1505,
+    "landscape": 1505,
+    "hero": 1505,
+    "focusPoster": 1503,
+    "focusLandscape": 1503
   },
-  "totalAssetBytes": 757307442,
+  "totalAssetBytes": 758946103,
   "heroPreset": {
     "id": "people-t2-perspective-v2",
     "width": 2560,
@@ -48385,6 +48385,69 @@
       }
     },
     {
+      "tmdbPersonId": 13324,
+      "canonicalName": "Paul Scofield",
+      "categoryMembership": [
+        "actor"
+      ],
+      "assets": {
+        "poster": {
+          "path": "assets/people/13324/poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13324/poster.webp",
+          "sha256": "069ddddf95edae3ff0e50675948fa475562abe815321fe2436283ac9ac15c8e1",
+          "bytes": 122810,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "path": "assets/people/13324/title-logo.png",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13324/title-logo.png",
+          "sha256": "a4b42238b6afb8a594fd967c6079b4e251b92c03689eae8af69f692c7e64a850",
+          "bytes": 28625,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        },
+        "landscape": {
+          "path": "assets/people/13324/landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13324/landscape.webp",
+          "sha256": "346fabe4fc2402a28315e2156db082965bd9a4f62d4801c4a3d6ea9ff3c76096",
+          "bytes": 39716,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/13324/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13324/hero.webp",
+          "sha256": "fd4fa50be609818499e36a398da2ecf3cb81b04c556d32dee954ae0e217c8aca",
+          "bytes": 195218,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/13324/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13324/focus-poster.webp",
+          "sha256": "c25b998d2145f27e90c8ff6d2da0f855f226f681886a1eaf6960597d28b2db4f",
+          "bytes": 92882,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/13324/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/13324/focus-landscape.webp",
+          "sha256": "81cc42f66e59217f6b10ba76704af7adfb645764f5c68dabea91eec9c944c52b",
+          "bytes": 29850,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        }
+      }
+    },
+    {
       "tmdbPersonId": 13333,
       "canonicalName": "Vanessa Redgrave",
       "categoryMembership": [
@@ -55373,6 +55436,69 @@
           "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/17753/focus-landscape.webp",
           "sha256": "00800c744616f229de9856017f0c276af6e7749fc44c46e95c180bc3df51163a",
           "bytes": 25418,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 17838,
+      "canonicalName": "Rami Malek",
+      "categoryMembership": [
+        "actor"
+      ],
+      "assets": {
+        "poster": {
+          "path": "assets/people/17838/poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/17838/poster.webp",
+          "sha256": "e8846373d637e219339cbdd0d525868c3a63ce3f8732e35aba84bab3f2720f10",
+          "bytes": 103450,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "path": "assets/people/17838/title-logo.png",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/17838/title-logo.png",
+          "sha256": "7fe5ecb093ade0912f81399430cfc7037c9ac857a7f02b78a0e0feb71b343d4a",
+          "bytes": 25280,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        },
+        "landscape": {
+          "path": "assets/people/17838/landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/17838/landscape.webp",
+          "sha256": "1efb1116180262f03032eb75ce962f7e05de66c653edf80e9f813e57a4226337",
+          "bytes": 31462,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/17838/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/17838/hero.webp",
+          "sha256": "a50daaca53f7d6434e92c945c1e06c1917b80bf1ab73a8fff635a4a7a120d58a",
+          "bytes": 184206,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/17838/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/17838/focus-poster.webp",
+          "sha256": "cf4b340c494fad06ee1eef33089a80037caae2b2f9595d993384ba9dae1c3dfe",
+          "bytes": 77258,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/17838/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/17838/focus-landscape.webp",
+          "sha256": "5db58d95b4bd7930abc1708b5261dbb06c7cf9bd2fcb95fb9840251c670c53eb",
+          "bytes": 24156,
           "width": 1200,
           "height": 675,
           "format": "webp"
@@ -85848,6 +85974,69 @@
           "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/124137/focus-landscape.webp",
           "sha256": "d7f644b5915362f6ccb1aa1aea2a58d7e57d3364fdc3e50668ac57680f10432a",
           "bytes": 46362,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 124309,
+      "canonicalName": "George Arliss",
+      "categoryMembership": [
+        "actor"
+      ],
+      "assets": {
+        "poster": {
+          "path": "assets/people/124309/poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/124309/poster.webp",
+          "sha256": "bf3bbb67f60d0619cf30817cb21ef939d668cb7eb72af5fa3d9834b37a6e36b1",
+          "bytes": 192908,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "path": "assets/people/124309/title-logo.png",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/124309/title-logo.png",
+          "sha256": "defada0ad66b34c663e592efead1227218a34be6da4aa8a785941a5994b69ad0",
+          "bytes": 27158,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        },
+        "landscape": {
+          "path": "assets/people/124309/landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/124309/landscape.webp",
+          "sha256": "2a6068b9526e223e9ec0736563335438170932cd8076658da11539dc675d53fc",
+          "bytes": 55202,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/124309/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/124309/hero.webp",
+          "sha256": "067a81fc2de08044434c58ceb812333a05341b1a0ad92554acf8bf266287ea30",
+          "bytes": 224354,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/124309/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/124309/focus-poster.webp",
+          "sha256": "a512ccc673217de1210aa7098d252b86d4ae9f9833db2a1e350a14101ff73dce",
+          "bytes": 143144,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/124309/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/124309/focus-landscape.webp",
+          "sha256": "88ca4914920e0e4980d419b557fb3a6e4fbea3908c78d67e9cdd34e0bfa5269a",
+          "bytes": 40982,
           "width": 1200,
           "height": 675,
           "format": "webp"
