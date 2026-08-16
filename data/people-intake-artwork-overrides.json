@@ -1,0 +1,158 @@
+{
+  "version": "people-intake-artwork-overrides-v1",
+  "status": "active",
+  "ordering": "tmdb-person-id-then-format-ascending",
+  "recordCount": 6,
+  "records": [
+    {
+      "stableKey": "person:55119",
+      "tmdbPersonId": 55119,
+      "canonicalName": "Alejandro Jodorowsky",
+      "formatId": "landscape",
+      "status": "active",
+      "sourceProfilePath": "/jKZs20IfmD8qmGAga7ykhJXivCA.jpg",
+      "sourceHash": "8eaeb7e1c33dcacd502bb56e3c410b15288499519b0ccca253ae3c2edd4ce6b5",
+      "basePresetId": "people-landscape-cormorant-v1",
+      "basePresetHash": "a94f863b9332332617355fd73265571dc9b3ccf055365674757d76ac2c48faad",
+      "cropStrategy": "owner-reviewed-full-portrait-landscape-v1",
+      "cropRectangle": { "left": 0, "top": 0, "width": 1000, "height": 1500 },
+      "cropScale": { "x": 0.45, "y": 0.45 },
+      "cropOffsetX": 648,
+      "cropOffsetY": 0,
+      "reason": "owner-review-chin-safe-correction-20260816",
+      "prototypeTier": "tier-2-full-portrait",
+      "approvedProofs": {
+        "monochromeWarmSha256": "07d670ecd6794e4ac205b121f9c453015a3c7303c73fdd94c417aea8e7bf9bd0",
+        "colourFocusSha256": "9298148601c9c3d57d000db22e46abd92175ed4da9a42ef5f360d5817f6a4d90"
+      },
+      "approvedAt": "2026-08-16",
+      "trackingIssue": 59
+    },
+    {
+      "stableKey": "person:107821",
+      "tmdbPersonId": 107821,
+      "canonicalName": "Ilya Khrzhanovsky",
+      "formatId": "landscape",
+      "status": "active",
+      "sourceProfilePath": "/93NDSHiogQ03SN6Z57e73Q8qCiy.jpg",
+      "sourceHash": "4be8d56880513fb0166edf96c13f5a26adcd49be452af659b3b45180fcd71d27",
+      "basePresetId": "people-landscape-cormorant-v1",
+      "basePresetHash": "a94f863b9332332617355fd73265571dc9b3ccf055365674757d76ac2c48faad",
+      "cropStrategy": "owner-reviewed-full-portrait-landscape-v1",
+      "cropRectangle": { "left": 0, "top": 0, "width": 300, "height": 450 },
+      "cropScale": { "x": 1.5, "y": 1.5 },
+      "cropOffsetX": 648,
+      "cropOffsetY": 0,
+      "reason": "owner-review-chin-safe-correction-20260816",
+      "prototypeTier": "tier-2-full-portrait",
+      "approvedProofs": {
+        "monochromeWarmSha256": "911cb35c8f0890ff0f32e689fc74cbfc7e9aaf9066a9ce8eaaebacfe6b062dea",
+        "colourFocusSha256": "182ff42e6bba8f868add58890b8c16a9d1ca157ab5ce7dbbe15bdd6e58a5006b"
+      },
+      "approvedAt": "2026-08-16",
+      "trackingIssue": 59
+    },
+    {
+      "stableKey": "person:107821",
+      "tmdbPersonId": 107821,
+      "canonicalName": "Ilya Khrzhanovsky",
+      "formatId": "poster",
+      "status": "active",
+      "sourceProfilePath": "/93NDSHiogQ03SN6Z57e73Q8qCiy.jpg",
+      "sourceHash": "4be8d56880513fb0166edf96c13f5a26adcd49be452af659b3b45180fcd71d27",
+      "basePresetId": "people-poster-cormorant-v1",
+      "basePresetHash": "77ba30578bf7a6a859530621bf706ddf9ac6945efd479672cf8515d4434efb8d",
+      "cropStrategy": "owner-reviewed-face-clear-bottom-band-poster-v1",
+      "cropRectangle": { "left": 0, "top": 0, "width": 300, "height": 450 },
+      "cropScale": { "x": 3, "y": 3 },
+      "cropOffsetX": 50,
+      "cropOffsetY": 0,
+      "reason": "owner-review-keep-name-clear-of-face-20260816",
+      "posterTypography": {
+        "requestedFontSize": 96,
+        "region": { "x": 72, "y": 1340, "width": 856, "height": 150 },
+        "maximumWidth": 856,
+        "maximumHeight": 150
+      },
+      "posterLowerBandStartY": 1260,
+      "approvedProofs": {
+        "monochromeWarmSha256": "cf5f84f2a516991451349c9a5512b1a071a0274fd3c754c44db7d3313f5c2fb2",
+        "colourFocusSha256": "ea21c736a9ad6d24c681355b7ad42107f8458fc0616facade12dddc80398b47d"
+      },
+      "approvedAt": "2026-08-16",
+      "trackingIssue": 59
+    },
+    {
+      "stableKey": "person:532227",
+      "tmdbPersonId": 532227,
+      "canonicalName": "Arturo Ripstein",
+      "formatId": "landscape",
+      "status": "active",
+      "sourceProfilePath": "/qD49L1pv1mPt3G9YkmK7R0cZ8cF.jpg",
+      "sourceHash": "a0dfedd8bac7ff276b771b665f581994faa94c83a9e3438c0710cf382d58cac3",
+      "basePresetId": "people-landscape-cormorant-v1",
+      "basePresetHash": "a94f863b9332332617355fd73265571dc9b3ccf055365674757d76ac2c48faad",
+      "cropStrategy": "owner-reviewed-full-portrait-landscape-v1",
+      "cropRectangle": { "left": 0, "top": 0, "width": 651, "height": 978 },
+      "cropScale": { "x": 0.691244, "y": 0.690184 },
+      "cropOffsetX": 648,
+      "cropOffsetY": 0,
+      "reason": "owner-review-chin-safe-correction-20260816",
+      "prototypeTier": "tier-2-full-portrait",
+      "approvedProofs": {
+        "monochromeWarmSha256": "e0431f61cb518548fdd6c68472628df7824ebd1691c41aef37924af4a59ce7f6",
+        "colourFocusSha256": "2e4149ad0f8283bb77e367fd801b2f386c8cb3525534fe8b984fa29dc9849970"
+      },
+      "approvedAt": "2026-08-16",
+      "trackingIssue": 59
+    },
+    {
+      "stableKey": "person:544699",
+      "tmdbPersonId": 544699,
+      "canonicalName": "Elmar Klos",
+      "formatId": "landscape",
+      "status": "active",
+      "sourceProfilePath": "/u7BTGFZAD0ny8uRl0QGPXPtvVe4.jpg",
+      "sourceHash": "798986b041dbdb3b8ced9c392bd8aaa607a8a59ae708f256990d35bbc32bf0f0",
+      "basePresetId": "people-landscape-cormorant-v1",
+      "basePresetHash": "a94f863b9332332617355fd73265571dc9b3ccf055365674757d76ac2c48faad",
+      "cropStrategy": "owner-reviewed-full-portrait-landscape-v1",
+      "cropRectangle": { "left": 0, "top": 0, "width": 534, "height": 798 },
+      "cropScale": { "x": 0.842697, "y": 0.845865 },
+      "cropOffsetX": 648,
+      "cropOffsetY": 0,
+      "reason": "owner-review-chin-safe-correction-20260816",
+      "prototypeTier": "tier-2-full-portrait",
+      "approvedProofs": {
+        "monochromeWarmSha256": "a0f94854d07f089d101b477e3b757ac620c4a00b15bf5d0bff62c8be60ec6864",
+        "colourFocusSha256": "f1405f5cec364b8fa0044a612d68bb8c1d2bdef4fafd7bc599126774d62b783e"
+      },
+      "approvedAt": "2026-08-16",
+      "trackingIssue": 59
+    },
+    {
+      "stableKey": "person:932403",
+      "tmdbPersonId": 932403,
+      "canonicalName": "Fernando Pérez",
+      "formatId": "landscape",
+      "status": "active",
+      "sourceProfilePath": "/DsNLtljAKvzQwdiLP7zUlkl2Uu.jpg",
+      "sourceHash": "9d1c712ea0cb3815066c5b9fda6fdb311a92e56a04be0ab286924b5ca7ccea8b",
+      "basePresetId": "people-landscape-cormorant-v1",
+      "basePresetHash": "a94f863b9332332617355fd73265571dc9b3ccf055365674757d76ac2c48faad",
+      "cropStrategy": "owner-reviewed-full-portrait-landscape-v1",
+      "cropRectangle": { "left": 0, "top": 0, "width": 330, "height": 495 },
+      "cropScale": { "x": 1.363636, "y": 1.363636 },
+      "cropOffsetX": 648,
+      "cropOffsetY": 0,
+      "reason": "owner-review-chin-safe-correction-20260816",
+      "prototypeTier": "tier-2-full-portrait",
+      "approvedProofs": {
+        "monochromeWarmSha256": "90385c060bfdb5fc427ca57894173238ab8e20cf6de83e0c40e0e6af3978b3dc",
+        "colourFocusSha256": "c05e51c6ad225aa0a8dc32d027a86e1fce891238052e6200724a9cd8773ae033"
+      },
+      "approvedAt": "2026-08-16",
+      "trackingIssue": 59
+    }
+  ]
+}

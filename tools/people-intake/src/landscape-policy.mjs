@@ -26,7 +26,39 @@ function selectLandscapeRecord(metadata, { personId, portraitTreatment }) {
   return records[0];
 }
 
-function validateRecord(record, { personId, hasProfile, portraitTreatment }) {
+function validateRecord(record, { personId, hasProfile, portraitTreatment, reviewedOverride = null }) {
+  if (hasProfile && reviewedOverride) {
+    const { record: configured, recordHash } = reviewedOverride;
+    const expectedBounds = {
+      x: configured.cropOffsetX,
+      y: configured.cropOffsetY,
+      width: Math.round(configured.cropRectangle.width * configured.cropScale.x),
+      height: Math.round(configured.cropRectangle.height * configured.cropScale.y)
+    };
+    assert(record.fallbackUsed === false && record.cropOverrideUsed !== true,
+      `${personId}: ${portraitTreatment} reviewed Landscape unexpectedly used fallback or a legacy crop override`);
+    assert(record.landscapeDefaultCropPolicyId === undefined,
+      `${personId}: ${portraitTreatment} reviewed Landscape also recorded the default chin-safe policy`);
+    assert(record.reviewedArtworkOverrideUsed === true
+      && record.reviewedArtworkOverrideId === `${configured.stableKey}/landscape`
+      && record.reviewedArtworkOverrideRecordHash === recordHash
+      && record.reviewedArtworkOverrideSourceHash === configured.sourceHash
+      && record.reviewedArtworkOverrideStatus === "active-source-match"
+      && record.reviewedArtworkOverrideReason === configured.reason,
+    `${personId}: ${portraitTreatment} Landscape is not bound to the reviewed chin-safe correction`);
+    assert(record.sourceHash === configured.sourceHash
+      && record.profilePathAttempted === configured.sourceProfilePath
+      && record.presetId === configured.basePresetId
+      && record.presetHash === configured.basePresetHash,
+    `${personId}: ${portraitTreatment} reviewed Landscape source or preset changed`);
+    assert(record.cropMethod === configured.cropStrategy
+      && JSON.stringify(record.cropRectangle) === JSON.stringify(configured.cropRectangle)
+      && JSON.stringify(record.resizeScale) === JSON.stringify(configured.cropScale)
+      && JSON.stringify(record.portraitBounds) === JSON.stringify(expectedBounds),
+    `${personId}: ${portraitTreatment} reviewed Landscape geometry changed`);
+    assert(HASH.test(record.outputHash || ""), `${personId}: ${portraitTreatment} Landscape output hash is invalid`);
+    return;
+  }
   assert(record.landscapeDefaultCropPolicyId === PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID,
     `${personId}: ${portraitTreatment} Landscape did not use the locked chin-safe policy`);
   assert(record.landscapeDefaultCropPolicyHash === PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_HASH,
@@ -64,7 +96,23 @@ function validateRecord(record, { personId, hasProfile, portraitTreatment }) {
   }
 }
 
-function compactRecord(record) {
+function compactRecord(record, reviewedOverride = null) {
+  if (reviewedOverride) {
+    return {
+      portraitTreatment: record.portraitTreatment,
+      outputHash: record.outputHash,
+      status: "reviewed-source-bound-override",
+      tier: reviewedOverride.record.prototypeTier,
+      sourceHash: record.sourceHash,
+      sourceBoundLimited: false,
+      cropMethod: record.cropMethod,
+      cropRectangle: record.cropRectangle,
+      resizeScale: record.resizeScale,
+      portraitBounds: record.portraitBounds,
+      overrideId: record.reviewedArtworkOverrideId,
+      overrideRecordHash: record.reviewedArtworkOverrideRecordHash
+    };
+  }
   return {
     portraitTreatment: record.portraitTreatment,
     outputHash: record.outputHash,
@@ -83,19 +131,23 @@ export function buildNewPersonLandscapePolicyEvidence({
   personId,
   hasProfile,
   monochromeMetadata,
-  focusMetadata = null
+  focusMetadata = null,
+  artworkOverrideConfiguration = null
 } = {}) {
   assert(Number.isSafeInteger(personId) && personId > 0, "Landscape policy evidence requires a positive Person ID");
   assert(typeof hasProfile === "boolean", `${personId}: Landscape policy evidence requires an explicit profile state`);
+  const reviewedOverride = artworkOverrideConfiguration?.recordsByKey?.get(`person:${personId}/landscape`) || null;
   const monochrome = selectLandscapeRecord(monochromeMetadata, { personId, portraitTreatment: "monochrome-warm" });
-  validateRecord(monochrome, { personId, hasProfile, portraitTreatment: "monochrome-warm" });
+  validateRecord(monochrome, { personId, hasProfile, portraitTreatment: "monochrome-warm", reviewedOverride });
 
   let focus = null;
   if (hasProfile) {
     focus = selectLandscapeRecord(focusMetadata, { personId, portraitTreatment: "colour-focus" });
-    validateRecord(focus, { personId, hasProfile, portraitTreatment: "colour-focus" });
+    validateRecord(focus, { personId, hasProfile, portraitTreatment: "colour-focus", reviewedOverride });
     for (const field of ["landscapeDefaultCropStatus", "landscapeDefaultCropTier", "landscapeDefaultCropSourceHash",
-      "landscapeDefaultCropSourceBoundLimited", "cropMethod", "cropRectangle", "resizeScale", "portraitBounds"]) {
+      "landscapeDefaultCropSourceBoundLimited", "cropMethod", "cropRectangle", "resizeScale", "portraitBounds",
+      "reviewedArtworkOverrideId", "reviewedArtworkOverrideRecordHash", "reviewedArtworkOverrideSourceHash",
+      "reviewedArtworkOverrideStatus", "reviewedArtworkOverrideReason"]) {
       assert(JSON.stringify(monochrome[field]) === JSON.stringify(focus[field]),
         `${personId}: monochrome and focus Landscapes differ in chin-safe ${field}`);
     }
@@ -108,7 +160,14 @@ export function buildNewPersonLandscapePolicyEvidence({
     policyId: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID,
     policyHash: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_HASH,
     hasProfile,
-    monochrome: compactRecord(monochrome),
-    focus: focus ? compactRecord(focus) : null
+    monochrome: compactRecord(monochrome, reviewedOverride),
+    focus: focus ? compactRecord(focus, reviewedOverride) : null,
+    ...(reviewedOverride ? {
+      reviewedOverride: {
+        overrideId: `${reviewedOverride.record.stableKey}/landscape`,
+        recordHash: reviewedOverride.recordHash,
+        tier: reviewedOverride.record.prototypeTier
+      }
+    } : {})
   };
 }

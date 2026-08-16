@@ -10,7 +10,7 @@ import {
 import { loadPeopleArtworkRuntime, PEOPLE_ARTWORK_PACKAGE_ROOT, PEOPLE_ARTWORK_REPO_ROOT } from "./runtime-dependencies.mjs";
 import { resolvePortraitSource } from "./source-resolution.mjs";
 
-export const PEOPLE_ARTWORK_RENDERER_VERSION = "people-artwork-renderer-v2";
+export const PEOPLE_ARTWORK_RENDERER_VERSION = "people-artwork-renderer-v3";
 
 const sha256 = (value) => crypto.createHash("sha256").update(value).digest("hex");
 const round = (value, places = 4) => Number(value.toFixed(places));
@@ -113,28 +113,37 @@ function landscapeOverlay(preset) {
   return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${preset.canvas.width}" height="${preset.canvas.height}"><defs><linearGradient id="h" x1="0" y1="0" x2="1" y2="0">${fade}</linearGradient><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="${bottom.startsAtCanvasPercent}%" stop-color="${bottom.colour}" stop-opacity="0"/><stop offset="100%" stop-color="${bottom.colour}" stop-opacity="${bottom.maximumOpacity}"/></linearGradient><radialGradient id="v"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="${preset.tonal.vignetteOpacity}"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#h)"/><rect width="100%" height="100%" fill="url(#b)"/><rect width="100%" height="100%" fill="url(#v)"/></svg>`);
 }
 
-function posterOverlay(preset) {
+function posterOverlay(preset, reviewedOverride = null) {
   const gradient = preset.background.bottomGradient;
-  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${preset.canvas.width}" height="${preset.canvas.height}"><defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="${gradient.transparentUntilCanvasPercent}%" stop-color="${gradient.bottomColour}" stop-opacity="0"/><stop offset="${gradient.transitionAtCanvasPercent}%" stop-color="${gradient.bottomColour}" stop-opacity="0.35"/><stop offset="100%" stop-color="${gradient.bottomColour}" stop-opacity="${gradient.maximumOpacity}"/></linearGradient><radialGradient id="v"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="${preset.tonal.vignetteOpacity}"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#b)"/><rect width="100%" height="100%" fill="url(#v)"/></svg>`);
+  const lowerBandStartY = reviewedOverride?.used
+    ? reviewedOverride.record.posterLowerBandStartY
+    : null;
+  const lowerBand = Number.isInteger(lowerBandStartY)
+    ? `<linearGradient id="band" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${gradient.bottomColour}" stop-opacity="0"/><stop offset="100%" stop-color="${gradient.bottomColour}" stop-opacity="1"/></linearGradient>`
+    : "";
+  const lowerBandRect = Number.isInteger(lowerBandStartY)
+    ? `<rect x="0" y="${lowerBandStartY}" width="${preset.canvas.width}" height="${preset.canvas.height - lowerBandStartY}" fill="url(#band)"/>`
+    : "";
+  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${preset.canvas.width}" height="${preset.canvas.height}"><defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="${gradient.transparentUntilCanvasPercent}%" stop-color="${gradient.bottomColour}" stop-opacity="0"/><stop offset="${gradient.transitionAtCanvasPercent}%" stop-color="${gradient.bottomColour}" stop-opacity="0.35"/><stop offset="100%" stop-color="${gradient.bottomColour}" stop-opacity="${gradient.maximumOpacity}"/></linearGradient>${lowerBand}<radialGradient id="v"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="${preset.tonal.vignetteOpacity}"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#b)"/>${lowerBandRect}<rect width="100%" height="100%" fill="url(#v)"/></svg>`);
 }
 
-async function buildPortraitBase(source, preset, formatId, sharp, cropOverride = null, portraitTreatment = "monochrome-warm") {
+async function buildPortraitBase(source, preset, formatId, sharp, geometryOverride = null, portraitTreatment = "monochrome-warm", directOutput = null) {
   const oriented = orientedDimensions(source);
-  const crop = cropOverride?.used
+  const crop = geometryOverride?.used
     ? {
-        ...cropOverride.record.cropRectangle,
+        ...geometryOverride.record.cropRectangle,
         orientedSourceWidth: oriented.width,
         orientedSourceHeight: oriented.height,
-        retainedAreaFraction: round(cropOverride.record.cropRectangle.width * cropOverride.record.cropRectangle.height / (oriented.width * oriented.height)),
+        retainedAreaFraction: round(geometryOverride.record.cropRectangle.width * geometryOverride.record.cropRectangle.height / (oriented.width * oriented.height)),
       }
     : cropFor(source, preset, formatId);
   assert(crop.left + crop.width <= oriented.width && crop.top + crop.height <= oriented.height, `${source.stableKey ?? "portrait source"}: crop rectangle exceeds the oriented source.`);
-  const target = cropOverride?.used
+  const target = geometryOverride?.used
     ? {
-        x: cropOverride.record.cropOffsetX,
-        y: cropOverride.record.cropOffsetY,
-        width: Math.round(crop.width * cropOverride.record.cropScale.x),
-        height: Math.round(crop.height * cropOverride.record.cropScale.y),
+        x: geometryOverride.record.cropOffsetX,
+        y: geometryOverride.record.cropOffsetY,
+        width: Math.round(crop.width * geometryOverride.record.cropScale.x),
+        height: Math.round(crop.height * geometryOverride.record.cropScale.y),
       }
     : formatId === "landscape"
       ? preset.portraitRegion
@@ -165,7 +174,7 @@ async function buildPortraitBase(source, preset, formatId, sharp, cropOverride =
     .toBuffer();
   const composites = [
     { input: portrait, left: target.x, top: target.y },
-    { input: formatId === "landscape" ? landscapeOverlay(preset) : posterOverlay(preset), left: 0, top: 0 },
+    { input: formatId === "landscape" ? landscapeOverlay(preset) : posterOverlay(preset, geometryOverride), left: 0, top: 0 },
   ];
   if (grainAmount > 0) {
     composites.push({
@@ -176,19 +185,21 @@ async function buildPortraitBase(source, preset, formatId, sharp, cropOverride =
       blend: preset.grain.blend,
     });
   }
-  const buffer = await sharp({ create: { width: preset.canvas.width, height: preset.canvas.height, channels: 3, background: hexToRgb(preset.background.base) } })
-    .composite(composites)
-    .png()
-    .toBuffer();
+  if (directOutput) composites.push({ input: directOutput.typographyBuffer, left: 0, top: 0 });
+  let outputPipeline = sharp({ create: { width: preset.canvas.width, height: preset.canvas.height, channels: 3, background: hexToRgb(preset.background.base) } })
+    .composite(composites);
+  outputPipeline = directOutput ? outputPipeline.webp(directOutput.outputOptions) : outputPipeline.png();
+  const buffer = await outputPipeline.toBuffer();
   return {
     buffer,
     crop,
     target,
-    resizeScale: cropOverride?.used ? cropOverride.record.cropScale : { x: round(scaleX), y: round(scaleY) },
+    resizeScale: geometryOverride?.used ? geometryOverride.record.cropScale : { x: round(scaleX), y: round(scaleY) },
     upscaleFactor,
     grainAmount,
     grainSeed,
-    cropOverride,
+    geometryOverride,
+    directOutput: Boolean(directOutput),
   };
 }
 
@@ -305,17 +316,36 @@ export async function fitTypography(name, preset, runtime, fontRecord, { fallbac
   };
 }
 
-async function renderPortrait({ person, source, formatId, presetRecord, runtime, fontRecord, cropOverride = null, portraitTreatment, outputQuality }) {
+function typographyPresetForOverride(preset, reviewedOverride) {
+  if (!reviewedOverride?.used || !reviewedOverride.record.posterTypography) return preset;
+  const effective = structuredClone(preset);
+  const typography = reviewedOverride.record.posterTypography;
+  effective.typography.requestedFontSize = typography.requestedFontSize;
+  effective.typography.region = { ...typography.region };
+  effective.typography.maximumWidth = typography.maximumWidth;
+  effective.typography.maximumHeight = typography.maximumHeight;
+  return effective;
+}
+
+async function renderPortrait({ person, source, formatId, presetRecord, runtime, fontRecord, cropOverride = null, reviewedOverride = null, portraitTreatment, outputQuality }) {
   const { preset, presetHash } = presetRecord;
-  if (cropOverride?.used) {
-    assert(cropOverride.record.basePresetId === preset.id, `${person.stableKey}: crop override preset ID mismatch.`);
-    assert(cropOverride.record.basePresetHash === presetHash, `${person.stableKey}: crop override preset hash mismatch.`);
+  assert(!(cropOverride?.used && reviewedOverride?.used), `${person.stableKey}/${formatId}: multiple artwork overrides cannot apply.`);
+  const geometryOverride = reviewedOverride?.used ? reviewedOverride : cropOverride;
+  if (geometryOverride?.used) {
+    assert(geometryOverride.record.basePresetId === preset.id, `${person.stableKey}: artwork override preset ID mismatch.`);
+    assert(geometryOverride.record.basePresetHash === presetHash, `${person.stableKey}: artwork override preset hash mismatch.`);
   }
-  const base = await buildPortraitBase(source, preset, formatId, runtime.sharp, cropOverride, portraitTreatment);
-  const typography = await fitTypography(person.canonicalName, preset, runtime, fontRecord);
+  const typographyPreset = typographyPresetForOverride(preset, reviewedOverride);
+  const typography = await fitTypography(person.canonicalName, typographyPreset, runtime, fontRecord);
   assert(!typography.clipping && typography.lineCount <= 2 && typography.lines.join(" ") === person.canonicalName, `${person.stableKey}/${formatId}: typography validation failed.`);
   const outputOptions = outputQuality === null ? preset.output : { ...preset.output, quality: outputQuality };
-  const output = await runtime.sharp(base.buffer).composite([{ input: typography.buffer, left: 0, top: 0 }]).webp(outputOptions).toBuffer();
+  const directOutput = reviewedOverride?.used && formatId === "poster"
+    ? { typographyBuffer: typography.buffer, outputOptions }
+    : null;
+  const base = await buildPortraitBase(source, preset, formatId, runtime.sharp, geometryOverride, portraitTreatment, directOutput);
+  const output = base.directOutput
+    ? base.buffer
+    : await runtime.sharp(base.buffer).composite([{ input: typography.buffer, left: 0, top: 0 }]).webp(outputOptions).toBuffer();
   const gradientBounds = formatId === "landscape"
     ? { x: 0, y: Math.round(preset.canvas.height * preset.background.bottomGradient.startsAtCanvasPercent / 100), width: preset.canvas.width, height: preset.canvas.height - Math.round(preset.canvas.height * preset.background.bottomGradient.startsAtCanvasPercent / 100) }
     : { x: 0, y: Math.round(preset.canvas.height * preset.background.bottomGradient.transparentUntilCanvasPercent / 100), width: preset.canvas.width, height: preset.canvas.height - Math.round(preset.canvas.height * preset.background.bottomGradient.transparentUntilCanvasPercent / 100) };
@@ -353,7 +383,7 @@ export function assertSafeOutputDirectory(outputDir) {
   return resolved;
 }
 
-function metadataRow({ person, source, formatId, rendered, presetRecord, fontRecord, outputRelativePath, outputHash, byteCount, fallbackUsed, cropOverride = null, portraitTreatment, outputQuality }) {
+function metadataRow({ person, source, formatId, rendered, presetRecord, fontRecord, outputRelativePath, outputHash, byteCount, fallbackUsed, cropOverride = null, reviewedOverride = null, portraitTreatment, outputQuality }) {
   const { preset, presetHash } = presetRecord;
   const typography = rendered.typography;
   const base = fallbackUsed ? null : rendered.base;
@@ -389,7 +419,9 @@ function metadataRow({ person, source, formatId, rendered, presetRecord, fontRec
     lineHeight: typography.lineHeight,
     textBounds: typography.textBounds,
     safeMargins: typography.safeMargins,
-    cropMethod: fallbackUsed ? null : cropOverride?.used ? cropOverride.record.cropStrategy : preset.crop.strategy,
+    cropMethod: fallbackUsed ? null : reviewedOverride?.used
+      ? reviewedOverride.record.cropStrategy
+      : cropOverride?.used ? cropOverride.record.cropStrategy : preset.crop.strategy,
     cropRectangle: fallbackUsed ? null : cropCore(base.crop),
     cropRetainedAreaFraction: fallbackUsed ? null : base.crop.retainedAreaFraction,
     resizeScale: fallbackUsed ? null : base.resizeScale,
@@ -421,6 +453,18 @@ function metadataRow({ person, source, formatId, rendered, presetRecord, fontRec
       landscapeDefaultCropSourceHash: cropOverride.used ? cropOverride.record.sourceHash : null,
       landscapeDefaultCropSourceBoundLimited: cropOverride.used ? cropOverride.sourceBoundLimited : false,
     } : {}),
+    ...(reviewedOverride?.used ? {
+      reviewedArtworkOverrideUsed: true,
+      reviewedArtworkOverrideId: reviewedOverride.id,
+      reviewedArtworkOverrideRecordHash: reviewedOverride.recordHash,
+      reviewedArtworkOverrideSourceHash: reviewedOverride.record.sourceHash,
+      reviewedArtworkOverrideStatus: reviewedOverride.status,
+      reviewedArtworkOverrideReason: reviewedOverride.record.reason,
+      ...(reviewedOverride.record.posterTypography ? {
+        reviewedArtworkOverrideTypography: reviewedOverride.record.posterTypography,
+        reviewedArtworkOverrideLowerBandStartY: reviewedOverride.record.posterLowerBandStartY,
+      } : {}),
+    } : {}),
   };
 }
 
@@ -435,6 +479,24 @@ export function resolveLandscapeCropTreatment({ person, source, formatId, overri
   return exactCropOverride;
 }
 
+function resolveReviewedArtworkOverride({ person, source, formatId, configuration } = {}) {
+  if (!configuration) return { used: false, status: "configuration-unavailable" };
+  const selected = configuration.recordsByKey.get(`${person.stableKey}/${formatId}`);
+  if (!selected || selected.record.status !== "active") return { used: false, status: "not-configured" };
+  const { record, recordHash } = selected;
+  assert(record.tmdbPersonId === person.tmdbPersonId && record.canonicalName === person.canonicalName,
+    `${person.stableKey}/${formatId}: reviewed artwork override identity mismatch.`);
+  assert(source?.available && source.sourceHash === record.sourceHash && source.profilePathAttempted === record.sourceProfilePath,
+    `reviewed-artwork-override-source-mismatch:${person.stableKey}/${formatId}: expected ${record.sourceHash}, received ${source?.sourceHash ?? "unavailable"}`);
+  return {
+    used: true,
+    id: `${person.stableKey}/${formatId}`,
+    status: "active-source-match",
+    recordHash,
+    record,
+  };
+}
+
 export async function renderPeopleArtwork({
   people,
   decisions,
@@ -446,6 +508,7 @@ export async function renderPeopleArtwork({
   runtime: providedRuntime = null,
   landscapeCropOverrides = null,
   landscapeDefaultCropPolicy = null,
+  reviewedArtworkOverrides = null,
   expectedSources = null,
   portraitTreatment = "monochrome-warm",
   outputQuality = null,
@@ -482,18 +545,21 @@ export async function renderPeopleArtwork({
     });
     if (dryRun) continue;
     for (const formatId of formats) {
-      const cropOverride = resolveLandscapeCropTreatment({ person, source, formatId, overrideConfiguration, defaultPolicyId: landscapeDefaultCropPolicy, presetRecord: presets.portrait.landscape });
+      const reviewedOverride = resolveReviewedArtworkOverride({ person, source, formatId, configuration: reviewedArtworkOverrides });
+      const cropOverride = reviewedOverride.used
+        ? null
+        : resolveLandscapeCropTreatment({ person, source, formatId, overrideConfiguration, defaultPolicyId: landscapeDefaultCropPolicy, presetRecord: presets.portrait.landscape });
       const fallbackUsed = !source.available;
       const presetRecord = fallbackUsed ? presets.fallback[formatId] : presets.portrait[formatId];
       const rendered = fallbackUsed
         ? await renderFallback({ person, source, formatId, presetRecord, runtime, fontRecord, outputQuality })
-        : await renderPortrait({ person, source, formatId, presetRecord, runtime, fontRecord, cropOverride, portraitTreatment, outputQuality });
+        : await renderPortrait({ person, source, formatId, presetRecord, runtime, fontRecord, cropOverride, reviewedOverride, portraitTreatment, outputQuality });
       const outputRelativePath = `${formatId}/${person.tmdbPersonId}.webp`;
       const outputPath = path.join(resolvedOutput, outputRelativePath);
       await atomicWrite(outputPath, rendered.output);
       const decoded = await runtime.sharp(rendered.output, { failOn: "error" }).metadata();
       assert(decoded.format === "webp" && decoded.width === rendered.preset.canvas.width && decoded.height === rendered.preset.canvas.height, `${person.stableKey}/${formatId}: output decode failed.`);
-      records.push(metadataRow({ person, source, formatId, rendered, presetRecord, fontRecord, outputRelativePath, outputHash: sha256(rendered.output), byteCount: rendered.output.length, fallbackUsed, cropOverride, portraitTreatment, outputQuality }));
+      records.push(metadataRow({ person, source, formatId, rendered, presetRecord, fontRecord, outputRelativePath, outputHash: sha256(rendered.output), byteCount: rendered.output.length, fallbackUsed, cropOverride, reviewedOverride, portraitTreatment, outputQuality }));
     }
   }
   return {

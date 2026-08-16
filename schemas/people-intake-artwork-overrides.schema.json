@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nuvio.example/schemas/people-intake-artwork-overrides.schema.json",
+  "title": "Nuvio reviewed new People artwork overrides",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "status", "ordering", "recordCount", "records"],
+  "properties": {
+    "version": { "const": "people-intake-artwork-overrides-v1" },
+    "status": { "const": "active" },
+    "ordering": { "const": "tmdb-person-id-then-format-ascending" },
+    "recordCount": { "type": "integer", "minimum": 0 },
+    "records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/record" }
+    }
+  },
+  "$defs": {
+    "hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "crop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["left", "top", "width", "height"],
+      "properties": {
+        "left": { "type": "integer", "minimum": 0 },
+        "top": { "type": "integer", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "scale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "number", "minimum": 0.000001 },
+        "y": { "type": "number", "minimum": 0.000001 }
+      }
+    },
+    "bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "proofs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["monochromeWarmSha256", "colourFocusSha256"],
+      "properties": {
+        "monochromeWarmSha256": { "$ref": "#/$defs/hash" },
+        "colourFocusSha256": { "$ref": "#/$defs/hash" }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestedFontSize", "region", "maximumWidth", "maximumHeight"],
+      "properties": {
+        "requestedFontSize": { "type": "integer", "minimum": 1 },
+        "region": { "$ref": "#/$defs/bounds" },
+        "maximumWidth": { "type": "integer", "minimum": 1 },
+        "maximumHeight": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stableKey", "tmdbPersonId", "canonicalName", "formatId", "status", "sourceProfilePath", "sourceHash", "basePresetId", "basePresetHash", "cropStrategy", "cropRectangle", "cropScale", "cropOffsetX", "cropOffsetY", "reason", "approvedProofs", "approvedAt", "trackingIssue"],
+      "properties": {
+        "stableKey": { "type": "string", "pattern": "^person:[1-9][0-9]*$" },
+        "tmdbPersonId": { "type": "integer", "minimum": 1 },
+        "canonicalName": { "type": "string", "minLength": 1 },
+        "formatId": { "enum": ["landscape", "poster"] },
+        "status": { "const": "active" },
+        "sourceProfilePath": { "type": "string", "pattern": "^/[^\\\\]+\\.jpg$" },
+        "sourceHash": { "$ref": "#/$defs/hash" },
+        "basePresetId": { "enum": ["people-landscape-cormorant-v1", "people-poster-cormorant-v1"] },
+        "basePresetHash": { "$ref": "#/$defs/hash" },
+        "cropStrategy": { "enum": ["owner-reviewed-full-portrait-landscape-v1", "owner-reviewed-face-clear-bottom-band-poster-v1"] },
+        "cropRectangle": { "$ref": "#/$defs/crop" },
+        "cropScale": { "$ref": "#/$defs/scale" },
+        "cropOffsetX": { "type": "integer", "minimum": 0 },
+        "cropOffsetY": { "type": "integer", "minimum": 0 },
+        "reason": { "enum": ["owner-review-chin-safe-correction-20260816", "owner-review-keep-name-clear-of-face-20260816"] },
+        "prototypeTier": { "const": "tier-2-full-portrait" },
+        "posterTypography": { "$ref": "#/$defs/typography" },
+        "posterLowerBandStartY": { "type": "integer", "minimum": 0, "maximum": 1499 },
+        "approvedProofs": { "$ref": "#/$defs/proofs" },
+        "approvedAt": { "const": "2026-08-16" },
+        "trackingIssue": { "const": 59 }
+      }
+    }
+  }
+}

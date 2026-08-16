@@ -19,6 +19,10 @@ import {
   buildNewPersonLandscapePolicyEvidence,
   PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
 } from "./landscape-policy.mjs";
+import {
+  buildNewPersonArtworkOverrideEvidence,
+  loadNewPersonArtworkOverrides
+} from "./artwork-overrides.mjs";
 
 const toolRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const repositoryRoot = path.resolve(toolRoot, "../..");
@@ -254,6 +258,7 @@ export async function stageNewPerson({
   assert(Number.isSafeInteger(personId) && personId > 0, "personId must be a positive safe integer");
   assert(typeof pythonExecutable === "string" && pythonExecutable.trim(), "A Python executable is required");
   await ensureUnregistered(personId);
+  const artworkOverrideConfiguration = await loadNewPersonArtworkOverrides({ repositoryRoot });
   const attemptRoot = await allocateAttempt(personId, now);
   const reportsRoot = path.join(attemptRoot, "reports");
   const candidateIdentityRoot = path.join(attemptRoot, "candidate", "assets", "people", String(personId));
@@ -321,7 +326,8 @@ export async function stageNewPerson({
     outputDir: monochromeRoot,
     format: "both",
     portraitTreatment: "monochrome-warm",
-    landscapeDefaultCropPolicy: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
+    landscapeDefaultCropPolicy: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID,
+    reviewedArtworkOverrides: artworkOverrideConfiguration
   });
   const monochromeMetadataFiles = await writeRenderMetadata({
     metadata: monochrome.metadata,
@@ -344,7 +350,8 @@ export async function stageNewPerson({
       format: "both",
       portraitTreatment: "colour-focus",
       outputQuality: 82,
-      landscapeDefaultCropPolicy: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
+      landscapeDefaultCropPolicy: PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID,
+      reviewedArtworkOverrides: artworkOverrideConfiguration
     });
     assert(focus.resolutions[0]?.sourceStatus === "validated-cache-hit",
       "Focus artwork requires a validated portrait source");
@@ -362,12 +369,19 @@ export async function stageNewPerson({
     personId,
     hasProfile: Boolean(selectedProfile),
     monochromeMetadata: monochrome.metadata,
-    focusMetadata: focus?.metadata || null
+    focusMetadata: focus?.metadata || null,
+    artworkOverrideConfiguration
   });
   landscapeCropPolicy.renderMetadata = {
     monochrome: await inspectEvidence(monochromeMetadataFiles.jsonPath),
     focus: focus ? await inspectEvidence(focusMetadataFiles.jsonPath) : null
   };
+  const artworkOverrideEvidence = selectedProfile ? buildNewPersonArtworkOverrideEvidence({
+    personId,
+    monochromeMetadata: monochrome.metadata,
+    focusMetadata: focus.metadata,
+    configuration: artworkOverrideConfiguration
+  }) : null;
 
   const preparedTitle = await prepareTitleLogoV2Renderer({ people: [person] });
   const titleLogo = await renderTitleLogoV2({ person, ...preparedTitle });
@@ -435,6 +449,7 @@ export async function stageNewPerson({
       output: hero.report.output || null
     },
     landscapeCropPolicy,
+    ...(artworkOverrideEvidence ? { artworkOverrides: artworkOverrideEvidence } : {}),
     requests: {
       metadata: 1,
       profileImageDownloads: selectedProfile ? 1 : 0,

@@ -68,6 +68,27 @@
         "y": { "type": "integer", "minimum": 0 }
       }
     },
+    "overrideTypography": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestedFontSize", "region", "maximumWidth", "maximumHeight"],
+      "properties": {
+        "requestedFontSize": { "type": "integer", "minimum": 1 },
+        "region": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y", "width", "height"],
+          "properties": {
+            "x": { "type": "integer", "minimum": 0 },
+            "y": { "type": "integer", "minimum": 0 },
+            "width": { "type": "integer", "minimum": 1 },
+            "height": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "maximumWidth": { "type": "integer", "minimum": 1 },
+        "maximumHeight": { "type": "integer", "minimum": 1 }
+      }
+    },
     "record": {
       "type": "object",
       "additionalProperties": false,
@@ -131,7 +152,15 @@
         "landscapeDefaultCropStatus": { "enum": ["active-tier-1-slight", "source-bound-maximum", "source-unavailable-fallback"] },
         "landscapeDefaultCropTier": { "type": ["string", "null"], "enum": ["tier-1-slight", null] },
         "landscapeDefaultCropSourceHash": { "$ref": "#/$defs/nullableHash" },
-        "landscapeDefaultCropSourceBoundLimited": { "type": "boolean" }
+        "landscapeDefaultCropSourceBoundLimited": { "type": "boolean" },
+        "reviewedArtworkOverrideUsed": { "const": true },
+        "reviewedArtworkOverrideId": { "type": "string", "pattern": "^person:[1-9][0-9]*/(landscape|poster)$" },
+        "reviewedArtworkOverrideRecordHash": { "$ref": "#/$defs/hash" },
+        "reviewedArtworkOverrideSourceHash": { "$ref": "#/$defs/hash" },
+        "reviewedArtworkOverrideStatus": { "const": "active-source-match" },
+        "reviewedArtworkOverrideReason": { "enum": ["owner-review-chin-safe-correction-20260816", "owner-review-keep-name-clear-of-face-20260816"] },
+        "reviewedArtworkOverrideTypography": { "$ref": "#/$defs/overrideTypography" },
+        "reviewedArtworkOverrideLowerBandStartY": { "type": "integer", "minimum": 0, "maximum": 1499 }
       }
     }
   }

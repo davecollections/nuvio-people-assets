@@ -12,6 +12,11 @@ import {
   PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
 } from "../src/landscape-policy.mjs";
 import {
+  buildNewPersonArtworkOverrideEvidence,
+  loadNewPersonArtworkOverrides,
+  resolveNewPersonArtworkOverride
+} from "../src/artwork-overrides.mjs";
+import {
   assertNewPersonWorkPath,
   buildReviewApprovalTemplate,
   candidateOutputDefinitions,
@@ -44,7 +49,50 @@ function landscapeRecord({ personId = 9001, portraitTreatment = "monochrome-warm
 }
 
 function renderMetadata(record) {
-  return { version: "people-artwork-render-metadata-v1", records: [record] };
+  return { version: "people-artwork-render-metadata-v1", records: Array.isArray(record) ? record : [record] };
+}
+
+function reviewedMetadataRecord(selected, portraitTreatment) {
+  const { record, recordHash } = selected;
+  const poster = record.formatId === "poster";
+  const result = {
+    tmdbPersonId: record.tmdbPersonId,
+    formatId: record.formatId,
+    portraitTreatment,
+    fallbackUsed: false,
+    outputHash: portraitTreatment === "monochrome-warm"
+      ? record.approvedProofs.monochromeWarmSha256
+      : record.approvedProofs.colourFocusSha256,
+    sourceHash: record.sourceHash,
+    profilePathAttempted: record.sourceProfilePath,
+    presetId: record.basePresetId,
+    presetHash: record.basePresetHash,
+    cropMethod: record.cropStrategy,
+    cropRectangle: record.cropRectangle,
+    resizeScale: record.cropScale,
+    portraitBounds: {
+      x: record.cropOffsetX,
+      y: record.cropOffsetY,
+      width: Math.round(record.cropRectangle.width * record.cropScale.x),
+      height: Math.round(record.cropRectangle.height * record.cropScale.y)
+    },
+    requestedFontSize: poster ? record.posterTypography.requestedFontSize : 84,
+    finalFontSize: poster ? 96 : 84,
+    textBounds: poster
+      ? { x: 151.135, y: 1366.5, width: 697.73, height: 97 }
+      : { x: 72, y: 310.5, width: 469.39, height: 161 },
+    reviewedArtworkOverrideUsed: true,
+    reviewedArtworkOverrideId: `${record.stableKey}/${record.formatId}`,
+    reviewedArtworkOverrideRecordHash: recordHash,
+    reviewedArtworkOverrideSourceHash: record.sourceHash,
+    reviewedArtworkOverrideStatus: "active-source-match",
+    reviewedArtworkOverrideReason: record.reason
+  };
+  if (poster) {
+    result.reviewedArtworkOverrideTypography = record.posterTypography;
+    result.reviewedArtworkOverrideLowerBandStartY = record.posterLowerBandStartY;
+  }
+  return result;
 }
 
 test("new People stage input requires exactly one positive ID", () => {
@@ -152,6 +200,88 @@ test("new People Landscape evidence requires the locked chin-safe policy for mon
   }), /locked chin-safe placement|differ in chin-safe/u);
 });
 
+test("reviewed new People artwork overrides are narrow, source-bound, and proof-bound", async () => {
+  const configuration = await loadNewPersonArtworkOverrides({ repositoryRoot });
+  assert.equal(configuration.config.recordCount, 6);
+  assert.deepEqual(configuration.config.records.map((record) => `${record.tmdbPersonId}/${record.formatId}`), [
+    "55119/landscape",
+    "107821/landscape",
+    "107821/poster",
+    "532227/landscape",
+    "544699/landscape",
+    "932403/landscape"
+  ]);
+  const person = {
+    stableKey: "person:107821",
+    tmdbPersonId: 107821,
+    canonicalName: "Ilya Khrzhanovsky"
+  };
+  const source = {
+    available: true,
+    sourceHash: "4be8d56880513fb0166edf96c13f5a26adcd49be452af659b3b45180fcd71d27",
+    profilePathAttempted: "/93NDSHiogQ03SN6Z57e73Q8qCiy.jpg"
+  };
+  assert.equal(resolveNewPersonArtworkOverride({
+    person,
+    source,
+    formatId: "poster",
+    configuration
+  }).record.posterLowerBandStartY, 1260);
+  assert.throws(() => resolveNewPersonArtworkOverride({
+    person,
+    source: { ...source, sourceHash: "f".repeat(64) },
+    formatId: "poster",
+    configuration
+  }), /source-mismatch/u);
+
+  const selected = ["landscape", "poster"].map((formatId) =>
+    configuration.recordsByKey.get(`person:107821/${formatId}`));
+  const monochrome = renderMetadata(selected.map((item) => reviewedMetadataRecord(item, "monochrome-warm")));
+  const focus = renderMetadata(selected.map((item) => reviewedMetadataRecord(item, "colour-focus")));
+  const evidence = buildNewPersonArtworkOverrideEvidence({
+    personId: 107821,
+    monochromeMetadata: monochrome,
+    focusMetadata: focus,
+    configuration
+  });
+  assert.deepEqual(evidence.records.map((record) => record.formatId), ["landscape", "poster"]);
+  assert.equal(evidence.records[1].monochrome.outputHash,
+    "cf5f84f2a516991451349c9a5512b1a071a0274fd3c754c44db7d3313f5c2fb2");
+  const changedPoster = monochrome.records.map((record) => record.formatId === "poster"
+    ? { ...record, cropRectangle: { ...record.cropRectangle, height: record.cropRectangle.height - 1 } }
+    : record);
+  assert.throws(() => buildNewPersonArtworkOverrideEvidence({
+    personId: 107821,
+    monochromeMetadata: renderMetadata(changedPoster),
+    focusMetadata: focus,
+    configuration
+  }), /reviewed override geometry changed/u);
+});
+
+test("reviewed full-portrait Landscapes retain chin-safe evidence and paired geometry", async () => {
+  const configuration = await loadNewPersonArtworkOverrides({ repositoryRoot });
+  const selected = configuration.recordsByKey.get("person:532227/landscape");
+  const monochrome = reviewedMetadataRecord(selected, "monochrome-warm");
+  const focus = reviewedMetadataRecord(selected, "colour-focus");
+  const evidence = buildNewPersonLandscapePolicyEvidence({
+    personId: 532227,
+    hasProfile: true,
+    monochromeMetadata: renderMetadata(monochrome),
+    focusMetadata: renderMetadata(focus),
+    artworkOverrideConfiguration: configuration
+  });
+  assert.equal(evidence.monochrome.status, "reviewed-source-bound-override");
+  assert.equal(evidence.monochrome.tier, "tier-2-full-portrait");
+  assert.deepEqual(evidence.monochrome.portraitBounds, { x: 648, y: 0, width: 450, height: 675 });
+  assert.throws(() => buildNewPersonLandscapePolicyEvidence({
+    personId: 532227,
+    hasProfile: true,
+    monochromeMetadata: renderMetadata(monochrome),
+    focusMetadata: renderMetadata({ ...focus, portraitBounds: { x: 647, y: 0, width: 450, height: 675 } }),
+    artworkOverrideConfiguration: configuration
+  }), /geometry changed/u);
+});
+
 test("profile-free new People Landscapes bind the chin-safe fallback boundary", () => {
   const evidence = buildNewPersonLandscapePolicyEvidence({
     personId: 9001,
@@ -165,7 +295,10 @@ test("profile-free new People Landscapes bind the chin-safe fallback boundary", 
 
 test("new People intake source contains no credential or permanent publication path", async () => {
   const source = await readFile(path.join(repositoryRoot, "tools", "people-intake", "src", "stage.mjs"), "utf8");
-  assert.doesNotMatch(source, /TMDB_BEARER_TOKEN|api_key|api\.themoviedb\.org/iu);
+  const overrideSource = await readFile(path.join(repositoryRoot, "tools", "people-intake", "src", "artwork-overrides.mjs"), "utf8");
+  const overrideConfiguration = await readFile(path.join(repositoryRoot, "data", "people-intake-artwork-overrides.json"), "utf8");
+  assert.doesNotMatch(`${source}\n${overrideSource}\n${overrideConfiguration}`,
+    /TMDB_BEARER_TOKEN|api_key|api\.themoviedb\.org/iu);
   assert.doesNotMatch(source, /git\s+(add|commit|push)|npm\s+run\s+manifest/iu);
   assert.match(source, /const workRoot = path\.join\(toolRoot, ["']\.work["']\)/u);
   assert.equal((source.match(/landscapeDefaultCropPolicy:\s*PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID/gu) || []).length, 2);

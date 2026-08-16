@@ -13,6 +13,8 @@ It reuses the approved People renderers and produces:
 
 Every profile-based Landscape must use the locked `people-landscape-default-chin-safe-v1` policy for both the monochrome and colour-focus outputs. Staging fails if the policy ID, policy hash, tier, source binding, placement, or monochrome/focus crop geometry differs. The candidate report hash-binds both render-metadata files, and promotion independently repeats the same checks against the reviewed Landscape bytes. A profile-free text fallback records an explicit source-unavailable policy boundary instead.
 
+When owner review finds that the default geometric policy still crops a face, chin, or jaw, a narrow correction may be recorded in `data/people-intake-artwork-overrides.json`. Each correction is bound to one Person ID, format, canonical name, official TMDB profile path and source hash, base-preset hash, exact geometry, reason, tracking issue, and approved monochrome/focus proof hashes. A source, name, preset, geometry, or typography change fails closed. The reference proof hashes preserve the visual decision; the final staged bytes still receive their own exact owner approval before promotion. The current full-portrait Landscape tier keeps the locked right edge and top alignment while showing the complete portrait; the face-clear Poster treatment reserves a dark lower name band. Identities without a recorded correction continue to use the unchanged default policies.
+
 All files remain below `tools/people-intake/.work/`. The tool cannot update the canonical registry, write to `assets/people`, rebuild the manifest, commit, push, or publish anything.
 
 Runtime configuration uses the same Cloudflare proxy boundary as the hero generator:
