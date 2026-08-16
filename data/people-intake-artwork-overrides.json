@@ -2,8 +2,32 @@
   "version": "people-intake-artwork-overrides-v1",
   "status": "active",
   "ordering": "tmdb-person-id-then-format-ascending",
-  "recordCount": 6,
+  "recordCount": 7,
   "records": [
+    {
+      "stableKey": "person:6729",
+      "tmdbPersonId": 6729,
+      "canonicalName": "Robert Benton",
+      "formatId": "landscape",
+      "status": "active",
+      "sourceProfilePath": "/e8aGltL65lWeWZpwILZWBAieH2C.jpg",
+      "sourceHash": "90e39fad06fda1c61162fcfbd4abb6cfd31cd454b4d81c23b94a1f481d50b92d",
+      "basePresetId": "people-landscape-cormorant-v1",
+      "basePresetHash": "a94f863b9332332617355fd73265571dc9b3ccf055365674757d76ac2c48faad",
+      "cropStrategy": "owner-reviewed-full-portrait-landscape-v1",
+      "cropRectangle": { "left": 0, "top": 0, "width": 682, "height": 1023 },
+      "cropScale": { "x": 0.659824, "y": 0.659824 },
+      "cropOffsetX": 648,
+      "cropOffsetY": 0,
+      "reason": "owner-review-chin-safe-correction-20260816",
+      "prototypeTier": "tier-2-full-portrait",
+      "approvedProofs": {
+        "monochromeWarmSha256": "42d809160da250511a0c306b7f81788c5a5b5effdc9bfd4639f928b44dc8fc6d",
+        "colourFocusSha256": "0fe194aa40fa08e275c25f70769409bcfedfaba430019f8cc11d378fd3b25ae6"
+      },
+      "approvedAt": "2026-08-16",
+      "trackingIssue": 67
+    },
     {
       "stableKey": "person:55119",
       "tmdbPersonId": 55119,
