@@ -71,6 +71,74 @@
       }
     },
     {
+      "tmdbPersonId": 55119,
+      "canonicalName": "Alejandro Jodorowsky",
+      "categoryMembership": [
+        "director"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 31930647692,
+      "promotionRunId": 31931040194,
+      "trackingIssue": 61,
+      "destination": "assets/people/55119",
+      "candidateGeneratedAt": "2026-08-16T06:09:16.092Z",
+      "candidateReportSha256": "7a68021230f656c77e91efa2f22b32a676542e75f7c952578a39431a5ae63ede",
+      "sourceSnapshotSha256": "48765560ce4aa2de5a9c1a8b3ff09ba1c205fe3b4ce70a8be0d0837e30f3d3b1",
+      "heroSelectionSha256": "21e1a682d10711a5dffe2572b301f2640f8bde0d75aebe8242da864ad0612884",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "filmography",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "8c713010fac6db781c3ea2c9163a251ac01ae79b5e503a4024e8cc6864468719",
+          "bytes": 37460,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "f3cb1b2bc23258a89a9d560a2ccf9c6257f9c29476cdff4576b42ca07a7d2dff",
+          "bytes": 121836,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "60f92593799898215080802a6d83e0a4d3e8cb0dd4029c99252b8de9f96daf04",
+          "bytes": 194532,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "a994042ea9d90e0bd515e7e14f6bc4c882a2a1aa23a41bed2f91037fc15f4b31",
+          "bytes": 48142,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "1a04066a906a7c59bda5e679b3560d9a44f865289cb3cdaad8cc8cbcd8a06137",
+          "bytes": 151972,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "91a8cc402a9935cfdceca990e3e465ce1f5299ced94b41576109f31960c60ba9",
+          "bytes": 39645,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    },
+    {
       "tmdbPersonId": 57130,
       "canonicalName": "Todd Phillips",
       "categoryMembership": [
@@ -132,6 +200,278 @@
           "filename": "title-logo.png",
           "sha256": "d123acd120ce443ff93f88aba8a6a26f02be2dd5c8e6d24d03ed74f489409ce6",
           "bytes": 25121,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 107821,
+      "canonicalName": "Ilya Khrzhanovsky",
+      "categoryMembership": [
+        "director"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 31930647692,
+      "promotionRunId": 31931040194,
+      "trackingIssue": 61,
+      "destination": "assets/people/107821",
+      "candidateGeneratedAt": "2026-08-16T06:09:13.311Z",
+      "candidateReportSha256": "4098d69c1680ed4284d7c56c262bc379c42d88928664dcab702794d59b6e0c70",
+      "sourceSnapshotSha256": "b961074cb95fd41026e51007989badaeb2f9fb51eadaa3422cc6f882b41a706f",
+      "heroSelectionSha256": "2208bf096be9156a17f3224a7e0964f7dfa05790d8035e53ba1a80ebb2e18b00",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "filmography",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "b491af65b1addc281ada3b9bffdbb10d7ce782b0c2698c9190d9cfbce62f19f2",
+          "bytes": 25938,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "31df3b91b439db89556a1ca319cdf966e2a0f080ccc92b69fb7b40f1675849b7",
+          "bytes": 58106,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "32fa350b40d0b19550a5ba9b1cc2d92a513e6d69598c636054c182b7443b0938",
+          "bytes": 137658,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "85c86c45d6948afe8800385053ffde86b0c5f230e12f29f040597892f919fde6",
+          "bytes": 32394,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "cdd439e5c63c2b0ddfadff0af45964ba1b51c872e732e119cef4dbaadb11615e",
+          "bytes": 70450,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "484f5d53e1f73e2d7f35758ad51e5412af608b06a51715ba9ef3e6a63a21c97b",
+          "bytes": 34188,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 532227,
+      "canonicalName": "Arturo Ripstein",
+      "categoryMembership": [
+        "director"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 31930647692,
+      "promotionRunId": 31931040194,
+      "trackingIssue": 61,
+      "destination": "assets/people/532227",
+      "candidateGeneratedAt": "2026-08-16T06:09:11.434Z",
+      "candidateReportSha256": "3c3417b4f0e391f93a7b2247b0bc89d764c2d7fd49771c710d8d2568a9fc47b3",
+      "sourceSnapshotSha256": "2d7b090ddc58c82c30d7b10c20031a5b2d104214c8d6f64f905194494933949c",
+      "heroSelectionSha256": "ec0b26e4febc4b153cc129694ef344e6a98e90b5bc69cfcedfcc7690c6fb5b6a",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "filmography",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "4d144614b4a4c99ea6d2a4298d13a6c3946382ae73593516baef8fd9d38087bf",
+          "bytes": 33562,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "7bb0c7731715818608b0c0ab6a9a66df8cd610a15d898817abb6761e2b6a1303",
+          "bytes": 74692,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "be72d5a806d281fdc5c8b9fd924d6754f7136d8e9d7a6bedbb8bb6f3db68f492",
+          "bytes": 195898,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "e4ba42a72ca14aa0de496c2ef488bbbae2c8407a340735eefefb2dea41c9d241",
+          "bytes": 40066,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "b20113d4810b34a724ffe5f07fd4ac12a1dab5119ff20589aa4d604e4f895376",
+          "bytes": 89664,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "54fdf2e530da1a1c9c815d4ceb50de88da2ad647d233f5f45e7fa604e9520262",
+          "bytes": 29168,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 544699,
+      "canonicalName": "Elmar Klos",
+      "categoryMembership": [
+        "director"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 31930647692,
+      "promotionRunId": 31931040194,
+      "trackingIssue": 61,
+      "destination": "assets/people/544699",
+      "candidateGeneratedAt": "2026-08-16T06:09:26.290Z",
+      "candidateReportSha256": "549e419f024e4b6a52ebe0b32e4c0cca6f895a19a26fc8e5a1af35956c7f7c2f",
+      "sourceSnapshotSha256": "0b331517c7663dbc222318c02b867aed3f97516d5a97cdf570c1f89ff6f6c78d",
+      "heroSelectionSha256": "0db05bdcd0100ae53e9d26ab344610d032b8ebfabd242bbf52ee247296465b0f",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "filmography",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "64af2d938173949bc26cad299c31d61c2ee918abac9cc352851507c193107645",
+          "bytes": 26330,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "436b9264fd3687be2912f0d0975200e37d2cbc6d23b8d555721d0188b602f205",
+          "bytes": 69588,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "88213ff5d895055df3e8ef5ae83885623a3444cb7d9e7d402572423cb0484ebc",
+          "bytes": 192474,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "76ba59514cfcea93b57513a4d9505ef730419a9a465fe89b354c379c93853c0f",
+          "bytes": 37194,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "06789f5062914acc50e6dae13aea304e983c86e7ba1a56c4ab210456d8e9306b",
+          "bytes": 97288,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "669c9b706a5eb8f823033be9b1878bdd7eadd2ec8e47da79e44b3e8116a65f28",
+          "bytes": 27823,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 932403,
+      "canonicalName": "Fernando Pérez",
+      "categoryMembership": [
+        "director"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 31930647692,
+      "promotionRunId": 31931040194,
+      "trackingIssue": 61,
+      "destination": "assets/people/932403",
+      "candidateGeneratedAt": "2026-08-16T06:09:22.835Z",
+      "candidateReportSha256": "a918efc1d70781346184ee08ada970b404f9e8cd49dbc058445132f40d80e23f",
+      "sourceSnapshotSha256": "6b1239022e6f3f42b0c1c562bafcb06156c7b88893da59c39afee2117ecb698b",
+      "heroSelectionSha256": "fdae266a47f8a14473b12bb73a7add24caaca1a0593cf919b4a8a11ab92c7d7d",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "sparse-fallback",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "7fff9a10d8e2f9e10ada2b0e6f9defa05d1208bf07eca03d4899cfaadebefa5d",
+          "bytes": 44164,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "dc7bfe42b0bea1d9b07e72d56a31250d31dd574f55a7d8ea231bacab0c409d0d",
+          "bytes": 100970,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "8e1f8c3351ce98e554ae2074acdfa5a1e8cf376ca8cbf95a22f34fffd63a3441",
+          "bytes": 17874,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "a0c92f885129f5ed91d6abdc83fecce41248b0eb0eb1aa55123f0042be87840a",
+          "bytes": 54704,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "c31ec61b0b48588a7819e58aee1d943554706253e0d0006cd3d4d0a046eaf081",
+          "bytes": 121890,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "88bbc29fa65a1df5e99294a55ab546f84f42954500c4a202cd2848c1a39b6cee",
+          "bytes": 28794,
           "width": 1600,
           "height": 480,
           "format": "png"

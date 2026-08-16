@@ -7859,6 +7859,13 @@
       ]
     },
     {
+      "tmdbPersonId": 55119,
+      "canonicalName": "Alejandro Jodorowsky",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
       "tmdbPersonId": 55520,
       "canonicalName": "Nae Caranfil",
       "categoryMembership": [
@@ -9238,6 +9245,13 @@
       ]
     },
     {
+      "tmdbPersonId": 107821,
+      "canonicalName": "Ilya Khrzhanovsky",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
       "tmdbPersonId": 108764,
       "canonicalName": "Mikhail Kalatozov",
       "categoryMembership": [
@@ -9819,6 +9833,13 @@
       ]
     },
     {
+      "tmdbPersonId": 532227,
+      "canonicalName": "Arturo Ripstein",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
       "tmdbPersonId": 543530,
       "canonicalName": "Dave Bautista",
       "categoryMembership": [
@@ -9828,6 +9849,13 @@
     {
       "tmdbPersonId": 543652,
       "canonicalName": "Ritwik Ghatak",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
+      "tmdbPersonId": 544699,
+      "canonicalName": "Elmar Klos",
       "categoryMembership": [
         "director"
       ]
@@ -9912,6 +9940,13 @@
     {
       "tmdbPersonId": 931211,
       "canonicalName": "Alice Rohrwacher",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
+      "tmdbPersonId": 932403,
+      "canonicalName": "Fernando Pérez",
       "categoryMembership": [
         "director"
       ]
