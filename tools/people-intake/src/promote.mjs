@@ -16,6 +16,10 @@ import sharp from "sharp";
 
 import { buildInventory, repositoryRoot as canonicalRepositoryRoot } from "../../../scripts/lib/inventory.mjs";
 import { isPathInside } from "../../people-hero/src/preflight.mjs";
+import {
+  buildNewPersonArtworkOverrideEvidence,
+  loadNewPersonArtworkOverrides
+} from "./artwork-overrides.mjs";
 import { buildNewPersonLandscapePolicyEvidence } from "./landscape-policy.mjs";
 
 export const MAXIMUM_PROMOTION_BATCH_SIZE = 30;
@@ -251,7 +255,7 @@ function assertReportedEvidence(personId, key, reported, inspected, expectedSuff
     `${personId}: ${key} evidence differs from the hash-bound candidate report`);
 }
 
-async function verifyCandidate({ candidate, approval }) {
+async function verifyCandidate({ candidate, approval, artworkOverrideConfiguration }) {
   const { reportPath, reportRecord } = candidate;
   const report = reportRecord.value;
   const personId = approval.tmdbPersonId;
@@ -301,7 +305,8 @@ async function verifyCandidate({ candidate, approval }) {
     personId,
     hasProfile,
     monochromeMetadata: monochromeMetadata.value,
-    focusMetadata: focusMetadata?.value || null
+    focusMetadata: focusMetadata?.value || null,
+    artworkOverrideConfiguration
   });
   assert(isDeepStrictEqual(reportedLandscapePolicy, expectedLandscapePolicy),
     `${personId}: candidate report chin-safe evidence differs from the render metadata`);
@@ -312,6 +317,19 @@ async function verifyCandidate({ candidate, approval }) {
       focusMetadata, `/reports/focus-render-metadata.json`);
   } else {
     assert(reportedRenderMetadata?.focus === null, `${personId}: profile-free candidate reports focus Landscape policy evidence`);
+  }
+  const expectedArtworkOverrides = hasProfile ? buildNewPersonArtworkOverrideEvidence({
+    personId,
+    monochromeMetadata: monochromeMetadata.value,
+    focusMetadata: focusMetadata.value,
+    configuration: artworkOverrideConfiguration
+  }) : null;
+  if (expectedArtworkOverrides) {
+    assert(isDeepStrictEqual(report.artworkOverrides, expectedArtworkOverrides),
+      `${personId}: candidate report reviewed artwork override evidence differs from the render metadata`);
+  } else {
+    assert(!Object.hasOwn(report, "artworkOverrides"),
+      `${personId}: candidate unexpectedly reports a reviewed artwork override`);
   }
 
   const directoryFiles = (await readdir(candidateRoot, { withFileTypes: true }))
@@ -478,11 +496,14 @@ export async function promoteReviewedCandidates({
   dryRun = false,
   repositoryRoot = moduleRoot,
   workRoot = defaultWorkRoot,
-  inventoryBuilder = buildInventory
+  inventoryBuilder = buildInventory,
+  artworkOverrideConfiguration = null
 }) {
   const resolvedArtifactRoot = assertPromotionWorkPath(artifactRoot, workRoot);
   assert(approvals?.version === APPROVAL_DOCUMENT_VERSION && approvals.status === "owner-approved",
     "Validated owner approvals are required");
+  const resolvedArtworkOverrides = artworkOverrideConfiguration
+    || await loadNewPersonArtworkOverrides({ repositoryRoot: moduleRoot });
   const discovered = await discoverCandidates(resolvedArtifactRoot);
   const candidateById = new Map();
   for (const candidate of discovered) {
@@ -495,7 +516,7 @@ export async function promoteReviewedCandidates({
   for (const approval of approvals.approvals) {
     const candidate = candidateById.get(approval.tmdbPersonId);
     assert(candidate, `Staging run does not contain approved TMDB Person ID ${approval.tmdbPersonId}`);
-    plans.push(await verifyCandidate({ candidate, approval }));
+    plans.push(await verifyCandidate({ candidate, approval, artworkOverrideConfiguration: resolvedArtworkOverrides }));
   }
 
   const registryPath = path.join(repositoryRoot, "data", "people.json");

@@ -50,6 +50,25 @@ export async function validateRenderMetadata(metadata) {
       }
       if (record.landscapeDefaultCropStatus === "source-unavailable-fallback" && (!record.fallbackUsed || record.landscapeDefaultCropSourceHash !== null || record.landscapeDefaultCropTier !== null)) errors.push(`${record.stableKey}/${record.formatId}: source-unavailable default crop policy metadata is inconsistent`);
     }
+    const reviewedOverrideFields = ["reviewedArtworkOverrideId", "reviewedArtworkOverrideRecordHash",
+      "reviewedArtworkOverrideSourceHash", "reviewedArtworkOverrideStatus", "reviewedArtworkOverrideReason"];
+    if (record.reviewedArtworkOverrideUsed === true) {
+      for (const field of reviewedOverrideFields) {
+        if (!Object.hasOwn(record, field)) errors.push(`${record.stableKey}/${record.formatId}: ${field} is required for a reviewed artwork override`);
+      }
+      if (record.reviewedArtworkOverrideId !== `${record.stableKey}/${record.formatId}`) errors.push(`${record.stableKey}/${record.formatId}: reviewed artwork override ID differs from the identity and format`);
+      if (record.reviewedArtworkOverrideSourceHash !== record.sourceHash) errors.push(`${record.stableKey}/${record.formatId}: reviewed artwork override source hash differs from the rendered source`);
+      if (record.cropOverrideUsed === true || hasDefaultCrop) errors.push(`${record.stableKey}/${record.formatId}: reviewed artwork override cannot be combined with another crop policy`);
+      if (record.formatId === "poster") {
+        if (!record.reviewedArtworkOverrideTypography || !Number.isInteger(record.reviewedArtworkOverrideLowerBandStartY)) errors.push(`${record.stableKey}/poster: reviewed face-clear treatment is incomplete`);
+      } else if (Object.hasOwn(record, "reviewedArtworkOverrideTypography") || Object.hasOwn(record, "reviewedArtworkOverrideLowerBandStartY")) {
+        errors.push(`${record.stableKey}/landscape: poster-only reviewed artwork fields are present`);
+      }
+    } else if (reviewedOverrideFields.some((field) => Object.hasOwn(record, field))
+      || Object.hasOwn(record, "reviewedArtworkOverrideTypography")
+      || Object.hasOwn(record, "reviewedArtworkOverrideLowerBandStartY")) {
+      errors.push(`${record.stableKey}/${record.formatId}: reviewed artwork override fields are present without reviewedArtworkOverrideUsed`);
+    }
   }
   return errors;
 }
@@ -68,6 +87,9 @@ export async function writeRenderMetadata({ metadata, outputDir, jsonName = "ren
     "effectiveCropRectangle", "effectiveCropScale", "effectiveCropOffset",
     "landscapeDefaultCropPolicyId", "landscapeDefaultCropPolicyHash", "landscapeDefaultCropStatus",
     "landscapeDefaultCropTier", "landscapeDefaultCropSourceHash", "landscapeDefaultCropSourceBoundLimited",
+    "reviewedArtworkOverrideUsed", "reviewedArtworkOverrideId", "reviewedArtworkOverrideRecordHash",
+    "reviewedArtworkOverrideSourceHash", "reviewedArtworkOverrideStatus", "reviewedArtworkOverrideReason",
+    "reviewedArtworkOverrideTypography", "reviewedArtworkOverrideLowerBandStartY",
   ];
   const jsonPath = path.join(outputDir, jsonName);
   const csvPath = path.join(outputDir, csvName);
