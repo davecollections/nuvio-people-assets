@@ -1524,6 +1524,13 @@
       ]
     },
     {
+      "tmdbPersonId": 2000,
+      "canonicalName": "Lewis Milestone",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
       "tmdbPersonId": 2034,
       "canonicalName": "Danny Boyle",
       "categoryMembership": [
@@ -1710,6 +1717,13 @@
       "canonicalName": "Michael Keaton",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 2239,
+      "canonicalName": "Anthony Minghella",
+      "categoryMembership": [
+        "director"
       ]
     },
     {
@@ -2361,6 +2375,13 @@
       "canonicalName": "Thomas Mitchell",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 3388,
+      "canonicalName": "James L. Brooks",
+      "categoryMembership": [
+        "director"
       ]
     },
     {
@@ -3923,6 +3944,13 @@
       "canonicalName": "Doris Day",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 8246,
+      "canonicalName": "Barry Levinson",
+      "categoryMembership": [
+        "director"
       ]
     },
     {
@@ -5877,6 +5905,13 @@
       ]
     },
     {
+      "tmdbPersonId": 16513,
+      "canonicalName": "John G. Avildsen",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
       "tmdbPersonId": 16523,
       "canonicalName": "Burgess Meredith",
       "categoryMembership": [
@@ -6252,6 +6287,13 @@
       "canonicalName": "Van Heflin",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 18868,
+      "canonicalName": "Jerome Robbins",
+      "categoryMembership": [
+        "director"
       ]
     },
     {
@@ -7232,6 +7274,13 @@
       "canonicalName": "Stephen Lang",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 32765,
+      "canonicalName": "Tony Richardson",
+      "categoryMembership": [
+        "director"
       ]
     },
     {
@@ -8293,10 +8342,24 @@
       ]
     },
     {
+      "tmdbPersonId": 67451,
+      "canonicalName": "Delbert Mann",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
       "tmdbPersonId": 67599,
       "canonicalName": "Vanessa Hudgens",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 67717,
+      "canonicalName": "Michel Hazanavicius",
+      "categoryMembership": [
+        "director"
       ]
     },
     {
@@ -8370,6 +8433,13 @@
       ]
     },
     {
+      "tmdbPersonId": 70500,
+      "canonicalName": "Tom Hooper",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
       "tmdbPersonId": 70579,
       "canonicalName": "Serdar Akar",
       "categoryMembership": [
@@ -8437,6 +8507,13 @@
       "canonicalName": "Betty White",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 72061,
+      "canonicalName": "Frank Lloyd",
+      "categoryMembership": [
+        "director"
       ]
     },
     {
@@ -8778,6 +8855,13 @@
     {
       "tmdbPersonId": 82796,
       "canonicalName": "Nikita Mikhalkov",
+      "categoryMembership": [
+        "director"
+      ]
+    },
+    {
+      "tmdbPersonId": 82800,
+      "canonicalName": "Norman Taurog",
       "categoryMembership": [
         "director"
       ]
@@ -9354,6 +9438,13 @@
       "canonicalName": "Jason Momoa",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 118415,
+      "canonicalName": "Sean Baker",
+      "categoryMembership": [
+        "director"
       ]
     },
     {
@@ -10257,6 +10348,13 @@
       "canonicalName": "Florence Pugh",
       "categoryMembership": [
         "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 1383612,
+      "canonicalName": "Daniel Kwan",
+      "categoryMembership": [
+        "director"
       ]
     },
     {
