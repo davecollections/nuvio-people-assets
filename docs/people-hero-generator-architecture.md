@@ -8,7 +8,8 @@ For each registered TMDB Person ID it chooses exactly one outcome:
 
 1. **Filmography:** select 15–32 eligible, distinct credits. Use more than 24 only when the career supports a denser unique-title composition. Use posters and backdrops first; add at most three profiles only when portrait positions would otherwise remain empty. The approved full-bleed Prism T2 lattice places every selected source first, then uses deterministic lower-salience fallback placements only where required to prevent exposed perspective/bleed slots.
 2. **Profile-only:** when fewer than 15 credits qualify but 15–24 suitable official profiles exist, use the portrait-focused T2 layout with no credit artwork.
-3. **Skip:** when neither threshold is met.
+3. **Sparse fallback:** when neither normal threshold is met but at least one eligible credit has official artwork, use every eligible credit in the same T2 lattice and apply the locked cinematic defocus and dark grading. This conceals unavoidable repetition without admitting excluded credits or baking the separate title logo into the hero. A later refresh automatically replaces the fallback when a normal hero becomes eligible.
+4. **Skip:** when the profile-only threshold is not met and no eligible credit artwork exists.
 
 The 250 KiB output size is an optimisation target, not a failure condition. The repository-wide 1 MiB asset ceiling remains mandatory.
 
@@ -34,9 +35,9 @@ Ranking is deterministic and career-oriented. Role significance is considered be
 
 ## Staging and publication
 
-Every operation accepts exactly one registered Person ID and writes only beneath `tools/people-hero/.work`. The lightweight eligibility check makes one metadata request and retains only a compact deterministic summary of counts, outcome, and grouped rejection reasons; it downloads no artwork and stores no source paths. A full candidate-generation run separately records the source snapshot, accepted and rejected credits, ranking components, selected paths, profiles, layout seed, renderer version, and hashes without credentials.
+The public hero CLI remains registry-bound and writes only beneath `tools/people-hero/.work`. The manual single-identity workflows accept exactly one registered Person ID, while the controlled batch workflow accepts an explicit bounded list of registered IDs. The lightweight eligibility check makes one metadata request and retains only a compact deterministic summary of counts, outcome, and grouped rejection reasons; it downloads no artwork and stores no source paths. A full candidate-generation run separately records the source snapshot, accepted and rejected credits, ranking components, selected paths, profiles, layout seed, renderer version, and hashes without credentials.
 
-Generation has no code path to `assets/people`. Promotion remains a separate future command requiring explicit owner approval of the exact Person ID and candidate SHA-256. No branch, commit, push, or publication occurs automatically.
+Generation has no code path to `assets/people`. The separate new-People intake can stage explicit unregistered IDs and has an implemented owner-approved promotion workflow: it verifies the reviewed hashes, copies the exact candidate bytes, updates the registry and manifest on an isolated branch, and opens a draft pull request without merging. Promotion of refreshed heroes for already-registered People is not yet implemented; it remains part of the automation-refresh work and must preserve the same exact-hash approval boundary. No generation workflow publishes or merges automatically.
 
 ## Refresh policy
 
