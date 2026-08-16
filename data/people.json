@@ -5383,6 +5383,13 @@
       ]
     },
     {
+      "tmdbPersonId": 13324,
+      "canonicalName": "Paul Scofield",
+      "categoryMembership": [
+        "actor"
+      ]
+    },
+    {
       "tmdbPersonId": 13333,
       "canonicalName": "Vanessa Redgrave",
       "categoryMembership": [
@@ -6157,6 +6164,13 @@
     {
       "tmdbPersonId": 17753,
       "canonicalName": "Lionel Barrymore",
+      "categoryMembership": [
+        "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 17838,
+      "canonicalName": "Rami Malek",
       "categoryMembership": [
         "actor"
       ]
@@ -9548,6 +9562,13 @@
       "canonicalName": "Věra Chytilová",
       "categoryMembership": [
         "director"
+      ]
+    },
+    {
+      "tmdbPersonId": 124309,
+      "canonicalName": "George Arliss",
+      "categoryMembership": [
+        "actor"
       ]
     },
     {
