@@ -93,7 +93,7 @@
         "posterLowerBandStartY": { "type": "integer", "minimum": 0, "maximum": 1499 },
         "approvedProofs": { "$ref": "#/$defs/proofs" },
         "approvedAt": { "const": "2026-08-16" },
-        "trackingIssue": { "const": 59 }
+        "trackingIssue": { "type": "integer", "minimum": 1 }
       }
     }
   }

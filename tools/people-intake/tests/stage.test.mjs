@@ -202,8 +202,9 @@ test("new People Landscape evidence requires the locked chin-safe policy for mon
 
 test("reviewed new People artwork overrides are narrow, source-bound, and proof-bound", async () => {
   const configuration = await loadNewPersonArtworkOverrides({ repositoryRoot });
-  assert.equal(configuration.config.recordCount, 6);
+  assert.equal(configuration.config.recordCount, 7);
   assert.deepEqual(configuration.config.records.map((record) => `${record.tmdbPersonId}/${record.formatId}`), [
+    "6729/landscape",
     "55119/landscape",
     "107821/landscape",
     "107821/poster",
@@ -211,6 +212,17 @@ test("reviewed new People artwork overrides are narrow, source-bound, and proof-
     "544699/landscape",
     "932403/landscape"
   ]);
+  const benton = configuration.recordsByKey.get("person:6729/landscape");
+  assert.equal(benton.record.sourceProfilePath, "/e8aGltL65lWeWZpwILZWBAieH2C.jpg");
+  assert.equal(benton.record.sourceHash,
+    "90e39fad06fda1c61162fcfbd4abb6cfd31cd454b4d81c23b94a1f481d50b92d");
+  assert.deepEqual(benton.record.cropRectangle, { left: 0, top: 0, width: 682, height: 1023 });
+  assert.deepEqual(benton.record.cropScale, { x: 0.659824, y: 0.659824 });
+  assert.equal(benton.record.approvedProofs.monochromeWarmSha256,
+    "42d809160da250511a0c306b7f81788c5a5b5effdc9bfd4639f928b44dc8fc6d");
+  assert.equal(benton.record.approvedProofs.colourFocusSha256,
+    "0fe194aa40fa08e275c25f70769409bcfedfaba430019f8cc11d378fd3b25ae6");
+  assert.equal(benton.record.trackingIssue, 67);
   const person = {
     stableKey: "person:107821",
     tmdbPersonId: 107821,
@@ -260,11 +272,11 @@ test("reviewed new People artwork overrides are narrow, source-bound, and proof-
 
 test("reviewed full-portrait Landscapes retain chin-safe evidence and paired geometry", async () => {
   const configuration = await loadNewPersonArtworkOverrides({ repositoryRoot });
-  const selected = configuration.recordsByKey.get("person:532227/landscape");
+  const selected = configuration.recordsByKey.get("person:6729/landscape");
   const monochrome = reviewedMetadataRecord(selected, "monochrome-warm");
   const focus = reviewedMetadataRecord(selected, "colour-focus");
   const evidence = buildNewPersonLandscapePolicyEvidence({
-    personId: 532227,
+    personId: 6729,
     hasProfile: true,
     monochromeMetadata: renderMetadata(monochrome),
     focusMetadata: renderMetadata(focus),
@@ -274,7 +286,7 @@ test("reviewed full-portrait Landscapes retain chin-safe evidence and paired geo
   assert.equal(evidence.monochrome.tier, "tier-2-full-portrait");
   assert.deepEqual(evidence.monochrome.portraitBounds, { x: 648, y: 0, width: 450, height: 675 });
   assert.throws(() => buildNewPersonLandscapePolicyEvidence({
-    personId: 532227,
+    personId: 6729,
     hasProfile: true,
     monochromeMetadata: renderMetadata(monochrome),
     focusMetadata: renderMetadata({ ...focus, portraitBounds: { x: 647, y: 0, width: 450, height: 675 } }),
