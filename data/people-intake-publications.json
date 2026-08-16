@@ -275,6 +275,74 @@
       }
     },
     {
+      "tmdbPersonId": 6729,
+      "canonicalName": "Robert Benton",
+      "categoryMembership": [
+        "director"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 31933565739,
+      "promotionRunId": 31935018724,
+      "trackingIssue": 64,
+      "destination": "assets/people/6729",
+      "candidateGeneratedAt": "2026-08-16T07:21:18.765Z",
+      "candidateReportSha256": "a942d34a0f9e3af786223ac50dadeb9f22c8c909f87f72e63016faadb6e9b63a",
+      "sourceSnapshotSha256": "c882795efe702dd6929ed0eac9584f493bfa1a46d4ce8da34487f76dfd370a6c",
+      "heroSelectionSha256": "2a14f1c999b9edde79e44446b02bbe984b8080627b34c02ccfdf274bff83a826",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "sparse-fallback",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "f0c168414d191276084fef7302a8ba88c06f5225fadba63883d625a56d952334",
+          "bytes": 44170,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "fa7ddf3b4d37b8d0a7839e6abc0494ae3cfb83348987a5eceb2af8223bc55b19",
+          "bytes": 190808,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "4ac7953621ed13cfc4c2e94a422c142c78db7f66165e61710fcb6d044d3445a9",
+          "bytes": 19718,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "3fb7ef36f86ce127d6b9eb56fbc12edb993a5dda6e3f0b69dfd38a921599c170",
+          "bytes": 64328,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "259916956a165b62709eee51b1510e19d33d3d35f936fd2d618dfe62322ce25d",
+          "bytes": 260738,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "f400910134ccd3c22b533a9aa765989251d41dabc62766d0ccf536c458bb3013",
+          "bytes": 25862,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    },
+    {
       "tmdbPersonId": 8246,
       "canonicalName": "Barry Levinson",
       "categoryMembership": [
