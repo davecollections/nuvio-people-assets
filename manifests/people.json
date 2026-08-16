@@ -2,16 +2,16 @@
   "schemaVersion": 2,
   "repository": "davecollections/nuvio-people-assets",
   "ordering": "tmdb-person-id-ascending",
-  "recordCount": 1501,
+  "recordCount": 1502,
   "assetCounts": {
-    "poster": 1501,
-    "titleLogo": 1501,
-    "landscape": 1501,
-    "hero": 1501,
-    "focusPoster": 1499,
-    "focusLandscape": 1499
+    "poster": 1502,
+    "titleLogo": 1502,
+    "landscape": 1502,
+    "hero": 1502,
+    "focusPoster": 1500,
+    "focusLandscape": 1500
   },
-  "totalAssetBytes": 756701818,
+  "totalAssetBytes": 757307442,
   "heroPreset": {
     "id": "people-t2-perspective-v2",
     "width": 2560,
@@ -32076,6 +32076,69 @@
           "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6721/focus-landscape.webp",
           "sha256": "ae36f4dd6544d5f324c528dd5e4e2b156deb1ffd8b28b90e44deb1aa192fe910",
           "bytes": 16166,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 6729,
+      "canonicalName": "Robert Benton",
+      "categoryMembership": [
+        "director"
+      ],
+      "assets": {
+        "poster": {
+          "path": "assets/people/6729/poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6729/poster.webp",
+          "sha256": "259916956a165b62709eee51b1510e19d33d3d35f936fd2d618dfe62322ce25d",
+          "bytes": 260738,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "path": "assets/people/6729/title-logo.png",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6729/title-logo.png",
+          "sha256": "f400910134ccd3c22b533a9aa765989251d41dabc62766d0ccf536c458bb3013",
+          "bytes": 25862,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        },
+        "landscape": {
+          "path": "assets/people/6729/landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6729/landscape.webp",
+          "sha256": "3fb7ef36f86ce127d6b9eb56fbc12edb993a5dda6e3f0b69dfd38a921599c170",
+          "bytes": 64328,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/6729/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6729/hero.webp",
+          "sha256": "4ac7953621ed13cfc4c2e94a422c142c78db7f66165e61710fcb6d044d3445a9",
+          "bytes": 19718,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/6729/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6729/focus-poster.webp",
+          "sha256": "fa7ddf3b4d37b8d0a7839e6abc0494ae3cfb83348987a5eceb2af8223bc55b19",
+          "bytes": 190808,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/6729/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/6729/focus-landscape.webp",
+          "sha256": "f0c168414d191276084fef7302a8ba88c06f5225fadba63883d625a56d952334",
+          "bytes": 44170,
           "width": 1200,
           "height": 675,
           "format": "webp"
