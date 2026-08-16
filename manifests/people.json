@@ -10282,7 +10282,8 @@
       "tmdbPersonId": 1269,
       "canonicalName": "Kevin Costner",
       "categoryMembership": [
-        "actor"
+        "actor",
+        "director"
       ],
       "assets": {
         "poster": {
@@ -16267,7 +16268,8 @@
       "tmdbPersonId": 2461,
       "canonicalName": "Mel Gibson",
       "categoryMembership": [
-        "actor"
+        "actor",
+        "director"
       ],
       "assets": {
         "poster": {
@@ -24079,7 +24081,8 @@
       "tmdbPersonId": 4135,
       "canonicalName": "Robert Redford",
       "categoryMembership": [
-        "actor"
+        "actor",
+        "director"
       ],
       "assets": {
         "poster": {
@@ -26347,7 +26350,8 @@
       "tmdbPersonId": 4786,
       "canonicalName": "Richard Attenborough",
       "categoryMembership": [
-        "actor"
+        "actor",
+        "director"
       ],
       "assets": {
         "poster": {
@@ -31262,7 +31266,8 @@
       "tmdbPersonId": 6449,
       "canonicalName": "Warren Beatty",
       "categoryMembership": [
-        "actor"
+        "actor",
+        "director"
       ],
       "assets": {
         "poster": {

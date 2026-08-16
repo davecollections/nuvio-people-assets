@@ -53,7 +53,10 @@ test("frozen migrated registry, legacy base artwork, and approved v2 title logos
     const legacyTitle = presentationById.get(person.tmdbPersonId);
     const publishedTitle = publicationById.get(person.tmdbPersonId);
     assert.equal(person.canonicalName, canonicalPerson.canonicalName);
-    assert.deepEqual(person.categoryMembership, canonicalPerson.categoryMembership);
+    for (const category of person.categoryMembership) {
+      assert(canonicalPerson.categoryMembership.includes(category),
+        `${person.tmdbPersonId}: canonical registry dropped migrated ${category} membership`);
+    }
     const legacyArtwork = artwork.records.find((record) => record.tmdbPersonId === person.tmdbPersonId);
     assert.equal(legacyArtwork.posterHash, currentPerson.assets.poster.sha256);
     assert.equal(legacyArtwork.landscapeHash, currentPerson.assets.landscape.sha256);
