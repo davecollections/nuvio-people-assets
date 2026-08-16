@@ -39,6 +39,6 @@ The public hero CLI remains registry-bound and writes only beneath `tools/people
 
 Generation has no code path to `assets/people`. The separate new-People intake can stage explicit unregistered IDs and has an implemented owner-approved promotion workflow: it verifies the reviewed hashes, copies the exact candidate bytes, updates the registry and manifest on an isolated branch, and opens a draft pull request without merging. Promotion of refreshed heroes for already-registered People is not yet implemented; it remains part of the automation-refresh work and must preserve the same exact-hash approval boundary. No generation workflow publishes or merges automatically.
 
-## Refresh policy
+## Planned refresh policy
 
-The scheduled audit cadence is every two months. A candidate is staged when at least two selected titles/artwork paths change, one new credit enters the top eight, or a manual refresh is requested. Profile-only heroes require at least three changed selected profiles unless manually refreshed. Score-only changes that leave the effective selection and artwork unchanged do not trigger a render.
+The approved target cadence for the forthcoming refresh automation is every two months; no scheduled refresh or registered-hero promotion workflow is active yet. Once implemented, a candidate is staged when at least two selected titles/artwork paths change, one new credit enters the top eight, or a manual refresh is requested. Profile-only heroes require at least three changed selected profiles unless manually refreshed. Score-only changes that leave the effective selection and artwork unchanged do not trigger a render.

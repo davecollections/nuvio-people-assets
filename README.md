@@ -19,6 +19,7 @@ For example, Tom Hanks is stored under `assets/people/31/`.
 ## Asset contract
 
 - `poster.webp`, `landscape.webp`, `title-logo.png`, and `hero.webp` are required for every registry entry. Landscape remains a current/V1 compatibility asset, but it is part of the canonical consumer contract until a separately approved V2 decision changes that contract.
+- `title-logo.png` uses the approved `people-title-logo-standard-canvas-v2` design on a transparent 1600 x 480 canvas. The renderer is staging-only; publication still requires the reviewed intake or asset-change boundary.
 - New heroes use the `people-t2-perspective-v2` design: 2560 x 1440, T2 perspective layout, and WebP quality 82.
 - Focus artwork is published as a pair wherever a preserved approved portrait source exists. `focus-poster.webp` is 1000 x 1500 and `focus-landscape.webp` is 1200 x 675; both are static WebP quality 82 files generated from the same approved portrait, crop, gradients, grain, and typography as their monochrome counterparts, with only the grayscale and warm-tint treatment removed. Kátia Lund (`8559`) and Shimit Amin (`76447`) intentionally have no focus pair because no approved profile source exists.
 - Filmography heroes use 15–32 eligible, distinct movie/TV credits. Principal-performer concert and performance films may qualify when TMDB records them as Music-genre movies with the person billed first; ordinary `Self` appearances remain excluded. The approved full-bleed T2 lattice places every selected source before using deterministic low-salience fallback placements to keep the perspective crop complete. Profile-only heroes are permitted when fewer than 15 credits qualify but at least 15 suitable official profile images exist.
@@ -57,9 +58,9 @@ New identities begin with the staging-only intake workflow documented in [`tools
 
 After review, the separate `Promote reviewed new People candidates` workflow can copy the exact approved artifact bytes into an isolated branch, extend `data/people.json` and the compact `data/people-intake-publications.json` evidence ledger, rebuild the manifest, validate the repository, and open a draft pull request. It cannot rerender artwork or merge its pull request. See the intake documentation for the approval record and safety checks.
 
-## Legacy poster, landscape, and title-logo reproduction
+## Base-artwork and historical reproduction
 
-The People-only base-artwork source record and offline renderer migrated from `nuvio-assets` are retained under `data/people-base/` and `tools/people-seed/`. The tool is staging-only, accepts at most 30 explicit Person IDs, and cannot access the network or publish assets. See [the decommission checklist](docs/people-workflow-decommission.md) before removing any legacy People paths from the old repository.
+The People-only base-artwork source record and offline renderer migrated from `nuvio-assets` are retained under `data/people-base/` and `tools/people-seed/`. For the frozen original 1,480 identities, the tool reproduces current posters, compatibility landscapes, and V2 title logos while retaining the historical title-logo output as separate migration evidence. It is staging-only, accepts at most 30 explicit migrated Person IDs, and cannot access the network or publish assets. See [the decommission checklist](docs/people-workflow-decommission.md) before removing any legacy People paths from the old repository.
 
 ## Local validation
 
