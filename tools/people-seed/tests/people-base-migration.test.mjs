@@ -9,6 +9,7 @@ import { assertSafeOutputDirectory } from "../src/people-artwork/renderer.mjs";
 import { selectSourceCacheCandidates } from "../src/people-artwork/source-resolution.mjs";
 import { loadTitleLogoConfiguration, prepareTitleLogoRenderer, renderTitleLogo } from "../src/people-artwork/title-logo.mjs";
 import { applyTitleLogoOutputOverride, loadTitleLogoOutputOverrides } from "../src/people-artwork/title-logo-output-overrides.mjs";
+import { prepareTitleLogoV2Renderer, renderTitleLogoV2 } from "../src/people-artwork/title-logo-v2.mjs";
 import { parseConsolidationArguments } from "../src/consolidate-source-caches.mjs";
 import { validateAgainstSchema } from "../src/schema-validator.mjs";
 import { baseArtworkAttemptName, parseBaseArtworkArguments, stageBaseArtwork, validateBaseArtworkInput } from "../src/stage-base-artwork.mjs";
@@ -169,6 +170,36 @@ test("migrated legacy title-logo renderer remains deterministic without defining
   assert.equal(second.record.outputHash, legacyHash);
   assert.notEqual(first.record.outputHash, currentHash);
   assert.deepEqual(first.output, second.output);
+});
+
+test("published v2 title logos reproduce current bytes while legacy title logos remain separate", async () => {
+  const [registry, current, publication, legacyPresentation] = await Promise.all([
+    readJson("data/people-base/people-registry.json"),
+    readJson("manifests/people.json"),
+    readJson("data/people-base/title-logo-v2-publication.json"),
+    readJson("data/people-base/legacy-presentation-manifest.json"),
+  ]);
+  const people = [1, 31].map((tmdbPersonId) => {
+    const record = registry.records.find((person) => person.tmdbPersonId === tmdbPersonId);
+    return { stableKey: record.stableKey, tmdbPersonId, canonicalName: record.canonicalName, categoryMembership: record.categoryMembership };
+  });
+  const configuration = await loadTitleLogoConfiguration({ registry });
+  const overrides = await loadTitleLogoOutputOverrides({ registry });
+  const preparedLegacy = await prepareTitleLogoRenderer({ people, configuration });
+  const preparedCurrent = await prepareTitleLogoV2Renderer({ people, basePrepared: preparedLegacy });
+  for (const person of people) {
+    const baseLegacy = await renderTitleLogo({ person, ...preparedLegacy });
+    const legacy = await applyTitleLogoOutputOverride({ person, rendered: baseLegacy, runtime: preparedLegacy.runtime, overrides });
+    const v2 = await renderTitleLogoV2({ person, ...preparedCurrent });
+    const currentHash = current.people.find((record) => record.tmdbPersonId === person.tmdbPersonId).assets.titleLogo.sha256;
+    const publicationHash = publication.records.find((record) => record.tmdbPersonId === person.tmdbPersonId).sha256;
+    const snapshotHash = legacyPresentation.records.find((record) => record.tmdbPersonId === person.tmdbPersonId).titleLogoSha256;
+    const approvedLegacyHash = overrides.byId.get(person.tmdbPersonId)?.outputSha256 || snapshotHash;
+    assert.equal(v2.record.outputHash, currentHash);
+    assert.equal(v2.record.outputHash, publicationHash);
+    assert.equal(legacy.record.outputHash, approvedLegacyHash);
+    assert.notEqual(legacy.record.outputHash, v2.record.outputHash);
+  }
 });
 
 test("historical Tom Hanks output override remains deterministic after the v2 publication", async () => {

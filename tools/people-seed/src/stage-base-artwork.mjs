@@ -9,6 +9,7 @@ import { assertSafeOutputDirectory, renderPeopleArtwork } from "./people-artwork
 import { readSourceCacheIndex, resolveApprovedProfile } from "./people-artwork/source-resolution.mjs";
 import { loadTitleLogoConfiguration, prepareTitleLogoRenderer, renderTitleLogo } from "./people-artwork/title-logo.mjs";
 import { applyTitleLogoOutputOverride, loadTitleLogoOutputOverrides } from "./people-artwork/title-logo-output-overrides.mjs";
+import { prepareTitleLogoV2Renderer, renderTitleLogoV2 } from "./people-artwork/title-logo-v2.mjs";
 
 const packageRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const repoRoot = path.resolve(packageRoot, "../..");
@@ -103,16 +104,18 @@ export function baseArtworkAttemptName(personIds, now = new Date()) {
 
 export async function stageBaseArtwork({ personIds, sourceCaches, now = new Date() } = {}) {
   ({ personIds, sourceCaches } = validateBaseArtworkInput({ personIds, sourceCaches }));
-  const [registry, decisions, legacyArtwork, legacyPresentation, currentManifest] = await Promise.all([
+  const [registry, decisions, legacyArtwork, legacyPresentation, titleLogoV2Publication, currentManifest] = await Promise.all([
     readJson("data/people-base/people-registry.json"),
     readJson("data/people-base/portrait-source-decisions.json"),
     readJson("data/people-base/legacy-artwork-manifest.json"),
     readJson("data/people-base/legacy-presentation-manifest.json"),
+    readJson("data/people-base/title-logo-v2-publication.json"),
     readJson("manifests/people.json"),
   ]);
   const registryById = new Map(registry.records.map((record) => [record.tmdbPersonId, record]));
   const legacyArtworkById = new Map(legacyArtwork.records.map((record) => [record.tmdbPersonId, record]));
   const legacyPresentationById = new Map(legacyPresentation.records.map((record) => [record.tmdbPersonId, record]));
+  const titleLogoV2PublicationById = new Map(titleLogoV2Publication.records.map((record) => [record.tmdbPersonId, record]));
   const currentById = new Map(currentManifest.people.map((record) => [record.tmdbPersonId, record]));
   const people = personIds.map((personId) => {
     const person = registryById.get(personId);
@@ -145,29 +148,53 @@ export async function stageBaseArtwork({ personIds, sourceCaches, now = new Date
   const renderMetadata = await writeRenderMetadata({ metadata: rendered.metadata, outputDir });
   const configuration = await loadTitleLogoConfiguration({ registry });
   const titleOutputOverrides = await loadTitleLogoOutputOverrides({ registry });
-  const preparedTitles = await prepareTitleLogoRenderer({ people, configuration });
-  const titleRecords = [];
+  const preparedLegacyTitles = await prepareTitleLogoRenderer({ people, configuration });
+  const preparedCurrentTitles = await prepareTitleLogoV2Renderer({ people, basePrepared: preparedLegacyTitles });
+  const legacyTitleRecords = [];
+  const currentTitleRecords = [];
   for (const person of people) {
-    const baseTitle = await renderTitleLogo({ person, ...preparedTitles });
-    const title = await applyTitleLogoOutputOverride({ person, rendered: baseTitle, runtime: preparedTitles.runtime, overrides: titleOutputOverrides });
-    await atomicWrite(path.join(outputDir, "title-logo", `${person.tmdbPersonId}.png`), title.output);
-    titleRecords.push(title.record);
+    const baseLegacyTitle = await renderTitleLogo({ person, ...preparedLegacyTitles });
+    const legacyTitle = await applyTitleLogoOutputOverride({
+      person,
+      rendered: baseLegacyTitle,
+      runtime: preparedLegacyTitles.runtime,
+      overrides: titleOutputOverrides,
+    });
+    const currentTitle = await renderTitleLogoV2({ person, ...preparedCurrentTitles });
+    await atomicWrite(path.join(outputDir, "title-logo", `${person.tmdbPersonId}.png`), currentTitle.output);
+    await atomicWrite(path.join(outputDir, "legacy-title-logo", `${person.tmdbPersonId}.png`), legacyTitle.output);
+    currentTitleRecords.push(currentTitle.record);
+    legacyTitleRecords.push(legacyTitle.record);
   }
-  await atomicWrite(path.join(outputDir, "title-logo-metadata.json"), Buffer.from(`${JSON.stringify({ rendererVersion: "people-title-logo-renderer-v5", recordCount: titleRecords.length, records: titleRecords }, null, 2)}\n`));
+  await atomicWrite(path.join(outputDir, "title-logo-metadata.json"), Buffer.from(`${JSON.stringify({ rendererVersion: "people-title-logo-standard-canvas-renderer-v5", recordCount: currentTitleRecords.length, records: currentTitleRecords }, null, 2)}\n`));
+  await atomicWrite(path.join(outputDir, "legacy-title-logo-metadata.json"), Buffer.from(`${JSON.stringify({ rendererVersion: "people-title-logo-renderer-v5", recordCount: legacyTitleRecords.length, records: legacyTitleRecords }, null, 2)}\n`));
   const renderByKey = new Map(rendered.metadata.records.map((record) => [`${record.tmdbPersonId}:${record.formatId}`, record]));
-  const titleById = new Map(titleRecords.map((record) => [record.tmdbPersonId, record]));
+  const currentTitleById = new Map(currentTitleRecords.map((record) => [record.tmdbPersonId, record]));
+  const legacyTitleById = new Map(legacyTitleRecords.map((record) => [record.tmdbPersonId, record]));
   const records = people.map((person) => {
     const expectedLegacy = legacyArtworkById.get(person.tmdbPersonId);
-    const expectedLegacyTitle = legacyPresentationById.get(person.tmdbPersonId);
+    const expectedLegacyTitleSnapshot = legacyPresentationById.get(person.tmdbPersonId);
+    const expectedLegacyTitle = titleOutputOverrides.byId.get(person.tmdbPersonId)?.outputSha256 || expectedLegacyTitleSnapshot.titleLogoSha256;
+    const expectedPublishedTitle = titleLogoV2PublicationById.get(person.tmdbPersonId);
     const current = currentById.get(person.tmdbPersonId);
     const poster = renderByKey.get(`${person.tmdbPersonId}:poster`);
     const landscape = renderByKey.get(`${person.tmdbPersonId}:landscape`);
-    const titleLogo = titleById.get(person.tmdbPersonId);
+    const titleLogo = currentTitleById.get(person.tmdbPersonId);
+    const legacyTitleLogo = legacyTitleById.get(person.tmdbPersonId);
+    if (!expectedPublishedTitle) throw new Error(`${person.stableKey}: approved V2 title-logo publication record is unavailable.`);
     const comparisons = {
       poster: { generated: poster.outputHash, current: expectedAssetHash(current, "poster"), legacy: expectedLegacy.posterHash },
       landscape: { generated: landscape.outputHash, current: expectedAssetHash(current, "landscape"), legacy: expectedLegacy.landscapeHash },
-      titleLogo: { generated: titleLogo.outputHash, current: expectedAssetHash(current, "titleLogo"), legacy: expectedLegacyTitle.titleLogoSha256 },
+      titleLogo: { generated: titleLogo.outputHash, current: expectedAssetHash(current, "titleLogo"), approvedV2: expectedPublishedTitle.sha256 },
+      legacyTitleLogo: { generated: legacyTitleLogo.outputHash, approvedLegacy: expectedLegacyTitle, migratedSnapshot: expectedLegacyTitleSnapshot.titleLogoSha256 },
     };
+    const matchesCurrent = comparisons.poster.generated === comparisons.poster.current
+      && comparisons.landscape.generated === comparisons.landscape.current
+      && comparisons.titleLogo.generated === comparisons.titleLogo.current
+      && comparisons.titleLogo.generated === comparisons.titleLogo.approvedV2;
+    const matchesLegacy = comparisons.poster.generated === comparisons.poster.legacy
+      && comparisons.landscape.generated === comparisons.landscape.legacy
+      && comparisons.legacyTitleLogo.generated === comparisons.legacyTitleLogo.approvedLegacy;
     return {
       tmdbPersonId: person.tmdbPersonId,
       canonicalName: person.canonicalName,
@@ -175,12 +202,12 @@ export async function stageBaseArtwork({ personIds, sourceCaches, now = new Date
       sourceHash: expectedLegacy.sourceHash,
       fallbackUsed: poster.fallbackUsed || landscape.fallbackUsed,
       comparisons,
-      matchesCurrent: Object.values(comparisons).every((comparison) => comparison.generated === comparison.current),
-      matchesLegacy: Object.values(comparisons).every((comparison) => comparison.generated === comparison.legacy),
+      matchesCurrent,
+      matchesLegacy,
     };
   });
   const report = {
-    version: "people-base-artwork-migration-proof-v1",
+    version: "people-base-artwork-reproduction-proof-v2",
     generatedAt: now.toISOString(),
     stagingOnly: true,
     networkRequests: 0,
@@ -195,11 +222,11 @@ export async function stageBaseArtwork({ personIds, sourceCaches, now = new Date
   };
   const reportPath = path.join(outputDir, "migration-proof.json");
   await atomicWrite(reportPath, Buffer.from(`${JSON.stringify(report, null, 2)}\n`));
-  if (!report.allMatchCurrent) throw new Error(`Migration proof differs from current published bytes. Inspect ${reportPath}`);
+  if (!report.allMatchCurrent || !report.allMatchLegacy) throw new Error(`Reproduction proof differs from current or frozen legacy bytes. Inspect ${reportPath}`);
   return { outputDir, reportPath, report };
 }
 
-export const BASE_ARTWORK_HELP = `Stage legacy People poster, landscape, and title-logo reproduction\n\n  --person-id <id[,id...]>   Required; 1-30 registered IDs\n  --source-cache <path>      Required; repeat for multiple offline caches\n\nThe command makes no network requests and writes only beneath tools/people-seed/.work.\n`;
+export const BASE_ARTWORK_HELP = `Stage current People base-artwork and frozen legacy title-logo reproduction\n\n  --person-id <id[,id...]>   Required; 1-30 migrated IDs\n  --source-cache <path>      Required; repeat for multiple offline caches\n\nThe command makes no network requests and writes only beneath tools/people-seed/.work.\n`;
 
 async function main() {
   const options = parseBaseArtworkArguments(process.argv.slice(2));
