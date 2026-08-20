@@ -11,6 +11,16 @@
       "mediaType": "movie",
       "mediaId": 1660279,
       "reason": "behind-the-scenes-self-documentary"
+    },
+    {
+      "mediaType": "movie",
+      "mediaId": 694189,
+      "reason": "self-interview-documentary"
+    },
+    {
+      "mediaType": "tv",
+      "mediaId": 22939,
+      "reason": "self-appearance-documentary-series"
     }
   ],
   "creativeCrewCredits": [
