@@ -9600,6 +9600,13 @@
       ]
     },
     {
+      "tmdbPersonId": 125482,
+      "canonicalName": "Luise Rainer",
+      "categoryMembership": [
+        "actor"
+      ]
+    },
+    {
       "tmdbPersonId": 125690,
       "canonicalName": "Mikio Naruse",
       "categoryMembership": [
@@ -10470,6 +10477,13 @@
     {
       "tmdbPersonId": 1590797,
       "canonicalName": "Sadie Sink",
+      "categoryMembership": [
+        "actor"
+      ]
+    },
+    {
+      "tmdbPersonId": 1640439,
+      "canonicalName": "Mikey Madison",
       "categoryMembership": [
         "actor"
       ]
