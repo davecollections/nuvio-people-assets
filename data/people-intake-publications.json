@@ -1431,6 +1431,74 @@
       }
     },
     {
+      "tmdbPersonId": 125482,
+      "canonicalName": "Luise Rainer",
+      "categoryMembership": [
+        "actor"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 32336995889,
+      "promotionRunId": 32337825008,
+      "trackingIssue": 77,
+      "destination": "assets/people/125482",
+      "candidateGeneratedAt": "2026-08-20T05:50:13.504Z",
+      "candidateReportSha256": "32b5e1310dc5c895cbd257574416b16eeef976ef3ac37df6f6ea76461ee8a0e7",
+      "sourceSnapshotSha256": "566a3bcecc91aca6b874917cdb002c93127e7471126b885a6e3f85771153a66a",
+      "heroSelectionSha256": "32e2cff1dac61f882fd2425136a2f32b953e3fda05eb533f91c54c42e69cd953",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "sparse-fallback",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "558160b39fa56b87484e4b25f712f0e26d6bbea9128dfa31f4c8feed3c19f960",
+          "bytes": 22768,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "610257b9046bd01a362cfb2a1608b7670da89749c92bd6683c2e251885061f01",
+          "bytes": 59428,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "132db33c1afe9ce069da5038628ce089d6526056f4c48c65f9de143f44d666b0",
+          "bytes": 20090,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "045f3581d1f32e777cd95c779dcaf85c6c756dfea6e5463ea35dc87dee93c283",
+          "bytes": 31296,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "1a30d21d7ace6b9022a29471a447512872d23941edc1bf8d71b256976eaa04fb",
+          "bytes": 85766,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "ba471ece584328fbe025f063288ab4cc80cf01eb55a4f2810fe2548d33a16223",
+          "bytes": 25517,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    },
+    {
       "tmdbPersonId": 532227,
       "canonicalName": "Arturo Ripstein",
       "categoryMembership": [
@@ -1696,6 +1764,74 @@
           "filename": "title-logo.png",
           "sha256": "397a8f3f7a8a4abff4c11c93d5b57c0f7dfdc0d84eca2eb80af6631e942a6f36",
           "bytes": 26674,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 1640439,
+      "canonicalName": "Mikey Madison",
+      "categoryMembership": [
+        "actor"
+      ],
+      "status": "owner-approved",
+      "stagingRunId": 32336995889,
+      "promotionRunId": 32337825008,
+      "trackingIssue": 77,
+      "destination": "assets/people/1640439",
+      "candidateGeneratedAt": "2026-08-20T05:50:11.489Z",
+      "candidateReportSha256": "bbdd8b215e445792b2379efde6a5396e7a28ae89d9040c3cd1c05c8d4a4222db",
+      "sourceSnapshotSha256": "eab0017ed2d0d22533089298bc3915d2cdd3d0f81948b7e104b04f53e44ff8c1",
+      "heroSelectionSha256": "7b416f1e7a5d9cd41cbb60cf959127abba215eb764878e668a6413e5bb296f0f",
+      "heroPresetId": "people-t2-perspective-v2",
+      "heroOutcome": "filmography",
+      "assets": {
+        "focusLandscape": {
+          "filename": "focus-landscape.webp",
+          "sha256": "124659bbf8f564bd2dc2d5ad7339dcea3b345dc9d3306b92a7ac290124b79bf7",
+          "bytes": 22222,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "filename": "focus-poster.webp",
+          "sha256": "66c9d209e63477d7ad79c2923d2f120b7cfbbe722946c1c908be829696bc644a",
+          "bytes": 82684,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "hero": {
+          "filename": "hero.webp",
+          "sha256": "4fd0a51f2229cdad24cbb9be8fd916ff82ce2f4d25816db029b269bfe15188f0",
+          "bytes": 175718,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "landscape": {
+          "filename": "landscape.webp",
+          "sha256": "0660e871562e7a290a0617fd8b693186049d05eb4778f588430fecf1367cbb5e",
+          "bytes": 28238,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "poster": {
+          "filename": "poster.webp",
+          "sha256": "676fc74c2d25d4ee2aa343937d033df6b26e46c55d3d8787a7d9d9bf63e436de",
+          "bytes": 113104,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "filename": "title-logo.png",
+          "sha256": "5dde7d92359bfed4d6cdfcd9e63de3ebd98585634f3e9a6cb53edf61f60f8bd3",
+          "bytes": 30443,
           "width": 1600,
           "height": 480,
           "format": "png"

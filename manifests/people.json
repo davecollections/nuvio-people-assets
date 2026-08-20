@@ -2,16 +2,16 @@
   "schemaVersion": 2,
   "repository": "davecollections/nuvio-people-assets",
   "ordering": "tmdb-person-id-ascending",
-  "recordCount": 1505,
+  "recordCount": 1507,
   "assetCounts": {
-    "poster": 1505,
-    "titleLogo": 1505,
-    "landscape": 1505,
-    "hero": 1505,
-    "focusPoster": 1503,
-    "focusLandscape": 1503
+    "poster": 1507,
+    "titleLogo": 1507,
+    "landscape": 1507,
+    "hero": 1507,
+    "focusPoster": 1505,
+    "focusLandscape": 1505
   },
-  "totalAssetBytes": 758946103,
+  "totalAssetBytes": 759643377,
   "heroPreset": {
     "id": "people-t2-perspective-v2",
     "width": 2560,
@@ -86296,6 +86296,69 @@
       }
     },
     {
+      "tmdbPersonId": 125482,
+      "canonicalName": "Luise Rainer",
+      "categoryMembership": [
+        "actor"
+      ],
+      "assets": {
+        "poster": {
+          "path": "assets/people/125482/poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/125482/poster.webp",
+          "sha256": "1a30d21d7ace6b9022a29471a447512872d23941edc1bf8d71b256976eaa04fb",
+          "bytes": 85766,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "path": "assets/people/125482/title-logo.png",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/125482/title-logo.png",
+          "sha256": "ba471ece584328fbe025f063288ab4cc80cf01eb55a4f2810fe2548d33a16223",
+          "bytes": 25517,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        },
+        "landscape": {
+          "path": "assets/people/125482/landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/125482/landscape.webp",
+          "sha256": "045f3581d1f32e777cd95c779dcaf85c6c756dfea6e5463ea35dc87dee93c283",
+          "bytes": 31296,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/125482/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/125482/hero.webp",
+          "sha256": "132db33c1afe9ce069da5038628ce089d6526056f4c48c65f9de143f44d666b0",
+          "bytes": 20090,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/125482/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/125482/focus-poster.webp",
+          "sha256": "610257b9046bd01a362cfb2a1608b7670da89749c92bd6683c2e251885061f01",
+          "bytes": 59428,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/125482/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/125482/focus-landscape.webp",
+          "sha256": "558160b39fa56b87484e4b25f712f0e26d6bbea9128dfa31f4c8feed3c19f960",
+          "bytes": 22768,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        }
+      }
+    },
+    {
       "tmdbPersonId": 125690,
       "canonicalName": "Mikio Naruse",
       "categoryMembership": [
@@ -94164,6 +94227,69 @@
           "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1590797/focus-landscape.webp",
           "sha256": "12a89157a0c5c66b74a664adf834fd1aad142f7cc3f6909275e430d8a501b138",
           "bytes": 21776,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        }
+      }
+    },
+    {
+      "tmdbPersonId": 1640439,
+      "canonicalName": "Mikey Madison",
+      "categoryMembership": [
+        "actor"
+      ],
+      "assets": {
+        "poster": {
+          "path": "assets/people/1640439/poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1640439/poster.webp",
+          "sha256": "676fc74c2d25d4ee2aa343937d033df6b26e46c55d3d8787a7d9d9bf63e436de",
+          "bytes": 113104,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "titleLogo": {
+          "path": "assets/people/1640439/title-logo.png",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1640439/title-logo.png",
+          "sha256": "5dde7d92359bfed4d6cdfcd9e63de3ebd98585634f3e9a6cb53edf61f60f8bd3",
+          "bytes": 30443,
+          "width": 1600,
+          "height": 480,
+          "format": "png"
+        },
+        "landscape": {
+          "path": "assets/people/1640439/landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1640439/landscape.webp",
+          "sha256": "0660e871562e7a290a0617fd8b693186049d05eb4778f588430fecf1367cbb5e",
+          "bytes": 28238,
+          "width": 1200,
+          "height": 675,
+          "format": "webp"
+        },
+        "hero": {
+          "path": "assets/people/1640439/hero.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1640439/hero.webp",
+          "sha256": "4fd0a51f2229cdad24cbb9be8fd916ff82ce2f4d25816db029b269bfe15188f0",
+          "bytes": 175718,
+          "width": 2560,
+          "height": 1440,
+          "format": "webp"
+        },
+        "focusPoster": {
+          "path": "assets/people/1640439/focus-poster.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1640439/focus-poster.webp",
+          "sha256": "66c9d209e63477d7ad79c2923d2f120b7cfbbe722946c1c908be829696bc644a",
+          "bytes": 82684,
+          "width": 1000,
+          "height": 1500,
+          "format": "webp"
+        },
+        "focusLandscape": {
+          "path": "assets/people/1640439/focus-landscape.webp",
+          "url": "https://raw.githubusercontent.com/davecollections/nuvio-people-assets/main/assets/people/1640439/focus-landscape.webp",
+          "sha256": "124659bbf8f564bd2dc2d5ad7339dcea3b345dc9d3306b92a7ac290124b79bf7",
+          "bytes": 22222,
           "width": 1200,
           "height": 675,
           "format": "webp"
