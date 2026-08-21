@@ -45,9 +45,10 @@ function oneEpisodeExceptionSet(overrides, personId) {
     .map((record) => `${personId}:tv:${record.mediaId}`));
 }
 
-function blockedMediaSet(overrides) {
+function blockedMediaSet(overrides, personId) {
   const records = Array.isArray(overrides?.blockedMedia) ? overrides.blockedMedia : [];
   return new Set(records.filter((record) => record
+    && (record.personId === undefined || record.personId === personId)
     && (record.mediaType === "movie" || record.mediaType === "tv")
     && Number.isSafeInteger(record.mediaId))
     .map((record) => `${record.mediaType}:${record.mediaId}`));
@@ -174,7 +175,7 @@ export function selectEligibleCredits(person, overrides = {}) {
   const personName = text(person?.name);
   const credits = person?.combined_credits;
   const exceptions = oneEpisodeExceptionSet(overrides, person?.id);
-  const blockedMedia = blockedMediaSet(overrides);
+  const blockedMedia = blockedMediaSet(overrides, person?.id);
   const creativeCrew = creativeCrewOverrideMap(overrides, person?.id);
   const accepted = new Map();
   const rejected = [];

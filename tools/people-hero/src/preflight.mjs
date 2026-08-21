@@ -19,12 +19,14 @@ export function validateCreditOverrides(overrides) {
   assert(Array.isArray(overrides.blockedMedia), "Invalid blocked-media overrides");
   assert(Array.isArray(overrides.creativeCrewCredits), "Invalid creative-crew credit overrides");
   assert(overrides.blockedMedia.every((record) => record
+    && (record.personId === undefined || (Number.isSafeInteger(record.personId) && record.personId > 0))
     && (record.mediaType === "movie" || record.mediaType === "tv")
     && Number.isSafeInteger(record.mediaId)
     && record.mediaId > 0
     && typeof record.reason === "string"
     && record.reason.trim().length > 0), "Invalid blocked-media override record");
-  const blockedMediaKeys = overrides.blockedMedia.map((record) => `${record.mediaType}:${record.mediaId}`);
+  const blockedMediaKeys = overrides.blockedMedia
+    .map((record) => `${record.personId ?? "global"}:${record.mediaType}:${record.mediaId}`);
   assert(new Set(blockedMediaKeys).size === blockedMediaKeys.length, "Duplicate blocked-media override");
   const permittedCreativeJobs = new Set(["Creator", "Original Film Writer", "Producer", "Screenplay", "Story", "Writer"]);
   assert(overrides.creativeCrewCredits.every((record) => record
