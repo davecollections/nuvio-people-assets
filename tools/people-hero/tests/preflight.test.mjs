@@ -27,7 +27,10 @@ test("credit override validation requires unique, explained media blocks", () =>
   const valid = {
     schemaVersion: 1,
     oneEpisodeTvRoles: [],
-    blockedMedia: [{ mediaType: "movie", mediaId: 1687093, reason: "owner-blocked" }],
+    blockedMedia: [
+      { mediaType: "movie", mediaId: 1687093, reason: "owner-blocked" },
+      { personId: 31, mediaType: "movie", mediaId: 1901, reason: "person-bound-owner-block" }
+    ],
     creativeCrewCredits: [{
       personId: 9339,
       mediaType: "movie",
@@ -41,6 +44,9 @@ test("credit override validation requires unique, explained media blocks", () =>
     .concat(valid.blockedMedia, valid.blockedMedia) }), /Duplicate blocked-media override/u);
   assert.throws(() => validateCreditOverrides({ ...valid, blockedMedia: [{ mediaType: "movie", mediaId: 1, reason: "" }] }),
     /Invalid blocked-media override record/u);
+  assert.throws(() => validateCreditOverrides({ ...valid, blockedMedia: [{
+    personId: 0, mediaType: "movie", mediaId: 1, reason: "invalid-person"
+  }] }), /Invalid blocked-media override record/u);
   assert.throws(() => validateCreditOverrides({ ...valid, creativeCrewCredits: []
     .concat(valid.creativeCrewCredits, valid.creativeCrewCredits) }), /Duplicate creative-crew credit override/u);
   assert.throws(() => validateCreditOverrides({ ...valid, creativeCrewCredits: [{

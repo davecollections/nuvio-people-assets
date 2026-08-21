@@ -206,6 +206,26 @@ test("media-level blocks reject both cast and exact Director credits", () => {
   assert.deepEqual(result.rejected.map((record) => record.reason), ["blocked-media", "blocked-media"]);
 });
 
+test("person-bound media blocks reject only the selected identity", () => {
+  const documentary = movie(1905, { title: "Ambiguous Documentary", character: "" });
+  const overrides = {
+    blockedMedia: [{
+      personId: 31,
+      mediaType: "movie",
+      mediaId: 1905,
+      reason: "person-bound-self-appearance"
+    }]
+  };
+  const person = {
+    id: 31,
+    name: "Tom Hanks",
+    combined_credits: { cast: [documentary], crew: [] }
+  };
+
+  assert.equal(selectEligibleCredits(person, overrides).eligible.length, 0);
+  assert.equal(selectEligibleCredits({ ...person, id: 32 }, overrides).eligible.length, 1);
+});
+
 test("person-bound creative crew exceptions fill a short directing career without admitting unrelated crew", () => {
   const directingCredits = Array.from({ length: 10 }, (_, index) => movie(index + 1, { job: "Director" }));
   const creativeCredits = [

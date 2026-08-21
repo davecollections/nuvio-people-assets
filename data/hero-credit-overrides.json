@@ -21,6 +21,66 @@
       "mediaType": "tv",
       "mediaId": 22939,
       "reason": "self-appearance-documentary-series"
+    },
+    {
+      "personId": 6748,
+      "mediaType": "movie",
+      "mediaId": 1412076,
+      "reason": "self-guest-music-special"
+    },
+    {
+      "personId": 6748,
+      "mediaType": "movie",
+      "mediaId": 1148074,
+      "reason": "cast-interview-companion-footage"
+    },
+    {
+      "personId": 11783,
+      "mediaType": "movie",
+      "mediaId": 169714,
+      "reason": "self-documentary-appearance"
+    },
+    {
+      "personId": 18793,
+      "mediaType": "movie",
+      "mediaId": 1648419,
+      "reason": "behind-the-scenes-archive-footage"
+    },
+    {
+      "personId": 1437491,
+      "mediaType": "movie",
+      "mediaId": 905029,
+      "reason": "self-celebrity-performance-not-principal"
+    },
+    {
+      "personId": 3672,
+      "mediaType": "movie",
+      "mediaId": 358107,
+      "reason": "self-newsreel-appearance"
+    },
+    {
+      "personId": 3672,
+      "mediaType": "movie",
+      "mediaId": 811434,
+      "reason": "making-of-interview-or-archive-footage"
+    },
+    {
+      "personId": 18365,
+      "mediaType": "movie",
+      "mediaId": 64654,
+      "reason": "self-documentary-appearance"
+    },
+    {
+      "personId": 68890,
+      "mediaType": "tv",
+      "mediaId": 39704,
+      "reason": "self-reality-series"
+    },
+    {
+      "personId": 68890,
+      "mediaType": "movie",
+      "mediaId": 1230772,
+      "reason": "self-or-archive-documentary-appearance"
     }
   ],
   "creativeCrewCredits": [
