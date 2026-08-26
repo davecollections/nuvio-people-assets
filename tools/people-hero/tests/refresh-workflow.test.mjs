@@ -7,7 +7,10 @@ const promotionWorkflow = readFileSync(new URL("../../../.github/workflows/promo
 
 test("scheduled refresh uses the locked cadence, cap, live proxy, and staging-only issue boundary", () => {
   assert.match(auditWorkflow, /cron: "17 3 3 2,4,6,8,10,12 \*"/u);
-  assert.match(auditWorkflow, /--stage-limit 30/u);
+  assert.match(auditWorkflow, /audit:\n\s+runs-on: windows-latest/u);
+  assert.match(auditWorkflow, /\$auditArguments = @\(/u);
+  assert.doesNotMatch(auditWorkflow, /args=\(/u);
+  assert.match(auditWorkflow, /"--stage-limit", "30"/u);
   assert.match(auditWorkflow, /PEOPLE_HERO_PROXY_URL/u);
   assert.match(auditWorkflow, /PEOPLE_HERO_PROXY_TOKEN/u);
   assert.match(auditWorkflow, /max-parallel: 5/u);
