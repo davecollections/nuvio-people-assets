@@ -31,7 +31,7 @@ concurrency:
 
 jobs:
   audit:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     timeout-minutes: 90
     outputs:
       attempt_root: ${{ steps.audit.outputs.attempt_root }}
@@ -67,19 +67,26 @@ jobs:
           FORCE_STAGE: ${{ inputs.force_stage }}
           AUDIT_ROOT: tools/people-hero/.work/refresh-audit-${{ github.run_id }}
         run: |
-          args=(--output-root "$AUDIT_ROOT" --github-output "$GITHUB_OUTPUT" --stage-limit 30)
-          if [[ "$EVENT_NAME" == "schedule" ]]; then
-            args+=(--all)
-          else
-            args+=(--person-ids "$REQUESTED_PERSON_IDS")
-            if [[ "$FORCE_STAGE" == "true" ]]; then
-              args+=(--force)
-            fi
-          fi
-          npm run people-hero:refresh-audit -- "${args[@]}"
+          $auditArguments = @(
+            "--output-root", $env:AUDIT_ROOT,
+            "--github-output", $env:GITHUB_OUTPUT,
+            "--stage-limit", "30"
+          )
+          if ($env:EVENT_NAME -eq "schedule") {
+            $auditArguments += "--all"
+          } else {
+            $auditArguments += @("--person-ids", $env:REQUESTED_PERSON_IDS)
+            if ($env:FORCE_STAGE -eq "true") {
+              $auditArguments += "--force"
+            }
+          }
+          npm run people-hero:refresh-audit -- @auditArguments
+          if ($LASTEXITCODE -ne 0) {
+            exit $LASTEXITCODE
+          }
 
       - name: Upload compact audit evidence
-        if: always()
+        if: always() && steps.audit.outcome != 'skipped'
         uses: actions/upload-artifact@v4
         with:
           name: people-hero-refresh-audit-${{ github.run_id }}
