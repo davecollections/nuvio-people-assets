@@ -1,0 +1,186 @@
+name: Promote reviewed People hero refreshes
+
+on:
+  workflow_dispatch:
+    inputs:
+      staging_run_id:
+        description: Successful trusted main-branch hero staging run ID
+        required: true
+        type: string
+      tracking_issue:
+        description: Open GitHub issue for this refresh batch
+        required: true
+        type: string
+      approvals_json:
+        description: Owner-approved hash-bound refresh JSON (maximum 30 identities)
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: write
+  issues: read
+  pull-requests: write
+
+concurrency:
+  group: promote-reviewed-people-hero-refreshes
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Require the trusted default branch
+        run: |
+          if ("${{ github.ref }}" -ne "refs/heads/main") {
+            throw "Promotion must be dispatched from main."
+          }
+
+      - name: Check out current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository before promotion
+        run: npm test
+
+      - name: Validate owner approval request
+        id: request
+        env:
+          REFRESH_STAGING_RUN_ID: ${{ inputs.staging_run_id }}
+          REFRESH_TRACKING_ISSUE: ${{ inputs.tracking_issue }}
+          REFRESH_PROMOTION_RUN_ID: ${{ github.run_id }}
+          REFRESH_PROMOTION_APPROVALS: ${{ inputs.approvals_json }}
+        run: node tools/people-hero/src/refresh-promotion-request.mjs
+
+      - name: Verify trusted staging run and open tracking issue
+        env:
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+          TRACKING_ISSUE: ${{ steps.request.outputs.tracking_issue }}
+        run: |
+          $run = gh run view "$env:STAGING_RUN_ID" --json conclusion,event,headBranch,headSha,status,workflowName,url | ConvertFrom-Json
+          if ($run.status -ne "completed" -or $run.conclusion -ne "success") {
+            throw "The staging run is not complete and successful."
+          }
+          $trustedWorkflows = @("Audit and stage People hero refreshes", "Stage People hero batch", "Stage one People hero")
+          if ($run.headBranch -ne "main" -or $trustedWorkflows -notcontains $run.workflowName) {
+            throw "The source run is not a trusted main-branch People hero staging workflow."
+          }
+          if ($run.workflowName -ne "Audit and stage People hero refreshes" -and $run.event -ne "workflow_dispatch") {
+            throw "Manual hero staging must be workflow-dispatched."
+          }
+          git merge-base --is-ancestor $run.headSha HEAD
+          if ($LASTEXITCODE -ne 0) {
+            throw "The staging commit is not an ancestor of current main."
+          }
+          $issue = gh issue view "$env:TRACKING_ISSUE" --json state,url | ConvertFrom-Json
+          if ($issue.state -ne "OPEN") {
+            throw "The refresh tracking issue must be open."
+          }
+          "Verified staging run: $($run.url)" >> $env:GITHUB_STEP_SUMMARY
+          "Tracking issue: $($issue.url)" >> $env:GITHUB_STEP_SUMMARY
+
+      - name: Download immutable staging artifacts
+        env:
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+          REQUEST_ROOT: ${{ steps.request.outputs.request_root }}
+        run: |
+          $artifactRoot = Join-Path "$env:REQUEST_ROOT" "artifacts"
+          gh run download "$env:STAGING_RUN_ID" --dir "$artifactRoot"
+
+      - name: Create isolated promotion branch
+        id: branch
+        run: |
+          $branch = "work/promote-people-hero-refresh-${{ github.run_id }}"
+          git switch -c "$branch"
+          "branch=$branch" >> $env:GITHUB_OUTPUT
+
+      - name: Promote exact reviewed hero bytes
+        id: promotion
+        env:
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+          TRACKING_ISSUE: ${{ steps.request.outputs.tracking_issue }}
+          REQUEST_ROOT: ${{ steps.request.outputs.request_root }}
+          APPROVALS_FILE: ${{ steps.request.outputs.approvals_file }}
+        run: |
+          $artifactRoot = Join-Path "$env:REQUEST_ROOT" "artifacts"
+          $reportFile = Join-Path "$env:REQUEST_ROOT" "promotion-result.json"
+          $summaryFile = Join-Path "$env:REQUEST_ROOT" "promotion-pr-body.md"
+          npm run people-hero:refresh-promote -- --artifact-root "$artifactRoot" --approvals-file "$env:APPROVALS_FILE" --staging-run-id "$env:STAGING_RUN_ID" --tracking-issue "$env:TRACKING_ISSUE" --promotion-run-id "${{ github.run_id }}" --report-file "$reportFile" --summary-file "$summaryFile" --github-output "$env:GITHUB_OUTPUT"
+
+      - name: Validate promoted repository
+        run: npm test
+
+      - name: Commit exact refresh change
+        env:
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- assets/people data/people-hero-refresh-state.json manifests/people.json
+          git diff --cached --check
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
+            throw "Refresh promotion produced no reviewed repository change."
+          }
+          $unexpected = git status --porcelain | Where-Object {
+            $_ -notmatch '^[AM]  (assets/people/\d+/hero\.webp$|data/people-hero-refresh-state\.json$|manifests/people\.json$)'
+          }
+          if ($unexpected) {
+            throw "Refresh promotion produced an unexpected worktree path: $($unexpected -join ', ')"
+          }
+          git commit -m "Publish reviewed People hero refreshes from run $env:STAGING_RUN_ID"
+
+      - name: Push promotion branch
+        env:
+          PROMOTION_BRANCH: ${{ steps.branch.outputs.branch }}
+        run: git push --set-upstream origin "$env:PROMOTION_BRANCH"
+
+      - name: Open draft refresh pull request
+        env:
+          PROMOTION_BRANCH: ${{ steps.branch.outputs.branch }}
+          REQUEST_ROOT: ${{ steps.request.outputs.request_root }}
+          TRACKING_ISSUE: ${{ steps.request.outputs.tracking_issue }}
+          PERSON_COUNT: ${{ steps.promotion.outputs.person_count }}
+          STAGING_RUN_ID: ${{ steps.request.outputs.staging_run_id }}
+        run: |
+          $summaryFile = Join-Path "$env:REQUEST_ROOT" "promotion-pr-body.md"
+          Add-Content -Path "$summaryFile" -Value "`nRefs #$env:TRACKING_ISSUE`n"
+          $createOutput = @(gh pr create --draft --base main --head "$env:PROMOTION_BRANCH" --title "Publish $env:PERSON_COUNT reviewed People hero refreshes" --body-file "$summaryFile" 2>&1)
+          if ($LASTEXITCODE -ne 0) {
+            $details = ($createOutput | Out-String).Trim()
+            throw "GitHub Actions could not create the draft refresh pull request. Details: $details"
+          }
+          $url = ([string]($createOutput | Select-Object -Last 1)).Trim()
+          if ($url -notmatch '^https://github\.com/.+/.+/pull/\d+$') {
+            throw "GitHub Actions did not return a valid draft pull request URL."
+          }
+          Get-Content "$summaryFile" >> $env:GITHUB_STEP_SUMMARY
+          "Draft pull request: $url" >> $env:GITHUB_STEP_SUMMARY
+
+      - name: Upload compact promotion evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: people-hero-refresh-promotion-${{ github.run_id }}
+          path: |
+            ${{ steps.request.outputs.approvals_file }}
+            ${{ steps.request.outputs.request_root }}/promotion-result.json
+            ${{ steps.request.outputs.request_root }}/promotion-pr-body.md
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 30

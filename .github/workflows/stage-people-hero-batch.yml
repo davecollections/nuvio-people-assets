@@ -85,14 +85,21 @@ jobs:
       - name: Stage candidate
         env:
           REQUESTED_PERSON_ID: ${{ matrix.person_id }}
-        run: npm run people-hero:stage -- --person-id "$REQUESTED_PERSON_ID"
+        run: npm run people-hero:refresh-stage -- --person-id "$REQUESTED_PERSON_ID"
 
       - name: Upload staging evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: people-hero-candidate-${{ github.run_id }}-${{ matrix.person_id }}
-          path: tools/people-hero/.work/attempt-*
+          path: |
+            tools/people-hero/.work/attempt-*/staging/hero.webp
+            tools/people-hero/.work/attempt-*/reports/candidate-report.json
+            tools/people-hero/.work/attempt-*/reports/selection.json
+            tools/people-hero/.work/attempt-*/reports/source-snapshot.json
+            tools/people-hero/.work/attempt-*/reports/compositor-report.json
+            tools/people-hero/.work/attempt-*/reports/refresh-review.json
+            tools/people-hero/.work/attempt-*/reports/review-approval-template.json
           if-no-files-found: error
           include-hidden-files: true
-          retention-days: 7
+          retention-days: 30

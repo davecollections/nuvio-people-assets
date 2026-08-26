@@ -129,14 +129,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- assets/people data/people.json data/people-intake-publications.json manifests/people.json
+          git add -- assets/people data/people.json data/people-intake-publications.json data/people-hero-refresh-state.json manifests/people.json
           git diff --cached --check
           git diff --cached --quiet
           if ($LASTEXITCODE -eq 0) {
             throw "Promotion produced no reviewed repository change."
           }
           $unexpected = git status --porcelain | Where-Object {
-            $_ -notmatch '^[AM]  (assets/people/|data/people\.json$|data/people-intake-publications\.json$|manifests/people\.json$)'
+            $_ -notmatch '^[AM]  (assets/people/|data/people\.json$|data/people-intake-publications\.json$|data/people-hero-refresh-state\.json$|manifests/people\.json$)'
           }
           if ($unexpected) {
             throw "Promotion produced an unexpected worktree path: $($unexpected -join ', ')"
