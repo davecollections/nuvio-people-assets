@@ -1,0 +1,206 @@
+name: Audit and stage People hero refreshes
+
+on:
+  schedule:
+    - cron: "17 3 3 2,4,6,8,10,12 *"
+  workflow_dispatch:
+    inputs:
+      person_ids:
+        description: Explicit registered TMDB Person IDs for a manual test (maximum 30)
+        required: true
+        type: string
+      force_stage:
+        description: Stage every renderable explicit identity regardless of material-change thresholds
+        required: false
+        default: false
+        type: boolean
+      open_issue:
+        description: Open a tracking issue for this manual run when changes are found
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+
+concurrency:
+  group: people-hero-refresh-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    outputs:
+      attempt_root: ${{ steps.audit.outputs.attempt_root }}
+      stage_ids: ${{ steps.audit.outputs.stage_ids }}
+      stage_count: ${{ steps.audit.outputs.stage_count }}
+      issue_needed: ${{ steps.audit.outputs.issue_needed }}
+      audit_complete: ${{ steps.audit.outputs.audit_complete }}
+    env:
+      PEOPLE_HERO_PROXY_URL: ${{ vars.PEOPLE_HERO_PROXY_URL }}
+      PEOPLE_HERO_PROXY_TOKEN: ${{ secrets.PEOPLE_HERO_PROXY_TOKEN }}
+
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository before audit
+        run: npm test
+
+      - name: Audit current People metadata
+        id: audit
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REQUESTED_PERSON_IDS: ${{ inputs.person_ids }}
+          FORCE_STAGE: ${{ inputs.force_stage }}
+          AUDIT_ROOT: tools/people-hero/.work/refresh-audit-${{ github.run_id }}
+        run: |
+          args=(--output-root "$AUDIT_ROOT" --github-output "$GITHUB_OUTPUT" --stage-limit 30)
+          if [[ "$EVENT_NAME" == "schedule" ]]; then
+            args+=(--all)
+          else
+            args+=(--person-ids "$REQUESTED_PERSON_IDS")
+            if [[ "$FORCE_STAGE" == "true" ]]; then
+              args+=(--force)
+            fi
+          fi
+          npm run people-hero:refresh-audit -- "${args[@]}"
+
+      - name: Upload compact audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: people-hero-refresh-audit-${{ github.run_id }}
+          path: tools/people-hero/.work/refresh-audit-${{ github.run_id }}
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
+
+  stage:
+    needs: audit
+    if: needs.audit.outputs.audit_complete == 'true' && needs.audit.outputs.stage_count != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        person_id: ${{ fromJSON(needs.audit.outputs.stage_ids) }}
+    env:
+      PEOPLE_HERO_PYTHON: python
+
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: tools/people-hero/requirements.txt
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Install compositor dependencies
+        run: python -m pip install --requirement tools/people-hero/requirements.txt
+
+      - name: Download immutable audit snapshot
+        uses: actions/download-artifact@v4
+        with:
+          name: people-hero-refresh-audit-${{ github.run_id }}
+          path: tools/people-hero/.work/audit-input
+
+      - name: Stage candidate from the audited snapshot
+        env:
+          REQUESTED_PERSON_ID: ${{ matrix.person_id }}
+          AUDIT_INPUT: tools/people-hero/.work/audit-input
+          CANDIDATE_ROOT: tools/people-hero/.work/refresh-stage-${{ github.run_id }}-${{ matrix.person_id }}
+        run: npm run people-hero:refresh-stage -- --person-id "$REQUESTED_PERSON_ID" --source-snapshot "$AUDIT_INPUT/snapshots/$REQUESTED_PERSON_ID.json" --output-root "$CANDIDATE_ROOT"
+
+      - name: Upload compact candidate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: people-hero-refresh-candidate-${{ github.run_id }}-${{ matrix.person_id }}
+          path: |
+            tools/people-hero/.work/refresh-stage-${{ github.run_id }}-${{ matrix.person_id }}/staging/hero.webp
+            tools/people-hero/.work/refresh-stage-${{ github.run_id }}-${{ matrix.person_id }}/reports/candidate-report.json
+            tools/people-hero/.work/refresh-stage-${{ github.run_id }}-${{ matrix.person_id }}/reports/selection.json
+            tools/people-hero/.work/refresh-stage-${{ github.run_id }}-${{ matrix.person_id }}/reports/source-snapshot.json
+            tools/people-hero/.work/refresh-stage-${{ github.run_id }}-${{ matrix.person_id }}/reports/compositor-report.json
+            tools/people-hero/.work/refresh-stage-${{ github.run_id }}-${{ matrix.person_id }}/reports/refresh-review.json
+            tools/people-hero/.work/refresh-stage-${{ github.run_id }}-${{ matrix.person_id }}/reports/review-approval-template.json
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
+
+  review-issue:
+    needs: [audit, stage]
+    if: always() && needs.audit.outputs.issue_needed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Check out current main
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download this run's immutable artifacts
+        env:
+          ARTIFACT_ROOT: tools/people-hero/.work/refresh-run-${{ github.run_id }}/artifacts
+        run: gh run download "${{ github.run_id }}" --dir "$ARTIFACT_ROOT"
+
+      - name: Build tracking-issue evidence
+        env:
+          ARTIFACT_ROOT: tools/people-hero/.work/refresh-run-${{ github.run_id }}/artifacts
+          ISSUE_ROOT: tools/people-hero/.work/refresh-run-${{ github.run_id }}/issue
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: npm run people-hero:refresh-issue -- --artifact-root "$ARTIFACT_ROOT" --output-root "$ISSUE_ROOT" --run-id "${{ github.run_id }}" --run-url "$RUN_URL"
+
+      - name: Open focused refresh tracking issue
+        if: github.event_name == 'schedule' || inputs.open_issue == true
+        env:
+          ISSUE_ROOT: tools/people-hero/.work/refresh-run-${{ github.run_id }}/issue
+        run: |
+          issue_url=$(gh issue create --title "Review People hero refresh candidates from run ${{ github.run_id }}" --body-file "$ISSUE_ROOT/issue-body.md")
+          echo "Tracking issue: $issue_url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload review and approval bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: people-hero-refresh-review-${{ github.run_id }}
+          path: tools/people-hero/.work/refresh-run-${{ github.run_id }}/issue
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30

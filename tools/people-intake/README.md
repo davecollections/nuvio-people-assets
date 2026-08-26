@@ -7,7 +7,7 @@ It reuses the approved People renderers and produces:
 - monochrome `poster.webp` and compatibility `landscape.webp`;
 - a matching quality-82 colour focus pair when an official profile is available;
 - the approved standard-canvas V2 `title-logo.png`;
-- the locked T2 `hero.webp` when the normal or sparse hero policy finds eligible artwork;
+- the locked T2 `hero.webp` when the normal or sparse hero policy finds eligible artwork; a complete promotable identity requires this fourth core asset;
 - a suggested actor/director category for owner review;
 - source, request, renderer, output, and SHA-256 evidence.
 
@@ -30,7 +30,7 @@ Stage one unregistered identity locally:
 npm run people-intake:stage -- --person-id 123456
 ```
 
-The manual `Stage new People artwork set` GitHub Action accepts 1–30 explicit unregistered IDs and uploads one isolated seven-day artifact per identity. Generation is not publication: the reviewed candidate hashes must be promoted in a separate owner-approved change.
+The manual `Stage new People artwork set` GitHub Action accepts 1–30 explicit unregistered IDs and uploads one isolated seven-day artifact per identity. Generation is not publication: the reviewed candidate hashes must be promoted in a separate owner-approved change. A candidate whose hero outcome is `skip` cannot be promoted as a complete canonical identity.
 
 ## Review and promotion
 
@@ -82,8 +82,9 @@ Only after all checks pass does it:
 2. copy the reviewed files byte-for-byte into `assets/people/{id}/`;
 3. add the reviewed identity and categories to `data/people.json`;
 4. add compact reproducibility evidence to `data/people-intake-publications.json`;
-5. rebuild `manifests/people.json` and run the full test suite;
-6. push the branch and open a draft pull request linked to the tracking issue.
+5. add the reviewed hero selection and hashes to `data/people-hero-refresh-state.json`;
+6. rebuild `manifests/people.json` and run the full test suite;
+7. push the branch and open a draft pull request linked to the tracking issue.
 
 Promotion makes no TMDB request, downloads no image, and performs no rendering. It never merges automatically. The owner must still review and explicitly approve the promotion pull request before the new URLs become live.
 

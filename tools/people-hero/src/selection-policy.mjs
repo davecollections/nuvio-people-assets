@@ -4,6 +4,8 @@ const UNCREDITED_PATTERN = /uncredited/iu;
 const SAFE_ART_PATH = /^\/[A-Za-z0-9._-]+$/u;
 const MUSIC_GENRE_ID = 10402;
 
+export const PEOPLE_HERO_SELECTION_POLICY_VERSION = "people-hero-selection-policy-v1";
+
 function text(value) {
   return typeof value === "string" ? value.trim() : "";
 }

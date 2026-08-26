@@ -26,6 +26,7 @@ For example, Tom Hanks is stored under `assets/people/31/`.
 - When neither normal threshold is met but at least one eligible credit has official artwork, a sparse fallback uses every eligible credit in the T2 lattice and applies the locked cinematic defocus and dark grading. This hides unavoidable repetition without admitting excluded credits; the separate title logo is never baked into the hero. Refreshes automatically replace the fallback when a normal hero becomes eligible.
 - Paths are identity-based and must not be renamed when a person's display name changes.
 - `manifests/people.json` is the canonical machine-readable authority for People identities, actor/director category memberships, and artwork inventory. It includes per-asset SHA-256 hashes, dimensions, byte counts, and direct raw GitHub URLs.
+- `data/people-hero-refresh-state.json` is the deterministic metadata baseline for selective hero refreshes. It covers every registered identity and binds the published hero hash, locked preset and selection policy, ordered effective sources, source-snapshot hash, and compact-selection hash.
 
 Consumers may use the stable `main` URLs and compare the per-asset hashes in the manifest when deciding whether to refresh cached artwork. See the practical [consumer handoff](docs/consumer-handoff.md) before migrating from the legacy `nuvio-assets` People paths.
 
@@ -43,12 +44,13 @@ No TMDB credential is stored in this repository. Metadata requests are made thro
 
 ## Updating
 
-The intended update model is selective and infrequent:
+Hero refreshes are selective and infrequent. The `Audit and stage People hero refreshes` workflow runs at **03:17 UTC on day 3 of even-numbered months**, beginning **3 October 2026**, and audits every registered identity through the approved proxy with concurrency five and bounded retries. It downloads and renders artwork only for materially changed identities, with a deterministic maximum of 30 candidates per run.
 
-1. Every two months, audit people whose selected catalogue or presentation assets may have materially changed.
-2. Regenerate only affected identities using deterministic selection and layout.
-3. Run `npm run manifest` and `npm test`.
-4. Review the exact output hashes before publishing.
+Automatic staging occurs when a renderable outcome changes, a genuinely new selected credit enters the top eight, at least two effective filmography sources change, or at least three profile-only paths change. Reordering the same effective sources does not render. A new skip outcome retains the published hero and is reported for attention. Manual forced audits may bypass thresholds for at most 30 explicit registered IDs.
+
+The scheduled workflow stages candidates and opens one tracking issue when changes or metadata failures require attention. It never changes published assets, creates a pull request, or merges. If any metadata request remains unavailable after retries, the run fails closed, uploads its incomplete report, and stages nothing.
+
+After visual review, `Promote reviewed People hero refreshes` accepts only a successful trusted `main` staging run, an open tracking issue, and exact owner-approved hashes. It copies the reviewed `hero.webp` bytes without metadata access or rerendering, updates only the hero, refresh state, and deterministic manifest on an isolated `work/` branch, runs the full suite, and opens a draft pull request. Merge, issue closure, and branch housekeeping remain manual owner-approved steps.
 
 Generated downloads, caches, contact sheets, and working files must remain outside the tracked asset tree. Do not rewrite unchanged binary assets: preserving their hashes keeps Git history and consumer caches efficient.
 
@@ -56,7 +58,7 @@ Generated downloads, caches, contact sheets, and working files must remain outsi
 
 New identities begin with the staging-only intake workflow documented in [`tools/people-intake/README.md`](tools/people-intake/README.md). It accepts explicit unregistered TMDB Person IDs and prepares the base poster/landscape, matching colour focus pair when a profile exists, V2 title logo, and T2 hero as one hash-bound review artifact. It cannot register or publish the identity; promotion remains a separate owner-approved step.
 
-After review, the separate `Promote reviewed new People candidates` workflow can copy the exact approved artifact bytes into an isolated branch, extend `data/people.json` and the compact `data/people-intake-publications.json` evidence ledger, rebuild the manifest, validate the repository, and open a draft pull request. It cannot rerender artwork or merge its pull request. See the intake documentation for the approval record and safety checks.
+After review, the separate `Promote reviewed new People candidates` workflow can copy the exact approved artifact bytes into an isolated branch, extend `data/people.json`, the compact `data/people-intake-publications.json` evidence ledger, and the hero refresh state, rebuild the manifest, validate the repository, and open a draft pull request. It cannot rerender artwork or merge its pull request. See the intake documentation for the approval record and safety checks.
 
 ## Base-artwork and historical reproduction
 
@@ -76,4 +78,4 @@ npm run manifest
 npm test
 ```
 
-Validation enforces the registry-to-directory mapping, required assets, supported formats, approved hero dimensions, absence of unexpected files, and an up-to-date manifest. The 250 KiB hero size is a target rather than a rejection threshold.
+Validation enforces the registry-to-directory mapping, required assets, supported formats, approved hero dimensions, absence of unexpected files, an up-to-date manifest, and complete refresh-state coverage with exact manifest hero-hash agreement. The 250 KiB hero size is a target rather than a rejection threshold.

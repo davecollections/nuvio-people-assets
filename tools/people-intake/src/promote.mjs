@@ -17,6 +17,11 @@ import sharp from "sharp";
 import { buildInventory, repositoryRoot as canonicalRepositoryRoot } from "../../../scripts/lib/inventory.mjs";
 import { isPathInside } from "../../people-hero/src/preflight.mjs";
 import {
+  buildRefreshStateRecord,
+  upsertRefreshStateRecord,
+  validateRefreshState
+} from "../../people-hero/src/refresh-state.mjs";
+import {
   buildNewPersonArtworkOverrideEvidence,
   loadNewPersonArtworkOverrides
 } from "./artwork-overrides.mjs";
@@ -46,7 +51,7 @@ const ASSETS = Object.freeze({
   titleLogo: { filename: "title-logo.png", format: "png", width: 1600, height: 480, required: true },
   focusPoster: { filename: "focus-poster.webp", format: "webp", width: 1000, height: 1500, required: false },
   focusLandscape: { filename: "focus-landscape.webp", format: "webp", width: 1200, height: 675, required: false },
-  hero: { filename: "hero.webp", format: "webp", width: 2560, height: 1440, required: false }
+  hero: { filename: "hero.webp", format: "webp", width: 2560, height: 1440, required: true }
 });
 
 function assert(condition, message) {
@@ -379,7 +384,9 @@ async function verifyCandidate({ candidate, approval, artworkOverrideConfigurati
     report,
     reportPath,
     candidateRoot,
+    sourceSnapshot: sourceSnapshot.value,
     sourceSnapshotSha256: sourceSnapshot.sha256,
+    selection: selection.value,
     heroSelectionSha256: selection.sha256,
     heroOutcome: heroReport.value.selection?.outcome || null,
     assets
@@ -522,15 +529,19 @@ export async function promoteReviewedCandidates({
   const registryPath = path.join(repositoryRoot, "data", "people.json");
   const ledgerPath = path.join(repositoryRoot, "data", "people-intake-publications.json");
   const manifestPath = path.join(repositoryRoot, "manifests", "people.json");
-  const [registryRecord, ledgerRecord, currentManifestRecord] = await Promise.all([
+  const refreshStatePath = path.join(repositoryRoot, "data", "people-hero-refresh-state.json");
+  const [registryRecord, ledgerRecord, currentManifestRecord, refreshStateRecord] = await Promise.all([
     readJsonRecord(registryPath),
     readJsonRecord(ledgerPath),
-    readJsonRecord(manifestPath)
+    readJsonRecord(manifestPath),
+    readJsonRecord(refreshStatePath)
   ]);
   const registry = registryRecord.value;
   const ledger = ledgerRecord.value;
+  let refreshState = refreshStateRecord.value;
   assert(Array.isArray(registry.people), "Canonical People registry is invalid");
   validatePublicationLedger({ ledger, registry, manifest: currentManifestRecord.value });
+  validateRefreshState({ state: refreshState, registry, manifest: currentManifestRecord.value });
   const registeredIds = new Set(registry.people.map((person) => person.tmdbPersonId));
   const ledgerIds = new Set(ledger.records.map((record) => record.tmdbPersonId));
   for (const plan of plans) {
@@ -565,6 +576,7 @@ export async function promoteReviewedCandidates({
     candidateAssetCount: assetWrites,
     registryRecordsAdded: dryRun ? 0 : plans.length,
     ledgerRecordsAdded: dryRun ? 0 : plans.length,
+    refreshStateRecordsAdded: dryRun ? 0 : plans.length,
     manifestRebuilt: !dryRun,
     networkRequests: 0,
     downloads: 0,
@@ -603,7 +615,27 @@ export async function promoteReviewedCandidates({
     writeFile(ledgerPath, stableJson(ledger), "utf8")
   ]);
   const manifest = await inventoryBuilder();
-  await writeFile(manifestPath, stableJson(manifest), "utf8");
+  for (const plan of plans) {
+    refreshState = upsertRefreshStateRecord(refreshState, buildRefreshStateRecord({
+      tmdbPersonId: plan.approval.tmdbPersonId,
+      publishedHeroSha256: plan.assets.hero.sha256,
+      sourceSnapshotSha256: plan.sourceSnapshotSha256,
+      selection: plan.selection,
+      evidence: {
+        kind: "reviewed-promotion",
+        candidateReportSha256: plan.approval.candidateReportSha256,
+        heroSelectionSha256: plan.heroSelectionSha256,
+        stagingRunId,
+        promotionRunId,
+        trackingIssue
+      }
+    }));
+  }
+  validateRefreshState({ state: refreshState, registry, manifest });
+  await Promise.all([
+    writeFile(refreshStatePath, stableJson(refreshState), "utf8"),
+    writeFile(manifestPath, stableJson(manifest), "utf8")
+  ]);
   validatePublicationLedger({ ledger, registry, manifest });
   return { result, markdown: promotionMarkdown(result) };
 }

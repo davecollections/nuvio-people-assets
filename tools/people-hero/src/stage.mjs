@@ -53,8 +53,8 @@ function sha256(bytes) {
 async function allocateAttempt(personId, requestedAttemptRoot = null) {
   if (requestedAttemptRoot) {
     const attempt = path.resolve(requestedAttemptRoot);
-    assert(isPathInside(peopleIntakeWorkRoot, attempt),
-      "A supplied People hero attempt must stay inside tools/people-intake/.work");
+    assert(isPathInside(peopleIntakeWorkRoot, attempt) || isPathInside(workRoot, attempt),
+      "A supplied People hero attempt must stay inside an ignored People staging workspace");
     await mkdir(attempt, { recursive: false });
     return attempt;
   }

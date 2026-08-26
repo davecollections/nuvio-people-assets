@@ -19,6 +19,7 @@ import {
   PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_HASH,
   PEOPLE_LANDSCAPE_DEFAULT_CROP_POLICY_ID
 } from "../src/landscape-policy.mjs";
+import { buildRefreshState } from "../../people-hero/src/refresh-state.mjs";
 
 const hash = (value) => createHash("sha256").update(value).digest("hex");
 const json = (value) => Buffer.from(`${JSON.stringify(value, null, 2)}\n`, "utf8");
@@ -46,16 +47,19 @@ async function fixture() {
   const registry = { schemaVersion: 1, sourceSnapshot: "fixture", people: [] };
   const ledger = { schemaVersion: 1, ordering: "tmdb-person-id-ascending", records: [] };
   const manifest = { schemaVersion: 2, people: [] };
+  const refreshState = buildRefreshState([]);
   await Promise.all([
     writeJson(path.join(repositoryRoot, "data", "people.json"), registry),
     writeJson(path.join(repositoryRoot, "data", "people-intake-publications.json"), ledger),
+    writeJson(path.join(repositoryRoot, "data", "people-hero-refresh-state.json"), refreshState),
     writeJson(path.join(repositoryRoot, "manifests", "people.json"), manifest)
   ]);
 
   const definitions = {
     poster: { filename: "poster.webp", width: 1000, height: 1500, format: "webp" },
     landscape: { filename: "landscape.webp", width: 1200, height: 675, format: "webp" },
-    titleLogo: { filename: "title-logo.png", width: 1600, height: 480, format: "png" }
+    titleLogo: { filename: "title-logo.png", width: 1600, height: 480, format: "png" },
+    hero: { filename: "hero.webp", width: 2560, height: 1440, format: "webp" }
   };
   const outputs = {};
   for (const [key, definition] of Object.entries(definitions)) {
@@ -77,16 +81,20 @@ async function fixture() {
     name: "Fixture Person"
   });
   const selection = await writeJson(path.join(attemptRoot, "hero", "reports", "selection.json"), {
-    personId: 9000001,
-    outcome: "skip"
+    outcome: "sparse-fallback",
+    selectedCredits: [{ mediaType: "movie", mediaId: 1, posterPath: "/poster.jpg", backdropPath: "/backdrop.jpg" }],
+    fallbackProfiles: [],
+    eligibleCreditCount: 1,
+    usableProfileCount: 0,
+    rejected: []
   });
   await writeJson(path.join(attemptRoot, "hero", "reports", "candidate-report.json"), {
     version: "nuvio-people-hero-candidate-v2",
-    status: "skipped",
+    status: "staging-only-needs-owner-review",
     person: { tmdbPersonId: 9000001 },
     preset: { id: "people-t2-perspective-v2" },
-    selection: { outcome: "skip" },
-    output: null,
+    selection: { outcome: "sparse-fallback" },
+    output: { sha256: outputs.hero.sha256 },
     boundaries: { permanentAssetWrites: 0, manifestWrites: 0, publishActions: 0 }
   });
   const monochromeMetadataValue = {
@@ -147,7 +155,7 @@ async function fixture() {
       bytes: sourceSnapshot.bytes
     },
     profileSource: { filePath: null },
-    hero: { status: "skipped", outcome: "skip", output: null },
+    hero: { status: "staging-only-needs-owner-review", outcome: "sparse-fallback", output: { sha256: outputs.hero.sha256 } },
     landscapeCropPolicy,
     outputs,
     boundaries: {
@@ -254,7 +262,7 @@ test("reviewed candidates validate by exact report, selection, identity, file se
     workRoot: item.workRoot
   });
   assert.equal(dryRun.result.status, "validated-no-writes");
-  assert.equal(dryRun.result.candidateAssetCount, 3);
+  assert.equal(dryRun.result.candidateAssetCount, 4);
   assert.equal(dryRun.result.assetWrites, 0);
   assert.equal(dryRun.result.networkRequests, 0);
   assert.match(dryRun.markdown, /copied byte-for-byte/u);
@@ -311,12 +319,14 @@ test("promotion copies reviewed bytes, adds the canonical identity and ledger re
     inventoryBuilder
   });
   assert.equal(promoted.result.status, "promoted-to-review-branch");
-  assert.equal(promoted.result.assetWrites, 3);
+  assert.equal(promoted.result.assetWrites, 4);
   const registry = JSON.parse(await readFile(path.join(item.repositoryRoot, "data", "people.json"), "utf8"));
   const ledger = JSON.parse(await readFile(path.join(item.repositoryRoot, "data", "people-intake-publications.json"), "utf8"));
   const manifest = JSON.parse(await readFile(path.join(item.repositoryRoot, "manifests", "people.json"), "utf8"));
+  const refreshState = JSON.parse(await readFile(path.join(item.repositoryRoot, "data", "people-hero-refresh-state.json"), "utf8"));
   assert.deepEqual(registry.people[0].categoryMembership, ["actor", "director"]);
   assert.equal(ledger.records[0].candidateReportSha256, item.approvalDocument.approvals[0].candidateReportSha256);
+  assert.equal(refreshState.records[0].publishedHeroSha256, item.outputs.hero.sha256);
   assert.equal(await readFile(path.join(item.repositoryRoot, "assets", "people", "9000001", "poster.webp"), "hex"),
     await readFile(path.join(item.artifactRoot, "new-person-candidate-1-9000001", "attempt-fixture", "candidate", "assets", "people", "9000001", "poster.webp"), "hex"));
   assert.doesNotThrow(() => validatePublicationLedger({ ledger, registry, manifest }));
